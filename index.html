@@ -76,25 +76,25 @@
             align-items: center;
         }
         .circular-image.with-top-margin img {
-            width: 95%;
-            height: 95%;
+            width: 98%;
+            height: 98%;
             object-fit: cover;
             object-position: center calc(50% + 5px);
         }
         .video-container {
             position: relative;
-            padding-bottom: 78.75%; /* (16:9 aspect ratio * 140%) */
+            width: 100%;
             height: 0;
+            padding-bottom: 56.25%; /* 16:9 비율 */
             overflow: hidden;
         }
         .video-container video {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 140%;
-            height: 140%;
-            object-fit: cover;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
         .description {
             margin-top: 40px;
@@ -140,7 +140,7 @@
                 </div>
             </div>
             <div class="video-container">
-                <video id="myVideo" muted>
+                <video id="myVideo" muted width="100%" height="100%">
                     <source src="images/anti_tarotcard.MP4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
