@@ -40,7 +40,7 @@
         }
         .gallery-item {
             position: relative;
-            padding-bottom: 100%; /* 1:1 aspect ratio */
+            padding-bottom: 100%;
             overflow: hidden;
         }
         .gallery-item img {
@@ -54,28 +54,29 @@
         .circular-image-container {
             position: relative;
             padding-bottom: 100%;
-            background-color: white;
         }
         .circular-image {
             position: absolute;
-            top: 10px;
+            top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
             width: 90%;
             height: 90%;
-            margin: auto;
             border-radius: 50%;
             overflow: hidden;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .circular-image img {
-            width: 100%;
-            height: 100%;
+            width: calc(100% - 20px);
+            height: calc(100% - 20px);
             object-fit: cover;
+            border-radius: 50%;
         }
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
         }
@@ -164,7 +165,6 @@
             video.muted = !video.muted;
         }
 
-        // 자동 재생
         window.addEventListener('load', function() {
             video.play();
         });
