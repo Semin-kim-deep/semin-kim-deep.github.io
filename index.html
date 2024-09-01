@@ -12,7 +12,7 @@
             margin: 0;
             padding: 0;
         }
-        .container {
+        .header-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
@@ -28,6 +28,7 @@
             font-weight: 700;
             font-size: 48px;
             color: #333;
+            margin: 0;
         }
         .menu {
             font-size: 18px;
@@ -35,21 +36,14 @@
         .gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 0;
         }
-        .gallery img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
-        .circular-image {
-            width: 100%;
-            padding-bottom: 100%; /* 정사각형 비율 유지 */
+        .gallery-item {
             position: relative;
+            padding-bottom: 100%; /* 1:1 aspect ratio */
             overflow: hidden;
-            border-radius: 50%;
         }
-        .circular-image img {
+        .gallery-item img {
             position: absolute;
             top: 0;
             left: 0;
@@ -57,9 +51,16 @@
             height: 100%;
             object-fit: cover;
         }
+        .circular-image {
+            border-radius: 50%;
+        }
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
         .description {
-            grid-column: 1 / span 2;
-            margin-top: 20px;
+            margin-top: 40px;
         }
         .about-link {
             text-align: right;
@@ -68,19 +69,27 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="header-container">
         <header>
             <h1>Deepdown Studio</h1>
             <div class="menu">Menu</div>
         </header>
-        <div class="gallery">
-            <div class="circular-image">
-                <img src="images/a_1253.png" alt="Image 1">
-            </div>
+    </div>
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="images/a_1253.png" alt="Image 1" class="circular-image">
+        </div>
+        <div class="gallery-item">
             <img src="image3.jpg" alt="Image 3">
+        </div>
+        <div class="gallery-item">
             <img src="image4.jpg" alt="Image 4">
+        </div>
+        <div class="gallery-item">
             <img src="image5.jpg" alt="Image 5">
         </div>
+    </div>
+    <div class="content-container">
         <div class="description">
             <p>Women who live their lives in their own way are very attractive. That is why we want to freely and honestly enjoy what we like and what makes our hearts flutter, without worrying about what anyone else will think.</p>
             <p>"Deepdown Studio" is a web magazine for all those who always shine in their own way.</p>
