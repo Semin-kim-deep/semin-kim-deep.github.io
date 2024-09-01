@@ -12,20 +12,16 @@
             margin: 0;
             padding: 0;
         }
-        .full-width-container {
-            width: 100%;
-            padding: 20px 0;
-        }
-        .content-width {
-            max-width: 1200px;
+        .container {
+            max-width: calc(100% - 100px);
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 50px;
         }
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
+            padding: 20px 0;
         }
         h1 {
             font-family: 'Jost', sans-serif;
@@ -40,7 +36,7 @@
         .gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 0;
+            gap: 20px;
         }
         .gallery-item {
             position: relative;
@@ -57,15 +53,15 @@
         }
         .circular-image-container {
             position: relative;
-            padding-bottom: 50%; /* Reduced to half size */
+            padding-bottom: 100%;
         }
         .circular-image {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 50%;
-            height: 50%;
+            width: 70%;
+            height: 70%;
             border-radius: 50%;
             overflow: hidden;
         }
@@ -81,42 +77,53 @@
             text-align: right;
             margin-top: 20px;
         }
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                max-width: calc(100% - 40px);
+                padding: 0 20px;
+            }
+            h1 {
+                font-size: 36px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="full-width-container">
-        <div class="content-width">
-            <header>
-                <h1>Deepdown Studio</h1>
-                <div class="menu">Menu</div>
-            </header>
-        </div>
-    </div>
-    <div class="gallery">
-        <div class="circular-image-container">
-            <div class="circular-image">
-                <img src="images/a_1253.png" alt="Image 1">
+    <div class="container">
+        <header>
+            <h1>Deepdown Studio</h1>
+            <div class="menu">Menu</div>
+        </header>
+        <div class="gallery">
+            <div class="circular-image-container">
+                <div class="circular-image">
+                    <img src="images/a_1253.png" alt="Image 1">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="image3.jpg" alt="Image 3">
+            </div>
+            <div class="gallery-item">
+                <img src="image4.jpg" alt="Image 4">
+            </div>
+            <div class="gallery-item">
+                <img src="image5.jpg" alt="Image 5">
             </div>
         </div>
-        <div class="gallery-item">
-            <img src="image3.jpg" alt="Image 3">
+        <div class="description">
+            <p>Women who live their lives in their own way are very attractive. That is why we want to freely and honestly enjoy what we like and what makes our hearts flutter, without worrying about what anyone else will think.</p>
+            <p>"Deepdown Studio" is a web magazine for all those who always shine in their own way.</p>
         </div>
-        <div class="gallery-item">
-            <img src="image4.jpg" alt="Image 4">
-        </div>
-        <div class="gallery-item">
-            <img src="image5.jpg" alt="Image 5">
-        </div>
-    </div>
-    <div class="full-width-container">
-        <div class="content-width">
-            <div class="description">
-                <p>Women who live their lives in their own way are very attractive. That is why we want to freely and honestly enjoy what we like and what makes our hearts flutter, without worrying about what anyone else will think.</p>
-                <p>"Deepdown Studio" is a web magazine for all those who always shine in their own way.</p>
-            </div>
-            <div class="about-link">
-                <a href="#">About Deepdown Studio →</a>
-            </div>
+        <div class="about-link">
+            <a href="#">About Deepdown Studio →</a>
         </div>
     </div>
 </body>
