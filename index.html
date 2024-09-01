@@ -14,9 +14,9 @@
             overflow-x: hidden;
         }
         .container {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 50px;
             box-sizing: border-box;
         }
         header {
@@ -37,32 +37,39 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            justify-items: center;
+            justify-content: center;
             align-items: center;
             margin: 0 auto;
         }
         .gallery-item {
+            position: relative;
             width: 100%;
-            aspect-ratio: 1 / 1;
+            padding-bottom: 100%;
             overflow: hidden;
             opacity: 0;
             transform: translateY(50px);
         }
         .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
         }
         .circular-image-container {
+            position: relative;
             width: 100%;
-            aspect-ratio: 1 / 1;
+            padding-bottom: 100%;
             opacity: 0;
             transform: translateY(50px);
         }
         .circular-image {
+            position: absolute;
+            top: 15%;
+            left: 15%;
             width: 70%;
             height: 70%;
-            margin: 15% auto;
             border-radius: 50%;
             overflow: hidden;
         }
@@ -78,17 +85,26 @@
             align-items: center;
         }
         .circular-image.with-top-margin img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             object-position: center calc(50% + 15px);
         }
         .video-container {
             grid-column: 1 / 4;
-            width: 100%;
-            aspect-ratio: 16 / 9;
+            position: relative;
+            width: 150%;
+            padding-bottom: 84.375%; /* 16:9 비율의 1.5배 */
             overflow: hidden;
             opacity: 0;
             transform: translateY(50px);
+            justify-self: center;
         }
         .video-container video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -134,7 +150,7 @@
                 grid-template-columns: 1fr;
             }
             .container {
-                padding: 0 10px;
+                padding: 0 20px;
             }
             h1 {
                 font-size: 36px;
@@ -161,11 +177,6 @@
                     <img src="images/a_1253.png" alt="Image 1">
                 </div>
             </div>
-            <div class="circular-image-container">
-                <div class="circular-image">
-                    <img src="images/placeholder.png" alt="Placeholder">
-                </div>
-            </div>
             <div class="video-container">
                 <video id="myVideo" muted autoplay loop>
                     <source src="images/anti_tarotcard.MP4" type="video/mp4">
@@ -176,7 +187,13 @@
                 <img src="images/aa.png" alt="Image 5">
             </div>
         </div>
-
+        <div class="description">
+            <p>Women who live their lives in their own way are very attractive. That is why we want to freely and honestly enjoy what we like and what makes our hearts flutter, without worrying about what anyone else will think.</p>
+            <p>"Deepdown Studio" is a web magazine for all those who always shine in their own way.</p>
+        </div>
+        <div class="about-link">
+            <a href="#">About Deepdown Studio →</a>
+        </div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
