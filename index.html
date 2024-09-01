@@ -42,6 +42,9 @@
             position: relative;
             padding-bottom: 100%;
             overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease-out forwards, float 6s ease-in-out infinite 1s;
         }
         .gallery-item img {
             position: absolute;
@@ -50,11 +53,13 @@
             width: 70%;
             height: 70%;
             object-fit: contain;
-            animation: float 6s ease-in-out infinite;
         }
         .circular-image-container {
             position: relative;
             padding-bottom: 100%;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease-out forwards, float 6s ease-in-out infinite 1s;
         }
         .circular-image {
             position: absolute;
@@ -64,7 +69,6 @@
             height: 70%;
             border-radius: 50%;
             overflow: hidden;
-            animation: float 6s ease-in-out infinite;
         }
         .circular-image img {
             width: 100%;
@@ -89,7 +93,9 @@
             height: 0;
             padding-bottom: 84.375%; /* 16:9 비율의 1.5배 */
             overflow: hidden;
-            animation: float 6s ease-in-out infinite;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease-out forwards, float 6s ease-in-out infinite 1s;
         }
         .video-container video {
             position: absolute;
@@ -106,12 +112,18 @@
             text-align: right;
             margin-top: 20px;
         }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         @keyframes float {
             0% {
                 transform: translatey(0px);
             }
             50% {
-                transform: translatey(-20px);
+                transform: translatey(-6.67px);
             }
             100% {
                 transform: translatey(0px);
@@ -144,13 +156,13 @@
         </header>
         <div class="gallery">
             <div class="circular-image-container">
-                <div class="circular-image">
-                    <img src="images/a_1253.png" alt="Image 1">
+                <div class="circular-image with-top-margin">
+                    <img src="images/Thank-you3_web.png" alt="Image 2">
                 </div>
             </div>
             <div class="circular-image-container">
-                <div class="circular-image with-top-margin">
-                    <img src="images/Thank-you3_web.png" alt="Image 2">
+                <div class="circular-image">
+                    <img src="images/a_1253.png" alt="Image 1">
                 </div>
             </div>
             <div class="video-container">
