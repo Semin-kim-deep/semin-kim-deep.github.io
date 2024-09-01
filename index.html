@@ -43,7 +43,7 @@
             padding-bottom: 100%; /* 1:1 aspect ratio */
             overflow: hidden;
         }
-        .gallery-item img {
+        .gallery-item img, .gallery-item video {
             position: absolute;
             top: 0;
             left: 0;
@@ -107,11 +107,16 @@
                     <img src="images/a_1253.png" alt="Image 1">
                 </div>
             </div>
-            <div class="gallery-item">
-                <img src="images/Thank-you3_web.png" alt="Image 3">
+            <div class="circular-image-container">
+                <div class="circular-image">
+                    <img src="images/Thank-you3_web.png" alt="Image 2">
+                </div>
             </div>
             <div class="gallery-item">
-                <img src="image4.jpg" alt="Image 4">
+                <video autoplay loop muted playsinline>
+                    <source src="images/anti_tarotcard.MP4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
             <div class="gallery-item">
                 <img src="image5.jpg" alt="Image 5">
