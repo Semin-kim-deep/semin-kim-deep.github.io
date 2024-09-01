@@ -1,70 +1,77 @@
 <!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <!-- head 내용은 생략 -->
-  </head>
-  <body class="text-black" data-barba="wrapper">
-    <div class="loading" id="js-loading"></div>
-    <div class="cursor js-curser">
-      <!-- cursor 내용 -->
-    </div>
-    <div class="l-page" data-page-id="home">
-      <div class="menu js-menu">
-        <!-- menu 내용 -->
-      </div>
-      <header class="header">
-        <div class="header__burger js-burger">
-          <div class="bot-b"></div>
-          <div class="text-b js-b-text">
-            <p class="roboto">Close</p>
-            <p class="roboto">Menu</p>
-          </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepdown Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0ead6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            color: #333;
+        }
+        .menu {
+            font-size: 18px;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .description {
+            grid-column: 1 / span 2;
+            margin-top: 20px;
+        }
+        .about-link {
+            text-align: right;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Deepdown Studio</h1>
+            <div class="menu">Menu</div>
+        </header>
+        <div class="gallery">
+            <img src="image1.jpg" alt="Image 1">
+            <img src="image2.jpg" alt="Image 2">
+            <img src="image3.jpg" alt="Image 3">
+            <img src="image4.jpg" alt="Image 4">
+            <img src="image5.jpg" alt="Image 5">
         </div>
-      </header>
-      <div class="js-bg-l loading-bg"></div>
-      <a class="main-logo js-logo-h" href="https://www.eteweb.com/journalduete/">
-        <!-- logo SVG -->
-      </a>
-      <div class="p-index" data-barba="container" data-barba-namespace="home">
-        <main class="home">
-          <section class="js-w-kv relative m-0 md:h-screen">
-            <!-- Key Visual Section -->
-          </section>
-          <div class="w-full mt-40 md:mt-[132px]">
-            <!-- Featured Article -->
-          </div>
-          <div class="article-links">
-            <div class="article-links__lists" x-data="{ hoveredLink: null }">
-              <div class="line-a-links"></div>
-              <a class="a-link" href="https://www.eteweb.com/journalduete/articles/" @mouseover="hoveredLink = 1" @mouseout="hoveredLink = null" :class="{'hide': hoveredLink !== 1 && hoveredLink !== null}">
-                <p class="a-link__t gara">All Articles</p>
-                <div class="a-link__arrow"><!-- SVG arrow --></div>
-                <div class="a-link__line"></div>
-              </a>
-              <a class="a-link" href="https://www.eteweb.com/journalduete/feature/" @mouseover="hoveredLink = 2" @mouseout="hoveredLink = null" :class="{'hide': hoveredLink !== 2 && hoveredLink !== null}">
-                <p class="a-link__t gara">Feature</p>
-                <div class="a-link__arrow"><!-- SVG arrow --></div>
-                <div class="a-link__line"></div>
-              </a>
-              <a class="a-link" href="https://www.eteweb.com/journalduete/interview/" @mouseover="hoveredLink = 3" @mouseout="hoveredLink = null" :class="{'hide': hoveredLink !== 3 && hoveredLink !== null}">
-                <p class="a-link__t gara">Interview</p>
-                <div class="a-link__arrow"><!-- SVG arrow --></div>
-                <div class="a-link__line"></div>
-              </a>
-              <a class="a-link" href="https://www.eteweb.com/journalduete/products/" @mouseover="hoveredLink = 4" @mouseout="hoveredLink = null" :class="{'hide': hoveredLink !== 4 && hoveredLink !== null}">
-                <p class="a-link__t gara">Products</p>
-                <div class="a-link__arrow"><!-- SVG arrow --></div>
-                <div class="a-link__line"></div>
-              </a>
-            </div>
-            <div class="tag-list flex flex-row items-center w-full py-6 overflow-hidden md:py-12">
-              <!-- Tag list content -->
-            </div>
-          </div>
-          <!-- Rest of the content -->
-        </main>
-      </div>
+        <div class="description">
+            <p>Women who live their lives in their own way are very attractive. That is why we want to freely and honestly enjoy what we like and what makes our hearts flutter, without worrying about what anyone else will think.</p>
+            <p>"Deepdown Studio" is a web magazine for all those who always shine in their own way.</p>
+        </div>
+        <div class="about-link">
+            <a href="#">About Deepdown Studio →</a>
+        </div>
     </div>
-    <script type="module" src="https://www.eteweb.com/journalduete/wp2023/wp-content/themes/journalduete/assets/js/main.js" defer></script>
-  </body>
+</body>
 </html>
