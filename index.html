@@ -69,21 +69,28 @@
             height: 100%;
             object-fit: cover;
         }
+        .circular-image.with-top-margin {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .circular-image.with-top-margin img {
-            object-position: center -10px;
+            width: 90%;
+            height: 90%;
+            object-position: center calc(50% + 5px);
         }
         .video-container {
             position: relative;
-            padding-bottom: 39.375%; /* (16:9 aspect ratio * 70%) */
+            padding-bottom: 78.75%; /* (16:9 aspect ratio * 140%) */
             height: 0;
             overflow: hidden;
         }
         .video-container video {
             position: absolute;
             top: 0;
-            left: 15%;
-            width: 70%;
-            height: 70%;
+            left: 0;
+            width: 140%;
+            height: 140%;
         }
         .description {
             margin-top: 40px;
