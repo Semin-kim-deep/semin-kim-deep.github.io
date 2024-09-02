@@ -79,7 +79,8 @@
             margin-top: 80px;
         }
         .video-container {
-            width: 120%;
+            width: 80%;
+            margin: 0 auto;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .video-container video {
@@ -88,11 +89,14 @@
         }
         .gallery-item:last-child {
             margin-top: 80px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
         }
         .gallery-item:last-child img {
             width: 100%;
             display: block;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .description {
             margin-top: 40px;
@@ -119,7 +123,7 @@
             .gallery {
                 grid-template-columns: 1fr;
             }
-            .video-container {
+            .video-container, .gallery-item:last-child {
                 width: 100%;
             }
         }
