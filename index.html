@@ -24,7 +24,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px 0;
-       }
+        }
         h1 {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
@@ -71,6 +71,7 @@
             height: 70%;
             border-radius: 50%;
             overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .circular-image img {
             width: 100%;
@@ -85,6 +86,24 @@
         }
         .circular-image-container:nth-child(2) {
             margin-top: 80px;
+        }
+        .video-container, .gallery-item:last-child {
+            position: relative;
+            overflow: hidden;
+        }
+        .video-container::before, .gallery-item:last-child::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            z-index: 1;
+        }
+        .video-container video, .gallery-item:last-child img {
+            position: relative;
+            z-index: 0;
         }
         .video-container {
             width: 120%;
@@ -178,3 +197,5 @@
             });
         });
     </script>
+</body>
+</html>
