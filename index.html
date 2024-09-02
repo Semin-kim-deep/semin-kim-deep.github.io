@@ -53,13 +53,13 @@
             opacity: 0;
             transform: translateY(50px);
         }
-        .gallery-item img, .video-container video {
+        .gallery-item img, .video-container video, .circular-image img {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
         }
         .circular-image {
             position: absolute;
@@ -70,12 +70,6 @@
             height: 70%;
             border-radius: 50%;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .circular-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
         .circular-image.with-top-margin {
             background-color: white;
@@ -93,7 +87,7 @@
         .gallery-item:last-child {
             margin-top: 80px;
         }
-        .video-container::after, .gallery-item:last-child::after {
+        .gallery-item::after, .circular-image::after, .video-container::after {
             content: '';
             position: absolute;
             top: 0;
