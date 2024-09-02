@@ -24,7 +24,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px 0;
-            }
+       }
         h1 {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
@@ -51,6 +51,8 @@
             width: 100%;
             padding-bottom: 100%;
             overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
         }
         .gallery-item img, .video-container video {
             position: absolute;
@@ -59,6 +61,19 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
+        }
+        .video-container, .gallery-item:last-child {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .video-container::after, .gallery-item:last-child::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+            pointer-events: none;
         }
         .circular-image {
             position: absolute;
@@ -69,6 +84,7 @@
             height: 70%;
             border-radius: 50%;
             overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .circular-image img {
             width: 100%;
@@ -98,6 +114,19 @@
         .about-link {
             text-align: center;
             margin-top: 20px;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes float {
+            0%, 100% { transform: translatey(0px); }
+            50% { transform: translatey(-6.67px); }
+        }
+        .animated {
+            animation: fadeInUp 1s ease-out forwards, float 6s ease-in-out infinite;
         }
         @media (max-width: 768px) {
             .gallery {
@@ -152,5 +181,16 @@
             <a href="#">About Deepdown Studio →</a>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const items = document.querySelectorAll('.circular-image-container, .video-container, .gallery-item');
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('animated');
+                    item.style.animationDelay = `${index * 0.2}s, ${index * 0.2 + 1}s`;
+                }, index * 200);
+            });
+        });
+    </script>
 </body>
 </html>
