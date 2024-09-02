@@ -43,7 +43,7 @@
             gap: 20px;
             justify-content: center;
             align-items: start;
-            margin: -90px auto 0; /* 전체 갤러리를 90px 위로 이동 */
+            margin: -50px auto 0; /* 전체 갤러리를 50px 위로 이동 */
         }
         .circular-image-container {
             position: relative;
@@ -116,6 +116,8 @@
         }
         .circular-image-container, .video-container, .gallery-item:last-child {
             opacity: 0;
+        }
+        .animated {
             animation: fadeInUp 1s ease-out forwards;
         }
         @media (max-width: 768px) {
@@ -170,5 +172,15 @@
             <a href="#">About Deepdown Studio →</a>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const items = document.querySelectorAll('.circular-image-container, .video-container, .gallery-item');
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('animated');
+                }, index * 200); // 각 아이템마다 200ms 간격으로 애니메이션 시작
+            });
+        });
+    </script>
 </body>
 </html>
