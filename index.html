@@ -50,8 +50,6 @@
             width: 100%;
             padding-bottom: 100%;
             overflow: hidden;
-            opacity: 0;
-            transform: translateY(50px);
         }
         .circular-image {
             position: absolute;
@@ -107,6 +105,10 @@
             margin-top: 20px;
         }
         @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -115,6 +117,9 @@
         @keyframes float {
             0%, 100% { transform: translatey(0px); }
             50% { transform: translatey(-6.67px); }
+        }
+        .circular-image-container, .video-container, .gallery-item:last-child {
+            opacity: 0;
         }
         .animated {
             animation: fadeInUp 1s ease-out forwards, float 6s ease-in-out infinite;
@@ -177,7 +182,6 @@
             items.forEach((item, index) => {
                 setTimeout(() => {
                     item.classList.add('animated');
-                    item.style.animationDelay = `${index * 0.2}s, ${index * 0.2 + 1}s`;
                 }, index * 200);
             });
         });
