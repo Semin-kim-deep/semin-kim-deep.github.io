@@ -90,8 +90,8 @@
         }
         .video-container {
             position: relative;
-            width: 110%;
-            padding-bottom: 82.5%; /* 4:3 ratio * 110% */
+            width: 120%;
+            padding-bottom: 90%; /* 4:3 ratio * 120% */
             overflow: hidden;
             opacity: 0;
             transform: translateY(50px);
@@ -133,7 +133,7 @@
             }
         }
         .animated {
-            animation: fadeInUp 1s ease-out forwards, float 6s ease-in-out infinite 1s;
+            animation: fadeInUp 1s ease-out forwards, float 6s ease-in-out infinite;
         }
         @media (max-width: 768px) {
             .gallery {
@@ -194,6 +194,7 @@
             items.forEach((item, index) => {
                 setTimeout(() => {
                     item.classList.add('animated');
+                    item.style.animationDelay = `${index * 0.3}s, ${index * 0.3 + 1}s`;
                 }, index * 300);
             });
         });
