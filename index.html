@@ -77,7 +77,7 @@
             object-position: center calc(50% + 15px);
         }
         .video-container {
-            width: 80%;
+            width: 40%;
             margin: 0 auto;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
@@ -95,6 +95,19 @@
             width: 100%;
             display: block;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .changing-image {
+            position: fixed;
+            top: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
         }
         .description {
             margin-top: 40px;
@@ -149,6 +162,7 @@
         <header>
             <h1>Deepdown Studio</h1>
         </header>
+        <div class="changing-image"></div>
         <div class="gallery">
             <div class="circular-image-container">
                 <div class="circular-image with-top-margin">
@@ -181,6 +195,31 @@
                 setTimeout(() => {
                     item.classList.add('animated');
                 }, index * 200);
+            });
+
+            const changingImage = document.querySelector('.changing-image');
+            let isFirstImage = true;
+            function changeImage() {
+                const imageUrl = isFirstImage ? 'images/a_1.png' : 'images/a_2.png';
+                changingImage.style.backgroundImage = `url('${imageUrl}')`;
+                isFirstImage = !isFirstImage;
+            }
+            changeImage();
+            setInterval(changeImage, 1000);
+
+            function setImageSize() {
+                const img = new Image();
+                img.onload = function() {
+                    changingImage.style.width = `${img.width}px`;
+                    changingImage.style.height = `${img.height}px`;
+                }
+                img.src = 'images/a_1.png';
+            }
+            setImageSize();
+
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.pageYOffset;
+                changingImage.style.top = `${200 + scrollPosition * 0.5}px`;
             });
         });
     </script>
