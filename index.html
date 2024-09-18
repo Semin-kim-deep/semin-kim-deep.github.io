@@ -8,10 +8,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0ead6;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            background-image: url('images/bg_hg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
         .container {
             max-width: 1200px;
@@ -43,7 +47,7 @@
             gap: 20px;
             justify-content: center;
             align-items: start;
-            margin: -50px auto 0; /* 전체 갤러리를 50px 위로 이동 */
+            margin: -50px auto 0;
         }
         .circular-image-container {
             position: relative;
@@ -175,7 +179,7 @@
             items.forEach((item, index) => {
                 setTimeout(() => {
                     item.classList.add('animated');
-                }, index * 200); // 각 아이템마다 200ms 간격으로 애니메이션 시작
+                }, index * 200);
             });
         });
     </script>
