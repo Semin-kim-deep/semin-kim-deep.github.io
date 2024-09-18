@@ -3,21 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Background Image Example</title>
+    <title>Pokemon Card Display</title>
     <style>
+        /* CSS 코드를 여기에 붙여넣습니다 */
+        /* 여기에 이전에 제공된 모든 CSS 코드를 붙여넣습니다 */
+
         body {
             margin: 0;
             padding: 0;
             background-image: url('images/bg_hp.jpg');
             background-size: cover;
-            background-position: top;
+            background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            width: 250px;
+            height: 350px;
+            position: relative;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .card__front, .card__back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+
+        .card__front img, .card__back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card__back {
+            transform: rotateY(180deg);
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
         }
     </style>
 </head>
 <body>
-    <!-- 여기에 페이지 내용을 추가할 수 있습니다 -->
+    <div class="card-container">
+        <div class="card" onclick="this.classList.toggle('flipped')">
+            <div class="card__front">
+                <img src="images/atc01.png" alt="Card 1 Front">
+            </div>
+            <div class="card__back">
+                <img src="images/atc01_back.png" alt="Card 1 Back">
+            </div>
+        </div>
+        <div class="card" onclick="this.classList.toggle('flipped')">
+            <div class="card__front">
+                <img src="images/atc02.png" alt="Card 2 Front">
+            </div>
+            <div class="card__back">
+                <img src="images/atc01_back.png" alt="Card 2 Back">
+            </div>
+        </div>
+        <div class="card" onclick="this.classList.toggle('flipped')">
+            <div class="card__front">
+                <img src="images/atc03.png" alt="Card 3 Front">
+            </div>
+            <div class="card__back">
+                <img src="images/atc01_back.png" alt="Card 3 Back">
+            </div>
+        </div>
+        <div class="card" onclick="this.classList.toggle('flipped')">
+            <div class="card__front">
+                <img src="images/atc04.png" alt="Card 4 Front">
+            </div>
+            <div class="card__back">
+                <img src="images/atc01_back.png" alt="Card 4 Back">
+            </div>
+        </div>
+    </div>
+
+    <svg viewBox="0 0 330 330" style="position: fixed; left: 25px; bottom: 35px; width: 22px; fill: cyan;">
+        <g>
+            <path d="M304.394,139.394l-139.39,139.393L25.607,139.393c-5.857-5.857-15.355-5.858-21.213,0.001   c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393s7.794-1.581,10.606-4.394l149.996-150   c5.858-5.858,5.858-15.355,0-21.213C319.749,133.536,310.251,133.535,304.394,139.394z" />
+            <path d="M154.398,190.607c2.813,2.813,6.628,4.393,10.606,4.393s7.794-1.581,10.606-4.394l149.996-150   c5.858-5.858,5.858-15.355,0-21.213c-5.857-5.858-15.355-5.858-21.213,0l-139.39,139.393L25.607,19.393   c-5.857-5.858-15.355-5.858-21.213,0c-5.858,5.858-5.858,15.355,0,21.213L154.398,190.607z" />
+        </g>
+    </svg>
+    <p class="scroll" style="position: fixed; left: 50px; bottom: 20px; color: cyan;">Scroll 4 moar!</p>
 </body>
 </html>
