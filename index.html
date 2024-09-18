@@ -27,7 +27,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px 0;
-         }
+        }
         h1 {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
@@ -78,7 +78,6 @@
         }
         .video-container {
             width: 30%;
-            margin: 40px auto 0;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .video-container video {
@@ -90,7 +89,7 @@
             text-align: center;
         }
         .mpic01-container img {
-            width: 40%; /* 크기 조정 */
+            width: 40%;
             display: inline-block;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
@@ -131,6 +130,22 @@
         .animated {
             animation: fadeInUp 1s ease-out forwards;
         }
+        .media-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 80px;
+        }
+        .media-section .circular-image-container {
+            width: 20%;
+            padding-bottom: 20%;
+        }
+        .media-section .video-container {
+            width: 30%;
+        }
+        .media-section .mpic01-container {
+            width: 20%;
+        }
         @media (max-width: 768px) {
             .gallery {
                 flex-direction: column;
@@ -146,6 +161,16 @@
             }
             .mpic01-container img {
                 width: 100%;
+            }
+            .media-section {
+                flex-direction: column;
+                align-items: center;
+            }
+            .media-section .circular-image-container,
+            .media-section .video-container,
+            .media-section .mpic01-container {
+                width: 80%;
+                margin-bottom: 20px;
             }
         }
         @media (max-width: 480px) {
@@ -177,11 +202,23 @@
             </div>
             <div class="circular-image-container"></div>
         </div>
-        <div class="video-container">
-            <video id="myVideo" muted autoplay loop>
-                <source src="images/anti_tarotcard.MP4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        <div class="media-section">
+            <div class="circular-image-container">
+                <div class="circular-image">
+                    <img src="images/a_1.png" alt="Image 1">
+                </div>
+            </div>
+            <div class="video-container">
+                <video id="myVideo" muted autoplay loop>
+                    <source src="images/anti_tarotcard.MP4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="circular-image-container">
+                <div class="circular-image">
+                    <img src="images/a_2.png" alt="Image 2">
+                </div>
+            </div>
         </div>
         <div class="mpic01-container">
             <img src="images/mpic01_2.png" alt="Image 5">
