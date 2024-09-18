@@ -229,7 +229,9 @@
                 bounce += 0.05;
                 const bounceOffset = Math.sin(bounce) * 10;
 
-                changingImage.style.transform = `translateX(-50%) translateY(${imageOffset + bounceOffset}px)`;
+                // 이미지가 항상 화면 내에 있도록 조정
+                const finalOffset = Math.min(imageOffset, window.innerHeight - changingImage.offsetHeight - 100);
+                changingImage.style.transform = `translateX(-50%) translateY(${finalOffset + bounceOffset}px)`;
 
                 requestAnimationFrame(animate);
             }
