@@ -8,13 +8,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f0ead6;
             margin: 0;
             padding: 0;
-            background-image: url('images/bg_hp.jpg');
-            background-size: 100% auto;
-            background-position: top center;
-            background-repeat: no-repeat;
-            min-height: 4000px;
+            overflow-x: hidden;
         }
         .container {
             max-width: 1200px;
@@ -28,51 +25,62 @@
             justify-content: center;
             align-items: center;
             padding: 20px 0;
-        }
+         }
         h1 {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
             font-size: 48px;
-            color: white;
+            color: #333;
             margin: 0 0 100px 0;
             text-align: center;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
         }
         .gallery {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-top: 100px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            justify-content: center;
+            align-items: start;
+            margin: -50px auto 0;
         }
         .circular-image-container {
-            width: 90%;
-            max-width: 400px;
-        }
-        .circular-image-container:nth-child(2) {
-            width: 70%;
-            max-width: 300px;
-        }
-        .circular-image {
+            position: relative;
             width: 100%;
             padding-bottom: 100%;
+            overflow: hidden;
+        }
+        .circular-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            height: 70%;
             border-radius: 50%;
             overflow: hidden;
-            position: relative;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .circular-image img {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+        .circular-image.with-top-margin {
+            background-color: white;
+        }
+        .circular-image.with-top-margin img {
+            object-position: center calc(50% + 15px);
+        }
+        .circular-image-container:nth-child(2) {
+            margin-top: 80px;
+        }
         .video-container {
             width: 80%;
-            margin: 80px auto 0;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .video-container video {
             width: 100%;
@@ -87,9 +95,15 @@
         .gallery-item:last-child img {
             width: 100%;
             display: block;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .animated {
-            opacity: 0;
+        .description {
+            margin-top: 40px;
+            text-align: center;
+        }
+        .about-link {
+            text-align: center;
+            margin-top: 20px;
         }
         @keyframes fadeInUp {
             from {
@@ -101,21 +115,23 @@
                 transform: translateY(0);
             }
         }
+        .circular-image-container, .video-container, .gallery-item:last-child {
+            opacity: 0;
+        }
+        .animated {
+            animation: fadeInUp 1s ease-out forwards;
+        }
         .changing-image {
             width: 100%;
-            max-width: 100%;
-            height: auto;
+            height: 200px;
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
+            margin-bottom: 50px;
         }
         @media (max-width: 768px) {
             .gallery {
-                flex-direction: column;
-                align-items: center;
-            }
-            .circular-image-container, .circular-image-container:nth-child(2) {
-                margin-bottom: 40px;
+                grid-template-columns: 1fr;
             }
             .video-container, .gallery-item:last-child {
                 width: 100%;
@@ -138,40 +154,37 @@
             <div class="changing-image"></div>
         </header>
         <div class="gallery">
-            <div class="circular-image-container animated">
-                <div class="circular-image">
+            <div class="circular-image-container">
+                <div class="circular-image with-top-margin">
                     <img src="images/Thank-you3_web.png" alt="Image 2">
                 </div>
             </div>
-            <div class="circular-image-container animated">
+            <div class="circular-image-container">
                 <div class="circular-image">
                     <img src="images/a_1253.png" alt="Image 1">
                 </div>
             </div>
+            <div class="video-container">
+                <video id="myVideo" muted autoplay loop>
+                    <source src="images/anti_tarotcard.MP4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="gallery-item">
+                <img src="images/aa.png" alt="Image 5">
+            </div>
         </div>
-        <div class="video-container animated">
-            <video id="myVideo" muted autoplay loop>
-                <source src="images/anti_tarotcard.MP4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <div class="gallery-item animated">
-            <img src="images/aa.png" alt="Image 5">
+        <div class="description">
+            <p></p>
         </div>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const items = document.querySelectorAll('.animated');
+            const items = document.querySelectorAll('.circular-image-container, .video-container, .gallery-item');
             items.forEach((item, index) => {
-                let delay = 200;
-                if (item.classList.contains('circular-image-container')) {
-                    delay = index === 0 ? 400 : 800;
-                } else if (item.classList.contains('gallery-item')) {
-                    delay = 1200;
-                }
                 setTimeout(() => {
-                    item.style.animation = `fadeInUp 1s ease-out ${delay}ms forwards`;
-                }, delay);
+                    item.classList.add('animated');
+                }, index * 200);
             });
 
             const changingImage = document.querySelector('.changing-image');
@@ -182,7 +195,7 @@
                 isFirstImage = !isFirstImage;
             }
             changeImage(); // 초기 이미지 설정
-            setInterval(changeImage, 3000);
+            setInterval(changeImage, 3000); // 3초마다 이미지 전환
         });
     </script>
 </body>
