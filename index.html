@@ -51,16 +51,16 @@
             position: relative;
             width: 30%;
             padding-bottom: 30%;
-            overflow: hidden;
+            overflow: visible;
             margin: 0 100px;
         }
         .circular-image {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 77%;  /* 110% of 70% */
-            height: 77%;  /* 110% of 70% */
+            transform: translate(-50%, -50%) scale(1.1);
+            width: 70%;
+            height: 70%;
             border-radius: 50%;
             overflow: hidden;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -136,10 +136,14 @@
         .about-text {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
-            font-size: 28.8px;  /* 60% of 48px */
+            font-size: 28.8px;
             color: white;
             text-align: center;
             margin-top: 10px;
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
         }
         @media (max-width: 1024px) {
             .container {
@@ -270,6 +274,7 @@
                     const pageHeight = pageWidth / aspectRatio;
                     document.body.style.height = `${pageHeight}px`;
                     document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
+                    document.body.style.overflowY = 'hidden';
                 }
                 bgImage.src = 'images/bg_hp.jpg';
             }
