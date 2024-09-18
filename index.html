@@ -241,9 +241,8 @@
                     document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
                     
                     const changingImageWidth = Math.min(pageWidth, 1200);
-                    const changingImageHeight = changingImageWidth / (bgImage.width / bgImage.height);
                     changingImage.style.width = `${changingImageWidth}px`;
-                    changingImage.style.height = `${changingImageHeight}px`;
+                    changingImage.style.height = 'auto';
                 }
                 bgImage.src = 'images/bg_hp.jpg';
             }
