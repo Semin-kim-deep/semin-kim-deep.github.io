@@ -42,17 +42,16 @@
         }
         .gallery {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin: -50px auto 0;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
         }
         .circular-image-container {
             position: relative;
             width: 30%;
             padding-bottom: 30%;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin: 0 20px;
         }
         .circular-image {
             position: absolute;
@@ -70,26 +69,24 @@
             height: 100%;
             object-fit: cover;
         }
-        .circular-image.with-top-margin {
-            background-color: white;
-        }
-        .circular-image.with-top-margin img {
-            object-position: center calc(50% + 15px);
-        }
         .video-container {
-            width: 30%;
+            width: 45%;
+            margin: 40px 2.5%;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: inline-block;
         }
         .video-container video {
             width: 100%;
             display: block;
         }
         .mpic01-container {
-            margin-top: 80px;
+            width: 45%;
+            margin: 40px 2.5%;
             text-align: center;
+            display: inline-block;
         }
         .mpic01-container img {
-            width: 40%;
+            width: 100%;
             display: inline-block;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
@@ -130,22 +127,6 @@
         .animated {
             animation: fadeInUp 1s ease-out forwards;
         }
-        .media-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 80px;
-        }
-        .media-section .circular-image-container {
-            width: 20%;
-            padding-bottom: 20%;
-        }
-        .media-section .video-container {
-            width: 30%;
-        }
-        .media-section .mpic01-container {
-            width: 20%;
-        }
         @media (max-width: 768px) {
             .gallery {
                 flex-direction: column;
@@ -154,23 +135,12 @@
             .circular-image-container {
                 width: 60%;
                 padding-bottom: 60%;
-                margin-bottom: 40px;
+                margin: 20px 0;
             }
-            .video-container {
+            .video-container, .mpic01-container {
                 width: 80%;
-            }
-            .mpic01-container img {
-                width: 100%;
-            }
-            .media-section {
-                flex-direction: column;
-                align-items: center;
-            }
-            .media-section .circular-image-container,
-            .media-section .video-container,
-            .media-section .mpic01-container {
-                width: 80%;
-                margin-bottom: 20px;
+                display: block;
+                margin: 20px 0;
             }
         }
         @media (max-width: 480px) {
@@ -191,7 +161,7 @@
         <div class="changing-image"></div>
         <div class="gallery">
             <div class="circular-image-container">
-                <div class="circular-image with-top-margin">
+                <div class="circular-image">
                     <img src="images/Thank-you3_web.png" alt="Image 2">
                 </div>
             </div>
@@ -200,25 +170,12 @@
                     <img src="images/a_1253.png" alt="Image 1">
                 </div>
             </div>
-            <div class="circular-image-container"></div>
         </div>
-        <div class="media-section">
-            <div class="circular-image-container">
-                <div class="circular-image">
-                    <img src="images/a_1.png" alt="Image 1">
-                </div>
-            </div>
-            <div class="video-container">
-                <video id="myVideo" muted autoplay loop>
-                    <source src="images/anti_tarotcard.MP4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-            <div class="circular-image-container">
-                <div class="circular-image">
-                    <img src="images/a_2.png" alt="Image 2">
-                </div>
-            </div>
+        <div class="video-container">
+            <video id="myVideo" muted autoplay loop>
+                <source src="images/anti_tarotcard.MP4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
         <div class="mpic01-container">
             <img src="images/mpic01_2.png" alt="Image 5">
