@@ -85,15 +85,13 @@
             width: 100%;
             display: block;
         }
-        .gallery-item:last-child {
+        .mpic01-container {
             margin-top: 80px;
-            width: 40%;
-            margin-left: auto;
-            margin-right: auto;
+            text-align: center;
         }
-        .gallery-item:last-child img {
-            width: 100%;
-            display: block;
+        .mpic01-container img {
+            width: 80%;
+            display: inline-block;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .changing-image {
@@ -127,7 +125,7 @@
                 transform: translateY(0);
             }
         }
-        .circular-image-container, .video-container, .gallery-item:last-child {
+        .circular-image-container, .video-container, .mpic01-container {
             opacity: 0;
         }
         .animated {
@@ -143,7 +141,10 @@
                 padding-bottom: 60%;
                 margin-bottom: 40px;
             }
-            .video-container, .gallery-item:last-child {
+            .video-container {
+                width: 80%;
+            }
+            .mpic01-container img {
                 width: 100%;
             }
         }
@@ -182,7 +183,7 @@
                 Your browser does not support the video tag.
             </video>
         </div>
-        <div class="gallery-item">
+        <div class="mpic01-container">
             <img src="images/mpic01_2.png" alt="Image 5">
         </div>
         <div class="description">
@@ -191,7 +192,7 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const items = document.querySelectorAll('.circular-image-container, .video-container, .gallery-item');
+            const items = document.querySelectorAll('.circular-image-container, .video-container, .mpic01-container');
             items.forEach((item, index) => {
                 setTimeout(() => {
                     item.classList.add('animated');
