@@ -227,10 +227,10 @@
                 const direction = scrollTop > lastScrollTop ? 'down' : 'up';
                 lastScrollTop = scrollTop;
 
-                const maxScroll = 3800 - window.innerHeight;
+                const maxScroll = 3000 - window.innerHeight;
                 const scrollPercentage = Math.min(scrollTop / maxScroll, 1);
                 const imageHeight = changingImage.offsetHeight;
-                const maxImageOffset = Math.max(0, 3800 - window.innerHeight - 100); // 100은 initial top 값
+                const maxImageOffset = Math.max(0, 3000 - window.innerHeight - 100); // 100은 initial top 값
                 let imageOffset = maxImageOffset * scrollPercentage;
 
                 bounce += 0.05;
