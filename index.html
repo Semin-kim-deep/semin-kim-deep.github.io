@@ -10,7 +10,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('images/bg_hp.jpg');
+            background-image: url('images/bg_hp.jpg');  /* 여기만 수정되었습니다 */
             background-size: 100% auto;
             background-position: center top;
             background-repeat: no-repeat;
@@ -234,9 +234,8 @@
                 const maxImageOffset = Math.max(0, imageHeight - window.innerHeight);
                 let imageOffset = maxImageOffset * scrollPercentage;
 
-                // 통통 튀는 효과 개선
                 bounce += 0.05;
-                const bounceOffset = Math.sin(bounce) * 10; // 10px 범위로 증가
+                const bounceOffset = Math.sin(bounce) * 10;
 
                 if (direction === 'up') {
                     imageOffset = Math.max(0, imageOffset - 10);
