@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
             background-image: url('images/bg_hp.jpg');
-            background-size: auto;
+            background-size: contain;
             background-position: center top;
             background-repeat: no-repeat;
             height: 4000px;
@@ -133,6 +133,27 @@
         .animated {
             animation: fadeInUp 1s ease-out forwards;
         }
+        @media (max-width: 1024px) {
+            body {
+                background-size: 1024px auto;
+            }
+            .container {
+                max-width: 1024px;
+                padding: 0 20px;
+            }
+            .changing-image {
+                max-width: 1024px;
+            }
+            .gallery {
+                margin-top: 200px;
+            }
+            .circular-image-container {
+                margin: 0 50px;
+            }
+            .video-container {
+                margin-right: 150px;
+            }
+        }
         @media (max-width: 768px) {
             .gallery {
                 flex-direction: column;
@@ -147,10 +168,13 @@
                 width: 80%;
                 margin: 20px 0;
             }
+            .video-container {
+                margin-right: 0;
+            }
         }
         @media (max-width: 480px) {
             .container {
-                padding: 0 20px;
+                padding: 0 10px;
             }
             h1 {
                 font-size: 36px;
@@ -213,23 +237,27 @@
             function setImageSize() {
                 const img = new Image();
                 img.onload = function() {
-                    changingImage.style.width = `${img.width}px`;
-                    changingImage.style.height = `${img.height}px`;
+                    const aspectRatio = img.width / img.height;
+                    const maxWidth = Math.min(window.innerWidth, 1200);
+                    const width = Math.min(maxWidth, img.width);
+                    const height = width / aspectRatio;
+                    changingImage.style.width = `${width}px`;
+                    changingImage.style.height = `${height}px`;
                 }
                 img.src = 'images/a_1.png';
             }
             setImageSize();
+            window.addEventListener('resize', setImageSize);
 
             let bounce = 0;
             function animate() {
                 const scrollTop = Math.min(window.pageYOffset || document.documentElement.scrollTop, 4000 - window.innerHeight);
-                const maxImageOffset = Math.max(0, 4000 - window.innerHeight - 100); // 100은 initial top 값
+                const maxImageOffset = Math.max(0, 4000 - window.innerHeight - 100);
                 let imageOffset = Math.min(scrollTop, maxImageOffset);
 
                 bounce += 0.05;
                 const bounceOffset = Math.sin(bounce) * 10;
 
-                // 이미지가 항상 화면 내에 있도록 조정
                 const finalOffset = Math.min(imageOffset, window.innerHeight - changingImage.offsetHeight - 100);
                 changingImage.style.transform = `translateX(-50%) translateY(${finalOffset + bounceOffset}px)`;
 
