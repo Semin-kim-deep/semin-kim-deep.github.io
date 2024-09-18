@@ -21,6 +21,7 @@
             margin: 0 auto;
             padding: 0 50px;
             box-sizing: border-box;
+            position: relative;
         }
         header {
             display: flex;
@@ -97,7 +98,7 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .changing-image {
-            position: fixed;
+            position: absolute;
             top: 100px;
             left: 50%;
             transform: translateX(-50%);
@@ -249,27 +250,24 @@
             function setImageSize() {
                 const img = new Image();
                 img.onload = function() {
-                    changingImage.style.width = `${img.width}px`;
-                    changingImage.style.height = `${img.height}px`;
+                    const aspectRatio = img.width / img.height;
+                    const maxWidth = Math.min(window.innerWidth, 1200);
+                    const width = maxWidth;
+                    const height = width / aspectRatio;
+                    changingImage.style.width = `${width}px`;
+                    changingImage.style.height = `${height}px`;
                 }
                 img.src = 'images/a_1.png';
             }
             setImageSize();
+            window.addEventListener('resize', setImageSize);
 
             let bounce = 0;
             function animate() {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const maxScroll = document.body.scrollHeight - window.innerHeight;
-                const scrollPercentage = Math.min(scrollTop / maxScroll, 1);
-
-                const maxImageOffset = document.body.scrollHeight - window.innerHeight - changingImage.offsetHeight;
-                let imageOffset = Math.min(scrollPercentage * maxImageOffset, maxImageOffset);
-
                 bounce += 0.05;
                 const bounceOffset = Math.sin(bounce) * 10;
-
-                changingImage.style.transform = `translateX(-50%) translateY(${imageOffset + bounceOffset}px)`;
-
+                changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
                 requestAnimationFrame(animate);
             }
 
