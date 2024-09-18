@@ -51,7 +51,7 @@
             width: 30%;
             padding-bottom: 30%;
             overflow: hidden;
-            margin: 0 20px;
+            margin: 0 150px; /* 간격 300px */
         }
         .circular-image {
             position: absolute;
@@ -69,29 +69,19 @@
             height: 100%;
             object-fit: cover;
         }
-        .video-container {
-            width: 30%;
-            margin: 40px 2.5%;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        .video-container, .mpic01-container {
             display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            margin: 0 150px; /* 간격 300px */
+            text-align: center; /* 가운데 정렬 */
         }
-        .video-container video {
+        .video-container video, .mpic01-container img {
             width: 100%;
-            display: block;
-        }
-        .mpic01-container {
-            width: 32%;
-            margin: 40px 2.5%;
-            text-align: center;
-            display: inline-block;
-        }
-        .mpic01-container img {
-            width: 100%;
-            display: inline-block;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .changing-image {
-            position: absolute;
+            position: fixed; /* 스크롤 따라 움직이도록 수정 */
             top: 200px;
             left: 50%;
             transform: translateX(-50%);
