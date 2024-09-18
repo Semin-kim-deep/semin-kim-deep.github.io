@@ -27,7 +27,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px 0;
-            margin-top: 4px; 
+            margin-top: 10px; 
         }
         h1 {
             font-family: 'Jost', sans-serif;
@@ -222,6 +222,7 @@
             setImageSize();
 
             let lastScrollTop = 0;
+            let bounce = 0;
             window.addEventListener('scroll', function() {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 const direction = scrollTop > lastScrollTop ? 'down' : 'up';
@@ -233,13 +234,17 @@
                 const maxImageOffset = Math.max(0, imageHeight - window.innerHeight);
                 let imageOffset = maxImageOffset * scrollPercentage;
 
+                // 통통 튀는 효과 추가
+                bounce += 0.1;
+                const bounceOffset = Math.sin(bounce) * 5; // 5px 범위 내에서 상하 움직임
+
                 if (direction === 'up') {
                     imageOffset = Math.max(0, imageOffset - 10);
                 } else {
                     imageOffset = Math.min(maxImageOffset, imageOffset + 10);
                 }
 
-                changingImage.style.transform = `translateX(-50%) translateY(${imageOffset}px)`;
+                changingImage.style.transform = `translateX(-50%) translateY(${imageOffset + bounceOffset}px)`;
             });
         });
     </script>
