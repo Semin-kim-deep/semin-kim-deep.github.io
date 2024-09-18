@@ -27,7 +27,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px 0;
-            margin-top: 100px;
+            margin-top: 80px; /* 상단에서 80px 아래로 조정 */
         }
         h1 {
             font-family: 'Jost', sans-serif;
@@ -228,7 +228,9 @@
                 const imageHeight = changingImage.offsetHeight;
                 const maxImageOffset = Math.max(0, imageHeight - window.innerHeight);
                 const imageOffset = maxImageOffset * scrollPercentage;
-                changingImage.style.top = `${200 - imageOffset}px`; /* 스크롤에 따라 교차 애니메이션 */
+                
+                // 스크롤에 따라 이미지의 Y축 이동
+                changingImage.style.transform = `translateX(-50%) translateY(${imageOffset}px)`;
             });
         });
     </script>
