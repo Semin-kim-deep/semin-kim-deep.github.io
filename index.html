@@ -258,9 +258,12 @@
 
             let bounce = 0;
             function animate() {
-                const scrollTop = Math.min(window.pageYOffset || document.documentElement.scrollTop, document.body.scrollHeight - window.innerHeight);
-                const maxImageOffset = Math.max(0, document.body.scrollHeight - window.innerHeight - changingImage.offsetHeight);
-                let imageOffset = Math.min(scrollTop, maxImageOffset);
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const maxScroll = document.body.scrollHeight - window.innerHeight;
+                const scrollPercentage = Math.min(scrollTop / maxScroll, 1);
+
+                const maxImageOffset = document.body.scrollHeight - window.innerHeight - changingImage.offsetHeight;
+                let imageOffset = maxImageOffset * scrollPercentage;
 
                 bounce += 0.05;
                 const bounceOffset = Math.sin(bounce) * 10;
