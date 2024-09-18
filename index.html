@@ -14,7 +14,7 @@
             background-size: 100% auto;
             background-position: top center;
             background-repeat: no-repeat;
-            min-height: 4500px; /* 페이지 높이를 늘려서 다른 요소들을 아래로 내림 */
+            min-height: 4500px;
         }
         .container {
             max-width: 1200px;
@@ -27,7 +27,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px 0;
-            margin-top: 100px; /* 요소를 아래로 내림 */
+            margin-top: 100px;
         }
         h1 {
             font-family: 'Jost', sans-serif;
@@ -44,15 +44,15 @@
         .gallery {
             display: flex;
             justify-content: center;
-            align-items: center;
-            margin-top: 100px; /* 원 이미지들이 더 아래에 위치하게 조정 */
+            align-items: flex-start; /* 서로 다른 높이를 반영 */
+            margin-top: 100px;
         }
         .circular-image-container {
             position: relative;
             width: 30%;
             padding-bottom: 30%;
             overflow: hidden;
-            margin: 0 40px; /* 간격을 2배로 확대 */
+            margin: 0 40px; /* 간격을 넓힘 */
         }
         .circular-image {
             position: absolute;
@@ -70,11 +70,14 @@
             height: 100%;
             object-fit: cover;
         }
+        .higher-image { 
+            margin-top: -100px; /* Thank-you3_web.png을 위로 이동 */
+        }
         .video-mpic-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 100px; /* 동영상과 이미지 요소도 아래로 조정 */
+            margin-top: 100px;
         }
         .video-container {
             width: 30%;
@@ -163,7 +166,7 @@
         </header>
         <div class="changing-image"></div>
         <div class="gallery">
-            <div class="circular-image-container">
+            <div class="circular-image-container higher-image"> <!-- Thank-you3_web.png을 더 위로 -->
                 <div class="circular-image">
                     <img src="images/Thank-you3_web.png" alt="Image 2">
                 </div>
@@ -225,7 +228,7 @@
                 const imageHeight = changingImage.offsetHeight;
                 const maxImageOffset = Math.max(0, imageHeight - window.innerHeight);
                 const imageOffset = maxImageOffset * scrollPercentage;
-                changingImage.style.top = `${200 - imageOffset}px`; /* 스크롤에 따라 움직이도록 복구 */
+                changingImage.style.top = `${200 - imageOffset}px`; /* 스크롤에 따라 교차 애니메이션 */
             });
         });
     </script>
