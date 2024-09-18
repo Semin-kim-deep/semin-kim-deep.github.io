@@ -232,26 +232,18 @@
                 const imageHeight = changingImage.offsetHeight;
                 const maxImageOffset = Math.max(0, 4000 - window.innerHeight - 100); // 100은 initial top 값
 
-                // 스크롤이 4000px를 초과하면 애니메이션을 멈춤
-                if (scrollTop <= 4000 - window.innerHeight) {
-                    let imageOffset = maxImageOffset * scrollPercentage;
+                let imageOffset = Math.min(maxImageOffset * scrollPercentage, maxImageOffset);
 
-                    bounce += 0.05;
-                    const bounceOffset = Math.sin(bounce) * 10;
+                bounce += 0.05;
+                const bounceOffset = Math.sin(bounce) * 10;
 
-                    if (direction === 'up') {
-                        imageOffset = Math.max(0, imageOffset - 10);
-                    } else {
-                        imageOffset = Math.min(maxImageOffset, imageOffset + 10);
-                    }
-
-                    changingImage.style.transform = `translateX(-50%) translateY(${imageOffset + bounceOffset}px)`;
-                    changingImage.style.opacity = 1;
+                if (direction === 'up') {
+                    imageOffset = Math.max(0, imageOffset - 10);
                 } else {
-                    // 4000px 이후에는 마지막 위치에 고정
-                    changingImage.style.transform = `translateX(-50%) translateY(${maxImageOffset}px)`;
-                    changingImage.style.opacity = 0;
+                    imageOffset = Math.min(maxImageOffset, imageOffset + 10);
                 }
+
+                changingImage.style.transform = `translateX(-50%) translateY(${imageOffset + bounceOffset}px)`;
 
                 requestAnimationFrame(animate);
             }
