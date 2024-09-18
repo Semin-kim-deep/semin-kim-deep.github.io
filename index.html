@@ -42,17 +42,15 @@
             text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
         }
         .gallery {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            justify-content: center;
-            align-items: start;
-            margin: -50px auto 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 50px;
         }
         .circular-image-container {
             position: relative;
-            width: 100%;
-            padding-bottom: 100%;
+            width: 30%;
+            padding-bottom: 30%;
             overflow: hidden;
         }
         .circular-image {
@@ -77,12 +75,9 @@
         .circular-image.with-top-margin img {
             object-position: center calc(50% + 15px);
         }
-        .circular-image-container:nth-child(2) {
-            margin-top: 80px;
-        }
         .video-container {
             width: 80%;
-            margin: 0 auto;
+            margin: 80px auto 0;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .video-container video {
@@ -125,12 +120,17 @@
             animation: fadeInUp 1s ease-out forwards;
         }
         .changing-image {
+            position: fixed;
+            top: 200px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
+            max-width: 1200px;
             height: auto;
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            margin-bottom: 50px;
+            z-index: -1;
         }
         @media (max-width: 1200px) {
             .changing-image {
@@ -139,7 +139,13 @@
         }
         @media (max-width: 768px) {
             .gallery {
-                grid-template-columns: 1fr;
+                flex-direction: column;
+                align-items: center;
+            }
+            .circular-image-container {
+                width: 60%;
+                padding-bottom: 60%;
+                margin-bottom: 40px;
             }
             .video-container, .gallery-item:last-child {
                 width: 100%;
@@ -165,8 +171,8 @@
     <div class="container">
         <header>
             <h1>Deepdown Studio</h1>
-            <div class="changing-image"></div>
         </header>
+        <div class="changing-image"></div>
         <div class="gallery">
             <div class="circular-image-container">
                 <div class="circular-image with-top-margin">
@@ -178,15 +184,15 @@
                     <img src="images/a_1253.png" alt="Image 1">
                 </div>
             </div>
-            <div class="video-container">
-                <video id="myVideo" muted autoplay loop>
-                    <source src="images/anti_tarotcard.MP4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-            <div class="gallery-item">
-                <img src="images/aa.png" alt="Image 5">
-            </div>
+        </div>
+        <div class="video-container">
+            <video id="myVideo" muted autoplay loop>
+                <source src="images/anti_tarotcard.MP4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="gallery-item">
+            <img src="images/aa.png" alt="Image 5">
         </div>
         <div class="description">
             <p></p>
@@ -208,18 +214,22 @@
                 changingImage.style.backgroundImage = `url('${imageUrl}')`;
                 isFirstImage = !isFirstImage;
             }
-            changeImage(); // 초기 이미지 설정
-            setInterval(changeImage, 1000); // 1초마다 이미지 전환
+            changeImage();
+            setInterval(changeImage, 1000);
 
-            // 이미지 로드 후 높이 설정
             function setImageHeight() {
                 const img = new Image();
                 img.onload = function() {
                     changingImage.style.height = `${img.height}px`;
                 }
-                img.src = 'images/a_1.png'; // a_1.png와 a_2.png의 크기가 같다고 가정
+                img.src = 'images/a_1.png';
             }
             setImageHeight();
+
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.pageYOffset;
+                changingImage.style.top = `${200 + scrollPosition * 0.5}px`;
+            });
         });
     </script>
 </body>
