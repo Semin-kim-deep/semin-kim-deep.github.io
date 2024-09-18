@@ -102,9 +102,8 @@
             top: 100px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100%;
-            max-width: 1200px;
-            height: auto;
+            width: 600px;
+            height: 600px;
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
@@ -140,7 +139,8 @@
                 padding: 0 20px;
             }
             .changing-image {
-                max-width: 1024px;
+                width: 500px;
+                height: 500px;
             }
             .gallery {
                 margin-top: 200px;
@@ -153,6 +153,10 @@
             }
         }
         @media (max-width: 768px) {
+            .changing-image {
+                width: 400px;
+                height: 400px;
+            }
             .gallery {
                 flex-direction: column;
                 align-items: center;
@@ -176,6 +180,10 @@
             }
             h1 {
                 font-size: 36px;
+            }
+            .changing-image {
+                width: 300px;
+                height: 300px;
             }
         }
     </style>
@@ -246,21 +254,6 @@
 
             setPageSize();
             window.addEventListener('resize', setPageSize);
-
-            function setImageSize() {
-                const img = new Image();
-                img.onload = function() {
-                    const aspectRatio = img.width / img.height;
-                    const maxWidth = Math.min(window.innerWidth, 1200);
-                    const width = maxWidth;
-                    const height = width / aspectRatio;
-                    changingImage.style.width = `${width}px`;
-                    changingImage.style.height = `${height}px`;
-                }
-                img.src = 'images/a_1.png';
-            }
-            setImageSize();
-            window.addEventListener('resize', setImageSize);
 
             let bounce = 0;
             function animate() {
