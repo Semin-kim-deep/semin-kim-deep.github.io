@@ -223,7 +223,7 @@
 
             let lastScrollTop = 0;
             let bounce = 0;
-            window.addEventListener('scroll', function() {
+            function animate() {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 const direction = scrollTop > lastScrollTop ? 'down' : 'up';
                 lastScrollTop = scrollTop;
@@ -234,9 +234,9 @@
                 const maxImageOffset = Math.max(0, imageHeight - window.innerHeight);
                 let imageOffset = maxImageOffset * scrollPercentage;
 
-                // 통통 튀는 효과 추가
-                bounce += 0.1;
-                const bounceOffset = Math.sin(bounce) * 5; // 5px 범위 내에서 상하 움직임
+                // 통통 튀는 효과 개선
+                bounce += 0.05;
+                const bounceOffset = Math.sin(bounce) * 10; // 10px 범위로 증가
 
                 if (direction === 'up') {
                     imageOffset = Math.max(0, imageOffset - 10);
@@ -245,7 +245,11 @@
                 }
 
                 changingImage.style.transform = `translateX(-50%) translateY(${imageOffset + bounceOffset}px)`;
-            });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
         });
     </script>
 </body>
