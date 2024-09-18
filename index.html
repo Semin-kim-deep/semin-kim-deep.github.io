@@ -227,10 +227,10 @@
                 const direction = scrollTop > lastScrollTop ? 'down' : 'up';
                 lastScrollTop = scrollTop;
 
-                const maxScroll = 3000 - window.innerHeight;
+                const maxScroll = 4000 - window.innerHeight;
                 const scrollPercentage = Math.min(scrollTop / maxScroll, 1);
                 const imageHeight = changingImage.offsetHeight;
-                const maxImageOffset = Math.max(0, 3000 - window.innerHeight - 100); // 100은 initial top 값
+                const maxImageOffset = Math.max(0, 4000 - window.innerHeight - 100); // 100은 initial top 값
                 let imageOffset = maxImageOffset * scrollPercentage;
 
                 bounce += 0.05;
@@ -243,6 +243,10 @@
                 }
 
                 changingImage.style.transform = `translateX(-50%) translateY(${imageOffset + bounceOffset}px)`;
+
+                // 4000px 이후에 서서히 사라지게 함
+                const opacity = Math.max(0, 1 - (scrollTop - maxScroll) / 200);
+                changingImage.style.opacity = opacity;
 
                 requestAnimationFrame(animate);
             }
