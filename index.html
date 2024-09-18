@@ -237,13 +237,14 @@
                 bounce += 0.05;
                 const bounceOffset = Math.sin(bounce) * 10;
 
-                if (direction === 'up') {
-                    imageOffset = Math.max(0, imageOffset - 10);
+                changingImage.style.transform = `translateX(-50%) translateY(${imageOffset}px)`;
+                
+                // 4000px 이후에도 애니메이션 계속 실행
+                if (scrollTop <= 4000 - window.innerHeight) {
+                    changingImage.style.display = 'block';
                 } else {
-                    imageOffset = Math.min(maxImageOffset, imageOffset + 10);
+                    changingImage.style.display = 'none';
                 }
-
-                changingImage.style.transform = `translateX(-50%) translateY(${imageOffset + bounceOffset}px)`;
 
                 requestAnimationFrame(animate);
             }
