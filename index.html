@@ -59,8 +59,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 70%;
-            height: 70%;
+            width: 77%;  /* 110% of 70% */
+            height: 77%;  /* 110% of 70% */
             border-radius: 50%;
             overflow: hidden;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -133,6 +133,14 @@
         .animated {
             animation: fadeInUp 1s ease-out forwards;
         }
+        .about-text {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 28.8px;  /* 60% of 48px */
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+        }
         @media (max-width: 1024px) {
             .container {
                 max-width: 1024px;
@@ -199,6 +207,7 @@
                 <div class="circular-image">
                     <img src="images/Thank-you3_web.png" alt="Image 2">
                 </div>
+                <div class="about-text">About</div>
             </div>
             <div class="circular-image-container">
                 <div class="circular-image">
@@ -224,10 +233,23 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const items = document.querySelectorAll('.circular-image-container, .video-container, .mpic01-container');
+            const higherImage = document.querySelector('.higher-image');
+            
+            function checkScroll() {
+                if (window.pageYOffset > 200) {
+                    higherImage.classList.add('animated');
+                    window.removeEventListener('scroll', checkScroll);
+                }
+            }
+
+            window.addEventListener('scroll', checkScroll);
+
             items.forEach((item, index) => {
-                setTimeout(() => {
-                    item.classList.add('animated');
-                }, index * 200);
+                if (!item.classList.contains('higher-image')) {
+                    setTimeout(() => {
+                        item.classList.add('animated');
+                    }, index * 200);
+                }
             });
 
             const changingImage = document.querySelector('.changing-image');
