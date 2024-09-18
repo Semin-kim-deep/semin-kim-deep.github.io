@@ -263,7 +263,7 @@
                 const scrollPercentage = Math.min(scrollTop / maxScroll, 1);
 
                 const maxImageOffset = document.body.scrollHeight - window.innerHeight - changingImage.offsetHeight;
-                let imageOffset = maxImageOffset * scrollPercentage;
+                let imageOffset = Math.min(scrollPercentage * maxImageOffset, maxImageOffset);
 
                 bounce += 0.05;
                 const bounceOffset = Math.sin(bounce) * 10;
