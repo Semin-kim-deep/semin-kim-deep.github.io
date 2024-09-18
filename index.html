@@ -14,7 +14,7 @@
             background-size: auto;
             background-position: center top;
             background-repeat: no-repeat;
-            height: 4000px; /* 배경 이미지의 실제 높이로 설정해주세요 */
+            height: 4000px;
         }
         .container {
             max-width: 1200px;
@@ -227,10 +227,10 @@
                 const direction = scrollTop > lastScrollTop ? 'down' : 'up';
                 lastScrollTop = scrollTop;
 
-                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-                const scrollPercentage = scrollTop / maxScroll;
+                const maxScroll = 3800 - window.innerHeight;
+                const scrollPercentage = Math.min(scrollTop / maxScroll, 1);
                 const imageHeight = changingImage.offsetHeight;
-                const maxImageOffset = Math.max(0, imageHeight - window.innerHeight);
+                const maxImageOffset = Math.max(0, 3800 - window.innerHeight - 100); // 100은 initial top 값
                 let imageOffset = maxImageOffset * scrollPercentage;
 
                 bounce += 0.05;
