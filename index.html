@@ -239,24 +239,24 @@
         <div class="gallery">
             <div class="circular-image-container higher-image">
                 <div class="circular-image">
-                    <img src="images/Thank-you3_web.png" alt="Image 2" style="display: none;">
+                    <img src="images/Thank-you3_web.png" alt="Image 2">
                 </div>
             </div>
             <div class="circular-image-container">
                 <div class="circular-image">
-                    <img src="images/a_1253.png" alt="Image 1" style="display: none;">
+                    <img src="images/a_1253.png" alt="Image 1">
                 </div>
             </div>
         </div>
         <div class="video-mpic-container">
             <div class="video-container">
-                <video id="myVideo" muted autoplay loop style="display: none;">
+                <video id="myVideo" muted autoplay loop>
                     <source src="images/anti_tarotcard.MP4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="mpic01-container">
-                <img src="images/mpic01_2.png" alt="Image 5" style="display: none;">
+                <img src="images/mpic01_2.png" alt="Image 5">
             </div>
         </div>
         <div class="description">
@@ -308,21 +308,35 @@
                 changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
                 
                 const aboutSection = document.querySelector('.about-section');
-                if (scrollTop > 60 && scrollTop <= 360) {
-                    const opacity = Math.min((scrollTop - 60) / 180, 1);
-                    const translateY = Math.max(50 - (scrollTop - 60) / 3.6, 0);
+                const circularImage = document.querySelector('.circular-image-container:not(.higher-image)');
+                
+                if (scrollTop > 30 && scrollTop <= 230) {  // 페이드인 시작 지점을 30으로, 끝 지점을 230으로 변경
+                    const opacity = Math.min((scrollTop - 30) / 200, 1);  // 페이드인 속도 조정
+                    const translateY = Math.max(50 - (scrollTop - 30) / 4, 0);  // 이동 속도 조정
                     aboutSection.style.opacity = opacity;
                     aboutSection.style.transform = `translateY(calc(-50% + ${translateY}px))`;
-                } else if (scrollTop > 360 && scrollTop <= 720) {  // 변경된 부분: 페이드 아웃 시작 지점을 360에서 720으로 늘림
-                    const opacity = Math.max(1 - (scrollTop - 360) / 360, 0);  // 변경된 부분: 페이드 아웃 속도를 절반으로 줄임 (180 -> 360)
+                } else if (scrollTop > 230 && scrollTop <= 430) {  // About 섹션 유지 시간 연장
+                    aboutSection.style.opacity = '1';
+                    aboutSection.style.transform = 'translateY(-50%)';
+                } else if (scrollTop > 430 && scrollTop <= 530) {  // 페이드 아웃 시작 지점을 430으로, 끝 지점을 530으로 변경 (빠른 페이드아웃)
+                    const opacity = Math.max(1 - (scrollTop - 430) / 100, 0);  // 페이드 아웃 속도 조정 (더 빠르게)
                     aboutSection.style.opacity = opacity;
                     aboutSection.style.transform = 'translateY(-50%)';
-                } else if (scrollTop > 720) {
+                    
+                    // a_1253.png 이미지 페이드인
+                    const circularImageOpacity = Math.min((1 - opacity) * 2, 1);
+                    circularImage.style.opacity = circularImageOpacity;
+                    circularImage.style.transform = `translateY(${50 * (1 - circularImageOpacity)}px)`;
+                } else if (scrollTop > 530) {
                     aboutSection.style.opacity = '0';
                     aboutSection.style.transform = 'translateY(-50%)';
+                    circularImage.style.opacity = '1';
+                    circularImage.style.transform = 'translateY(0)';
                 } else {
                     aboutSection.style.opacity = '0';
                     aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
+                    circularImage.style.opacity = '0';
+                    circularImage.style.transform = 'translateY(50px)';
                 }
 
                 requestAnimationFrame(animate);
