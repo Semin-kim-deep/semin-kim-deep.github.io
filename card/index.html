@@ -3,121 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Card Display</title>
+    <title>Simple Flipping Card</title>
     <style>
-        html, body {
-            width: 100%;
-            height: 100%;
-            padding: 0;
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: url('../images/bg_hp.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background-color: #f0f0f0;
         }
-
-        .cards {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
         .card {
             width: 250px;
             height: 350px;
-            margin: 10px;
             perspective: 1000px;
             cursor: pointer;
         }
-
-        .card__inner {
+        .card-inner {
+            position: relative;
             width: 100%;
             height: 100%;
             transition: transform 0.6s;
             transform-style: preserve-3d;
-            position: relative;
         }
-
-        .card.flipped .card__inner {
+        .card.flipped .card-inner {
             transform: rotateY(180deg);
         }
-
-        .card__front, .card__back {
+        .card-front, .card-back {
             position: absolute;
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
-
-        .card__back {
+        .card-back {
             transform: rotateY(180deg);
         }
-
         img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="cards">
-        <!-- Cards will be dynamically added here -->
+    <div class="card">
+        <div class="card-inner">
+            <div class="card-front">
+                <img src="./images/atc01.png" alt="Card Front">
+            </div>
+            <div class="card-back">
+                <img src="./images/atc01_back.png" alt="Card Back">
+            </div>
+        </div>
     </div>
 
     <script>
-        const CARD_IMAGES = [
-            { front: '../card/images/atc01.png', back: '../card/images/atc01_back.png' },
-            { front: '../card/iimages/atc02.png', back: '../card/iimages/atc01_back.png' },
-            { front: '../card/iimages/atc03.png', back: '../card/iimages/atc01_back.png' },
-            { front: '../card/iimages/atc04.png', back: '../card/iimages/atc01_back.png' }
-        ];
-
-        const cardsContainer = document.querySelector('.cards');
-
-        CARD_IMAGES.forEach((card, index) => {
-            const cardElement = document.createElement('div');
-            cardElement.className = 'card';
-            cardElement.innerHTML = `
-                <div class="card__inner">
-                    <div class="card__front">
-                        <img src="${card.front}" alt="Card Front ${index + 1}">
-                    </div>
-                    <div class="card__back">
-                        <img src="${card.back}" alt="Card Back ${index + 1}">
-                    </div>
-                </div>
-            `;
-            cardsContainer.appendChild(cardElement);
-
-            cardElement.addEventListener('click', () => {
-                cardElement.classList.toggle('flipped');
-            });
-
-            cardElement.addEventListener('mousemove', (e) => {
-                const rect = cardElement.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-
-                const rotateX = (y - centerY) / 10;
-                const rotateY = (centerX - x) / 10;
-
-                cardElement.querySelector('.card__inner').style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-
-            cardElement.addEventListener('mouseleave', () => {
-                cardElement.querySelector('.card__inner').style.transform = 'rotateX(0) rotateY(0)';
-            });
+        const card = document.querySelector('.card');
+        card.addEventListener('click', () => {
+            card.classList.toggle('flipped');
         });
     </script>
 </body>
