@@ -168,13 +168,13 @@
         }
         .it-seodanggae-group {
             position: fixed;
-            right: calc(50% - 550px);
+            right: calc(50% - 470px); /* 80px 오른쪽으로 이동 */
             top: 50%;
             transform: translateY(-50%);
             text-align: left;
             opacity: 0;
             transition: opacity 0.5s ease, transform 0.5s ease;
-            color: white;
+            color: black; /* 글자 색을 검은색으로 변경 */
         }
         .it-seodanggae-image {
             width: 300px;
@@ -198,6 +198,30 @@
             line-height: 1.5;
             max-width: 500px;
         }
+        .scroll-more {
+            position: fixed;
+            left: calc(50% - 550px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+        }
+        .anti-tarot-card {
+            position: absolute;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
         @media (max-width: 1024px) {
             .container {
                 max-width: 1024px;
@@ -216,7 +240,7 @@
             .video-container {
                 margin-right: 150px;
             }
-            .info-section {
+            .info-section, .scroll-more {
                 left: 20px;
             }
             .it-seodanggae-group {
@@ -260,7 +284,7 @@
                 width: 300px;
                 height: 300px;
             }
-            .info-title, .it-seodanggae-title {
+            .info-title, .it-seodanggae-title, .scroll-more {
                 font-size: 36px;
             }
             .info-description, .it-seodanggae-description {
@@ -327,6 +351,8 @@
             <p class="info-more"><a href="it.html">More ></a></p>
         </div>
     </div>
+    <div class="scroll-more">Scroll More</div>
+    <div class="anti-tarot-card">Anti-Tarot Card</div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const changingImage = document.querySelector('.changing-image');
@@ -363,6 +389,7 @@
             
             const aboutSection = document.querySelector('#about-section');
             const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
+            const scrollMore = document.querySelector('.scroll-more');
             
             if (scrollTop > 30 && scrollTop <= 230) {
                 const opacity = Math.min((scrollTop - 30) / 200, 1);
@@ -371,17 +398,23 @@
                 aboutSection.style.transform = `translateY(calc(-50% + ${translateY}px))`;
                 itSeodanggaeGroup.style.opacity = '0';
                 itSeodanggaeGroup.style.transform = 'translateY(calc(-50% + 100px))';
+                scrollMore.style.opacity = '0';
+                scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
             } else if (scrollTop > 230 && scrollTop <= 430) {
                 aboutSection.style.opacity = '1';
                 aboutSection.style.transform = 'translateY(-50%)';
                 itSeodanggaeGroup.style.opacity = '0';
                 itSeodanggaeGroup.style.transform = 'translateY(calc(-50% + 100px))';
+                scrollMore.style.opacity = '0';
+                scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
             } else if (scrollTop > 430 && scrollTop <= 530) {
                 const opacity = Math.max(1 - (scrollTop - 430) / 100, 0);
                 aboutSection.style.opacity = opacity;
                 aboutSection.style.transform = 'translateY(-50%)';
                 itSeodanggaeGroup.style.opacity = '0';
                 itSeodanggaeGroup.style.transform = 'translateY(calc(-50% + 100px))';
+                scrollMore.style.opacity = '0';
+                scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
             } else if (scrollTop > 530 && scrollTop <= 730) {
                 const opacity = Math.min((scrollTop - 530) / 200, 1);
                 const translateY = Math.max(100 - (scrollTop - 530) / 2, 0);
@@ -389,11 +422,15 @@
                 aboutSection.style.transform = 'translateY(-50%)';
                 itSeodanggaeGroup.style.opacity = opacity;
                 itSeodanggaeGroup.style.transform = `translateY(calc(-50% + ${translateY}px))`;
+                scrollMore.style.opacity = '0';
+                scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
             } else if (scrollTop > 730 && scrollTop <= 1230) {
                 aboutSection.style.opacity = '0';
                 aboutSection.style.transform = 'translateY(-50%)';
                 itSeodanggaeGroup.style.opacity = '1';
                 itSeodanggaeGroup.style.transform = 'translateY(-50%)';
+                scrollMore.style.opacity = '0';
+                scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
             } else if (scrollTop > 1230 && scrollTop <= 1330) {
                 const opacity = Math.max(1 - (scrollTop - 1230) / 100, 0);
                 const translateY = Math.min((scrollTop - 1230) / 2, 50);
@@ -401,11 +438,30 @@
                 aboutSection.style.transform = 'translateY(-50%)';
                 itSeodanggaeGroup.style.opacity = opacity;
                 itSeodanggaeGroup.style.transform = `translateY(calc(-50% - ${translateY}px))`;
+                scrollMore.style.opacity = 1 - opacity;
+                scrollMore.style.transform = `translateY(calc(-50% + ${50 - translateY}px))`;
+            } else if (scrollTop > 1330 && scrollTop <= 1830) {
+                aboutSection.style.opacity = '0';
+                aboutSection.style.transform = 'translateY(-50%)';
+                itSeodanggaeGroup.style.opacity = '0';
+                itSeodanggaeGroup.style.transform = 'translateY(calc(-50% - 50px))';
+                scrollMore.style.opacity = '1';
+                scrollMore.style.transform = 'translateY(-50%)';
+            } else if (scrollTop > 1830 && scrollTop <= 1930) {
+                const opacity = Math.max(1 - (scrollTop - 1830) / 100, 0);
+                aboutSection.style.opacity = '0';
+                aboutSection.style.transform = 'translateY(-50%)';
+                itSeodanggaeGroup.style.opacity = '0';
+                itSeodanggaeGroup.style.transform = 'translateY(calc(-50% - 50px))';
+                scrollMore.style.opacity = opacity;
+                scrollMore.style.transform = 'translateY(-50%)';
             } else {
                 aboutSection.style.opacity = '0';
                 aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
                 itSeodanggaeGroup.style.opacity = '0';
                 itSeodanggaeGroup.style.transform = 'translateY(calc(-50% - 50px))';
+                scrollMore.style.opacity = '0';
+                scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
             }
 
             requestAnimationFrame(animate);
