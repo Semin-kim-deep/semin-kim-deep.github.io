@@ -129,7 +129,7 @@
         }
         .about-section {
             position: fixed;
-            left: calc(50% - 550px);  /* 50px 왼쪽으로 이동 */
+            left: calc(50% - 550px);
             top: 50%;
             transform: translateY(-50%);
             color: white;
@@ -160,7 +160,7 @@
         .about-more {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 24px;
         }
         .about-more a {
             color: white;
@@ -308,13 +308,13 @@
                 changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
                 
                 const aboutSection = document.querySelector('.about-section');
-                if (scrollTop > 120 && scrollTop <= 420) {
-                    const opacity = Math.min((scrollTop - 120) / 180, 1);
-                    const translateY = Math.max(50 - (scrollTop - 120) / 3.6, 0);
+                if (scrollTop > 60 && scrollTop <= 360) {
+                    const opacity = Math.min((scrollTop - 60) / 180, 1);
+                    const translateY = Math.max(50 - (scrollTop - 60) / 3.6, 0);
                     aboutSection.style.opacity = opacity;
                     aboutSection.style.transform = `translateY(calc(-50% + ${translateY}px))`;
-                } else if (scrollTop > 420) {
-                    const opacity = Math.max(1 - (scrollTop - 420) / 180, 0);
+                } else if (scrollTop > 360) {
+                    const opacity = Math.max(1 - (scrollTop - 360) / 180, 0);
                     aboutSection.style.opacity = opacity;
                     aboutSection.style.transform = 'translateY(-50%)';
                 } else {
