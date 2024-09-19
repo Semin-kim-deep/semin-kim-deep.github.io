@@ -134,7 +134,7 @@
             font-size: 48px;
             color: white;
             opacity: 0;
-            transition: opacity 1s, transform 1s;
+            transition: opacity 0.5s ease, transform 0.5s ease;
             font-family: 'Jost', sans-serif;
             font-weight: 700;
         }
@@ -265,12 +265,16 @@
                 changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
                 
                 const aboutText = document.querySelector('.about-text');
-                if (scrollTop > 200 && scrollTop <= 300) {
-                    aboutText.style.opacity = '1';
-                    aboutText.style.transform = 'translateY(-50%) translateY(0)';
-                } else {
+                if (scrollTop > 200 && scrollTop <= 800) {
+                    const opacity = 1 - (scrollTop - 200) / 600;
+                    aboutText.style.opacity = Math.max(opacity, 0);
+                    aboutText.style.transform = `translateY(-50%) translateY(${(scrollTop - 200) / 4}px)`;
+                } else if (scrollTop <= 200) {
                     aboutText.style.opacity = '0';
                     aboutText.style.transform = 'translateY(-50%) translateY(50px)';
+                } else {
+                    aboutText.style.opacity = '0';
+                    aboutText.style.transform = 'translateY(-50%) translateY(150px)';
                 }
 
                 requestAnimationFrame(animate);
