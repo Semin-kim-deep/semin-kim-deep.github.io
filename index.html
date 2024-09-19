@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deepdown Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -126,17 +127,34 @@
             text-align: center;
             margin-top: 20px;
         }
-        .about-text {
+        .about-section {
             position: fixed;
             left: calc(50% - 500px);
             top: 50%;
             transform: translateY(-50%);
-            font-size: 48px;
             color: white;
             opacity: 0;
             transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .about-title {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .about-description {
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 500px;
+        }
+        .about-description p:first-child {
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        .about-description p:last-child {
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
         }
         @media (max-width: 1024px) {
             .container {
@@ -156,7 +174,7 @@
             .video-container {
                 margin-right: 150px;
             }
-            .about-text {
+            .about-section {
                 left: 20px;
             }
         }
@@ -192,6 +210,12 @@
             .changing-image {
                 width: 300px;
                 height: 300px;
+            }
+            .about-title {
+                font-size: 36px;
+            }
+            .about-description {
+                font-size: 14px;
             }
         }
     </style>
@@ -229,7 +253,15 @@
             <p></p>
         </div>
     </div>
-    <div class="about-text">About</div>
+    <div class="about-section">
+        <div class="about-title">About</div>
+        <div class="about-description">
+            <p>딥다운 스튜디오는 일러스트를 중심으로 다양한 제품을 만들고 있어요.<br>
+            음악과 책 등에서 영감을 받고, 재미있는 것들을 만들고자 해요.</p>
+            <p>Deepdown Studio creates a variety of products with a focus on illustration.<br>
+            We draw inspiration from music and books, and our goal is to make fun and interesting things.</p>
+        </div>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const changingImage = document.querySelector('.changing-image');
@@ -264,17 +296,15 @@
                 const bounceOffset = Math.sin(bounce) * 10;
                 changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
                 
-                const aboutText = document.querySelector('.about-text');
-                if (scrollTop > 200 && scrollTop <= 800) {
-                    const opacity = 1 - (scrollTop - 200) / 600;
-                    aboutText.style.opacity = Math.max(opacity, 0);
-                    aboutText.style.transform = `translateY(-50%) translateY(${(scrollTop - 200) / 4}px)`;
-                } else if (scrollTop <= 200) {
-                    aboutText.style.opacity = '0';
-                    aboutText.style.transform = 'translateY(-50%) translateY(50px)';
+                const aboutSection = document.querySelector('.about-section');
+                if (scrollTop > 200) {
+                    const opacity = Math.min((scrollTop - 200) / 200, 1);
+                    const translateY = Math.max(50 - (scrollTop - 200) / 4, 0);
+                    aboutSection.style.opacity = opacity;
+                    aboutSection.style.transform = `translateY(calc(-50% + ${translateY}px))`;
                 } else {
-                    aboutText.style.opacity = '0';
-                    aboutText.style.transform = 'translateY(-50%) translateY(150px)';
+                    aboutSection.style.opacity = '0';
+                    aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
                 }
 
                 requestAnimationFrame(animate);
