@@ -131,7 +131,7 @@
             left: calc(50% - 500px);
             top: 50%;
             transform: translateY(-50%);
-            font-size: 48px; /* 24px에서 48px로 변경 */
+            font-size: 48px;
             color: white;
             opacity: 0;
             transition: opacity 1s, transform 1s;
@@ -265,7 +265,7 @@
                 changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
                 
                 const aboutText = document.querySelector('.about-text');
-                if (scrollTop > 200) {
+                if (scrollTop > 200 && scrollTop <= 300) {
                     aboutText.style.opacity = '1';
                     aboutText.style.transform = 'translateY(-50%) translateY(0)';
                 } else {
