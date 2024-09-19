@@ -53,6 +53,9 @@
             padding-bottom: 30%;
             overflow: hidden;
             margin: 0 100px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
         }
         .circular-image {
             position: absolute;
@@ -83,6 +86,9 @@
             width: 30%;
             margin-right: 350px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
         }
         .video-container video {
             width: 100%;
@@ -91,6 +97,9 @@
         .mpic01-container {
             width: 30%;
             text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
         }
         .mpic01-container img {
             width: 100%;
@@ -116,22 +125,6 @@
         .about-link {
             text-align: center;
             margin-top: 20px;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .circular-image-container, .video-container, .mpic01-container {
-            opacity: 0;
-        }
-        .animated {
-            animation: fadeInUp 1s ease-out forwards;
         }
         @media (max-width: 1024px) {
             .container {
@@ -223,13 +216,6 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const items = document.querySelectorAll('.circular-image-container, .video-container, .mpic01-container');
-            items.forEach((item, index) => {
-                setTimeout(() => {
-                    item.classList.add('animated');
-                }, index * 200);
-            });
-
             const changingImage = document.querySelector('.changing-image');
             let isFirstImage = true;
             function changeImage() {
@@ -261,6 +247,33 @@
                 bounce += 0.05;
                 const bounceOffset = Math.sin(bounce) * 10;
                 changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
+                
+                // Scroll-based animations
+                const thankYouImage = document.querySelector('.higher-image');
+                const a1253Image = document.querySelector('.gallery .circular-image-container:not(.higher-image)');
+                const videoContainer = document.querySelector('.video-container');
+                const mpic01Container = document.querySelector('.mpic01-container');
+
+                if (scrollTop > 100) {
+                    thankYouImage.style.opacity = '1';
+                    thankYouImage.style.transform = 'translateY(0)';
+                }
+
+                if (scrollTop > 300) {
+                    a1253Image.style.opacity = '1';
+                    a1253Image.style.transform = 'translateY(0)';
+                }
+
+                if (scrollTop > 800) {
+                    videoContainer.style.opacity = '1';
+                    videoContainer.style.transform = 'translateY(0)';
+                }
+
+                if (scrollTop > 1600) {
+                    mpic01Container.style.opacity = '1';
+                    mpic01Container.style.transform = 'translateY(0)';
+                }
+
                 requestAnimationFrame(animate);
             }
 
