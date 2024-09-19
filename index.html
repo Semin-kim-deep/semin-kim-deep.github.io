@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deepdown Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
     <style>
         body {
@@ -127,7 +127,7 @@
             text-align: center;
             margin-top: 20px;
         }
-        .about-section {
+        .info-section {
             position: fixed;
             left: calc(50% - 550px);
             top: 50%;
@@ -136,33 +136,33 @@
             opacity: 0;
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
-        .about-title {
+        .info-title {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
             font-size: 48px;
             margin-bottom: 20px;
         }
-        .about-description {
+        .info-description {
             font-size: 16px;
             line-height: 1.5;
             max-width: 500px;
         }
-        .about-description p:first-child {
+        .info-description p:first-child {
             font-family: 'Pretendard', sans-serif;
             font-weight: 400;
             margin-bottom: 10px;
         }
-        .about-description p:nth-child(2) {
+        .info-description p:nth-child(2) {
             font-family: 'Jost', sans-serif;
-            font-weight: 400;
+            font-weight: 500;
             margin-bottom: 10px;
         }
-        .about-more {
+        .info-more {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
             font-size: 24px;
         }
-        .about-more a {
+        .info-more a {
             color: white;
             text-decoration: none;
         }
@@ -184,7 +184,7 @@
             .video-container {
                 margin-right: 150px;
             }
-            .about-section {
+            .info-section {
                 left: 20px;
             }
         }
@@ -221,10 +221,10 @@
                 width: 300px;
                 height: 300px;
             }
-            .about-title {
+            .info-title {
                 font-size: 36px;
             }
-            .about-description {
+            .info-description {
                 font-size: 14px;
             }
         }
@@ -263,17 +263,26 @@
             <p></p>
         </div>
     </div>
-    <div class="about-section">
-        <div class="about-title">About</div>
-        <div class="about-description">
+    <div class="info-section" id="about-section">
+        <div class="info-title">About</div>
+        <div class="info-description">
             <p>딥다운 스튜디오는 일러스트를 중심으로 다양한 제품을 만들고 있어요.<br>
             음악과 책 등에서 영감을 받고, 재미있는 것들을 만들고자 해요.</p>
             <p>Deepdown Studio creates a variety of products with a focus on illustration.<br>
-            I got inspiration from music and books, and my goal is to make fun and interesting things.</p>
-            <p class="about-more"><a href="about.html">More ></a></p>
+            <span style="font-family: 'Jost', sans-serif; font-weight: 500;">I got inspiration from music and books, and my goal is to make fun and interesting things.</span></p>
+            <p class="info-more"><a href="about.html">More ></a></p>
         </div>
     </div>
-    <script>
+    <div class="info-section" id="it-section">
+        <div class="info-title">IT Seodanggae</div>
+        <div class="info-description">
+            <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. IT라인의 브랜드는 IT서당개입니다.</p>
+            <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' This IT brand is called 'IT Seodanggae.</span></p>
+            <p class="info-more"><a href="it.html">More ></a></p>
+        </div>
+    </div>
+
+<script>
         document.addEventListener('DOMContentLoaded', function() {
             const changingImage = document.querySelector('.changing-image');
             let isFirstImage = true;
@@ -307,36 +316,64 @@
                 const bounceOffset = Math.sin(bounce) * 10;
                 changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
                 
-                const aboutSection = document.querySelector('.about-section');
+                const aboutSection = document.querySelector('#about-section');
+                const itSection = document.querySelector('#it-section');
                 const circularImage = document.querySelector('.circular-image-container:not(.higher-image)');
                 
-                if (scrollTop > 30 && scrollTop <= 230) {  // 페이드인 시작 지점을 30으로, 끝 지점을 230으로 변경
-                    const opacity = Math.min((scrollTop - 30) / 200, 1);  // 페이드인 속도 조정
-                    const translateY = Math.max(50 - (scrollTop - 30) / 4, 0);  // 이동 속도 조정
+                if (scrollTop > 30 && scrollTop <= 230) {
+                    const opacity = Math.min((scrollTop - 30) / 200, 1);
+                    const translateY = Math.max(50 - (scrollTop - 30) / 4, 0);
                     aboutSection.style.opacity = opacity;
                     aboutSection.style.transform = `translateY(calc(-50% + ${translateY}px))`;
-                } else if (scrollTop > 230 && scrollTop <= 430) {  // About 섹션 유지 시간 연장
+                    itSection.style.opacity = '0';
+                    itSection.style.transform = 'translateY(calc(-50% + 50px))';
+                } else if (scrollTop > 230 && scrollTop <= 430) {
                     aboutSection.style.opacity = '1';
                     aboutSection.style.transform = 'translateY(-50%)';
-                } else if (scrollTop > 430 && scrollTop <= 530) {  // 페이드 아웃 시작 지점을 430으로, 끝 지점을 530으로 변경 (빠른 페이드아웃)
-                    const opacity = Math.max(1 - (scrollTop - 430) / 100, 0);  // 페이드 아웃 속도 조정 (더 빠르게)
+                    itSection.style.opacity = '0';
+                    itSection.style.transform = 'translateY(calc(-50% + 50px))';
+                } else if (scrollTop > 430 && scrollTop <= 530) {
+                    const opacity = Math.max(1 - (scrollTop - 430) / 100, 0);
                     aboutSection.style.opacity = opacity;
                     aboutSection.style.transform = 'translateY(-50%)';
-                    
-                    // a_1253.png 이미지 페이드인
-                    const circularImageOpacity = Math.min((1 - opacity) * 2, 1);
-                    circularImage.style.opacity = circularImageOpacity;
-                    circularImage.style.transform = `translateY(${50 * (1 - circularImageOpacity)}px)`;
-                } else if (scrollTop > 530) {
+                    itSection.style.opacity = '0';
+                    itSection.style.transform = 'translateY(calc(-50% + 50px))';
+                } else if (scrollTop > 530 && scrollTop <= 730) {
+                    const opacity = Math.min((scrollTop - 530) / 200, 1);
+                    const translateY = Math.max(50 - (scrollTop - 530) / 4, 0);
                     aboutSection.style.opacity = '0';
                     aboutSection.style.transform = 'translateY(-50%)';
+                    itSection.style.opacity = opacity;
+                    itSection.style.transform = `translateY(calc(-50% + ${translateY}px))`;
+                } else if (scrollTop > 730 && scrollTop <= 930) {
+                    aboutSection.style.opacity = '0';
+                    aboutSection.style.transform = 'translateY(-50%)';
+                    itSection.style.opacity = '1';
+                    itSection.style.transform = 'translateY(-50%)';
+                } else if (scrollTop > 930 && scrollTop <= 1030) {
+                    const opacity = Math.max(1 - (scrollTop - 930) / 100, 0);
+                    aboutSection.style.opacity = '0';
+                    aboutSection.style.transform = 'translateY(-50%)';
+                    itSection.style.opacity = opacity;
+                    itSection.style.transform = 'translateY(-50%)';
+                    
+                    const circularImageOpacity = Math.min((1 - opacity) * 2, 1);
+                    circularImage.style.opacity = circularImageOpacity;
+                    circularImage.style.transform = `translateY(${750 - (750 * circularImageOpacity)}px)`;
+                } else if (scrollTop > 1030) {
+                    aboutSection.style.opacity = '0';
+                    aboutSection.style.transform = 'translateY(-50%)';
+                    itSection.style.opacity = '0';
+                    itSection.style.transform = 'translateY(-50%)';
                     circularImage.style.opacity = '1';
                     circularImage.style.transform = 'translateY(0)';
                 } else {
                     aboutSection.style.opacity = '0';
                     aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
+                    itSection.style.opacity = '0';
+                    itSection.style.transform = 'translateY(calc(-50% + 50px))';
                     circularImage.style.opacity = '0';
-                    circularImage.style.transform = 'translateY(50px)';
+                    circularImage.style.transform = 'translateY(750px)';
                 }
 
                 requestAnimationFrame(animate);
