@@ -129,7 +129,7 @@
         }
         .about-section {
             position: fixed;
-            left: calc(50% - 500px);
+            left: calc(50% - 550px);  /* 50px 왼쪽으로 이동 */
             top: 50%;
             transform: translateY(-50%);
             color: white;
@@ -152,9 +152,19 @@
             font-weight: 400;
             margin-bottom: 10px;
         }
-        .about-description p:last-child {
+        .about-description p:nth-child(2) {
             font-family: 'Jost', sans-serif;
             font-weight: 400;
+            margin-bottom: 10px;
+        }
+        .about-more {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .about-more a {
+            color: white;
+            text-decoration: none;
         }
         @media (max-width: 1024px) {
             .container {
@@ -260,6 +270,7 @@
             음악과 책 등에서 영감을 받고, 재미있는 것들을 만들고자 해요.</p>
             <p>Deepdown Studio creates a variety of products with a focus on illustration.<br>
             We draw inspiration from music and books, and our goal is to make fun and interesting things.</p>
+            <p class="about-more"><a href="about.html">More ></a></p>
         </div>
     </div>
     <script>
@@ -297,11 +308,15 @@
                 changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
                 
                 const aboutSection = document.querySelector('.about-section');
-                if (scrollTop > 200) {
-                    const opacity = Math.min((scrollTop - 200) / 200, 1);
-                    const translateY = Math.max(50 - (scrollTop - 200) / 4, 0);
+                if (scrollTop > 120 && scrollTop <= 420) {
+                    const opacity = Math.min((scrollTop - 120) / 180, 1);
+                    const translateY = Math.max(50 - (scrollTop - 120) / 3.6, 0);
                     aboutSection.style.opacity = opacity;
                     aboutSection.style.transform = `translateY(calc(-50% + ${translateY}px))`;
+                } else if (scrollTop > 420) {
+                    const opacity = Math.max(1 - (scrollTop - 420) / 180, 0);
+                    aboutSection.style.opacity = opacity;
+                    aboutSection.style.transform = 'translateY(-50%)';
                 } else {
                     aboutSection.style.opacity = '0';
                     aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
