@@ -1,4 +1,359 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepdown Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('images/bg_hp.jpg');
+            background-size: contain;
+            background-position: center top;
+            background-repeat: no-repeat;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 50px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+        }
+        h1 {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            color: white;
+            margin: 0;
+            text-align: center;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+        }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 300px;
+        }
+        .circular-image-container {
+            position: relative;
+            width: 30%;
+            padding-bottom: 30%;
+            overflow: hidden;
+            margin: 0 100px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
+        }
+        .circular-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            height: 70%;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .circular-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .higher-image { 
+            margin-top: -100px;
+        }
+        .video-mpic-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px;
+        }
+        .video-container {
+            width: 30%;
+            margin-right: 350px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
+        }
+        .video-container video {
+            width: 100%;
+            display: block;
+        }
+        .mpic01-container {
+            width: 30%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
+        }
+        .mpic01-container img {
+            width: 100%;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .changing-image {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+        .description {
+            margin-top: 40px;
+            text-align: center;
+        }
+        .about-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .info-section {
+            position: fixed;
+            left: calc(50% - 550px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .info-title {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .info-description {
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 500px;
+        }
+        .info-description p:first-child {
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        .info-description p:nth-child(2) {
+            font-family: 'Jost', sans-serif;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .info-more {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        .info-more a {
+            color: white;
+            text-decoration: none;
+        }
+        .it-seodanggae-group {
+            position: fixed;
+            right: calc(50% - 470px); /* 80px 오른쪽으로 이동 */
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: left;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            color: black;
+        }
+        .it-seodanggae-image {
+            width: 300px;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        .it-seodanggae-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .it-seodanggae-title {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .it-seodanggae-description {
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 500px;
+        }
+        .scroll-more {
+            position: fixed;
+            left: calc(50% - 550px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+        }
+        .anti-tarot-card {
+            position: absolute;
+            bottom: 300px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: black;
+            text-align: center;
+            width: 100%;
+        }
+        @media (max-width: 1024px) {
+            .container {
+                max-width: 1024px;
+                padding: 0 20px;
+            }
+            .changing-image {
+                width: 500px;
+                height: 500px;
+            }
+            .gallery {
+                margin-top: 200px;
+            }
+            .circular-image-container {
+                margin: 0 50px;
+            }
+            .video-container {
+                margin-right: 150px;
+            }
+            .info-section, .scroll-more {
+                left: 20px;
+            }
+            .it-seodanggae-group {
+                right: 20px;
+            }
+        }
+        @media (max-width: 768px) {
+            .changing-image {
+                width: 400px;
+                height: 400px;
+            }
+            .gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+            .circular-image-container {
+                width: 60%;
+                padding-bottom: 60%;
+                margin: 20px 0;
+            }
+            .video-container, .mpic01-container {
+                width: 80%;
+                margin: 20px 0;
+            }
+            .video-container {
+                margin-right: 0;
+            }
+            .it-seodanggae-image {
+                width: 200px;
+                height: 200px;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+            h1 {
+                font-size: 36px;
+            }
+            .changing-image {
+                width: 300px;
+                height: 300px;
+            }
+            .info-title, .it-seodanggae-title, .scroll-more {
+                font-size: 36px;
+            }
+            .info-description, .it-seodanggae-description {
+                font-size: 14px;
+            }
+            .it-seodanggae-image {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Deepdown Studio</h1>
+        </header>
+        <div class="changing-image"></div>
+        <div class="gallery">
+            <div class="circular-image-container higher-image">
+                <div class="circular-image">
+                    <img src="images/Thank-you3_web.png" alt="Image 2">
+                </div>
+            </div>
+            <div class="circular-image-container">
+                <div class="circular-image">
+                    <img src="images/a_1253.png" alt="Image 1">
+                </div>
+            </div>
+        </div>
+        <div class="video-mpic-container">
+            <div class="video-container">
+                <video id="myVideo" muted autoplay loop>
+                    <source src="images/anti_tarotcard.MP4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="mpic01-container">
+                <img src="images/mpic01_2.png" alt="Image 5">
+            </div>
+        </div>
+        <div class="description">
+            <p></p>
+        </div>
+    </div>
+    <div class="info-section" id="about-section">
+        <div class="info-title">About</div>
+        <div class="info-description">
+            <p>딥다운 스튜디오는 일러스트를 중심으로 다양한 제품을 만들고 있어요.<br>
+            음악과 책 등에서 영감을 받고, 재미있는 것들을 만들고자 해요.</p>
+            <p>Deepdown Studio creates a variety of products with a focus on illustration.<br>
+            <span style="font-family: 'Jost', sans-serif; font-weight: 500;">I got inspiration from music and books, and my goal is to make fun and interesting things.</span></p>
+            <p class="info-more"><a href="about.html">More ></a></p>
+        </div>
+    </div>
+    <div class="it-seodanggae-group">
+        <div class="it-seodanggae-image">
+            <img src="images/a_1253.png" alt="IT Seodanggae Image">
+        </div>
+        <div class="it-seodanggae-title">IT Seodanggae</div>
+        <div class="it-seodanggae-description">
+            <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. IT라인의 브랜드는 IT서당개입니다.</p>
+            <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' This IT brand is called 'IT Seodanggae.</span></p>
+            <p class="info-more"><a href="it.html">More ></a></p>
+        </div>
+    </div>
+    <div class="scroll-more">Scroll More</div>
+    <div class="anti-tarot-card">Anti-Tarot Card</div>
+ <script>
     document.addEventListener('DOMContentLoaded', function() {
         const changingImage = document.querySelector('.changing-image');
         let isFirstImage = true;
@@ -120,3 +475,5 @@
         animate();
     });
 </script>
+</body>
+</html>
