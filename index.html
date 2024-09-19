@@ -168,12 +168,12 @@
         }
         .it-seodanggae-group {
             position: fixed;
-            left: calc(50% - 550px);
+            right: calc(50% - 550px);
             top: 50%;
             transform: translateY(-50%);
             text-align: left;
             opacity: 0;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease;
             color: white;
         }
         .it-seodanggae-image {
@@ -216,8 +216,11 @@
             .video-container {
                 margin-right: 150px;
             }
-            .info-section, .it-seodanggae-group {
+            .info-section {
                 left: 20px;
+            }
+            .it-seodanggae-group {
+                right: 20px;
             }
         }
         @media (max-width: 768px) {
@@ -367,18 +370,21 @@
                 aboutSection.style.opacity = opacity;
                 aboutSection.style.transform = `translateY(calc(-50% + ${translateY}px))`;
                 itSeodanggaeGroup.style.opacity = '0';
+                itSeodanggaeGroup.style.transform = 'translateY(calc(-50% + 100px))';
             } else if (scrollTop > 230 && scrollTop <= 430) {
                 aboutSection.style.opacity = '1';
                 aboutSection.style.transform = 'translateY(-50%)';
                 itSeodanggaeGroup.style.opacity = '0';
+                itSeodanggaeGroup.style.transform = 'translateY(calc(-50% + 100px))';
             } else if (scrollTop > 430 && scrollTop <= 530) {
                 const opacity = Math.max(1 - (scrollTop - 430) / 100, 0);
                 aboutSection.style.opacity = opacity;
                 aboutSection.style.transform = 'translateY(-50%)';
                 itSeodanggaeGroup.style.opacity = '0';
+                itSeodanggaeGroup.style.transform = 'translateY(calc(-50% + 100px))';
             } else if (scrollTop > 530 && scrollTop <= 730) {
                 const opacity = Math.min((scrollTop - 530) / 200, 1);
-                const translateY = Math.max(50 - (scrollTop - 530) / 4, 0);
+                const translateY = Math.max(100 - (scrollTop - 530) / 2, 0);
                 aboutSection.style.opacity = '0';
                 aboutSection.style.transform = 'translateY(-50%)';
                 itSeodanggaeGroup.style.opacity = opacity;
@@ -390,15 +396,16 @@
                 itSeodanggaeGroup.style.transform = 'translateY(-50%)';
             } else if (scrollTop > 1230 && scrollTop <= 1330) {
                 const opacity = Math.max(1 - (scrollTop - 1230) / 100, 0);
+                const translateY = Math.min((scrollTop - 1230) / 2, 50);
                 aboutSection.style.opacity = '0';
                 aboutSection.style.transform = 'translateY(-50%)';
                 itSeodanggaeGroup.style.opacity = opacity;
-                itSeodanggaeGroup.style.transform = 'translateY(-50%)';
+                itSeodanggaeGroup.style.transform = `translateY(calc(-50% - ${translateY}px))`;
             } else {
                 aboutSection.style.opacity = '0';
                 aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
                 itSeodanggaeGroup.style.opacity = '0';
-                itSeodanggaeGroup.style.transform = 'translateY(calc(-50% + 50px))';
+                itSeodanggaeGroup.style.transform = 'translateY(calc(-50% - 50px))';
             }
 
             requestAnimationFrame(animate);
