@@ -126,6 +126,16 @@
             text-align: center;
             margin-top: 20px;
         }
+        .about-text {
+            position: fixed;
+            left: calc(50% - 500px);
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: white;
+            opacity: 0;
+            transition: opacity 1s, transform 1s;
+        }
         @media (max-width: 1024px) {
             .container {
                 max-width: 1024px;
@@ -143,6 +153,9 @@
             }
             .video-container {
                 margin-right: 150px;
+            }
+            .about-text {
+                left: 20px;
             }
         }
         @media (max-width: 768px) {
@@ -190,30 +203,31 @@
         <div class="gallery">
             <div class="circular-image-container higher-image">
                 <div class="circular-image">
-                    <img src="images/Thank-you3_web.png" alt="Image 2">
+                    <img src="images/Thank-you3_web.png" alt="Image 2" style="display: none;">
                 </div>
             </div>
             <div class="circular-image-container">
                 <div class="circular-image">
-                    <img src="images/a_1253.png" alt="Image 1">
+                    <img src="images/a_1253.png" alt="Image 1" style="display: none;">
                 </div>
             </div>
         </div>
         <div class="video-mpic-container">
             <div class="video-container">
-                <video id="myVideo" muted autoplay loop>
+                <video id="myVideo" muted autoplay loop style="display: none;">
                     <source src="images/anti_tarotcard.MP4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
             <div class="mpic01-container">
-                <img src="images/mpic01_2.png" alt="Image 5">
+                <img src="images/mpic01_2.png" alt="Image 5" style="display: none;">
             </div>
         </div>
         <div class="description">
             <p></p>
         </div>
     </div>
+    <div class="about-text">About</div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const changingImage = document.querySelector('.changing-image');
@@ -248,30 +262,13 @@
                 const bounceOffset = Math.sin(bounce) * 10;
                 changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
                 
-                // Scroll-based animations
-                const thankYouImage = document.querySelector('.higher-image');
-                const a1253Image = document.querySelector('.gallery .circular-image-container:not(.higher-image)');
-                const videoContainer = document.querySelector('.video-container');
-                const mpic01Container = document.querySelector('.mpic01-container');
-
-                if (scrollTop > 100) {
-                    thankYouImage.style.opacity = '1';
-                    thankYouImage.style.transform = 'translateY(0)';
-                }
-
-                if (scrollTop > 300) {
-                    a1253Image.style.opacity = '1';
-                    a1253Image.style.transform = 'translateY(0)';
-                }
-
-                if (scrollTop > 800) {
-                    videoContainer.style.opacity = '1';
-                    videoContainer.style.transform = 'translateY(0)';
-                }
-
-                if (scrollTop > 1600) {
-                    mpic01Container.style.opacity = '1';
-                    mpic01Container.style.transform = 'translateY(0)';
+                const aboutText = document.querySelector('.about-text');
+                if (scrollTop > 200) {
+                    aboutText.style.opacity = '1';
+                    aboutText.style.transform = 'translateY(-50%) translateY(0)';
+                } else {
+                    aboutText.style.opacity = '0';
+                    aboutText.style.transform = 'translateY(-50%) translateY(50px)';
                 }
 
                 requestAnimationFrame(animate);
