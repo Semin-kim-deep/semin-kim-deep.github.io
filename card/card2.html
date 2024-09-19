@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Card Display</title>
+    <style>
+        :root {
+            --mx: 50%;
+            --my: 50%;
+            --s: 1;
+            --o: 0;
+            --tx: 0px;
+            --ty: 0px;
+            --rx: 0deg;
+            --ry: 0deg;
+            --pos: 50% 50%;
+            --posx: 50%;
+            --posy: 50%;
+            --hyp: 0;
+        }
+
+        .card {
+            --radius: 4.55% / 3.5%;
+            z-index: calc(var(--s) * 100);
+            transform: translate3d(0, 0, 0.1px);
+            will-change: transform, visibility;
+            transform-style: preserve-3d;
+        }
+
+        .card.interacting {
+            z-index: calc(var(--s) * 120);
+        }
+
+        .card.active .card__translater,
+        .card.active .card__rotator {
+            touch-action: none;
+        }
+
+        .card__translater,
+        .card__rotator {
+            display: grid;
+            perspective: 600px;
+            transform-origin: center;
+            will-change: transform;
+        }
+
+        .card__translater {
+            width: auto;
+            position: relative;
+            transform: translate3d(var(--tx), var(--ty), 0) scale(var(--s));
+        }
+
+        .card__rotator {
+            --glow: #69d1e9;
+            transform: rotateY(var(--rx)) rotateX(var(--ry));
+            transform-style: preserve-3d;
+            box-shadow: 0px 10px 20px -5px black;
+            border-radius: var(--radius);
+            outline: none;
+            transition: box-shadow 0.4s ease, outline 0.2s ease;
+        }
+
+        .card.active .card__rotator {
+            box-shadow: 0 0 10px 0px var(--glow), 0 0 10px 0px var(--glow),
+                0 0 30px 0px var(--glow);
+        }
+
+        .card__rotator:focus {
+            box-shadow: 0 0 10px 0px var(--glow), 0 0 10px 0px var(--glow),
+                0 0 30px 0px var(--glow);
+        }
+
+        .card.active .card__rotator:focus {
+            box-shadow: 0px 10px 30px 3px black;
+        }
+
+        .card__rotator :global(*) {
+            width: 100%;
+            display: grid;
+            grid-area: 1/1;
+            border-radius: var(--radius);
+            image-rendering: optimizeQuality;
+            transform-style: preserve-3d;
+        }
+
+        .card__back {
+            transform: rotateY(180deg);
+            backface-visibility: visible;
+        }
+
+        .card__front,
+        .card__front * {
+            backface-visibility: hidden;
+        }
+
+        .card__front {
+            opacity: 1;
+            transition: opacity 0.2s ease-out;
+        }
+
+        .loading .card__front {
+            opacity: 0;
+        }
+
+        .loading .card__back {
+            transform: rotateY(0deg);
+        }
+
+        .card__shine {
+            --grain: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCI+CjxmaWx0ZXIgaWQ9Im4iPgo8ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjciIG51bU9jdGF2ZXM9IjEwIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIj48L2ZlVHVyYnVsZW5jZT4KPC9maWx0ZXI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjMDAwIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiBmaWx0ZXI9InVybCgjbikiIG9wYWNpdHk9IjAuMyI+PC9yZWN0Pgo8L3N2Zz4=");
+
+            --space: 5%;
+            --angle: 133deg;
+            --imgsize: 500px;
+
+            --red: #f80e7b;
+            --yel: #eedf10;
+            --gre: #21e985;
+            --blu: #0dbde9;
+            --vio: #c929f1;
+        }
+
+        html,
+        body,
+        iframe {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            background-image: url('images/bg_hp.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            width: 250px;
+            height: 350px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="module">
+        import { writable } from 'https://cdn.skypack.dev/svelte/store';
+        import { tweened } from 'https://cdn.skypack.dev/svelte/motion';
+        import { cubicOut } from 'https://cdn.skypack.dev/svelte/easing';
+
+        const CARD_IMAGES = [
+            { front: './images/atc01.png', back: './images/atc01_back.png' },
+            { front: './images/atc02.png', back: './images/atc01_back.png' },
+            { front: './images/atc03.png', back: './images/atc01_back.png' },
+            { front: './images/atc04.png', back: './images/atc01_back.png' }
+        ];
+
+        function createCard(cardData) {
+            const { subscribe, set, update } = writable({
+                ...cardData,
+                loading: true,
+                active: false,
+                interacting: false
+            });
+
+            return {
+                subscribe,
+                setLoading: (loading) => update(c => ({ ...c, loading })),
+                setActive: (active) => update(c => ({ ...c, active })),
+                setInteracting: (interacting) => update(c => ({ ...c, interacting }))
+            };
+        }
+
+        const cards = CARD_IMAGES.map(createCard);
+
+        function app(node) {
+            let cardElements;
+
+            function updateCards() {
+                cardElements = node.querySelectorAll('.card');
+                cardElements.forEach((card, i) => {
+                    const unsubscribe = cards[i].subscribe(cardData => {
+                        card.classList.toggle('loading', cardData.loading);
+                        card.classList.toggle('active', cardData.active);
+                        card.classList.toggle('interacting', cardData.interacting);
+                    });
+                });
+            }
+
+            updateCards();
+
+            return {
+                update: updateCards,
+                destroy: () => {
+                    // Clean up if necessary
+                }
+            };
+        }
+
+        const appElement = document.getElementById('app');
+        appElement.innerHTML = `
+            <div class="cards">
+                ${CARD_IMAGES.map((card, index) => `
+                    <div class="card" data-index="${index}">
+                        <div class="card__translater">
+                            <div class="card__rotator">
+                                <img class="card__front" src="${card.front}" alt="Card Front ${index + 1}">
+                                <img class="card__back" src="${card.back}" alt="Card Back ${index + 1}">
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+
+        app(appElement);
+
+        // Interaction logic
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('flipped');
+            });
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
