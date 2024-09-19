@@ -166,6 +166,22 @@
             color: white;
             text-decoration: none;
         }
+        .it-seodanggae-group {
+            position: fixed;
+            right: calc(50% - 550px);
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .it-seodanggae-title {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 36px;
+            color: white;
+            margin-top: 20px;
+        }
         @media (max-width: 1024px) {
             .container {
                 max-width: 1024px;
@@ -186,6 +202,9 @@
             }
             .info-section {
                 left: 20px;
+            }
+            .it-seodanggae-group {
+                right: 20px;
             }
         }
         @media (max-width: 768px) {
@@ -273,16 +292,15 @@
             <p class="info-more"><a href="about.html">More ></a></p>
         </div>
     </div>
-    <div class="info-section" id="it-section">
-        <div class="info-title">IT Seodanggae</div>
-        <div class="info-description">
-            <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. IT라인의 브랜드는 IT서당개입니다.</p>
-            <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' This IT brand is called 'IT Seodanggae.</span></p>
-            <p class="info-more"><a href="it.html">More ></a></p>
+    <div class="it-seodanggae-group">
+        <div class="circular-image-container">
+            <div class="circular-image">
+                <img src="images/a_1253.png" alt="IT Seodanggae Image">
+            </div>
         </div>
+        <div class="it-seodanggae-title">IT Seodanggae</div>
     </div>
-
-<script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const changingImage = document.querySelector('.changing-image');
             let isFirstImage = true;
@@ -317,63 +335,31 @@
                 changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
                 
                 const aboutSection = document.querySelector('#about-section');
-                const itSection = document.querySelector('#it-section');
-                const circularImage = document.querySelector('.circular-image-container:not(.higher-image)');
+                const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
                 
                 if (scrollTop > 30 && scrollTop <= 230) {
                     const opacity = Math.min((scrollTop - 30) / 200, 1);
                     const translateY = Math.max(50 - (scrollTop - 30) / 4, 0);
                     aboutSection.style.opacity = opacity;
                     aboutSection.style.transform = `translateY(calc(-50% + ${translateY}px))`;
-                    itSection.style.opacity = '0';
-                    itSection.style.transform = 'translateY(calc(-50% + 50px))';
+                    itSeodanggaeGroup.style.opacity = '0';
                 } else if (scrollTop > 230 && scrollTop <= 430) {
                     aboutSection.style.opacity = '1';
                     aboutSection.style.transform = 'translateY(-50%)';
-                    itSection.style.opacity = '0';
-                    itSection.style.transform = 'translateY(calc(-50% + 50px))';
+                    itSeodanggaeGroup.style.opacity = '0';
                 } else if (scrollTop > 430 && scrollTop <= 530) {
                     const opacity = Math.max(1 - (scrollTop - 430) / 100, 0);
                     aboutSection.style.opacity = opacity;
                     aboutSection.style.transform = 'translateY(-50%)';
-                    itSection.style.opacity = '0';
-                    itSection.style.transform = 'translateY(calc(-50% + 50px))';
-                } else if (scrollTop > 530 && scrollTop <= 730) {
-                    const opacity = Math.min((scrollTop - 530) / 200, 1);
-                    const translateY = Math.max(50 - (scrollTop - 530) / 4, 0);
+                    itSeodanggaeGroup.style.opacity = 1 - opacity;
+                } else if (scrollTop > 530) {
                     aboutSection.style.opacity = '0';
                     aboutSection.style.transform = 'translateY(-50%)';
-                    itSection.style.opacity = opacity;
-                    itSection.style.transform = `translateY(calc(-50% + ${translateY}px))`;
-                } else if (scrollTop > 730 && scrollTop <= 930) {
-                    aboutSection.style.opacity = '0';
-                    aboutSection.style.transform = 'translateY(-50%)';
-                    itSection.style.opacity = '1';
-                    itSection.style.transform = 'translateY(-50%)';
-                } else if (scrollTop > 930 && scrollTop <= 1030) {
-                    const opacity = Math.max(1 - (scrollTop - 930) / 100, 0);
-                    aboutSection.style.opacity = '0';
-                    aboutSection.style.transform = 'translateY(-50%)';
-                    itSection.style.opacity = opacity;
-                    itSection.style.transform = 'translateY(-50%)';
-                    
-                    const circularImageOpacity = Math.min((1 - opacity) * 2, 1);
-                    circularImage.style.opacity = circularImageOpacity;
-                    circularImage.style.transform = `translateY(${750 - (750 * circularImageOpacity)}px)`;
-                } else if (scrollTop > 1030) {
-                    aboutSection.style.opacity = '0';
-                    aboutSection.style.transform = 'translateY(-50%)';
-                    itSection.style.opacity = '0';
-                    itSection.style.transform = 'translateY(-50%)';
-                    circularImage.style.opacity = '1';
-                    circularImage.style.transform = 'translateY(0)';
+                    itSeodanggaeGroup.style.opacity = '1';
                 } else {
                     aboutSection.style.opacity = '0';
                     aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
-                    itSection.style.opacity = '0';
-                    itSection.style.transform = 'translateY(calc(-50% + 50px))';
-                    circularImage.style.opacity = '0';
-                    circularImage.style.transform = 'translateY(750px)';
+                    itSeodanggaeGroup.style.opacity = '0';
                 }
 
                 requestAnimationFrame(animate);
