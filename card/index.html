@@ -31,7 +31,6 @@
             transform-style: preserve-3d;
             transition: transform 0.3s ease;
             cursor: pointer;
-            animation: float 3s ease-in-out infinite;
         }
 
         .card:nth-child(1) { transform: rotateX(5deg) rotateY(-5deg); }
@@ -39,17 +38,13 @@
         .card:nth-child(3) { transform: rotateX(10deg) rotateY(0deg); }
         .card:nth-child(4) { transform: rotateX(0deg) rotateY(-10deg); }
 
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(0, -10px); }
-        }
-
         .card__front,
         .card__back {
             position: absolute;
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
+            transition: transform 0.3s ease;
         }
 
         .card__back {
@@ -70,8 +65,12 @@
             z-index: 10;
         }
 
-        .flipped {
+        .flipped .card__front {
             transform: rotateY(180deg);
+        }
+
+        .flipped .card__back {
+            transform: rotateY(0deg);
         }
     </style>
 </head>
@@ -144,7 +143,6 @@
         function handleClick() {
             if (activeCard) {
                 activeCard.classList.remove('enlarged', 'flipped');
-                const index = Array.from(cards).indexOf(activeCard);
                 handleMouseLeave.call(activeCard);
             }
 
@@ -153,7 +151,7 @@
                 setTimeout(() => {
                     this.classList.remove('flipped');
                     this.classList.add('enlarged');
-                }, 150);
+                }, 300);
                 activeCard = this;
             } else {
                 activeCard = null;
