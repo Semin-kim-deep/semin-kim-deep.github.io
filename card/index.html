@@ -3,7 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Cards with 60% Reduced Size</title>
+    <title>Pokemon Cards with 60% Reduced Size</title>a<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Cards with Improved Flip Animation</title>
+    <style>
+        /* 이전 스타일은 그대로 유지합니다 */
+        /* ... */
+
+        .card__front,
+        .card__back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            transition: transform 0.4s ease;
+            box-shadow: 0 8.4px 16.8px rgba(0,0,0,0.25), 0 6px 6px rgba(0,0,0,0.22);
+        }
+
+        .card__back {
+            transform: rotateY(180deg);
+        }
+
+        .flipped .card__front {
+            transform: rotateY(180deg);
+        }
+
+        .flipped .card__back {
+            transform: rotateY(0deg);
+        }
+
+        .enlarged {
+            position: fixed;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) scale(1.2) !important;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <!-- HTML 구조는 그대로 유지합니다 -->
+    <!-- ... -->
+
+    <script>
+        const cards = document.querySelectorAll('.card');
+        let activeCard = null;
+
+        cards.forEach(card => {
+            card.addEventListener('mousemove', handleMouseMove);
+            card.addEventListener('mouseleave', handleMouseLeave);
+            card.addEventListener('click', handleClick);
+        });
+
+        function handleMouseMove(e) {
+            // 이전 코드와 동일합니다
+        }
+
+        function handleMouseLeave() {
+            // 이전 코드와 동일합니다
+        }
+
+        function handleClick() {
+            if (activeCard) {
+                activeCard.classList.remove('enlarged', 'flipped');
+                handleMouseLeave.call(activeCard);
+                activeCard = null;
+            }
+
+            if (activeCard !== this) {
+                const rect = this.getBoundingClientRect();
+                const centerX = window.innerWidth / 2 - rect.width / 2;
+                const centerY = window.innerHeight / 2 - rect.height / 2;
+
+                this.style.position = 'fixed';
+                this.style.left = `${rect.left}px`;
+                this.style.top = `${rect.top}px`;
+
+                // 중앙으로 이동하면서 뒤집기
+                setTimeout(() => {
+                    this.classList.add('flipped');
+                    this.style.left = `${centerX}px`;
+                    this.style.top = `${centerY}px`;
+                }, 50);
+
+                // 중앙에 도달하면 다시 앞면으로 뒤집고 확대
+                setTimeout(() => {
+                    this.classList.remove('flipped');
+                    this.classList.add('enlarged');
+                }, 450);
+
+                activeCard = this;
+            }
+        }
+    </script>
+</body>
+</html>
     <style>
         body {
             margin: 0;
