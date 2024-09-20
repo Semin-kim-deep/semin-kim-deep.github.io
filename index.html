@@ -171,13 +171,13 @@
             font-weight: 700;
             font-size: 24px;
         }
-           .info-more-it a {
+        .info-more-it a {
             color: #282828;
             text-decoration: none;
         }
         .it-seodanggae-group {
             position: fixed;
-            right: calc(50% - 660px); /* 80px 오른쪽으로 이동 */
+            right: calc(50% - 660px);
             top: 50%;
             transform: translateY(-50%);
             text-align: left;
@@ -205,7 +205,7 @@
         .it-seodanggae-description {
             font-size: 16px;
             line-height: 1.5;
-            max-width: 400px; /* Reduced from 500px to 400px */
+            max-width: 400px;
         }
         .scroll-more {
             position: fixed;
@@ -220,8 +220,8 @@
             font-size: 48px;
         }
         .anti-tarot-card {
-            position: fixed;
-            bottom: 20px;
+            position: absolute;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
             font-family: 'Jost', sans-serif;
@@ -230,6 +230,7 @@
             color: black;
             text-align: center;
             width: 100%;
+            margin-bottom: 150px;
         }
         @media (max-width: 1024px) {
             .container {
@@ -361,8 +362,7 @@
         </div>
     </div>
     <div class="scroll-more">Scroll More</div>
-    <div class="anti-tarot-card">Anti-Tarot Card</div>
-    <script>
+    <div class="anti-tarot-card">Anti-Tarot Card</div> <script>
 document.addEventListener('DOMContentLoaded', function() {
     const changingImage = document.querySelector('.changing-image');
     let isFirstImage = true;
@@ -399,7 +399,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const aboutSection = document.querySelector('#about-section');
         const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
         const scrollMore = document.querySelector('.scroll-more');
-        const antiTarotCard = document.querySelector('.anti-tarot-card');
         
         // About 섹션 애니메이션
         if (scrollTop > 0 && scrollTop <= 430) {
@@ -449,14 +448,11 @@ document.addEventListener('DOMContentLoaded', function() {
             scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
-        // Anti-Tarot Card 위치 조정
-        antiTarotCard.style.bottom = `${20 + Math.max(0, scrollTop)}px`;
-
         requestAnimationFrame(animate);
     }
 
     animate();
 });
-    </script>
+</script>
 </body>
 </html>
