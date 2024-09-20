@@ -42,7 +42,7 @@
         img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         .enlarged {
@@ -70,7 +70,7 @@
         let isEnlarged = false;
 
         function handleMouseMove(e) {
-            if (!isEnlarged) {
+            if (!isEnlarged && !isFlipped) {
                 const rect = card.getBoundingClientRect();
                 const mx = e.clientX - rect.left;
                 const my = e.clientY - rect.top;
@@ -90,18 +90,17 @@
         function flipAndEnlarge() {
             if (!isFlipped && !isEnlarged) {
                 // First flip
-                card.classList.add('flipped');
+                card.style.transform = 'rotateY(180deg)';
                 isFlipped = true;
                 setTimeout(() => {
                     // Flip back and enlarge
-                    card.classList.remove('flipped');
-                    card.classList.add('enlarged');
+                    card.style.transform = 'rotateY(0deg) scale(1.2)';
                     isFlipped = false;
                     isEnlarged = true;
                 }, 600); // Match the transition time
             } else if (isEnlarged) {
                 // Return to original size
-                card.classList.remove('enlarged');
+                card.style.transform = 'rotateY(0deg) scale(1)';
                 isEnlarged = false;
             }
         }
