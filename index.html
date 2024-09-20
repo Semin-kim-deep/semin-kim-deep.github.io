@@ -3,209 +3,475 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Card with Flip Effect</title>
+    <title>Deepdown Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
     <style>
-        :root {
-            --mx: 50%;
-            --my: 50%;
-            --s: 1;
-            --o: 0;
-            --tx: 0px;
-            --ty: 0px;
-            --rx: 0deg;
-            --ry: 0deg;
-            --pos: 50% 50%;
-            --posx: 50%;
-            --posy: 50%;
-            --hyp: 0;
-        }
-
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            min-height: 300vh;
-            background-color: #393c42;
-            perspective: 1000px;
+            background-image: url('images/bg_hp.jpg');
+            background-size: contain;
+            background-position: center top;
+            background-repeat: no-repeat;
             overflow-x: hidden;
         }
-
-        .card-container {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 50px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        header {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            position: sticky;
-            top: 0;
+            padding: 20px 0;
         }
-
-        .card {
-            --radius: 4.55% / 3.5%;
-            width: 300px;
-            height: 418px;
+        h1 {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            color: white;
+            margin: 0;
+            text-align: center;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+        }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 300px;
+        }
+        .circular-image-container {
             position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.8s;
-            cursor: pointer;
-        }
-
-        .card__face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: var(--radius);
+            width: 30%;
+            padding-bottom: 30%;
             overflow: hidden;
+            margin: 0 100px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
         }
-
-        .card__face--back {
-            transform: rotateY(180deg);
-        }
-
-        .card__shine {
-            --space: 5%;
-            --h: 21;
-            --s: 70%;
-            --l: 50%;
-            --bars: 24px;
-            --bar-color: rgba(255, 255, 255, 0.6);
-            --bar-bg: rgb(10, 10, 10);
-
+        .circular-image {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                repeating-linear-gradient(
-                    90deg,
-                    var(--bar-bg) calc(var(--bars) * 2),
-                    var(--bar-color) calc(var(--bars) * 3),
-                    var(--bar-bg) calc(var(--bars) * 3.5),
-                    var(--bar-color) calc(var(--bars) * 4),
-                    var(--bar-bg) calc(var(--bars) * 5),
-                    var(--bar-bg) calc(var(--bars) * 12)
-                ),
-                radial-gradient(
-                    farthest-corner circle at var(--mx) var(--my),
-                    rgba(230, 230, 230, 0.85) 0%,
-                    rgba(200, 200, 200, 0.1) 25%,
-                    rgb(0, 0, 0) 90%
-                );
-
-            background-blend-mode: soft-light, overlay;
-            background-position: center, calc(((50% - var(--posx)) * 25) + 50%) center;
-            background-size: 237% 237%, 200%;
-
-            filter: brightness(calc((var(--hyp) + 0.7) * 0.7)) contrast(3.2) saturate(0.66);
-            mix-blend-mode: color-dodge;
-            opacity: var(--o);
-            clip-path: inset(10% 8.5% 52.5% 8.5%);
-            transition: opacity 0.3s ease-out;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            height: 70%;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-
-        img {
+        .circular-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
-        .scroll-indicator {
-            position: fixed;
-            left: 50px;
-            bottom: 20px;
+        .higher-image { 
+            margin-top: -100px;
+        }
+        .video-mpic-container {
             display: flex;
+            justify-content: center;
             align-items: center;
-            color: cyan;
-            font-weight: bold;
-            text-shadow: 0 1px 0 black;
+            margin-top: 100px;
         }
-
-        .scroll-indicator svg {
-            width: 22px;
-            height: 22px;
-            fill: cyan;
-            margin-right: 10px;
-            animation: bounce 1s ease infinite;
+        .video-container {
+            width: 30%;
+            margin-right: 350px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
         }
-
-        @keyframes bounce {
-            50% {
-                transform: translateY(5px);
+        .video-container video {
+            width: 100%;
+            display: block;
+        }
+        .mpic01-container {
+            width: 30%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
+        }
+        .mpic01-container img {
+            width: 100%;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .changing-image {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+        .description {
+            margin-top: 40px;
+            text-align: center;
+        }
+        .about-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .info-section {
+            position: fixed;
+            left: calc(50% - 550px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .info-title {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .info-description {
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 500px;
+        }
+        .info-description p:first-child {
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        .info-description p:nth-child(2) {
+            font-family: 'Jost', sans-serif;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .info-more {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        .info-more a {
+            color: white;
+            text-decoration: none;
+        }
+        .info-more-it {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        .info-more-it a {
+            color: #282828;
+            text-decoration: none;
+        }
+        .it-seodanggae-group {
+            position: fixed;
+            right: calc(50% - 660px);
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: left;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            color: #282828;
+        }
+        .it-seodanggae-image {
+            width: 300px;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        .it-seodanggae-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .it-seodanggae-title {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .it-seodanggae-description {
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 400px;
+        }
+        .scroll-more {
+            position: fixed;
+            left: calc(50% - 550px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+        }
+        .anti-tarot-card {
+            position: absolute;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: black;
+            text-align: center;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        @media (max-width: 1024px) {
+            .container {
+                max-width: 1024px;
+                padding: 0 20px;
+            }
+            .changing-image {
+                width: 500px;
+                height: 500px;
+            }
+            .gallery {
+                margin-top: 200px;
+            }
+            .circular-image-container {
+                margin: 0 50px;
+            }
+            .video-container {
+                margin-right: 150px;
+            }
+            .info-section, .scroll-more {
+                left: 20px;
+            }
+            .it-seodanggae-group {
+                right: 20px;
             }
         }
-
-        .scroll-text {
-            font-size: 0.875rem;
+        @media (max-width: 768px) {
+            .changing-image {
+                width: 400px;
+                height: 400px;
+            }
+            .gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+            .circular-image-container {
+                width: 60%;
+                padding-bottom: 60%;
+                margin: 20px 0;
+            }
+            .video-container, .mpic01-container {
+                width: 80%;
+                margin: 20px 0;
+            }
+            .video-container {
+                margin-right: 0;
+            }
+            .it-seodanggae-image {
+                width: 200px;
+                height: 200px;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+            h1 {
+                font-size: 36px;
+            }
+            .changing-image {
+                width: 300px;
+                height: 300px;
+            }
+            .info-title, .it-seodanggae-title, .scroll-more {
+                font-size: 36px;
+            }
+            .info-description, .it-seodanggae-description {
+                font-size: 14px;
+            }
+            .it-seodanggae-image {
+                width: 150px;
+                height: 150px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="card-container">
-        <div class="card" data-rarity="rare holo">
-            <div class="card__face card__face--front">
-                <img src="images/atc04_2.png" alt="Pokemon Card Front" id="frontImage">
-                <div class="card__shine"></div>
+    <div class="container">
+        <header>
+            <h1>Deepdown Studio</h1>
+        </header>
+        <div class="changing-image"></div>
+        <div class="gallery">
+            <div class="circular-image-container higher-image">
+                <div class="circular-image">
+                    <img src="images/Thank-you3_web.png" alt="Image 2">
+                </div>
             </div>
-            <div class="card__face card__face--back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back" id="backImage">
-                <div class="card__shine"></div>
+            <div class="circular-image-container">
+                <div class="circular-image">
+                    <img src="images/a_1253.png" alt="Image 1">
+                </div>
             </div>
         </div>
+        <div class="video-mpic-container">
+            <div class="video-container">
+                <video id="myVideo" muted autoplay loop>
+                    <source src="images/anti_tarotcard.MP4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="mpic01-container">
+                <img src="images/mpic01_2.png" alt="Image 5">
+            </div>
+        </div>
+        <div class="description">
+            <p></p>
+        </div>
     </div>
-
-    <div class="scroll-indicator">
-        <svg viewBox="0 0 330 330">
-            <path d="M304.394,139.394l-139.39,139.393L25.607,139.393c-5.857-5.857-15.355-5.858-21.213,0.001 c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393s7.794-1.581,10.606-4.394l149.996-150 c5.858-5.858,5.858-15.355,0-21.213C319.749,133.536,310.251,133.535,304.394,139.394z" />
-            <path d="M154.398,190.607c2.813,2.813,6.628,4.393,10.606,4.393s7.794-1.581,10.606-4.394l149.996-150 c5.858-5.858,5.858-15.355,0-21.213c-5.857-5.858-15.355-5.858-21.213,0l-139.39,139.393L25.607,19.393 c-5.857-5.858-15.355-5.858-21.213,0c-5.858,5.858-5.858,15.355,0,21.213L154.398,190.607z" />
-        </svg>
-        <span class="scroll-text">Scroll 4 moar!</span>
+    <div class="info-section" id="about-section">
+        <div class="info-title">About</div>
+        <div class="info-description">
+            <p>딥다운 스튜디오는 일러스트를 중심으로 다양한 제품을 만들고 있어요.<br>
+            음악과 책 등에서 영감을 받고, 재미있는 것들을 만들고자 해요.</p>
+            <p>Deepdown Studio creates a variety of products with a focus on illustration.<br>
+            <span style="font-family: 'Jost', sans-serif; font-weight: 500;">I got inspiration from music and books, and my goal is to make fun and interesting things.</span></p>
+            <p class="info-more"><a href="about.html">More ></a></p>
+        </div>
     </div>
-
+    <div class="it-seodanggae-group">
+        <div class="it-seodanggae-image">
+            <img src="images/a_1253.png" alt="IT Seodanggae Image">
+        </div>
+        <div class="it-seodanggae-title">IT Seodanggae</div>
+        <div class="it-seodanggae-description">
+            <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. IT라인의 브랜드는 IT서당개입니다.</p>
+            <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' This IT brand is called 'IT Seodanggae.</span></p>
+            <p class="info-more-it"><a href="it.html">More ></a></p>
+        </div>
+    </div>
+    <div class="scroll-more">Scroll More</div>
+    <div class="anti-tarot-card">Anti-Tarot Card</div>
     <script>
-        const card = document.querySelector('.card');
-        const shines = document.querySelectorAll('.card__shine');
-        let rect;
+document.addEventListener('DOMContentLoaded', function() {
+    const changingImage = document.querySelector('.changing-image');
+    const aboutSection = document.querySelector('#about-section');
+    const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
+    const scrollMore = document.querySelector('.scroll-more');
+    const antiTarotCard = document.querySelector('.anti-tarot-card');
 
-        function updateRect() {
-            rect = card.getBoundingClientRect();
+    let isFirstImage = true;
+    function changeImage() {
+        const imageUrl = isFirstImage ? 'images/a_1.png' : 'images/a_2.png';
+        changingImage.style.backgroundImage = `url('${imageUrl}')`;
+        isFirstImage = !isFirstImage;
+    }
+    changeImage();
+    setInterval(changeImage, 1000);
+
+    function setPageSize() {
+        const bgImage = new Image();
+        bgImage.onload = function() {
+            const aspectRatio = bgImage.width / bgImage.height;
+            const pageWidth = Math.min(window.innerWidth, bgImage.width);
+            const pageHeight = pageWidth / aspectRatio;
+            document.body.style.height = `${pageHeight}px`;
+            document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
+        }
+        bgImage.src = 'images/bg_hp.jpg';
+    }
+
+    setPageSize();
+    window.addEventListener('resize', setPageSize);
+
+    let bounce = 0;
+    function animate() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        const documentHeight = Math.max(
+            document.body.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.clientHeight,
+            document.documentElement.scrollHeight,
+            document.documentElement.offsetHeight
+        );
+
+        bounce += 0.05;
+        const bounceOffset = Math.sin(bounce) * 10;
+        changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
+        
+        // About 섹션 애니메이션
+        if (scrollTop > 0 && scrollTop <= 430) {
+            const opacity = Math.min(scrollTop / 100, 1);
+            aboutSection.style.opacity = opacity;
+            aboutSection.style.transform = `translateY(calc(-50% + ${Math.max(50 - scrollTop / 2, 0)}px))`;
+        } else if (scrollTop > 430 && scrollTop <= 530) {
+            const opacity = Math.max(1 - (scrollTop - 430) / 100, 0);
+            aboutSection.style.opacity = opacity;
+            aboutSection.style.transform = 'translateY(-50%)';
+        } else {
+            aboutSection.style.opacity = '0';
+            aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
-        function handleMouseMove(e) {
-            const mx = e.clientX - rect.left;
-            const my = e.clientY - rect.top;
-            const dx = (mx - rect.width / 2) / 10;
-            const dy = (my - rect.height / 2) / 10;
-            const hyp = Math.sqrt(Math.pow((mx / rect.width - 0.5) * 2, 2) + Math.pow((my / rect.height - 0.5) * 2, 2));
-
-            card.style.transform = `rotateY(${dx}deg) rotateX(${-dy}deg)`;
-            
-            document.documentElement.style.setProperty('--mx', mx + 'px');
-            document.documentElement.style.setProperty('--my', my + 'px');
-            document.documentElement.style.setProperty('--posx', (mx / rect.width * 100) + '%');
-            document.documentElement.style.setProperty('--posy', (my / rect.height * 100) + '%');
-            document.documentElement.style.setProperty('--hyp', hyp);
-            document.documentElement.style.setProperty('--o', '1');
+        // IT Seodanggae 섹션 애니메이션 (아래에서 위로 페이드인)
+        if (scrollTop > 530 && scrollTop <= 730) {
+            const opacity = Math.min((scrollTop - 530) / 200, 1);
+            const translateY = Math.max(50 - (scrollTop - 530) / 4, 0);
+            itSeodanggaeGroup.style.opacity = opacity;
+            itSeodanggaeGroup.style.transform = `translateY(calc(-50% + ${translateY}px))`;
+        } else if (scrollTop > 730 && scrollTop <= 1230) {
+            itSeodanggaeGroup.style.opacity = '1';
+            itSeodanggaeGroup.style.transform = 'translateY(-50%)';
+        } else if (scrollTop > 1230 && scrollTop <= 1330) {
+            const opacity = Math.max(1 - (scrollTop - 1230) / 100, 0);
+            const translateY = Math.min((scrollTop - 1230) / 2, 50);
+            itSeodanggaeGroup.style.opacity = opacity;
+            itSeodanggaeGroup.style.transform = `translateY(calc(-50% - ${translateY}px))`;
+            scrollMore.style.opacity = 1 - opacity;
+            scrollMore.style.transform = `translateY(calc(-50% + ${50 - translateY}px))`;
+        } else {
+            itSeodanggaeGroup.style.opacity = '0';
+            itSeodanggaeGroup.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
-        function handleMouseLeave() {
-            card.style.transform = '';
-            document.documentElement.style.setProperty('--o', '0');
+        // Scroll More 텍스트 애니메이션
+        if (scrollTop > 1330 && scrollTop <= 1830) {
+            scrollMore.style.opacity = '1';
+            scrollMore.style.transform = 'translateY(-50%)';
+        } else if (scrollTop > 1830 && scrollTop <= 1930) {
+            const opacity = Math.max(1 - (scrollTop - 1830) / 100, 0);
+            scrollMore.style.opacity = opacity;
+            scrollMore.style.transform = 'translateY(-50%)';
+        } else {
+            scrollMore.style.opacity = '0';
+            scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
-        card.addEventListener('mousemove', handleMouseMove);
-        card.addEventListener('mouseleave', handleMouseLeave);
+        // Anti-Tarot Card 애니메이션 (스크롤 끝에서 나타남)
+        if (scrollTop + windowHeight >= documentHeight - 1) {
+            antiTarotCard.style.opacity = '1';
+        } else {
+            antiTarotCard.style.opacity = '0';
+        }
 
-        window.addEventListener('resize', updateRect);
-        window.addEventListener('scroll', updateRect);
+        requestAnimationFrame(animate);
+    }
 
-        updateRect();
-
-        // Scroll effect
-        window.addEventListener('scroll', () => {
-            const scrollPercentage = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-            const rotation = scrollPercentage * 720; // 두 번 뒤집기 위해 720도로 변경
-            card.style.transform = `rotateY(${rotation}deg)`;
-        });
-    </script>
+    animate();
+});
+</script>
 </body>
 </html>
