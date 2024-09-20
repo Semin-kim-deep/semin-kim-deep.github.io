@@ -221,7 +221,7 @@
         }
         .anti-tarot-card {
             position: absolute;
-            bottom: 0;
+            bottom: 150px;
             left: 50%;
             transform: translateX(-50%);
             font-family: 'Jost', sans-serif;
@@ -230,7 +230,8 @@
             color: black;
             text-align: center;
             width: 100%;
-            margin-bottom: 150px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
         @media (max-width: 1024px) {
             .container {
@@ -362,9 +363,15 @@
         </div>
     </div>
     <div class="scroll-more">Scroll More</div>
-    <div class="anti-tarot-card">Anti-Tarot Card</div> <script>
+    <div class="anti-tarot-card">Anti-Tarot Card</div>
+    <script>
 document.addEventListener('DOMContentLoaded', function() {
     const changingImage = document.querySelector('.changing-image');
+    const aboutSection = document.querySelector('#about-section');
+    const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
+    const scrollMore = document.querySelector('.scroll-more');
+    const antiTarotCard = document.querySelector('.anti-tarot-card');
+
     let isFirstImage = true;
     function changeImage() {
         const imageUrl = isFirstImage ? 'images/a_1.png' : 'images/a_2.png';
@@ -392,13 +399,18 @@ document.addEventListener('DOMContentLoaded', function() {
     let bounce = 0;
     function animate() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        const documentHeight = Math.max(
+            document.body.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.clientHeight,
+            document.documentElement.scrollHeight,
+            document.documentElement.offsetHeight
+        );
+
         bounce += 0.05;
         const bounceOffset = Math.sin(bounce) * 10;
         changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
-        
-        const aboutSection = document.querySelector('#about-section');
-        const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
-        const scrollMore = document.querySelector('.scroll-more');
         
         // About 섹션 애니메이션
         if (scrollTop > 0 && scrollTop <= 430) {
@@ -414,10 +426,10 @@ document.addEventListener('DOMContentLoaded', function() {
             aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
-        // IT Seodanggae 섹션 애니메이션
+        // IT Seodanggae 섹션 애니메이션 (아래에서 위로 페이드인)
         if (scrollTop > 530 && scrollTop <= 730) {
             const opacity = Math.min((scrollTop - 530) / 200, 1);
-            const translateY = Math.max(100 - (scrollTop - 530) / 2, 0);
+            const translateY = Math.max(50 - (scrollTop - 530) / 4, 0);
             itSeodanggaeGroup.style.opacity = opacity;
             itSeodanggaeGroup.style.transform = `translateY(calc(-50% + ${translateY}px))`;
         } else if (scrollTop > 730 && scrollTop <= 1230) {
@@ -432,7 +444,7 @@ document.addEventListener('DOMContentLoaded', function() {
             scrollMore.style.transform = `translateY(calc(-50% + ${50 - translateY}px))`;
         } else {
             itSeodanggaeGroup.style.opacity = '0';
-            itSeodanggaeGroup.style.transform = 'translateY(calc(-50% - 50px))';
+            itSeodanggaeGroup.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
         // Scroll More 텍스트 애니메이션
@@ -446,6 +458,13 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             scrollMore.style.opacity = '0';
             scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
+        }
+
+        // Anti-Tarot Card 애니메이션 (스크롤 끝에서 나타남)
+        if (scrollTop + windowHeight >= documentHeight - 1) {
+            antiTarotCard.style.opacity = '1';
+        } else {
+            antiTarotCard.style.opacity = '0';
         }
 
         requestAnimationFrame(animate);
