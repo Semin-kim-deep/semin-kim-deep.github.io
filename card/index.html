@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Cards with 356x594px Size and Precise Shadow</title>
+    <title>Pokemon Cards with 60% Reduced Size</title>
     <style>
         body {
             margin: 0;
@@ -22,13 +22,13 @@
 
         .card-container {
             position: relative;
-            width: 1500px;
-            height: 594px;
+            width: 900px; /* 1500px * 0.6 */
+            height: 356px; /* 594px * 0.6 */
         }
 
         .card {
-            width: 356px;
-            height: 594px;
+            width: 213.6px; /* 356px * 0.6 */
+            height: 356.4px; /* 594px * 0.6 */
             position: absolute;
             transform-style: preserve-3d;
             transition: transform 0.4s ease;
@@ -36,9 +36,9 @@
         }
 
         .card:nth-child(1) { left: 0; transform: rotateX(5deg) rotateY(-5deg); }
-        .card:nth-child(2) { left: 380px; transform: rotateX(-5deg) rotateY(5deg); }
-        .card:nth-child(3) { left: 760px; transform: rotateX(10deg) rotateY(0deg); }
-        .card:nth-child(4) { left: 1140px; transform: rotateX(0deg) rotateY(-10deg); }
+        .card:nth-child(2) { left: 228px; /* 380px * 0.6 */ transform: rotateX(-5deg) rotateY(5deg); }
+        .card:nth-child(3) { left: 456px; /* 760px * 0.6 */ transform: rotateX(10deg) rotateY(0deg); }
+        .card:nth-child(4) { left: 684px; /* 1140px * 0.6 */ transform: rotateX(0deg) rotateY(-10deg); }
 
         .card__front,
         .card__back {
@@ -47,7 +47,7 @@
             height: 100%;
             backface-visibility: hidden;
             transition: transform 0.4s ease;
-            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+            box-shadow: 0 8.4px 16.8px rgba(0,0,0,0.25), 0 6px 6px rgba(0,0,0,0.22); /* Reduced by 60% */
         }
 
         .card__back {
@@ -128,8 +128,8 @@
             const rect = this.getBoundingClientRect();
             const mx = e.clientX - rect.left;
             const my = e.clientY - rect.top;
-            const dx = (mx - rect.width / 2) / 5;
-            const dy = (my - rect.height / 2) / 5;
+            const dx = (mx - rect.width / 2) / 3; // Reduced sensitivity for smaller cards
+            const dy = (my - rect.height / 2) / 3;
 
             this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
         }
