@@ -366,19 +366,16 @@
 
     function enlargeCard(card) {
         const rect = card.getBoundingClientRect();
-        const containerRect = cardContainer.getBoundingClientRect();
         const centerX = window.innerWidth / 2;
         const centerY = window.innerHeight / 2;
 
         card.style.position = 'fixed';
-        card.style.left = `${rect.left - containerRect.left + currentPosition}px`;
-        card.style.top = `${rect.top}px`;
+        card.style.left = `${centerX - rect.width / 2}px`;
+        card.style.top = `${centerY - rect.height / 2}px`;
         card.style.zIndex = '1000';
 
         setTimeout(() => {
             card.classList.add('flipped');
-            card.style.left = `${centerX - rect.width / 2}px`;
-            card.style.top = `${centerY - rect.height / 2}px`;
         }, 50);
 
         setTimeout(() => {
