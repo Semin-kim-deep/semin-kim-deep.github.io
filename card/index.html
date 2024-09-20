@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Card with Tilt and Center Effect</title>
+    <title>Pokemon Card with Flip and Zoom Effect</title>
     <style>
         :root {
             --mx: 50%;
@@ -32,25 +32,8 @@
             height: 418px;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.3s ease;
+            transition: transform 0.6s;
             cursor: pointer;
-        }
-
-        .card__translater {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            transform: translate3d(var(--tx), var(--ty), 0) scale(var(--s));
-            transition: transform 0.3s ease;
-        }
-
-        .card__rotator {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            transform: rotateY(var(--rx)) rotateX(var(--ry));
-            transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
         }
 
         .card__front,
@@ -59,7 +42,10 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
             overflow: hidden;
         }
 
@@ -70,75 +56,73 @@
         img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+        }
+
+        .enlarged {
+            transform: scale(1.2);
+        }
+
+        .flipped {
+            transform: rotateY(180deg);
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <div class="card__translater">
-            <div class="card__rotator">
-                <div class="card__front">
-                    <img src="images/atc04_2.png" alt="Pokemon Card Front">
-                </div>
-                <div class="card__back">
-                    <img src="images/atc01_back.png" alt="Pokemon Card Back">
-                </div>
-            </div>
+        <div class="card__front">
+            <img src="images/atc04_2.png" alt="Pokemon Card Front">
+        </div>
+        <div class="card__back">
+            <img src="images/atc01_back.png" alt="Pokemon Card Back">
         </div>
     </div>
 
     <script>
         const card = document.querySelector('.card');
-        const rotator = document.querySelector('.card__rotator');
-        const translater = document.querySelector('.card__translater');
-        let rect;
-
-        function updateRect() {
-            rect = card.getBoundingClientRect();
-        }
+        let isFlipped = false;
+        let isEnlarged = false;
 
         function handleMouseMove(e) {
-            if (!card.classList.contains('active')) {
+            if (!isEnlarged) {
+                const rect = card.getBoundingClientRect();
                 const mx = e.clientX - rect.left;
                 const my = e.clientY - rect.top;
                 const dx = (mx - rect.width / 2) / 10;
                 const dy = (my - rect.height / 2) / 10;
 
-                document.documentElement.style.setProperty('--rx', `${dy}deg`);
-                document.documentElement.style.setProperty('--ry', `${-dx}deg`);
+                card.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
             }
         }
 
         function handleMouseLeave() {
-            if (!card.classList.contains('active')) {
-                document.documentElement.style.setProperty('--rx', '0deg');
-                document.documentElement.style.setProperty('--ry', '0deg');
+            if (!isEnlarged) {
+                card.style.transform = 'rotateY(0deg) rotateX(0deg)';
             }
         }
 
-        function handleClick() {
-            card.classList.toggle('active');
-            if (card.classList.contains('active')) {
-                const centerX = window.innerWidth / 2 - rect.width / 2;
-                const centerY = window.innerHeight / 2 - rect.height / 2;
-                const tx = centerX - rect.left;
-                const ty = centerY - rect.top;
-                translater.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(1.2)`;
-                rotator.style.transform = 'rotateY(0deg) rotateX(0deg)';
-            } else {
-                translater.style.transform = 'translate3d(0, 0, 0) scale(1)';
+        function flipAndEnlarge() {
+            if (!isFlipped && !isEnlarged) {
+                // First flip
+                card.classList.add('flipped');
+                isFlipped = true;
+                setTimeout(() => {
+                    // Flip back and enlarge
+                    card.classList.remove('flipped');
+                    card.classList.add('enlarged');
+                    isFlipped = false;
+                    isEnlarged = true;
+                }, 600); // Match the transition time
+            } else if (isEnlarged) {
+                // Return to original size
+                card.classList.remove('enlarged');
+                isEnlarged = false;
             }
         }
 
         card.addEventListener('mousemove', handleMouseMove);
         card.addEventListener('mouseleave', handleMouseLeave);
-        card.addEventListener('click', handleClick);
-
-        window.addEventListener('resize', updateRect);
-        window.addEventListener('scroll', updateRect);
-
-        updateRect();
+        card.addEventListener('click', flipAndEnlarge);
     </script>
 </body>
 </html>
