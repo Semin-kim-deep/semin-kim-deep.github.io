@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Card with Flip and Zoom Effect</title>
+    <title>Multiple Pokemon Cards with Flip and Zoom Effect</title>
     <style>
         body {
             margin: 0;
@@ -14,6 +14,12 @@
             align-items: center;
             background-color: #393c42;
             perspective: 1000px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
         }
 
         .card {
@@ -55,59 +61,88 @@
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="card__front">
-            <img src="images/atc04_2.png" alt="Pokemon Card Front">
+    <div class="card-container">
+        <div class="card" data-image="atc01.png">
+            <div class="card__front">
+                <img src="images/atc01.png" alt="Pokemon Card Front">
+            </div>
+            <div class="card__back">
+                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+            </div>
         </div>
-        <div class="card__back">
-            <img src="images/atc01_back.png" alt="Pokemon Card Back">
+        <div class="card" data-image="atc02.png">
+            <div class="card__front">
+                <img src="images/atc02.png" alt="Pokemon Card Front">
+            </div>
+            <div class="card__back">
+                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+            </div>
+        </div>
+        <div class="card" data-image="atc03.png">
+            <div class="card__front">
+                <img src="images/atc03.png" alt="Pokemon Card Front">
+            </div>
+            <div class="card__back">
+                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+            </div>
+        </div>
+        <div class="card" data-image="atc04_2.png">
+            <div class="card__front">
+                <img src="images/atc04_2.png" alt="Pokemon Card Front">
+            </div>
+            <div class="card__back">
+                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+            </div>
         </div>
     </div>
 
     <script>
-        const card = document.querySelector('.card');
-        let isFlipped = false;
-        let isEnlarged = false;
+        const cards = document.querySelectorAll('.card');
 
-        function handleMouseMove(e) {
-            if (!isEnlarged && !isFlipped) {
-                const rect = card.getBoundingClientRect();
-                const mx = e.clientX - rect.left;
-                const my = e.clientY - rect.top;
-                const dx = (mx - rect.width / 2) / 10;
-                const dy = (my - rect.height / 2) / 10;
+        cards.forEach(card => {
+            let isFlipped = false;
+            let isEnlarged = false;
 
-                card.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
+            function handleMouseMove(e) {
+                if (!isEnlarged && !isFlipped) {
+                    const rect = card.getBoundingClientRect();
+                    const mx = e.clientX - rect.left;
+                    const my = e.clientY - rect.top;
+                    const dx = (mx - rect.width / 2) / 10;
+                    const dy = (my - rect.height / 2) / 10;
+
+                    card.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
+                }
             }
-        }
 
-        function handleMouseLeave() {
-            if (!isEnlarged && !isFlipped) {
-                card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+            function handleMouseLeave() {
+                if (!isEnlarged && !isFlipped) {
+                    card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+                }
             }
-        }
 
-        function flipAndEnlarge() {
-            if (!isFlipped && !isEnlarged) {
-                // First flip
-                card.style.transform = 'rotateY(180deg)';
-                isFlipped = true;
-                setTimeout(() => {
-                    // Flip back and enlarge
-                    card.style.transform = 'rotateY(0deg) scale(1.2)';
-                    isFlipped = false;
-                    isEnlarged = true;
-                }, 600); // Match the transition time
-            } else if (isEnlarged) {
-                // Return to original size
-                card.style.transform = 'rotateY(0deg) scale(1)';
-                isEnlarged = false;
+            function flipAndEnlarge() {
+                if (!isFlipped && !isEnlarged) {
+                    // First flip
+                    card.style.transform = 'rotateY(180deg)';
+                    isFlipped = true;
+                    setTimeout(() => {
+                        // Flip back and enlarge
+                        card.style.transform = 'rotateY(0deg) scale(1.2)';
+                        isFlipped = false;
+                        isEnlarged = true;
+                    }, 600); // Match the transition time
+                } else if (isEnlarged) {
+                    // Return to original size
+                    card.style.transform = 'rotateY(0deg) scale(1)';
+                    isEnlarged = false;
+                }
             }
-        }
 
-        card.addEventListener('mousemove', handleMouseMove);
-        card.addEventListener('mouseleave', handleMouseLeave);
-        card.addEventListener('click', flipAndEnlarge);
+            card.addEventListener('mousemove', handleMouseMove);
+            card.addEventListener('mouseleave', handleMouseLeave);
+            card.addEventListener('click', flipAndEnlarge);
+        });
     </script>
 </body>
 </html>
