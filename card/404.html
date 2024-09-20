@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting to Deepdown Studio</title>
+    <title>Page Not Found</title>
     <script>
-        // 원하는 폴더 이름으로 변경하세요
-        var targetFolder = "your-folder-name";
-        
-        // 현재 URL 확인
-        var currentPath = window.location.pathname;
-        
-        // 루트 URL이거나 폴더 URL인 경우에만 리다이렉션
-        if (currentPath === "/" || currentPath === "/" + targetFolder + "/") {
-            window.location.href = "/" + targetFolder + "/index.html";
-        }
+        (function() {
+            var path = window.location.pathname;
+            var folderName = 'your-folder-name'; // 실제 폴더 이름으로 변경하세요
+            
+            // 폴더 경로에 접근했을 때 index.html로 리다이렉션
+            if (path.endsWith(folderName + '/')) {
+                window.location.href = path + 'index.html';
+            }
+            // 다른 404 에러의 경우 메인 페이지로 리다이렉션 (선택사항)
+            else {
+                window.location.href = '/';
+            }
+        })();
     </script>
 </head>
 <body>
-    <p>If you are not redirected, <a href="/your-folder-name/index.html">click here</a>.</p>
+    <h1>Page Not Found</h1>
+    <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+    <p>If you are not redirected automatically, please <a href="/">click here</a> to go to the homepage.</p>
 </body>
 </html>
