@@ -3,265 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deepdown Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@700&display=swap" rel="stylesheet">
+    <title>Pokemon Cards with Improved Interaction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@500&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('images/bg_hp.jpg');
-            background-size: auto;
-            background-position: center top;
-            background-repeat: no-repeat;
-            height: 4000px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 50px;
-            box-sizing: border-box;
-        }
-        header {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px 0;
+            background-image: url('../images/bg_hp.jpg');
+            background-size: cover;
+            background-position: top center;
+            background-repeat: no-repeat;
+            perspective: 1000px;
+            overflow: hidden;
         }
+
+        .title-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
         h1 {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
             font-size: 48px;
             color: white;
             margin: 0;
-            text-align: center;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
         }
+
         .subtitle {
-            font-family: Arial, sans-serif;
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 500;
             font-size: 18px;
             color: white;
             margin-top: 10px;
-            text-align: center;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+            margin-bottom: 5px;
         }
-        .gallery {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            margin-top: 300px;
+
+        .subtitle-en {
+            font-family: 'Jost', sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            color: white;
+            margin: 0;
         }
-        .circular-image-container {
+
+        .card-container {
             position: relative;
-            width: 30%;
-            padding-bottom: 30%;
-            overflow: hidden;
-            margin: 0 100px;
+            width: 900px; /* 1500px * 0.6 */
+            height: 356px; /* 594px * 0.6 */
         }
-        .circular-image {
+
+        .card {
+            width: 213.6px; /* 356px * 0.6 */
+            height: 356.4px; /* 594px * 0.6 */
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70%;
-            height: 70%;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transform-style: preserve-3d;
+            transition: transform 0.4s ease, left 0.4s ease, top 0.4s ease;
+            cursor: pointer;
         }
-        .circular-image img {
+
+        .card:nth-child(1) { left: 0; transform: rotateX(5deg) rotateY(-5deg); }
+        .card:nth-child(2) { left: 228px; transform: rotateX(-5deg) rotateY(5deg); }
+        .card:nth-child(3) { left: 456px; transform: rotateX(10deg) rotateY(0deg); }
+        .card:nth-child(4) { left: 684px; transform: rotateX(0deg) rotateY(-10deg); }
+
+        .card__front,
+        .card__back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            transition: transform 0.4s ease;
+            box-shadow: 0 8.4px 16.8px rgba(0,0,0,0.25), 0 6px 6px rgba(0,0,0,0.22);
+        }
+
+        .card__back {
+            transform: rotateY(180deg);
+        }
+
+        img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-        .higher-image { 
-            margin-top: -100px;
-        }
-        .video-mpic-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 100px;
-        }
-        .video-container {
-            width: 30%;
-            margin-right: 350px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .video-container video {
-            width: 100%;
             display: block;
         }
-        .mpic01-container {
-            width: 30%;
-            text-align: center;
-        }
-        .mpic01-container img {
-            width: 100%;
-            display: inline-block;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .changing-image {
+
+        .enlarged {
             position: fixed;
-            top: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 1200px;
-            height: auto;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: 1;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) scale(1.2) !important;
+            z-index: 10;
         }
-        .description {
-            margin-top: 40px;
-            text-align: center;
+
+        .flipped .card__front {
+            transform: rotateY(180deg);
         }
-        .about-link {
-            text-align: center;
-            margin-top: 20px;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .circular-image-container, .video-container, .mpic01-container {
-            opacity: 0;
-        }
-        .animated {
-            animation: fadeInUp 1s ease-out forwards;
-        }
-        @media (max-width: 768px) {
-            .gallery {
-                flex-direction: column;
-                align-items: center;
-            }
-            .circular-image-container {
-                width: 60%;
-                padding-bottom: 60%;
-                margin: 20px 0;
-            }
-            .video-container, .mpic01-container {
-                width: 80%;
-                margin: 20px 0;
-            }
-        }
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 20px;
-            }
-            h1 {
-                font-size: 36px;
-            }
-            .subtitle {
-                font-size: 16px;
-            }
+
+        .flipped .card__back {
+            transform: rotateY(0deg);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Deepdown Studio</h1>
-            <div class="subtitle">Uncovering Beauty in Everyday Life</div>
-        </header>
-        <div class="changing-image"></div>
-        <div class="gallery">
-            <div class="circular-image-container higher-image">
-                <div class="circular-image">
-                    <img src="images/Thank-you3_web.png" alt="Image 2">
-                </div>
+    <div class="title-container">
+        <h1>Anti-Tarot Card</h1>
+        <p class="subtitle">안티타로카드, 미래는 알 수 없으니까 지금 할 수 있는 일을 해요.</p>
+        <p class="subtitle-en">We don't know the future, so We just do what can do now.</p>
+    </div>
+    <div class="card-container">
+        <div class="card" data-image="atc01.png">
+            <div class="card__front">
+                <img src="images/atc01.png" alt="Pokemon Card Front">
             </div>
-            <div class="circular-image-container">
-                <div class="circular-image">
-                    <img src="images/a_1253.png" alt="Image 1">
-                </div>
+            <div class="card__back">
+                <img src="images/atc01_back.png" alt="Pokemon Card Back">
             </div>
         </div>
-        <div class="video-mpic-container">
-            <div class="video-container">
-                <video id="myVideo" muted autoplay loop>
-                    <source src="images/anti_tarotcard.MP4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+        <div class="card" data-image="atc02.png">
+            <div class="card__front">
+                <img src="images/atc02.png" alt="Pokemon Card Front">
             </div>
-            <div class="mpic01-container">
-                <img src="images/mpic01_2.png" alt="Image 5">
+            <div class="card__back">
+                <img src="images/atc01_back.png" alt="Pokemon Card Back">
             </div>
         </div>
-        <div class="description">
-            <p></p>
+        <div class="card" data-image="atc03.png">
+            <div class="card__front">
+                <img src="images/atc03.png" alt="Pokemon Card Front">
+            </div>
+            <div class="card__back">
+                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+            </div>
+        </div>
+        <div class="card" data-image="atc04_2.png">
+            <div class="card__front">
+                <img src="images/atc04_2.png" alt="Pokemon Card Front">
+            </div>
+            <div class="card__back">
+                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+            </div>
         </div>
     </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const items = document.querySelectorAll('.circular-image-container, .video-container, .mpic01-container');
-            items.forEach((item, index) => {
-                setTimeout(() => {
-                    item.classList.add('animated');
-                }, index * 200);
-            });
+        const cards = document.querySelectorAll('.card');
+        let activeCard = null;
 
-            const changingImage = document.querySelector('.changing-image');
-            let isFirstImage = true;
-            function changeImage() {
-                const imageUrl = isFirstImage ? 'images/a_1.png' : 'images/a_2.png';
-                changingImage.style.backgroundImage = `url('${imageUrl}')`;
-                isFirstImage = !isFirstImage;
-            }
-            changeImage();
-            setInterval(changeImage, 1000);
-
-            function setImageSize() {
-                const img = new Image();
-                img.onload = function() {
-                    changingImage.style.width = `${img.width}px`;
-                    changingImage.style.height = `${img.height}px`;
-                }
-                img.src = 'images/a_1.png';
-            }
-            setImageSize();
-
-            let lastScrollTop = 0;
-            let bounce = 0;
-            function animate() {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const direction = scrollTop > lastScrollTop ? 'down' : 'up';
-                lastScrollTop = scrollTop;
-
-                const maxScroll = 3800 - window.innerHeight;
-                const scrollPercentage = Math.min(scrollTop / maxScroll, 1);
-                const imageHeight = changingImage.offsetHeight;
-                const maxImageOffset = Math.max(0, 3800 - window.innerHeight - 100); // 100은 initial top 값
-                let imageOffset = maxImageOffset * scrollPercentage;
-
-                bounce += 0.05;
-                const bounceOffset = Math.sin(bounce) * 10;
-
-                if (direction === 'up') {
-                    imageOffset = Math.max(0, imageOffset - 10);
-                } else {
-                    imageOffset = Math.min(maxImageOffset, imageOffset + 10);
-                }
-
-                changingImage.style.transform = `translateX(-50%) translateY(${imageOffset + bounceOffset}px)`;
-
-                requestAnimationFrame(animate);
-            }
-
-            animate();
+        cards.forEach(card => {
+            card.addEventListener('mousemove', handleMouseMove);
+            card.addEventListener('mouseleave', handleMouseLeave);
+            card.addEventListener('click', handleClick);
         });
+
+        function handleMouseMove(e) {
+            if (this.classList.contains('enlarged')) return;
+            const rect = this.getBoundingClientRect();
+            const mx = e.clientX - rect.left;
+            const my = e.clientY - rect.top;
+            const dx = (mx - rect.width / 2) / 3;
+            const dy = (my - rect.height / 2) / 3;
+
+            this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
+        }
+
+        function handleMouseLeave() {
+            if (this.classList.contains('enlarged')) return;
+            const index = Array.from(cards).indexOf(this);
+            switch(index) {
+                case 0: this.style.transform = 'rotateX(5deg) rotateY(-5deg)'; break;
+                case 1: this.style.transform = 'rotateX(-5deg) rotateY(5deg)'; break;
+                case 2: this.style.transform = 'rotateX(10deg) rotateY(0deg)'; break;
+                case 3: this.style.transform = 'rotateX(0deg) rotateY(-10deg)'; break;
+            }
+        }
+
+        function handleClick() {
+            if (activeCard === this) {
+                returnToOriginalPosition(this);
+                activeCard = null;
+            } else {
+                if (activeCard) {
+                    returnToOriginalPosition(activeCard);
+                }
+                enlargeCard(this);
+                activeCard = this;
+            }
+        }
+
+        function enlargeCard(card) {
+            const rect = card.getBoundingClientRect();
+            const centerX = window.innerWidth / 2 - rect.width / 2;
+            const centerY = window.innerHeight / 2 - rect.height / 2;
+
+            card.style.position = 'fixed';
+            card.style.left = `${rect.left}px`;
+            card.style.top = `${rect.top}px`;
+
+            setTimeout(() => {
+                card.classList.add('flipped');
+                card.style.left = `${centerX}px`;
+                card.style.top = `${centerY}px`;
+            }, 50);
+
+            setTimeout(() => {
+                card.classList.remove('flipped');
+                card.classList.add('enlarged');
+            }, 450);
+        }
+
+        function returnToOriginalPosition(card) {
+            const index = Array.from(cards).indexOf(card);
+            card.classList.remove('enlarged', 'flipped');
+            card.style.position = '';
+            card.style.left = '';
+            card.style.top = '';
+            handleMouseLeave.call(card);
+        }
     </script>
 </body>
 </html>
