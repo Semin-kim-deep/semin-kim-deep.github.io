@@ -365,14 +365,9 @@
     <div class="anti-tarot-card">Anti-Tarot Card</div> <script>
 document.addEventListener('DOMContentLoaded', function() {
     const changingImage = document.querySelector('.changing-image');
-    const aboutSection = document.querySelector('#about-section');
-    const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
-    const scrollMore = document.querySelector('.scroll-more');
-    const antiTarotCard = document.querySelector('.anti-tarot-card');
-
     let isFirstImage = true;
     function changeImage() {
-        const imageUrl = isFirstImage ? '/images/a_1.png' : '/images/a_2.png';
+        const imageUrl = isFirstImage ? 'images/a_1.png' : 'images/a_2.png';
         changingImage.style.backgroundImage = `url('${imageUrl}')`;
         isFirstImage = !isFirstImage;
     }
@@ -388,7 +383,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.height = `${pageHeight}px`;
             document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
         }
-        bgImage.src = '/images/bg_hp.jpg';
+        bgImage.src = 'images/bg_hp.jpg';
     }
 
     setPageSize();
@@ -397,18 +392,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let bounce = 0;
     function animate() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const windowHeight = window.innerHeight;
-        const documentHeight = Math.max(
-            document.body.scrollHeight,
-            document.body.offsetHeight,
-            document.documentElement.clientHeight,
-            document.documentElement.scrollHeight,
-            document.documentElement.offsetHeight
-        );
-
         bounce += 0.05;
         const bounceOffset = Math.sin(bounce) * 10;
         changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
+        
+        const aboutSection = document.querySelector('#about-section');
+        const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
+        const scrollMore = document.querySelector('.scroll-more');
         
         // About 섹션 애니메이션
         if (scrollTop > 0 && scrollTop <= 430) {
@@ -458,20 +448,11 @@ document.addEventListener('DOMContentLoaded', function() {
             scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
-        // Anti-Tarot Card 애니메이션
-        if (scrollTop + windowHeight >= documentHeight - 1) {  // 완전히 스크롤을 끝까지 내렸을 때
-            antiTarotCard.style.opacity = '1';
-            antiTarotCard.style.transform = 'translateY(0)';
-        } else {
-            antiTarotCard.style.opacity = '0';
-            antiTarotCard.style.transform = 'translateY(50px)';
-        }
-
         requestAnimationFrame(animate);
     }
 
     animate();
 });
-</cript>
+</script>
 </body>
 </html>
