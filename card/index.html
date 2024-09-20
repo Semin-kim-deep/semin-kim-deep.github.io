@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Size Interactive 3D Card</title>
+    <title>Centered Image Test</title>
     <style>
         body {
             margin: 0;
@@ -13,104 +13,35 @@
             align-items: center;
             height: 100vh;
             background-color: #f0f0f0;
-            perspective: 1000px;
         }
-        .card {
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-        }
-        .card__front, .card__back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
-        }
-        .card__front img, .card__back img {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-        .card__back {
-            transform: rotateY(180deg);
-        }
-        .card.flipped {
-            transform: rotateY(180deg);
+        img {
+            max-width: 100%;
+            max-height: 100vh;
+            object-fit: contain;
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="card__front">
-            <img src=“/card/images/atc04_2.png" alt="Card Front" id="frontImage">
-        </div>
-        <div class="card__back">
-            <img src="/card/images/atc01_back.png" alt="Card Back" id="backImage">
-        </div>
-    </div>
-<script>
-const card = document.querySelector('.card');
-const frontImage = document.getElementById('frontImage');
-const backImage = document.getElementById('backImage');
-let bounds;
+    <img src="/images/atc04_2.png" alt="Test Image" id="testImage">
 
-function checkImageLoading(img, name) {
-    img.onload = function() {
-        console.log(`${name} loaded successfully. Width: ${this.width}, Height: ${this.height}`);
-        if (name === 'Front image') {
-            card.style.width = this.width + 'px';
-            card.style.height = this.height + 'px';
-        }
-    }
-    img.onerror = function() {
-        console.error(`Error loading ${name}. Src: ${this.src}`);
-    }
-}
+    <script>
+        const img = document.getElementById('testImage');
+        
+        img.onload = function() {
+            console.log('Image loaded successfully');
+            console.log('Image dimensions:', this.width + 'x' + this.height);
+        };
+        
+        img.onerror = function() {
+            console.error('Error loading image');
+            console.error('Image source:', this.src);
+        };
 
-checkImageLoading(frontImage, 'Front image');
-checkImageLoading(backImage, 'Back image');
-
-function rotateToMouse(e) {
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
-    const leftX = mouseX - bounds.x;
-    const topY = mouseY - bounds.y;
-    const center = {
-        x: leftX - bounds.width / 2,
-        y: topY - bounds.height / 2
-    }
-    const distance = Math.sqrt(center.x**2 + center.y**2);
-    card.style.transform = `
-        rotate3d(
-            ${center.y / 100},
-            ${-center.x / 100},
-            0,
-            ${Math.log(distance)* 2}deg
-        )
-    `;
-}
-
-card.addEventListener('mouseenter', () => {
-    bounds = card.getBoundingClientRect();
-    document.addEventListener('mousemove', rotateToMouse);
-});
-
-card.addEventListener('mouseleave', () => {
-    document.removeEventListener('mousemove', rotateToMouse);
-    card.style.transform = '';
-});
-
-card.addEventListener('click', () => {
-    card.classList.toggle('flipped');
-});
-
-// 추가된 디버깅 코드
-window.addEventListener('load', () => {
-    console.log('Window loaded');
-    console.log('Front image:', frontImage.complete ? 'loaded' : 'not loaded', 'Source:', frontImage.src);
-    console.log('Back image:', backImage.complete ? 'loaded' : 'not loaded', 'Source:', backImage.src);
-});
-</script>
+        window.addEventListener('load', () => {
+            console.log('Window loaded');
+            console.log('Image load state:', img.complete ? 'loaded' : 'not loaded');
+            console.log('Image source:', img.src);
+        });
+    </script>
 </body>
 </html>
