@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Card with Click Flip and Zoom Effect</title>
+    <title>Pokemon Card with Tilt and Center Effect</title>
     <style>
+        :root {
+            --mx: 50%;
+            --my: 50%;
+            --s: 1;
+            --tx: 0px;
+            --ty: 0px;
+            --rx: 0deg;
+            --ry: 0deg;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -14,15 +24,33 @@
             align-items: center;
             background-color: #393c42;
             perspective: 1000px;
+            overflow: hidden;
         }
 
         .card {
-            width: 300px;  /* 100% of original size */
-            height: 418px; /* 100% of original size, maintaining aspect ratio */
+            width: 300px;
+            height: 418px;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.75s, scale 0.25s;
+            transition: transform 0.3s ease;
             cursor: pointer;
+        }
+
+        .card__translater {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform: translate3d(var(--tx), var(--ty), 0) scale(var(--s));
+            transition: transform 0.3s ease;
+        }
+
+        .card__rotator {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform: rotateY(var(--rx)) rotateX(var(--ry));
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
         }
 
         .card__front,
@@ -39,59 +67,78 @@
             transform: rotateY(180deg);
         }
 
-        .card__front::before,
-        .card__back::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .card__front::before {
-            background-image: url('images/atc04_2.png');
-        }
-
-        .card__back::before {
-            background-image: url('images/atc01_back.png');
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <div class="card__front"></div>
-        <div class="card__back"></div>
+        <div class="card__translater">
+            <div class="card__rotator">
+                <div class="card__front">
+                    <img src="images/atc04_2.png" alt="Pokemon Card Front">
+                </div>
+                <div class="card__back">
+                    <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
         const card = document.querySelector('.card');
-        let isFlipped = false;
-        let isZoomed = false;
+        const rotator = document.querySelector('.card__rotator');
+        const translater = document.querySelector('.card__translater');
+        let rect;
 
-        function flipAndZoom() {
-            if (!isFlipped) {
-                // Flip to back
-                card.style.transform = 'rotateY(180deg)';
-                isFlipped = true;
-                setTimeout(() => {
-                    // Flip to front and zoom
-                    card.style.transform = 'rotateY(0deg) scale(1.2)';
-                    isFlipped = false;
-                    isZoomed = true;
-                }, 750); // Half of the original flip duration
-            } else {
-                // If already flipped, just return to front
-                card.style.transform = 'rotateY(0deg) scale(1)';
-                isFlipped = false;
-                isZoomed = false;
+        function updateRect() {
+            rect = card.getBoundingClientRect();
+        }
+
+        function handleMouseMove(e) {
+            if (!card.classList.contains('active')) {
+                const mx = e.clientX - rect.left;
+                const my = e.clientY - rect.top;
+                const dx = (mx - rect.width / 2) / 10;
+                const dy = (my - rect.height / 2) / 10;
+
+                document.documentElement.style.setProperty('--rx', `${dy}deg`);
+                document.documentElement.style.setProperty('--ry', `${-dx}deg`);
             }
         }
 
-        card.addEventListener('click', flipAndZoom);
+        function handleMouseLeave() {
+            if (!card.classList.contains('active')) {
+                document.documentElement.style.setProperty('--rx', '0deg');
+                document.documentElement.style.setProperty('--ry', '0deg');
+            }
+        }
+
+        function handleClick() {
+            card.classList.toggle('active');
+            if (card.classList.contains('active')) {
+                const centerX = window.innerWidth / 2 - rect.width / 2;
+                const centerY = window.innerHeight / 2 - rect.height / 2;
+                const tx = centerX - rect.left;
+                const ty = centerY - rect.top;
+                translater.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(1.2)`;
+                rotator.style.transform = 'rotateY(0deg) rotateX(0deg)';
+            } else {
+                translater.style.transform = 'translate3d(0, 0, 0) scale(1)';
+            }
+        }
+
+        card.addEventListener('mousemove', handleMouseMove);
+        card.addEventListener('mouseleave', handleMouseLeave);
+        card.addEventListener('click', handleClick);
+
+        window.addEventListener('resize', updateRect);
+        window.addEventListener('scroll', updateRect);
+
+        updateRect();
     </script>
 </body>
 </html>
