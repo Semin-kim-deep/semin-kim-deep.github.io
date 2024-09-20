@@ -3,18 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Cards with Advanced Effects</title>
+    <title>Pokemon Cards with Individual Tilts and Flip Effect</title>
     <style>
-        :root {
-            --mx: 50%;
-            --my: 50%;
-            --s: 1;
-            --tx: 0px;
-            --ty: 0px;
-            --rx: 0deg;
-            --ry: 0deg;
-        }
-
         body {
             margin: 0;
             padding: 0;
@@ -39,15 +29,19 @@
             height: 418px;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.3s ease, scale 0.3s ease;
+            transition: transform 0.3s ease;
             cursor: pointer;
-            transform: rotateX(10deg) rotateY(-10deg);
             animation: float 3s ease-in-out infinite;
         }
 
+        .card:nth-child(1) { transform: rotateX(5deg) rotateY(-5deg); }
+        .card:nth-child(2) { transform: rotateX(-5deg) rotateY(5deg); }
+        .card:nth-child(3) { transform: rotateX(10deg) rotateY(0deg); }
+        .card:nth-child(4) { transform: rotateX(0deg) rotateY(-10deg); }
+
         @keyframes float {
-            0%, 100% { transform: rotateX(10deg) rotateY(-10deg) translate(0, 0); }
-            50% { transform: rotateX(10deg) rotateY(-10deg) translate(0, -10px); }
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(0, -10px); }
         }
 
         .card__front,
@@ -56,8 +50,6 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 5%;
-            overflow: hidden;
         }
 
         .card__back {
@@ -67,7 +59,7 @@
         img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         .enlarged {
@@ -140,13 +132,20 @@
         }
 
         function handleMouseLeave() {
-            this.style.transform = 'rotateX(10deg) rotateY(-10deg)';
+            const index = Array.from(cards).indexOf(this);
+            switch(index) {
+                case 0: this.style.transform = 'rotateX(5deg) rotateY(-5deg)'; break;
+                case 1: this.style.transform = 'rotateX(-5deg) rotateY(5deg)'; break;
+                case 2: this.style.transform = 'rotateX(10deg) rotateY(0deg)'; break;
+                case 3: this.style.transform = 'rotateX(0deg) rotateY(-10deg)'; break;
+            }
         }
 
         function handleClick() {
             if (activeCard) {
                 activeCard.classList.remove('enlarged', 'flipped');
-                activeCard.style.transform = 'rotateX(10deg) rotateY(-10deg)';
+                const index = Array.from(cards).indexOf(activeCard);
+                handleMouseLeave.call(activeCard);
             }
 
             if (activeCard !== this) {
@@ -154,7 +153,7 @@
                 setTimeout(() => {
                     this.classList.remove('flipped');
                     this.classList.add('enlarged');
-                }, 150); // Half of the original flip duration
+                }, 150);
                 activeCard = this;
             } else {
                 activeCard = null;
