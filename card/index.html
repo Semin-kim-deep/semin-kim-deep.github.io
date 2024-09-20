@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Card with Flip and Zoom Effect</title>
+    <title>Pokemon Card with Click Flip and Zoom Effect</title>
     <style>
         body {
             margin: 0;
@@ -17,11 +17,12 @@
         }
 
         .card {
-            width: 300px;
-            height: 418px;
+            width: 100vmin;
+            height: 139.33vmin; /* Maintaining the aspect ratio of 300:418 */
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 1.5s, scale 0.5s;
+            transition: transform 0.75s, scale 0.25s;
+            cursor: pointer;
         }
 
         .card__front,
@@ -33,7 +34,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 15px;
+            border-radius: 5%;
             overflow: hidden;
         }
 
@@ -44,7 +45,7 @@
         img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -63,24 +64,26 @@
         let isFlipped = false;
         let isZoomed = false;
 
-        function flipCard() {
-            isFlipped = !isFlipped;
-            card.style.transform = isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+        function flipAndZoom() {
+            if (!isFlipped) {
+                // Flip to back
+                card.style.transform = 'rotateY(180deg)';
+                isFlipped = true;
+                setTimeout(() => {
+                    // Flip to front and zoom
+                    card.style.transform = 'rotateY(0deg) scale(1.2)';
+                    isFlipped = false;
+                    isZoomed = true;
+                }, 750); // Half of the original flip duration
+            } else {
+                // If already flipped, just return to front
+                card.style.transform = 'rotateY(0deg) scale(1)';
+                isFlipped = false;
+                isZoomed = false;
+            }
         }
 
-        function zoomCard() {
-            isZoomed = !isZoomed;
-            card.style.scale = isZoomed ? '1.2' : '1';
-        }
-
-        // Flip the card after 2 seconds
-        setTimeout(flipCard, 2000);
-
-        // Flip back and zoom after another 2 seconds
-        setTimeout(() => {
-            flipCard();
-            setTimeout(zoomCard, 1500); // Zoom after the flip animation is complete
-        }, 4000);
+        card.addEventListener('click', flipAndZoom);
     </script>
 </body>
 </html>
