@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Cards with Centered Flip and Slower Animation</title>
+    <title>Pokemon Cards with Fixed Positions, Shadows, and Background</title>
     <style>
         body {
             margin: 0;
@@ -12,31 +12,34 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #393c42;
+            background-image: url('../images/bg_hp.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             perspective: 1000px;
             overflow: hidden;
         }
 
         .card-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            perspective: 1000px;
+            position: relative;
+            width: 1300px;
+            height: 418px;
         }
 
         .card {
             width: 300px;
             height: 418px;
-            position: relative;
+            position: absolute;
             transform-style: preserve-3d;
-            transition: transform 0.4s ease, left 0.4s ease, top 0.4s ease;
+            transition: transform 0.4s ease;
             cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
         }
 
-        .card:nth-child(1) { transform: rotateX(5deg) rotateY(-5deg); }
-        .card:nth-child(2) { transform: rotateX(-5deg) rotateY(5deg); }
-        .card:nth-child(3) { transform: rotateX(10deg) rotateY(0deg); }
-        .card:nth-child(4) { transform: rotateX(0deg) rotateY(-10deg); }
+        .card:nth-child(1) { left: 0; transform: rotateX(5deg) rotateY(-5deg); }
+        .card:nth-child(2) { left: 320px; transform: rotateX(-5deg) rotateY(5deg); }
+        .card:nth-child(3) { left: 640px; transform: rotateX(10deg) rotateY(0deg); }
+        .card:nth-child(4) { left: 960px; transform: rotateX(0deg) rotateY(-10deg); }
 
         .card__front,
         .card__back {
