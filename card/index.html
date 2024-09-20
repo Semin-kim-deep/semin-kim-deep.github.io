@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Cards with Improved Flip Animation</title>
+    <title>Pokemon Cards with Improved Interaction</title>
     <style>
         body {
             margin: 0;
@@ -36,9 +36,9 @@
         }
 
         .card:nth-child(1) { left: 0; transform: rotateX(5deg) rotateY(-5deg); }
-        .card:nth-child(2) { left: 228px; /* 380px * 0.6 */ transform: rotateX(-5deg) rotateY(5deg); }
-        .card:nth-child(3) { left: 456px; /* 760px * 0.6 */ transform: rotateX(10deg) rotateY(0deg); }
-        .card:nth-child(4) { left: 684px; /* 1140px * 0.6 */ transform: rotateX(0deg) rotateY(-10deg); }
+        .card:nth-child(2) { left: 228px; transform: rotateX(-5deg) rotateY(5deg); }
+        .card:nth-child(3) { left: 456px; transform: rotateX(10deg) rotateY(0deg); }
+        .card:nth-child(4) { left: 684px; transform: rotateX(0deg) rotateY(-10deg); }
 
         .card__front,
         .card__back {
@@ -125,16 +125,18 @@
         });
 
         function handleMouseMove(e) {
+            if (this.classList.contains('enlarged')) return;
             const rect = this.getBoundingClientRect();
             const mx = e.clientX - rect.left;
             const my = e.clientY - rect.top;
-            const dx = (mx - rect.width / 2) / 3; // Reduced sensitivity for smaller cards
+            const dx = (mx - rect.width / 2) / 3;
             const dy = (my - rect.height / 2) / 3;
 
             this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
         }
 
         function handleMouseLeave() {
+            if (this.classList.contains('enlarged')) return;
             const index = Array.from(cards).indexOf(this);
             switch(index) {
                 case 0: this.style.transform = 'rotateX(5deg) rotateY(-5deg)'; break;
@@ -145,36 +147,46 @@
         }
 
         function handleClick() {
-            if (activeCard) {
-                activeCard.classList.remove('enlarged', 'flipped');
-                handleMouseLeave.call(activeCard);
+            if (activeCard === this) {
+                returnToOriginalPosition(this);
                 activeCard = null;
-            }
-
-            if (activeCard !== this) {
-                const rect = this.getBoundingClientRect();
-                const centerX = window.innerWidth / 2 - rect.width / 2;
-                const centerY = window.innerHeight / 2 - rect.height / 2;
-
-                this.style.position = 'fixed';
-                this.style.left = `${rect.left}px`;
-                this.style.top = `${rect.top}px`;
-
-                // Start flipping while moving to center
-                setTimeout(() => {
-                    this.classList.add('flipped');
-                    this.style.left = `${centerX}px`;
-                    this.style.top = `${centerY}px`;
-                }, 50);
-
-                // Flip back to front and enlarge at center
-                setTimeout(() => {
-                    this.classList.remove('flipped');
-                    this.classList.add('enlarged');
-                }, 450);
-
+            } else {
+                if (activeCard) {
+                    returnToOriginalPosition(activeCard);
+                }
+                enlargeCard(this);
                 activeCard = this;
             }
+        }
+
+        function enlargeCard(card) {
+            const rect = card.getBoundingClientRect();
+            const centerX = window.innerWidth / 2 - rect.width / 2;
+            const centerY = window.innerHeight / 2 - rect.height / 2;
+
+            card.style.position = 'fixed';
+            card.style.left = `${rect.left}px`;
+            card.style.top = `${rect.top}px`;
+
+            setTimeout(() => {
+                card.classList.add('flipped');
+                card.style.left = `${centerX}px`;
+                card.style.top = `${centerY}px`;
+            }, 50);
+
+            setTimeout(() => {
+                card.classList.remove('flipped');
+                card.classList.add('enlarged');
+            }, 450);
+        }
+
+        function returnToOriginalPosition(card) {
+            const index = Array.from(cards).indexOf(card);
+            card.classList.remove('enlarged', 'flipped');
+            card.style.position = '';
+            card.style.left = '';
+            card.style.top = '';
+            handleMouseLeave.call(card);
         }
     </script>
 </body>
