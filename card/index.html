@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multiple Pokemon Cards with Flip and Zoom Effect</title>
+    <title>Pokemon Cards with Advanced Effects</title>
     <style>
+        :root {
+            --mx: 50%;
+            --my: 50%;
+            --s: 1;
+            --tx: 0px;
+            --ty: 0px;
+            --rx: 0deg;
+            --ry: 0deg;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -14,12 +24,14 @@
             align-items: center;
             background-color: #393c42;
             perspective: 1000px;
+            overflow: hidden;
         }
 
         .card-container {
             display: flex;
             justify-content: center;
-            gap: 50px;
+            gap: 20px;
+            perspective: 1000px;
         }
 
         .card {
@@ -27,8 +39,15 @@
             height: 418px;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.6s;
+            transition: transform 0.3s ease, scale 0.3s ease;
             cursor: pointer;
+            transform: rotateX(10deg) rotateY(-10deg);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: rotateX(10deg) rotateY(-10deg) translate(0, 0); }
+            50% { transform: rotateX(10deg) rotateY(-10deg) translate(0, -10px); }
         }
 
         .card__front,
@@ -48,11 +67,15 @@
         img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
         }
 
         .enlarged {
-            transform: scale(1.2);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.2) !important;
+            z-index: 10;
         }
 
         .flipped {
@@ -98,51 +121,45 @@
 
     <script>
         const cards = document.querySelectorAll('.card');
+        let activeCard = null;
 
         cards.forEach(card => {
-            let isFlipped = false;
-            let isEnlarged = false;
-
-            function handleMouseMove(e) {
-                if (!isEnlarged && !isFlipped) {
-                    const rect = card.getBoundingClientRect();
-                    const mx = e.clientX - rect.left;
-                    const my = e.clientY - rect.top;
-                    const dx = (mx - rect.width / 2) / 10;
-                    const dy = (my - rect.height / 2) / 10;
-
-                    card.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
-                }
-            }
-
-            function handleMouseLeave() {
-                if (!isEnlarged && !isFlipped) {
-                    card.style.transform = 'rotateY(0deg) rotateX(0deg)';
-                }
-            }
-
-            function flipAndEnlarge() {
-                if (!isFlipped && !isEnlarged) {
-                    // First flip
-                    card.style.transform = 'rotateY(180deg)';
-                    isFlipped = true;
-                    setTimeout(() => {
-                        // Flip back and enlarge
-                        card.style.transform = 'rotateY(0deg) scale(1.2)';
-                        isFlipped = false;
-                        isEnlarged = true;
-                    }, 600); // Match the transition time
-                } else if (isEnlarged) {
-                    // Return to original size
-                    card.style.transform = 'rotateY(0deg) scale(1)';
-                    isEnlarged = false;
-                }
-            }
-
             card.addEventListener('mousemove', handleMouseMove);
             card.addEventListener('mouseleave', handleMouseLeave);
-            card.addEventListener('click', flipAndEnlarge);
+            card.addEventListener('click', handleClick);
         });
+
+        function handleMouseMove(e) {
+            const rect = this.getBoundingClientRect();
+            const mx = e.clientX - rect.left;
+            const my = e.clientY - rect.top;
+            const dx = (mx - rect.width / 2) / 5;
+            const dy = (my - rect.height / 2) / 5;
+
+            this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
+        }
+
+        function handleMouseLeave() {
+            this.style.transform = 'rotateX(10deg) rotateY(-10deg)';
+        }
+
+        function handleClick() {
+            if (activeCard) {
+                activeCard.classList.remove('enlarged', 'flipped');
+                activeCard.style.transform = 'rotateX(10deg) rotateY(-10deg)';
+            }
+
+            if (activeCard !== this) {
+                this.classList.add('flipped');
+                setTimeout(() => {
+                    this.classList.remove('flipped');
+                    this.classList.add('enlarged');
+                }, 150); // Half of the original flip duration
+                activeCard = this;
+            } else {
+                activeCard = null;
+            }
+        }
     </script>
 </body>
 </html>
