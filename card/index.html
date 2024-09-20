@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Cards with Fixed Positions, Shadows, and Background</title>
+    <title>Pokemon Cards with Adjusted Background and Shadow</title>
     <style>
         body {
             margin: 0;
@@ -14,7 +14,7 @@
             align-items: center;
             background-image: url('../images/bg_hp.jpg');
             background-size: cover;
-            background-position: center;
+            background-position: top center;
             background-repeat: no-repeat;
             perspective: 1000px;
             overflow: hidden;
@@ -33,7 +33,6 @@
             transform-style: preserve-3d;
             transition: transform 0.4s ease;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
         }
 
         .card:nth-child(1) { left: 0; transform: rotateX(5deg) rotateY(-5deg); }
@@ -48,6 +47,7 @@
             height: 100%;
             backface-visibility: hidden;
             transition: transform 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
         }
 
         .card__back {
