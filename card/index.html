@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Card with Shining Effect</title>
+    <title>Improved Pokemon Card with Shining Effect and Scroll</title>
     <style>
         :root {
             --mx: 50%;
@@ -23,12 +23,19 @@
         body {
             margin: 0;
             padding: 0;
+            min-height: 100vh;
+            background-color: #393c42;
+            perspective: 1000px;
+            overflow-x: hidden;
+        }
+
+        .card-container {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #393c42;
-            perspective: 1000px;
+            position: sticky;
+            top: 0;
         }
 
         .card {
@@ -56,6 +63,7 @@
             position: absolute;
             transform: rotateY(var(--rx)) rotateX(var(--ry));
             transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
         }
 
         .card__shine {
@@ -97,6 +105,7 @@
             mix-blend-mode: color-dodge;
             opacity: var(--o);
             clip-path: inset(10% 8.5% 52.5% 8.5%);
+            transition: opacity 0.3s ease-out;
         }
 
         img {
@@ -105,39 +114,78 @@
             object-fit: contain;
             border-radius: var(--radius);
         }
+
+        .scroll-indicator {
+            position: fixed;
+            left: 50px;
+            bottom: 20px;
+            display: flex;
+            align-items: center;
+            color: cyan;
+            font-weight: bold;
+            text-shadow: 0 1px 0 black;
+        }
+
+        .scroll-indicator svg {
+            width: 22px;
+            height: 22px;
+            fill: cyan;
+            margin-right: 10px;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            50% {
+                transform: translateY(5px);
+            }
+        }
+
+        .scroll-text {
+            font-size: 0.875rem;
+        }
     </style>
 </head>
 <body>
-    <div class="card" data-rarity="rare holo">
-        <div class="card__translater">
-            <div class="card__rotator">
-                <img src="images/atc04_2.png" alt="Pokemon Card" id="testImage">
-                <div class="card__shine"></div>
+    <div class="card-container">
+        <div class="card" data-rarity="rare holo">
+            <div class="card__translater">
+                <div class="card__rotator">
+                    <img src="images/atc04_2.png" alt="Pokemon Card" id="testImage">
+                    <div class="card__shine"></div>
+                </div>
             </div>
         </div>
+    </div>
+
+    <div class="scroll-indicator">
+        <svg viewBox="0 0 330 330">
+            <path d="M304.394,139.394l-139.39,139.393L25.607,139.393c-5.857-5.857-15.355-5.858-21.213,0.001 c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393s7.794-1.581,10.606-4.394l149.996-150 c5.858-5.858,5.858-15.355,0-21.213C319.749,133.536,310.251,133.535,304.394,139.394z" />
+            <path d="M154.398,190.607c2.813,2.813,6.628,4.393,10.606,4.393s7.794-1.581,10.606-4.394l149.996-150 c5.858-5.858,5.858-15.355,0-21.213c-5.857-5.858-15.355-5.858-21.213,0l-139.39,139.393L25.607,19.393 c-5.857-5.858-15.355-5.858-21.213,0c-5.858,5.858-5.858,15.355,0,21.213L154.398,190.607z" />
+        </svg>
+        <span class="scroll-text">Scroll 4 moar!</span>
     </div>
 
     <script>
         const card = document.querySelector('.card');
         const shine = document.querySelector('.card__shine');
-        const translater = document.querySelector('.card__translater');
         const rotator = document.querySelector('.card__rotator');
+        let rect;
 
-        let rect = card.getBoundingClientRect();
+        function updateRect() {
+            rect = card.getBoundingClientRect();
+        }
 
         function handleMouseMove(e) {
             const mx = e.clientX - rect.left;
             const my = e.clientY - rect.top;
-            const dx = mx - rect.width / 2;
-            const dy = my - rect.height / 2;
-            const rx = dy / -8;
-            const ry = dx / 8;
+            const dx = (mx - rect.width / 2) / 10;
+            const dy = (my - rect.height / 2) / 10;
             const hyp = Math.sqrt(Math.pow((mx / rect.width - 0.5) * 2, 2) + Math.pow((my / rect.height - 0.5) * 2, 2));
 
+            rotator.style.transform = `rotateY(${dx}deg) rotateX(${-dy}deg)`;
+            
             document.documentElement.style.setProperty('--mx', mx + 'px');
             document.documentElement.style.setProperty('--my', my + 'px');
-            document.documentElement.style.setProperty('--rx', rx + 'deg');
-            document.documentElement.style.setProperty('--ry', ry + 'deg');
             document.documentElement.style.setProperty('--posx', (mx / rect.width * 100) + '%');
             document.documentElement.style.setProperty('--posy', (my / rect.height * 100) + '%');
             document.documentElement.style.setProperty('--hyp', hyp);
@@ -145,16 +193,23 @@
         }
 
         function handleMouseLeave() {
-            document.documentElement.style.setProperty('--rx', '0deg');
-            document.documentElement.style.setProperty('--ry', '0deg');
+            rotator.style.transform = 'rotateY(0deg) rotateX(0deg)';
             document.documentElement.style.setProperty('--o', '0');
         }
 
         card.addEventListener('mousemove', handleMouseMove);
         card.addEventListener('mouseleave', handleMouseLeave);
 
-        window.addEventListener('resize', () => {
-            rect = card.getBoundingClientRect();
+        window.addEventListener('resize', updateRect);
+        window.addEventListener('scroll', updateRect);
+
+        updateRect();
+
+        // Scroll effect
+        window.addEventListener('scroll', () => {
+            const scrollPercentage = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            const rotation = scrollPercentage * 360;
+            card.style.transform = `rotateY(${rotation}deg)`;
         });
     </script>
 </body>
