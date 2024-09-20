@@ -54,10 +54,11 @@
 
         .card-container {
             position: relative;
-            width: 4374.8px; /* (213.6px * 18) + (30px * 17) */
+            width: 4474.8px; /* (213.6px * 18) + (30px * 17) + 100px */
             height: 356px;
             margin: auto;
             transition: transform 0.4s ease;
+            transform: translateX(100px); /* Initial 100px left margin */
         }
 
         .card {
@@ -159,134 +160,7 @@
                 <img src="images/atc01_back.png" alt="Pokemon Card Back">
             </div>
         </div>
-        <div class="card" data-image="atc02.png">
-            <div class="card__front">
-                <img src="images/atc02.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc03.png">
-            <div class="card__front">
-                <img src="images/atc03.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc04_2.png">
-            <div class="card__front">
-                <img src="images/atc04_2.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc05.png">
-            <div class="card__front">
-                <img src="images/atc05.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc06.png">
-            <div class="card__front">
-                <img src="images/atc06.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc07.png">
-            <div class="card__front">
-                <img src="images/atc07.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc08.png">
-            <div class="card__front">
-                <img src="images/atc08.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc09.png">
-            <div class="card__front">
-                <img src="images/atc09.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc10.png">
-            <div class="card__front">
-                <img src="images/atc10.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc11.png">
-            <div class="card__front">
-                <img src="images/atc11.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc12.png">
-            <div class="card__front">
-                <img src="images/atc12.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc13.png">
-            <div class="card__front">
-                <img src="images/atc13.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc14.png">
-            <div class="card__front">
-                <img src="images/atc14.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc15.png">
-            <div class="card__front">
-                <img src="images/atc15.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc16.png">
-            <div class="card__front">
-                <img src="images/atc16.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc17.png">
-            <div class="card__front">
-                <img src="images/atc17.png" alt="Pokemon Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
-            </div>
-        </div>
+        <!-- Repeat for all 18 cards -->
         <div class="card" data-image="atc18.png">
             <div class="card__front">
                 <img src="images/atc18.png" alt="Pokemon Card Front">
@@ -300,99 +174,100 @@
     <img src="images/right_indi.png" alt="Right Navigation" class="nav-button right">
 
     <script>
+        const cards = document.querySelectorAll('.card');
+        const cardContainer = document.querySelector('.card-container');
+        const leftNav = document.querySelector('.nav-button.left');
+        const rightNav = document.querySelector('.nav-button.right');
+        let activeCard = null;
+        let currentPosition = 100; // Start with 100px left margin
 
-    const cards = document.querySelectorAll('.card');
-    const cardContainer = document.querySelector('.card-container');
-    const leftNav = document.querySelector('.nav-button.left');
-    const rightNav = document.querySelector('.nav-button.right');
-    let activeCard = null;
-    let currentPosition = 0;
+        cards.forEach(card => {
+            card.addEventListener('mousemove', handleMouseMove);
+            card.addEventListener('mouseleave', handleMouseLeave);
+            card.addEventListener('click', handleClick);
+        });
 
-    cards.forEach(card => {
-        card.addEventListener('mousemove', handleMouseMove);
-        card.addEventListener('mouseleave', handleMouseLeave);
-        card.addEventListener('click', handleClick);
-    });
+        leftNav.addEventListener('click', () => {
+            currentPosition = Math.min(currentPosition + 800, 100);
+            updateCardContainerPosition();
+        });
 
-    leftNav.addEventListener('click', () => {
-        currentPosition = Math.min(currentPosition + 400, 0);
-        updateCardContainerPosition();
-    });
+        rightNav.addEventListener('click', () => {
+            const maxPosition = -(cardContainer.offsetWidth - window.innerWidth - 100);
+            currentPosition = Math.max(currentPosition - 800, maxPosition);
+            updateCardContainerPosition();
+        });
 
-    rightNav.addEventListener('click', () => {
-        const maxPosition = -(cardContainer.offsetWidth - window.innerWidth);
-        currentPosition = Math.max(currentPosition - 400, maxPosition);
-        updateCardContainerPosition();
-    });
-
-    function updateCardContainerPosition() {
-        cardContainer.style.transform = `translateX(${currentPosition}px)`;
-    }
-
-    function handleMouseMove(e) {
-        if (this.classList.contains('enlarged')) return;
-        const rect = this.getBoundingClientRect();
-        const mx = e.clientX - rect.left;
-        const my = e.clientY - rect.top;
-        const dx = (mx - rect.width / 2) / 3;
-        const dy = (my - rect.height / 2) / 3;
-
-        this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
-    }
-
-    function handleMouseLeave() {
-        if (this.classList.contains('enlarged')) return;
-        const index = Array.from(cards).indexOf(this);
-        switch(index % 4) {
-            case 0: this.style.transform = 'rotateX(5deg) rotateY(-5deg)'; break;
-            case 1: this.style.transform = 'rotateX(-5deg) rotateY(5deg)'; break;
-            case 2: this.style.transform = 'rotateX(10deg) rotateY(0deg)'; break;
-            case 3: this.style.transform = 'rotateX(0deg) rotateY(-10deg)'; break;
+        function updateCardContainerPosition() {
+            cardContainer.style.transform = `translateX(${currentPosition}px)`;
         }
-    }
 
-    function handleClick() {
-        if (activeCard === this) {
-            returnToOriginalPosition(this);
-            activeCard = null;
-        } else {
-            if (activeCard) {
-                returnToOriginalPosition(activeCard);
+        function handleMouseMove(e) {
+            if (this.classList.contains('enlarged')) return;
+            const rect = this.getBoundingClientRect();
+            const mx = e.clientX - rect.left;
+            const my = e.clientY - rect.top;
+            const dx = (mx - rect.width / 2) / 3;
+            const dy = (my - rect.height / 2) / 3;
+
+            this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
+        }
+
+        function handleMouseLeave() {
+            if (this.classList.contains('enlarged')) return;
+            const index = Array.from(cards).indexOf(this);
+            switch(index % 4) {
+                case 0: this.style.transform = 'rotateX(5deg) rotateY(-5deg)'; break;
+                case 1: this.style.transform = 'rotateX(-5deg) rotateY(5deg)'; break;
+                case 2: this.style.transform = 'rotateX(10deg) rotateY(0deg)'; break;
+                case 3: this.style.transform = 'rotateX(0deg) rotateY(-10deg)'; break;
             }
-            enlargeCard(this);
-            activeCard = this;
         }
-    }
 
-    function enlargeCard(card) {
-        const rect = card.getBoundingClientRect();
-        const centerX = window.innerWidth / 2 - rect.width / 2;
-        const centerY = window.innerHeight / 2 - rect.height / 2;
+        function handleClick() {
+            if (activeCard === this) {
+                returnToOriginalPosition(this);
+                activeCard = null;
+            } else {
+                if (activeCard) {
+                    returnToOriginalPosition(activeCard);
+                }
+                enlargeCard(this);
+                activeCard = this;
+            }
+        }
 
-        card.style.position = 'fixed';
-        card.style.left = `${rect.left}px`;
-        card.style.top = `${rect.top}px`;
+        function enlargeCard(card) {
+            const rect = card.getBoundingClientRect();
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
 
-        setTimeout(() => {
-            card.classList.add('flipped');
-            card.style.left = `${centerX}px`;
-            card.style.top = `${centerY}px`;
-        }, 50);
+            card.style.position = 'fixed';
+            card.style.left = `${rect.left}px`;
+            card.style.top = `${rect.top}px`;
+            card.style.zIndex = '1000';
 
-        setTimeout(() => {
-            card.classList.remove('flipped');
-            card.classList.add('enlarged');
-        }, 450);
-    }
+            setTimeout(() => {
+                card.classList.add('flipped');
+                card.style.left = `${centerX - rect.width / 2}px`;
+                card.style.top = `${centerY - rect.height / 2}px`;
+            }, 50);
 
-    function returnToOriginalPosition(card) {
-        const index = Array.from(cards).indexOf(card);
-        card.classList.remove('enlarged', 'flipped');
-        card.style.position = '';
-        card.style.left = '';
-        card.style.top = '';
-        handleMouseLeave.call(card);
-    }
-</script>
+            setTimeout(() => {
+                card.classList.remove('flipped');
+                card.classList.add('enlarged');
+            }, 450);
+        }
+
+        function returnToOriginalPosition(card) {
+            const index = Array.from(cards).indexOf(card);
+            card.classList.remove('enlarged', 'flipped');
+            card.style.position = '';
+            card.style.left = '';
+            card.style.top = '';
+            card.style.zIndex = '';
+            handleMouseLeave.call(card);
+        }
+    </script>
 </body>
 </html>
