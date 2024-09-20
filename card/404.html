@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
+    <title>Redirecting to Deepdown Studio</title>
     <script>
-        // 현재 URL에서 폴더 경로 추출
-        var path = window.location.pathname;
-        var folder = path.substring(0, path.lastIndexOf('/'));
+        // 원하는 폴더 이름으로 변경하세요
+        var targetFolder = "your-folder-name";
         
-        // index.html로 리다이렉트
-        window.location.href = folder + "/index.html";
+        // 현재 URL 확인
+        var currentPath = window.location.pathname;
+        
+        // 루트 URL이거나 폴더 URL인 경우에만 리다이렉션
+        if (currentPath === "/" || currentPath === "/" + targetFolder + "/") {
+            window.location.href = "/" + targetFolder + "/index.html";
+        }
     </script>
 </head>
 <body>
-    <p>If you are not redirected, <a href="index.html">click here</a>.</p>
+    <p>If you are not redirected, <a href="/your-folder-name/index.html">click here</a>.</p>
 </body>
 </html>
