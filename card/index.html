@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Cards with Individual Tilts and Flip Effect</title>
+    <title>Pokemon Cards with Centered Flip and Slower Animation</title>
     <style>
         body {
             margin: 0;
@@ -29,7 +29,7 @@
             height: 418px;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease, left 0.4s ease, top 0.4s ease;
             cursor: pointer;
         }
 
@@ -44,7 +44,7 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
         }
 
         .card__back {
@@ -59,8 +59,8 @@
 
         .enlarged {
             position: fixed;
-            top: 50%;
-            left: 50%;
+            top: 50% !important;
+            left: 50% !important;
             transform: translate(-50%, -50%) scale(1.2) !important;
             z-index: 10;
         }
@@ -147,13 +147,28 @@
             }
 
             if (activeCard !== this) {
-                this.classList.add('flipped');
+                const rect = this.getBoundingClientRect();
+                const centerX = window.innerWidth / 2 - rect.width / 2;
+                const centerY = window.innerHeight / 2 - rect.height / 2;
+
+                this.style.position = 'fixed';
+                this.style.left = `${rect.left}px`;
+                this.style.top = `${rect.top}px`;
+
+                setTimeout(() => {
+                    this.classList.add('enlarged');
+                    this.classList.add('flipped');
+                }, 50);
+
                 setTimeout(() => {
                     this.classList.remove('flipped');
-                    this.classList.add('enlarged');
-                }, 300);
+                }, 800);
+
                 activeCard = this;
             } else {
+                this.style.position = '';
+                this.style.left = '';
+                this.style.top = '';
                 activeCard = null;
             }
         }
