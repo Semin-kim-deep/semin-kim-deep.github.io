@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centered Image Test</title>
+    <title>Pokemon Card with Shining Effect</title>
     <style>
+        :root {
+            --mx: 50%;
+            --my: 50%;
+            --s: 1;
+            --o: 0;
+            --tx: 0px;
+            --ty: 0px;
+            --rx: 0deg;
+            --ry: 0deg;
+            --pos: 50% 50%;
+            --posx: 50%;
+            --posy: 50%;
+            --hyp: 0;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -12,35 +27,134 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            background-color: #393c42;
+            perspective: 1000px;
         }
+
+        .card {
+            --radius: 4.55% / 3.5%;
+            z-index: calc(var(--s) * 100);
+            transform: translate3d(0, 0, 0.1px);
+            will-change: transform, visibility;
+            transform-style: preserve-3d;
+            width: 300px;
+            height: 418px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .card__translater {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform: translate3d(var(--tx), var(--ty), 0) scale(var(--s));
+        }
+
+        .card__rotator {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform: rotateY(var(--rx)) rotateX(var(--ry));
+            transform-style: preserve-3d;
+        }
+
+        .card__shine {
+            --space: 5%;
+            --h: 21;
+            --s: 70%;
+            --l: 50%;
+            --bars: 24px;
+            --bar-color: rgba(255, 255, 255, 0.6);
+            --bar-bg: rgb(10, 10, 10);
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    90deg,
+                    var(--bar-bg) calc(var(--bars) * 2),
+                    var(--bar-color) calc(var(--bars) * 3),
+                    var(--bar-bg) calc(var(--bars) * 3.5),
+                    var(--bar-color) calc(var(--bars) * 4),
+                    var(--bar-bg) calc(var(--bars) * 5),
+                    var(--bar-bg) calc(var(--bars) * 12)
+                ),
+                radial-gradient(
+                    farthest-corner circle at var(--mx) var(--my),
+                    rgba(230, 230, 230, 0.85) 0%,
+                    rgba(200, 200, 200, 0.1) 25%,
+                    rgb(0, 0, 0) 90%
+                );
+
+            background-blend-mode: soft-light, overlay;
+            background-position: center, calc(((50% - var(--posx)) * 25) + 50%) center;
+            background-size: 237% 237%, 200%;
+
+            filter: brightness(calc((var(--hyp) + 0.7) * 0.7)) contrast(3.2) saturate(0.66);
+            mix-blend-mode: color-dodge;
+            opacity: var(--o);
+            clip-path: inset(10% 8.5% 52.5% 8.5%);
+        }
+
         img {
-            max-width: 100%;
-            max-height: 100vh;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
+            border-radius: var(--radius);
         }
     </style>
 </head>
 <body>
-    <img src="images/atc04_2.png" alt="Test Image" id="testImage">
+    <div class="card" data-rarity="rare holo">
+        <div class="card__translater">
+            <div class="card__rotator">
+                <img src="images/atc04_2.png" alt="Pokemon Card" id="testImage">
+                <div class="card__shine"></div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        const img = document.getElementById('testImage');
-        
-        img.onload = function() {
-            console.log('Image loaded successfully');
-            console.log('Image dimensions:', this.width + 'x' + this.height);
-        };
-        
-        img.onerror = function() {
-            console.error('Error loading image');
-            console.error('Image source:', this.src);
-        };
+        const card = document.querySelector('.card');
+        const shine = document.querySelector('.card__shine');
+        const translater = document.querySelector('.card__translater');
+        const rotator = document.querySelector('.card__rotator');
 
-        window.addEventListener('load', () => {
-            console.log('Window loaded');
-            console.log('Image load state:', img.complete ? 'loaded' : 'not loaded');
-            console.log('Image source:', img.src);
+        let rect = card.getBoundingClientRect();
+
+        function handleMouseMove(e) {
+            const mx = e.clientX - rect.left;
+            const my = e.clientY - rect.top;
+            const dx = mx - rect.width / 2;
+            const dy = my - rect.height / 2;
+            const rx = dy / -8;
+            const ry = dx / 8;
+            const hyp = Math.sqrt(Math.pow((mx / rect.width - 0.5) * 2, 2) + Math.pow((my / rect.height - 0.5) * 2, 2));
+
+            document.documentElement.style.setProperty('--mx', mx + 'px');
+            document.documentElement.style.setProperty('--my', my + 'px');
+            document.documentElement.style.setProperty('--rx', rx + 'deg');
+            document.documentElement.style.setProperty('--ry', ry + 'deg');
+            document.documentElement.style.setProperty('--posx', (mx / rect.width * 100) + '%');
+            document.documentElement.style.setProperty('--posy', (my / rect.height * 100) + '%');
+            document.documentElement.style.setProperty('--hyp', hyp);
+            document.documentElement.style.setProperty('--o', '1');
+        }
+
+        function handleMouseLeave() {
+            document.documentElement.style.setProperty('--rx', '0deg');
+            document.documentElement.style.setProperty('--ry', '0deg');
+            document.documentElement.style.setProperty('--o', '0');
+        }
+
+        card.addEventListener('mousemove', handleMouseMove);
+        card.addEventListener('mouseleave', handleMouseLeave);
+
+        window.addEventListener('resize', () => {
+            rect = card.getBoundingClientRect();
         });
     </script>
 </body>
