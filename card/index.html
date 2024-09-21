@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokemon Cards with Improved Interaction</title>
+    <title>Anti-Tarot Cards with Centered Enlargement and Fixed Header</title>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@500&display=swap" rel="stylesheet">
     <style>
@@ -18,13 +18,19 @@
             background-position: top center;
             background-repeat: no-repeat;
             perspective: 1000px;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         .title-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
             text-align: center;
             padding-top: 20px;
             margin-bottom: 20px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.5);
         }
 
         h1 {
@@ -50,6 +56,7 @@
             font-size: 18px;
             color: white;
             margin: 0;
+            padding-bottom: 20px;
         }
 
         .card-container {
@@ -59,6 +66,7 @@
             margin: auto;
             transition: transform 0.4s ease;
             transform: translateX(100px); /* Initial 100px left margin */
+            margin-top: 200px; /* Add space for fixed header */
         }
 
         .card {
@@ -111,11 +119,11 @@
         }
 
         .enlarged {
-            position: fixed;
+            position: fixed !important;
             top: 50% !important;
             left: 50% !important;
             transform: translate(-50%, -50%) scale(1.2) !important;
-            z-index: 10;
+            z-index: 1001 !important;
         }
 
         .flipped .card__front {
@@ -133,7 +141,7 @@
             width: 50px;
             height: 50px;
             cursor: pointer;
-            z-index: 100;
+            z-index: 1002;
         }
 
         .nav-button.left {
@@ -154,146 +162,146 @@
     <div class="card-container">
         <div class="card" data-image="atc01.png">
             <div class="card__front">
-                <img src="images/atc01.png" alt="Pokemon Card Front">
+                <img src="images/atc01.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc02.png">
             <div class="card__front">
-                <img src="images/atc02.png" alt="Pokemon Card Front">
+                <img src="images/atc02.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc03.png">
             <div class="card__front">
-                <img src="images/atc03.png" alt="Pokemon Card Front">
+                <img src="images/atc03.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc04_2.png">
             <div class="card__front">
-                <img src="images/atc04_2.png" alt="Pokemon Card Front">
+                <img src="images/atc04_2.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc05.png">
             <div class="card__front">
-                <img src="images/atc05.png" alt="Pokemon Card Front">
+                <img src="images/atc05.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc06.png">
             <div class="card__front">
-                <img src="images/atc06.png" alt="Pokemon Card Front">
+                <img src="images/atc06.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc07.png">
             <div class="card__front">
-                <img src="images/atc07.png" alt="Pokemon Card Front">
+                <img src="images/atc07.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc08.png">
             <div class="card__front">
-                <img src="images/atc08.png" alt="Pokemon Card Front">
+                <img src="images/atc08.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc09.png">
             <div class="card__front">
-                <img src="images/atc09.png" alt="Pokemon Card Front">
+                <img src="images/atc09.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc10.png">
             <div class="card__front">
-                <img src="images/atc10.png" alt="Pokemon Card Front">
+                <img src="images/atc10.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc11.png">
             <div class="card__front">
-                <img src="images/atc11.png" alt="Pokemon Card Front">
+                <img src="images/atc11.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc12.png">
             <div class="card__front">
-                <img src="images/atc12.png" alt="Pokemon Card Front">
+                <img src="images/atc12.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc13.png">
             <div class="card__front">
-                <img src="images/atc13.png" alt="Pokemon Card Front">
+                <img src="images/atc13.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc14.png">
             <div class="card__front">
-                <img src="images/atc14.png" alt="Pokemon Card Front">
+                <img src="images/atc14.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc15.png">
             <div class="card__front">
-                <img src="images/atc15.png" alt="Pokemon Card Front">
+                <img src="images/atc15.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc16.png">
             <div class="card__front">
-                <img src="images/atc16.png" alt="Pokemon Card Front">
+                <img src="images/atc16.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc17.png">
             <div class="card__front">
-                <img src="images/atc17.png" alt="Pokemon Card Front">
+                <img src="images/atc17.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
         <div class="card" data-image="atc18.png">
             <div class="card__front">
-                <img src="images/atc18.png" alt="Pokemon Card Front">
+                <img src="images/atc18.png" alt="Anti-Tarot Card Front">
             </div>
             <div class="card__back">
-                <img src="images/atc01_back.png" alt="Pokemon Card Back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
             </div>
         </div>
     </div>
@@ -301,98 +309,100 @@
     <img src="images/right_indi.png" alt="Right Navigation" class="nav-button right">
 
 <script>
-    const cards = document.querySelectorAll('.card');
-    const cardContainer = document.querySelector('.card-container');
-    const leftNav = document.querySelector('.nav-button.left');
-    const rightNav = document.querySelector('.nav-button.right');
-    let activeCard = null;
-    let currentPosition = 100; // Start with 100px left margin
+ const cards = document.querySelectorAll('.card');
+const cardContainer = document.querySelector('.card-container');
+const leftNav = document.querySelector('.nav-button.left');
+const rightNav = document.querySelector('.nav-button.right');
+const titleContainer = document.querySelector('.title-container');
+let activeCard = null;
+let currentPosition = 100; // Start with 100px left margin
 
-    cards.forEach(card => {
-        card.addEventListener('mousemove', handleMouseMove);
-        card.addEventListener('mouseleave', handleMouseLeave);
-        card.addEventListener('click', handleClick);
-    });
+cards.forEach(card => {
+    card.addEventListener('mousemove', handleMouseMove);
+    card.addEventListener('mouseleave', handleMouseLeave);
+    card.addEventListener('click', handleClick);
+});
 
-    leftNav.addEventListener('click', () => {
-        currentPosition = Math.min(currentPosition + 800, 100);
-        updateCardContainerPosition();
-    });
+leftNav.addEventListener('click', () => {
+    currentPosition = Math.min(currentPosition + 800, 100);
+    updateCardContainerPosition();
+});
 
-    rightNav.addEventListener('click', () => {
-        const maxPosition = -(cardContainer.offsetWidth - window.innerWidth - 100);
-        currentPosition = Math.max(currentPosition - 800, maxPosition);
-        updateCardContainerPosition();
-    });
+rightNav.addEventListener('click', () => {
+    const maxPosition = -(cardContainer.offsetWidth - window.innerWidth - 100);
+    currentPosition = Math.max(currentPosition - 800, maxPosition);
+    updateCardContainerPosition();
+});
 
-    function updateCardContainerPosition() {
-        cardContainer.style.transform = `translateX(${currentPosition}px)`;
+function updateCardContainerPosition() {
+    cardContainer.style.transform = `translateX(${currentPosition}px)`;
+}
+
+function handleMouseMove(e) {
+    if (this.classList.contains('enlarged')) return;
+    const rect = this.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const dx = (mx - rect.width / 2) / 3;
+    const dy = (my - rect.height / 2) / 3;
+
+    this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
+}
+
+function handleMouseLeave() {
+    if (this.classList.contains('enlarged')) return;
+    const index = Array.from(cards).indexOf(this);
+    switch(index % 4) {
+        case 0: this.style.transform = 'rotateX(5deg) rotateY(-5deg)'; break;
+        case 1: this.style.transform = 'rotateX(-5deg) rotateY(5deg)'; break;
+        case 2: this.style.transform = 'rotateX(10deg) rotateY(0deg)'; break;
+        case 3: this.style.transform = 'rotateX(0deg) rotateY(-10deg)'; break;
     }
+}
 
-    function handleMouseMove(e) {
-        if (this.classList.contains('enlarged')) return;
-        const rect = this.getBoundingClientRect();
-        const mx = e.clientX - rect.left;
-        const my = e.clientY - rect.top;
-        const dx = (mx - rect.width / 2) / 3;
-        const dy = (my - rect.height / 2) / 3;
-
-        this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
-    }
-
-    function handleMouseLeave() {
-        if (this.classList.contains('enlarged')) return;
-        const index = Array.from(cards).indexOf(this);
-        switch(index % 4) {
-            case 0: this.style.transform = 'rotateX(5deg) rotateY(-5deg)'; break;
-            case 1: this.style.transform = 'rotateX(-5deg) rotateY(5deg)'; break;
-            case 2: this.style.transform = 'rotateX(10deg) rotateY(0deg)'; break;
-            case 3: this.style.transform = 'rotateX(0deg) rotateY(-10deg)'; break;
+function handleClick() {
+    if (activeCard === this) {
+        returnToOriginalPosition(this);
+        activeCard = null;
+    } else {
+        if (activeCard) {
+            returnToOriginalPosition(activeCard);
         }
+        enlargeCard(this);
+        activeCard = this;
     }
+}
 
-    function handleClick() {
-        if (activeCard === this) {
-            returnToOriginalPosition(this);
-            activeCard = null;
-        } else {
-            if (activeCard) {
-                returnToOriginalPosition(activeCard);
-            }
-            enlargeCard(this);
-            activeCard = this;
-        }
-    }
+function enlargeCard(card) {
+    const rect = card.getBoundingClientRect();
+    const titleHeight = titleContainer.offsetHeight;
+    const centerX = window.innerWidth / 2;
+    const centerY = (window.innerHeight - titleHeight) / 2 + titleHeight;
 
-    function enlargeCard(card) {
-        const rect = card.getBoundingClientRect();
-        const centerX = window.innerWidth / 2;
-        const centerY = window.innerHeight / 2;
+    card.style.position = 'fixed';
+    card.style.left = `${centerX - rect.width / 2}px`;
+    card.style.top = `${centerY - rect.height / 2}px`;
+    card.style.zIndex = '1001';
 
-        card.style.position = 'fixed';
-        card.style.left = `${centerX - rect.width / 2}px`;
-        card.style.top = `${centerY - rect.height / 2}px`;
-        card.style.zIndex = '1000';
+    setTimeout(() => {
+        card.classList.add('flipped');
+    }, 50);
 
-        setTimeout(() => {
-            card.classList.add('flipped');
-        }, 50);
+    setTimeout(() => {
+        card.classList.remove('flipped');
+        card.classList.add('enlarged');
+    }, 450);
+}
 
-        setTimeout(() => {
-            card.classList.remove('flipped');
-            card.classList.add('enlarged');
-        }, 450);
-    }
-
-    function returnToOriginalPosition(card) {
-        const index = Array.from(cards).indexOf(card);
-        card.classList.remove('enlarged', 'flipped');
-        card.style.position = '';
-        card.style.left = '';
-        card.style.top = '';
-        card.style.zIndex = '';
-        handleMouseLeave.call(card);
-    }
+function returnToOriginalPosition(card) {
+    const index = Array.from(cards).indexOf(card);
+    card.classList.remove('enlarged', 'flipped');
+    card.style.position = '';
+    card.style.left = '';
+    card.style.top = '';
+    card.style.zIndex = '';
+    handleMouseLeave.call(card);
+}
 </script>
 </body>
 </html>
