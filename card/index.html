@@ -365,14 +365,8 @@
     }
 
     function enlargeCard(card) {
-        const rect = card.getBoundingClientRect();
-        const centerX = window.innerWidth / 2;
-        const centerY = window.innerHeight / 2;
-
-        card.style.position = 'fixed';
-        card.style.left = `${centerX - rect.width / 2}px`;
-        card.style.top = `${centerY - rect.height / 2}px`;
-        card.style.zIndex = '1000';
+        card.style.transition = 'all 0.4s ease';
+        card.classList.add('enlarged');
 
         setTimeout(() => {
             card.classList.add('flipped');
@@ -380,18 +374,17 @@
 
         setTimeout(() => {
             card.classList.remove('flipped');
-            card.classList.add('enlarged');
         }, 450);
     }
 
     function returnToOriginalPosition(card) {
-        const index = Array.from(cards).indexOf(card);
         card.classList.remove('enlarged', 'flipped');
-        card.style.position = '';
-        card.style.left = '';
-        card.style.top = '';
-        card.style.zIndex = '';
+        card.style.transition = 'all 0.4s ease';
         handleMouseLeave.call(card);
+        
+        setTimeout(() => {
+            card.style.transition = '';
+        }, 400);
     }
 </script>
 </body>
