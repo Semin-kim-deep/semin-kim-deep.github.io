@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -298,44 +297,102 @@
             </div>
         </div>
     </div>
+    <img src="images/left_indi.png" alt="Left Navigation" class="nav-button left">
+    <img src="images/right_indi.png" alt="Right Navigation" class="nav-button right">
 
-    <script>
-const cards = document.querySelectorAll('.card');
-const cardContainer = document.querySelector('.card-container');
+<script>
+    const cards = document.querySelectorAll('.card');
+    const cardContainer = document.querySelector('.card-container');
+    const leftNav = document.querySelector('.nav-button.left');
+    const rightNav = document.querySelector('.nav-button.right');
+    let activeCard = null;
+    let currentPosition = 100; // Start with 100px left margin
 
-cards.forEach((card, index) => {
-    card.addEventListener('click', () => {
-        // Toggle flip class
-        card.classList.toggle('flipped');
-
-        // Check if the card is already enlarged
-        if (card.classList.contains('enlarged')) {
-            card.classList.remove('enlarged');
-            // Reset card container position
-            cardContainer.style.transform = 'translateX(0)';
-        } else {
-            // Remove enlarged class from any other card
-            document.querySelectorAll('.card.enlarged').forEach(enlargedCard => {
-                enlargedCard.classList.remove('enlarged');
-            });
-
-            // Add enlarged class to clicked card
-            card.classList.add('enlarged');
-
-            // Calculate new cardContainer's translateX to center the clicked card
-            const cardRect = card.getBoundingClientRect();
-            const containerRect = cardContainer.getBoundingClientRect();
-            const viewportWidth = window.innerWidth;
-
-            // Calculate the difference between the center of the card and the center of the viewport
-            const cardMidpoint = cardRect.left + cardRect.width / 2;
-            const distanceToMove = cardMidpoint - viewportWidth / 2;
-
-            // Adjust card container translation
-            cardContainer.style.transform = `translateX(${-distanceToMove}px)`;
-        }
+    cards.forEach(card => {
+        card.addEventListener('mousemove', handleMouseMove);
+        card.addEventListener('mouseleave', handleMouseLeave);
+        card.addEventListener('click', handleClick);
     });
-});
+
+    leftNav.addEventListener('click', () => {
+        currentPosition = Math.min(currentPosition + 800, 100);
+        updateCardContainerPosition();
+    });
+
+    rightNav.addEventListener('click', () => {
+        const maxPosition = -(cardContainer.offsetWidth - window.innerWidth - 100);
+        currentPosition = Math.max(currentPosition - 800, maxPosition);
+        updateCardContainerPosition();
+    });
+
+    function updateCardContainerPosition() {
+        cardContainer.style.transform = `translateX(${currentPosition}px)`;
+    }
+
+    function handleMouseMove(e) {
+        if (this.classList.contains('enlarged')) return;
+        const rect = this.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        const dx = (mx - rect.width / 2) / 3;
+        const dy = (my - rect.height / 2) / 3;
+
+        this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
+    }
+
+    function handleMouseLeave() {
+        if (this.classList.contains('enlarged')) return;
+        const index = Array.from(cards).indexOf(this);
+        switch(index % 4) {
+            case 0: this.style.transform = 'rotateX(5deg) rotateY(-5deg)'; break;
+            case 1: this.style.transform = 'rotateX(-5deg) rotateY(5deg)'; break;
+            case 2: this.style.transform = 'rotateX(10deg) rotateY(0deg)'; break;
+            case 3: this.style.transform = 'rotateX(0deg) rotateY(-10deg)'; break;
+        }
+    }
+
+    function handleClick() {
+        if (activeCard === this) {
+            returnToOriginalPosition(this);
+            activeCard = null;
+        } else {
+            if (activeCard) {
+                returnToOriginalPosition(activeCard);
+            }
+            enlargeCard(this);
+            activeCard = this;
+        }
+    }
+
+    function enlargeCard(card) {
+        const rect = card.getBoundingClientRect();
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+
+        card.style.position = 'fixed';
+        card.style.left = `${centerX - rect.width / 2}px`;
+        card.style.top = `${centerY - rect.height / 2}px`;
+        card.style.zIndex = '1000';
+
+        setTimeout(() => {
+            card.classList.add('flipped');
+        }, 50);
+
+        setTimeout(() => {
+            card.classList.remove('flipped');
+            card.classList.add('enlarged');
+        }, 450);
+    }
+
+    function returnToOriginalPosition(card) {
+        const index = Array.from(cards).indexOf(card);
+        card.classList.remove('enlarged', 'flipped');
+        card.style.position = '';
+        card.style.left = '';
+        card.style.top = '';
+        card.style.zIndex = '';
+        handleMouseLeave.call(card);
+    }
 </script>
 </body>
 </html>
