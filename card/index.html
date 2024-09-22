@@ -310,4 +310,89 @@
 
     cards.forEach(card => {
         card.addEventListener('mousemove', handleMouseMove);
-        card.addEventListener('mouseleave
+        card.addEventListener('mouseleave', handleMouseLeave);
+        card.addEventListener('click', handleClick);
+    });
+
+    leftNav.addEventListener('click', () => {
+        currentPosition = Math.min(currentPosition + 800, 100);
+        updateCardContainerPosition();
+    });
+
+    rightNav.addEventListener('click', () => {
+        const maxPosition = -(cardContainer.offsetWidth - window.innerWidth - 100);
+        currentPosition = Math.max(currentPosition - 800, maxPosition);
+        updateCardContainerPosition();
+    });
+
+    function updateCardContainerPosition() {
+        cardContainer.style.transform = `translateX(${currentPosition}px)`;
+    }
+
+    function handleMouseMove(e) {
+        if (this.classList.contains('enlarged')) return;
+        const rect = this.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        const dx = (mx - rect.width / 2) / 3;
+        const dy = (my - rect.height / 2) / 3;
+
+        this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
+    }
+
+    function handleMouseLeave() {
+        if (this.classList.contains('enlarged')) return;
+        const index = Array.from(cards).indexOf(this);
+        switch(index % 4) {
+            case 0: this.style.transform = 'rotateX(5deg) rotateY(-5deg)'; break;
+            case 1: this.style.transform = 'rotateX(-5deg) rotateY(5deg)'; break;
+            case 2: this.style.transform = 'rotateX(10deg) rotateY(0deg)'; break;
+            case 3: this.style.transform = 'rotateX(0deg) rotateY(-10deg)'; break;
+        }
+    }
+
+    function handleClick() {
+        if (activeCard === this) {
+            returnToOriginalPosition(this);
+            activeCard = null;
+        } else {
+            if (activeCard) {
+                returnToOriginalPosition(activeCard);
+            }
+            enlargeCard(this);
+            activeCard = this;
+        }
+    }
+
+    function enlargeCard(card) {
+        const rect = card.getBoundingClientRect();
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+
+        card.style.position = 'fixed';
+        card.style.left = `${centerX - rect.width / 2}px`;
+        card.style.top = `${centerY - rect.height / 2}px`;
+        card.style.zIndex = '1000';
+
+        setTimeout(() => {
+            card.classList.add('flipped');
+        }, 50);
+
+        setTimeout(() => {
+            card.classList.remove('flipped');
+            card.classList.add('enlarged');
+        }, 450);
+    }
+
+    function returnToOriginalPosition(card) {
+        const index = Array.from(cards).indexOf(card);
+        card.classList.remove('enlarged', 'flipped');
+        card.style.position = '';
+        card.style.left = '';
+        card.style.top = '';
+        card.style.zIndex = '';
+        handleMouseLeave.call(card);
+    }
+</script>
+</body>
+</html>
