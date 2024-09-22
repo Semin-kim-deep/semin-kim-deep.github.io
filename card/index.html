@@ -110,14 +110,16 @@
             display: block;
         }
 
-        .enlarged {
-            position: fixed !important;
-            top: 50% !important;
-            left: 50% !important;
-            transform: translate(-50%, -50%) scale(1.2) !important;
-            z-index: 1000;
-        }
+ 
 
+        .enlarged {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(1.2) !important;
+    z-index: 1000;
+    transform-origin: center center;
+}
         .flipped .card__front {
             transform: rotateY(180deg);
         }
@@ -364,28 +366,36 @@
         }
     }
 
+
+
+
     function enlargeCard(card) {
-        card.style.transition = 'all 0.4s ease';
-        card.classList.add('enlarged');
+    card.style.transition = 'all 0.4s ease';
+    
+    // Reset any existing transforms before applying the enlarged class
+    card.style.transform = 'none';
+    
+    card.classList.add('enlarged');
 
-        setTimeout(() => {
-            card.classList.add('flipped');
-        }, 50);
+    setTimeout(() => {
+        card.classList.add('flipped');
+    }, 50);
 
-        setTimeout(() => {
-            card.classList.remove('flipped');
-        }, 450);
-    }
+    setTimeout(() => {
+        card.classList.remove('flipped');
+    }, 450);
+}
 
-    function returnToOriginalPosition(card) {
-        card.classList.remove('enlarged', 'flipped');
-        card.style.transition = 'all 0.4s ease';
-        handleMouseLeave.call(card);
-        
-        setTimeout(() => {
-            card.style.transition = '';
-        }, 400);
-    }
+function returnToOriginalPosition(card) {
+    card.classList.remove('enlarged', 'flipped');
+    card.style.transition = 'all 0.4s ease';
+    card.style.transform = ''; // Reset transform to original state
+    handleMouseLeave.call(card);
+    
+    setTimeout(() => {
+        card.style.transition = '';
+    }, 400);
+}
 </script>
 </body>
 </html>
