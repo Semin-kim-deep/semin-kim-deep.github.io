@@ -300,38 +300,42 @@
     </div>
 
     <script>
-        const cards = document.querySelectorAll('.card');
-        const cardContainer = document.querySelector('.card-container');
+const cards = document.querySelectorAll('.card');
+const cardContainer = document.querySelector('.card-container');
 
-        cards.forEach((card, index) => {
-            card.addEventListener('click', () => {
-                // Toggle flip class
-                card.classList.toggle('flipped');
+cards.forEach((card, index) => {
+    card.addEventListener('click', () => {
+        // Toggle flip class
+        card.classList.toggle('flipped');
 
-                // Check if the card is already enlarged
-                if (card.classList.contains('enlarged')) {
-                    card.classList.remove('enlarged');
-                } else {
-                    // Remove enlarged class from any other card
-                    document.querySelectorAll('.card.enlarged').forEach(enlargedCard => {
-                        enlargedCard.classList.remove('enlarged');
-                    });
-
-                    // Add enlarged class to clicked card
-                    card.classList.add('enlarged');
-
-                    // Calculate new cardContainer's translateX to center the clicked card
-                    const cardRect = card.getBoundingClientRect();
-                    const containerRect = cardContainer.getBoundingClientRect();
-                    const viewportWidth = window.innerWidth;
-                    const containerMidpoint = containerRect.left + containerRect.width / 2;
-                    const cardMidpoint = cardRect.left + cardRect.width / 2;
-                    const distanceToMove = cardMidpoint - viewportWidth / 2;
-
-                    cardContainer.style.transform = `translateX(${-distanceToMove}px)`;
-                }
+        // Check if the card is already enlarged
+        if (card.classList.contains('enlarged')) {
+            card.classList.remove('enlarged');
+            // Reset card container position
+            cardContainer.style.transform = 'translateX(0)';
+        } else {
+            // Remove enlarged class from any other card
+            document.querySelectorAll('.card.enlarged').forEach(enlargedCard => {
+                enlargedCard.classList.remove('enlarged');
             });
-        });
-    </script>
+
+            // Add enlarged class to clicked card
+            card.classList.add('enlarged');
+
+            // Calculate new cardContainer's translateX to center the clicked card
+            const cardRect = card.getBoundingClientRect();
+            const containerRect = cardContainer.getBoundingClientRect();
+            const viewportWidth = window.innerWidth;
+
+            // Calculate the difference between the center of the card and the center of the viewport
+            const cardMidpoint = cardRect.left + cardRect.width / 2;
+            const distanceToMove = cardMidpoint - viewportWidth / 2;
+
+            // Adjust card container translation
+            cardContainer.style.transform = `translateX(${-distanceToMove}px)`;
+        }
+    });
+});
+</script>
 </body>
 </html>
