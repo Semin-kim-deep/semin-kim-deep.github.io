@@ -302,7 +302,15 @@
     <img src="images/left_indi.png" alt="Left Navigation" class="nav-button left">
     <img src="images/right_indi.png" alt="Right Navigation" class="nav-button right">
 
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... (기존 head 내용은 그대로 유지) ... -->
+</head>
+<body>
+    <!-- ... (기존 body 내용은 그대로 유지) ... -->
+
+    <script>
     const cards = document.querySelectorAll('.card');
     const cardContainer = document.querySelector('.card-container');
     const leftNav = document.querySelector('.nav-button.left');
@@ -326,10 +334,6 @@
         currentPosition = Math.max(currentPosition - 800, maxPosition);
         updateCardContainerPosition();
     });
-
-    function updateCardContainerPosition() {
-        cardContainer.style.transform = `translateX(${currentPosition}px)`;
-    }
 
     function handleMouseMove(e) {
         if (this.classList.contains('enlarged')) return;
@@ -366,36 +370,53 @@
         }
     }
 
-
-
-
     function enlargeCard(card) {
-    card.style.transition = 'all 0.4s ease';
-    
-    // Reset any existing transforms before applying the enlarged class
-    card.style.transform = 'none';
-    
-    card.classList.add('enlarged');
+        card.style.transition = 'all 0.4s ease';
+        
+        // Reset any existing transforms before applying the enlarged class
+        card.style.transform = 'none';
+        
+        card.classList.add('enlarged');
 
-    setTimeout(() => {
-        card.classList.add('flipped');
-    }, 50);
+        // Center the card
+        const cardRect = card.getBoundingClientRect();
+        const containerRect = cardContainer.getBoundingClientRect();
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        
+        const cardCenterX = cardRect.left + cardRect.width / 2;
+        const viewportCenterX = window.innerWidth / 2;
+        const offsetX = viewportCenterX - cardCenterX;
 
-    setTimeout(() => {
-        card.classList.remove('flipped');
-    }, 450);
-}
+        currentPosition += offsetX;
+        updateCardContainerPosition();
 
-function returnToOriginalPosition(card) {
-    card.classList.remove('enlarged', 'flipped');
-    card.style.transition = 'all 0.4s ease';
-    card.style.transform = ''; // Reset transform to original state
-    handleMouseLeave.call(card);
-    
-    setTimeout(() => {
-        card.style.transition = '';
-    }, 400);
-}
-</script>
+        setTimeout(() => {
+            card.classList.add('flipped');
+        }, 50);
+
+        setTimeout(() => {
+            card.classList.remove('flipped');
+        }, 450);
+    }
+
+    function returnToOriginalPosition(card) {
+        card.classList.remove('enlarged', 'flipped');
+        card.style.transition = 'all 0.4s ease';
+        card.style.transform = ''; // Reset transform to original state
+        handleMouseLeave.call(card);
+        
+        setTimeout(() => {
+            card.style.transition = '';
+        }, 400);
+    }
+
+    function updateCardContainerPosition() {
+        const maxPosition = -(cardContainer.offsetWidth - window.innerWidth - 100);
+        currentPosition = Math.max(Math.min(currentPosition, 100), maxPosition);
+        cardContainer.style.transform = `translateX(${currentPosition}px)`;
+    }
+    </script>
+</body>
+</html>
 </body>
 </html>
