@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Centered Squares</title>
+    <title>Interactive Centered Square</title>
     <style>
         body, html {
             margin: 0;
@@ -27,22 +27,18 @@
             flex-shrink: 0;
             transition: all 0.3s ease;
             cursor: pointer;
-            position: absolute;
         }
         .square.active {
             width: 400px;
             height: 400px;
             background-color: green;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             z-index: 10;
         }
     </style>
 </head>
 <body>
-    <div class="container" id="container">
+    <div class="container">
         <div class="square"></div>
         <div class="square"></div>
         <div class="square"></div>
@@ -65,42 +61,46 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('container');
             const squares = document.querySelectorAll('.square');
             let activeSquare = null;
-            let originalPositions = new Map();
+            let originalPosition = null;
 
-            // Set initial positions
-            squares.forEach((square, index) => {
-                const left = 200 + (index * 200); // 100px width + 100px margin
-                square.style.left = left + 'px';
-                square.style.top = '50%';
-                square.style.transform = 'translateY(-50%)';
-                originalPositions.set(square, { left, top: '50%' });
-            });
+            function centerActiveSquare() {
+                if (activeSquare) {
+                    const viewportWidth = document.documentElement.clientWidth;
+                    const viewportHeight = document.documentElement.clientHeight;
+                    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    
+                    activeSquare.style.left = `${scrollLeft + viewportWidth / 2 - 200}px`;
+                    activeSquare.style.top = `${scrollTop + viewportHeight / 2 - 200}px`;
+                }
+            }
 
             squares.forEach(square => {
                 square.addEventListener('click', function() {
                     if (activeSquare) {
                         activeSquare.classList.remove('active');
-                        const originalPosition = originalPositions.get(activeSquare);
-                        activeSquare.style.width = '100px';
-                        activeSquare.style.height = '100px';
-                        activeSquare.style.backgroundColor = 'red';
-                        activeSquare.style.position = 'absolute';
-                        activeSquare.style.left = originalPosition.left + 'px';
-                        activeSquare.style.top = originalPosition.top;
-                        activeSquare.style.transform = 'translateY(-50%)';
+                        activeSquare.style.position = '';
+                        activeSquare.style.left = '';
+                        activeSquare.style.top = '';
+                        activeSquare.style.width = '';
+                        activeSquare.style.height = '';
+                        activeSquare.style.backgroundColor = '';
                     }
 
                     if (activeSquare !== this) {
                         this.classList.add('active');
                         activeSquare = this;
+                        centerActiveSquare();
                     } else {
                         activeSquare = null;
                     }
                 });
             });
+
+            window.addEventListener('scroll', centerActiveSquare);
+            window.addEventListener('resize', centerActiveSquare);
         });
     </script>
 </body>
