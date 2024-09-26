@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Centered Square</title>
+    <title>Interactive Numbered Squares</title>
     <style>
         body, html {
             margin: 0;
@@ -27,6 +27,12 @@
             flex-shrink: 0;
             transition: all 0.3s ease;
             cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: white;
+            position: relative;
         }
         .square.active {
             width: 400px;
@@ -34,36 +40,43 @@
             background-color: green;
             position: fixed;
             z-index: 10;
+            font-size: 72px;
+        }
+        .placeholder {
+            width: 100px;
+            height: 100px;
+            margin-right: 100px;
+            flex-shrink: 0;
+            visibility: hidden;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
+    <div class="container" id="container">
+        <!-- Squares will be dynamically added here -->
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const squares = document.querySelectorAll('.square');
+            const container = document.getElementById('container');
             let activeSquare = null;
-            let originalPosition = null;
+
+            function createSquare(i) {
+                const square = document.createElement('div');
+                square.className = 'square';
+                square.textContent = i + 1;
+                return square;
+            }
+
+            function createPlaceholder() {
+                const placeholder = document.createElement('div');
+                placeholder.className = 'placeholder';
+                return placeholder;
+            }
+
+            for (let i = 0; i < 18; i++) {
+                container.appendChild(createSquare(i));
+            }
 
             function centerActiveSquare() {
                 if (activeSquare) {
@@ -77,8 +90,8 @@
                 }
             }
 
-            squares.forEach(square => {
-                square.addEventListener('click', function() {
+            container.addEventListener('click', function(e) {
+                if (e.target.classList.contains('square')) {
                     if (activeSquare) {
                         activeSquare.classList.remove('active');
                         activeSquare.style.position = '';
@@ -86,17 +99,20 @@
                         activeSquare.style.top = '';
                         activeSquare.style.width = '';
                         activeSquare.style.height = '';
-                        activeSquare.style.backgroundColor = '';
+                        activeSquare.style.fontSize = '';
+                        activeSquare.parentNode.replaceChild(activeSquare, activeSquare.nextElementSibling);
                     }
 
-                    if (activeSquare !== this) {
-                        this.classList.add('active');
-                        activeSquare = this;
+                    if (activeSquare !== e.target) {
+                        e.target.classList.add('active');
+                        activeSquare = e.target;
+                        const placeholder = createPlaceholder();
+                        e.target.parentNode.insertBefore(placeholder, e.target.nextSibling);
                         centerActiveSquare();
                     } else {
                         activeSquare = null;
                     }
-                });
+                }
             });
 
             window.addEventListener('scroll', centerActiveSquare);
