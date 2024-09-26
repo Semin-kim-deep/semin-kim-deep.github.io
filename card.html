@@ -3,21 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Background Image Example</title>
+    <title>Interactive Centered Squares</title>
     <style>
-        body {
+        body, html {
             margin: 0;
             padding: 0;
-            background-image: url('images/bg_hp.jpg');
-            background-size: cover;
-            background-position: top;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            min-height: 100vh;
+            height: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding-left: 200px;
+            position: relative;
+        }
+        .square {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin-right: 100px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        .square.active {
+            width: 400px;
+            height: 400px;
+            background-color: green;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
         }
     </style>
 </head>
 <body>
-    <!-- 여기에 페이지 내용을 추가할 수 있습니다 -->
+    <div class="container">
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const squares = document.querySelectorAll('.square');
+            let activeSquare = null;
+            let originalPositions = new Map();
+
+            squares.forEach(square => {
+                square.addEventListener('click', function() {
+                    if (activeSquare) {
+                        activeSquare.classList.remove('active');
+                        const originalPosition = originalPositions.get(activeSquare);
+                        activeSquare.style.left = originalPosition.left;
+                        activeSquare.style.top = originalPosition.top;
+                    }
+
+                    if (activeSquare !== this) {
+                        if (!originalPositions.has(this)) {
+                            const rect = this.getBoundingClientRect();
+                            originalPositions.set(this, {
+                                left: rect.left + 'px',
+                                top: rect.top + 'px'
+                            });
+                        }
+                        this.classList.add('active');
+                        activeSquare = this;
+                    } else {
+                        activeSquare = null;
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
