@@ -27,7 +27,7 @@
             flex-shrink: 0;
             transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
+            position: absolute;
         }
         .square.active {
             width: 400px;
@@ -42,7 +42,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="container">
         <div class="square"></div>
         <div class="square"></div>
         <div class="square"></div>
@@ -65,27 +65,35 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('container');
             const squares = document.querySelectorAll('.square');
             let activeSquare = null;
             let originalPositions = new Map();
+
+            // Set initial positions
+            squares.forEach((square, index) => {
+                const left = 200 + (index * 200); // 100px width + 100px margin
+                square.style.left = left + 'px';
+                square.style.top = '50%';
+                square.style.transform = 'translateY(-50%)';
+                originalPositions.set(square, { left, top: '50%' });
+            });
 
             squares.forEach(square => {
                 square.addEventListener('click', function() {
                     if (activeSquare) {
                         activeSquare.classList.remove('active');
                         const originalPosition = originalPositions.get(activeSquare);
-                        activeSquare.style.left = originalPosition.left;
+                        activeSquare.style.width = '100px';
+                        activeSquare.style.height = '100px';
+                        activeSquare.style.backgroundColor = 'red';
+                        activeSquare.style.position = 'absolute';
+                        activeSquare.style.left = originalPosition.left + 'px';
                         activeSquare.style.top = originalPosition.top;
+                        activeSquare.style.transform = 'translateY(-50%)';
                     }
 
                     if (activeSquare !== this) {
-                        if (!originalPositions.has(this)) {
-                            const rect = this.getBoundingClientRect();
-                            originalPositions.set(this, {
-                                left: rect.left + 'px',
-                                top: rect.top + 'px'
-                            });
-                        }
                         this.classList.add('active');
                         activeSquare = this;
                     } else {
