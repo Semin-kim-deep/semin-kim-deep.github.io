@@ -7,90 +7,66 @@
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@500&display=swap" rel="stylesheet">
     <style>
-        body {
+        body, html {
             margin: 0;
             padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            height: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            font-family: 'Jost', sans-serif;
             background-image: url('../images/bg_hp.jpg');
             background-size: cover;
             background-position: top center;
             background-repeat: no-repeat;
-            perspective: 1000px;
-            overflow-x: hidden;
         }
-
         .title-container {
             text-align: center;
             padding-top: 20px;
             margin-bottom: 20px;
+            color: white;
         }
-
         h1 {
-            font-family: 'Jost', sans-serif;
             font-weight: 700;
             font-size: 48px;
-            color: white;
             margin: 0;
         }
-
         .subtitle {
             font-family: 'Pretendard', sans-serif;
             font-weight: 500;
             font-size: 18px;
-            color: white;
             margin-top: 10px;
             margin-bottom: 5px;
         }
-
         .subtitle-en {
-            font-family: 'Jost', sans-serif;
             font-weight: 500;
             font-size: 18px;
-            color: white;
             margin: 0;
         }
-
-        .card-container {
+        .container {
+            display: flex;
+            align-items: center;
+            height: calc(100% - 150px);
+            padding-left: 200px;
             position: relative;
-            width: 4474.8px; /* (213.6px * 18) + (30px * 17) + 100px */
-            height: 356px;
-            margin: auto;
-            transition: transform 0.4s ease;
-            transform: translateX(100px); /* Initial 100px left margin */
         }
-
         .card {
             width: 213.6px;
             height: 356.4px;
-            position: absolute;
-            transform-style: preserve-3d;
-            transition: transform 0.4s ease, left 0.4s ease, top 0.4s ease;
+            background-color: transparent;
+            margin-right: 30px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
         }
-
-        .card:nth-child(1) { left: 0; transform: rotateX(5deg) rotateY(-5deg); }
-        .card:nth-child(2) { left: 243.6px; transform: rotateX(-5deg) rotateY(5deg); }
-        .card:nth-child(3) { left: 487.2px; transform: rotateX(10deg) rotateY(0deg); }
-        .card:nth-child(4) { left: 730.8px; transform: rotateX(0deg) rotateY(-10deg); }
-        .card:nth-child(5) { left: 974.4px; transform: rotateX(5deg) rotateY(-5deg); }
-        .card:nth-child(6) { left: 1218px; transform: rotateX(-5deg) rotateY(5deg); }
-        .card:nth-child(7) { left: 1461.6px; transform: rotateX(10deg) rotateY(0deg); }
-        .card:nth-child(8) { left: 1705.2px; transform: rotateX(0deg) rotateY(-10deg); }
-        .card:nth-child(9) { left: 1948.8px; transform: rotateX(5deg) rotateY(-5deg); }
-        .card:nth-child(10) { left: 2192.4px; transform: rotateX(-5deg) rotateY(5deg); }
-        .card:nth-child(11) { left: 2436px; transform: rotateX(10deg) rotateY(0deg); }
-        .card:nth-child(12) { left: 2679.6px; transform: rotateX(0deg) rotateY(-10deg); }
-        .card:nth-child(13) { left: 2923.2px; transform: rotateX(5deg) rotateY(-5deg); }
-        .card:nth-child(14) { left: 3166.8px; transform: rotateX(-5deg) rotateY(5deg); }
-        .card:nth-child(15) { left: 3410.4px; transform: rotateX(10deg) rotateY(0deg); }
-        .card:nth-child(16) { left: 3654px; transform: rotateX(0deg) rotateY(-10deg); }
-        .card:nth-child(17) { left: 3897.6px; transform: rotateX(5deg) rotateY(-5deg); }
-        .card:nth-child(18) { left: 4141.2px; transform: rotateX(-5deg) rotateY(5deg); }
-
-        .card__front,
-        .card__back {
+        .card.active {
+            width: 427.2px;
+            height: 712.8px;
+            position: fixed;
+            z-index: 10;
+        }
+        .card__front, .card__back {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -98,36 +74,21 @@
             transition: transform 0.4s ease;
             box-shadow: 0 8.4px 16.8px rgba(0,0,0,0.25), 0 6px 6px rgba(0,0,0,0.22);
         }
-
         .card__back {
             transform: rotateY(180deg);
         }
-
-        img {
+        .card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
-
- 
-
-        .enlarged {
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) scale(1.2) !important;
-    z-index: 1000;
-    transform-origin: center center;
-}
-        .flipped .card__front {
-            transform: rotateY(180deg);
+        .placeholder {
+            width: 213.6px;
+            height: 356.4px;
+            margin-right: 30px;
+            flex-shrink: 0;
+            visibility: hidden;
         }
-
-        .flipped .card__back {
-            transform: rotateY(0deg);
-        }
-
         .nav-button {
             position: fixed;
             top: 50%;
@@ -137,11 +98,9 @@
             cursor: pointer;
             z-index: 100;
         }
-
         .nav-button.left {
             left: 20px;
         }
-
         .nav-button.right {
             right: 20px;
         }
@@ -151,278 +110,137 @@
     <div class="title-container">
         <h1>Anti-Tarot Card</h1>
         <p class="subtitle">안티타로카드, 미래는 알 수 없으니까 지금 할 수 있는 일을 해요.</p>
-        <p class="subtitle-en">We don't know the future, so We just do what we can do now.</p>
+        <p class="subtitle-en">We don't know the future, so just do what we can do now.</p>
     </div>
-    <div class="card-container">
-        <div class="card" data-image="atc01.png">
-            <div class="card__front">
-                <img src="images/atc01.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc02.png">
-            <div class="card__front">
-                <img src="images/atc02.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc03.png">
-            <div class="card__front">
-                <img src="images/atc03.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc04_2.png">
-            <div class="card__front">
-                <img src="images/atc04_2.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc05.png">
-            <div class="card__front">
-                <img src="images/atc05.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc06.png">
-            <div class="card__front">
-                <img src="images/atc06.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc07.png">
-            <div class="card__front">
-                <img src="images/atc07.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc08.png">
-            <div class="card__front">
-                <img src="images/atc08.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc09.png">
-            <div class="card__front">
-                <img src="images/atc09.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc10.png">
-            <div class="card__front">
-                <img src="images/atc10.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc11.png">
-            <div class="card__front">
-                <img src="images/atc11.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc12.png">
-            <div class="card__front">
-                <img src="images/atc12.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc13.png">
-            <div class="card__front">
-                <img src="images/atc13.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc14.png">
-            <div class="card__front">
-                <img src="images/atc14.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc15.png">
-            <div class="card__front">
-                <img src="images/atc15.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc16.png">
-            <div class="card__front">
-                <img src="images/atc16.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc17.png">
-            <div class="card__front">
-                <img src="images/atc17.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
-        <div class="card" data-image="atc18.png">
-            <div class="card__front">
-                <img src="images/atc18.png" alt="Anti-Tarot Card Front">
-            </div>
-            <div class="card__back">
-                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-            </div>
-        </div>
+    <div class="container" id="container">
+        <!-- Cards will be dynamically added here -->
     </div>
     <img src="images/left_indi.png" alt="Left Navigation" class="nav-button left">
     <img src="images/right_indi.png" alt="Right Navigation" class="nav-button right">
 
-
     <script>
-    const cards = document.querySelectorAll('.card');
-    const cardContainer = document.querySelector('.card-container');
-    const leftNav = document.querySelector('.nav-button.left');
-    const rightNav = document.querySelector('.nav-button.right');
-    let activeCard = null;
-    let currentPosition = 100; // Start with 100px left margin
+        const container = document.getElementById('container');
+        const leftNav = document.querySelector('.nav-button.left');
+        const rightNav = document.querySelector('.nav-button.right');
+        let activeCard = null;
+        let currentPosition = 0;
 
-    cards.forEach(card => {
-        card.addEventListener('mousemove', handleMouseMove);
-        card.addEventListener('mouseleave', handleMouseLeave);
-        card.addEventListener('click', handleClick);
-    });
+        const cardData = [
+            {image: "atc01.png"}, {image: "atc02.png"}, {image: "atc03.png"},
+            {image: "atc04_2.png"}, {image: "atc05.png"}, {image: "atc06.png"},
+            {image: "atc07.png"}, {image: "atc08.png"}, {image: "atc09.png"},
+            {image: "atc10.png"}, {image: "atc11.png"}, {image: "atc12.png"},
+            {image: "atc13.png"}, {image: "atc14.png"}, {image: "atc15.png"},
+            {image: "atc16.png"}, {image: "atc17.png"}, {image: "atc18.png"}
+        ];
 
-    leftNav.addEventListener('click', () => {
-        currentPosition = Math.min(currentPosition + 800, 100);
-        updateCardContainerPosition();
-    });
-
-    rightNav.addEventListener('click', () => {
-        const maxPosition = -(cardContainer.offsetWidth - window.innerWidth - 100);
-        currentPosition = Math.max(currentPosition - 800, maxPosition);
-        updateCardContainerPosition();
-    });
-
-    function handleMouseMove(e) {
-        if (this.classList.contains('enlarged')) return;
-        const rect = this.getBoundingClientRect();
-        const mx = e.clientX - rect.left;
-        const my = e.clientY - rect.top;
-        const dx = (mx - rect.width / 2) / 3;
-        const dy = (my - rect.height / 2) / 3;
-
-        this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
-    }
-
-    function handleMouseLeave() {
-        if (this.classList.contains('enlarged')) return;
-        const index = Array.from(cards).indexOf(this);
-        switch(index % 4) {
-            case 0: this.style.transform = 'rotateX(5deg) rotateY(-5deg)'; break;
-            case 1: this.style.transform = 'rotateX(-5deg) rotateY(5deg)'; break;
-            case 2: this.style.transform = 'rotateX(10deg) rotateY(0deg)'; break;
-            case 3: this.style.transform = 'rotateX(0deg) rotateY(-10deg)'; break;
+        function createCard(data, index) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="card__front">
+                    <img src="images/${data.image}" alt="Anti-Tarot Card Front">
+                </div>
+                <div class="card__back">
+                    <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
+                </div>
+            `;
+            card.style.transform = getInitialTransform(index);
+            return card;
         }
-    }
 
-    function handleClick() {
-        if (activeCard === this) {
-            returnToOriginalPosition(this);
-            activeCard = null;
-        } else {
-            if (activeCard) {
-                returnToOriginalPosition(activeCard);
+        function getInitialTransform(index) {
+            switch(index % 4) {
+                case 0: return 'rotateX(5deg) rotateY(-5deg)';
+                case 1: return 'rotateX(-5deg) rotateY(5deg)';
+                case 2: return 'rotateX(10deg) rotateY(0deg)';
+                case 3: return 'rotateX(0deg) rotateY(-10deg)';
             }
-            enlargeCard(this);
-            activeCard = this;
         }
-    }
 
-function enlargeCard(card) {
-    card.style.transition = 'all 0.4s ease';
-    
-    // Reset any existing transforms before applying the enlarged class
-    card.style.transform = 'none';
-    
-    card.classList.add('enlarged');
+        function createPlaceholder() {
+            const placeholder = document.createElement('div');
+            placeholder.className = 'placeholder';
+            return placeholder;
+        }
 
-    // Center the card using fixed positioning
-    const viewportWidth = document.documentElement.clientWidth;
-    const viewportHeight = document.documentElement.clientHeight;
-    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    card.style.position = 'fixed';
-    card.style.left = `${scrollLeft + viewportWidth / 2 - card.offsetWidth / 2}px`;
-    card.style.top = `${scrollTop + viewportHeight / 2 - card.offsetHeight / 2}px`;
+        cardData.forEach((data, index) => {
+            container.appendChild(createCard(data, index));
+        });
 
-    setTimeout(() => {
-        card.classList.add('flipped');
-    }, 50);
+        function centerActiveCard() {
+            if (activeCard) {
+                const rect = activeCard.getBoundingClientRect();
+                const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                activeCard.style.left = `${scrollLeft + (window.innerWidth - rect.width) / 2}px`;
+                activeCard.style.top = `${scrollTop + (window.innerHeight - rect.height) / 2}px`;
+            }
+        }
 
-    setTimeout(() => {
-        card.classList.remove('flipped');
-    }, 450);
-}
-  
+        container.addEventListener('click', function(e) {
+            const clickedCard = e.target.closest('.card');
+            if (clickedCard) {
+                if (activeCard === clickedCard) {
+                    returnToOriginalPosition(clickedCard);
+                    activeCard = null;
+                } else {
+                    if (activeCard) {
+                        returnToOriginalPosition(activeCard);
+                    }
+                    enlargeCard(clickedCard);
+                    activeCard = clickedCard;
+                }
+            }
+        });
 
-function returnToOriginalPosition(card) {
-    card.classList.remove('enlarged', 'flipped');
-    card.style.transition = 'all 0.4s ease';
-    card.style.position = '';
-    card.style.left = '';
-    card.style.top = '';
-    card.style.transform = ''; // Reset transform to original state
-    handleMouseLeave.call(card);
-    
-    setTimeout(() => {
-        card.style.transition = '';
-    }, 400);
-}
+        function enlargeCard(card) {
+            card.style.transition = 'all 0.4s ease';
+            card.classList.add('active');
+            const placeholder = createPlaceholder();
+            card.parentNode.insertBefore(placeholder, card.nextSibling);
+            centerActiveCard();
+            setTimeout(() => {
+                card.style.transform = 'rotateY(180deg)';
+            }, 200);
+            setTimeout(() => {
+                card.style.transform = 'none';
+            }, 600);
+        }
 
-    function updateCardContainerPosition() {
-        const maxPosition = -(cardContainer.offsetWidth - window.innerWidth - 100);
-        currentPosition = Math.max(Math.min(currentPosition, 100), maxPosition);
-        cardContainer.style.transform = `translateX(${currentPosition}px)`;
-    }  function updateEnlargedCardPosition() {
-    if (activeCard && activeCard.classList.contains('enlarged')) {
-        const viewportWidth = document.documentElement.clientWidth;
-        const viewportHeight = document.documentElement.clientHeight;
-        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        activeCard.style.left = `${scrollLeft + viewportWidth / 2 - activeCard.offsetWidth / 2}px`;
-        activeCard.style.top = `${scrollTop + viewportHeight / 2 - activeCard.offsetHeight / 2}px`;
-    }
-}
+        function returnToOriginalPosition(card) {
+            card.classList.remove('active');
+            card.style.transition = 'all 0.4s ease';
+            card.style.position = '';
+            card.style.left = '';
+            card.style.top = '';
+            card.style.width = '';
+            card.style.height = '';
+            const index = Array.from(container.children).indexOf(card);
+            card.style.transform = getInitialTransform(index);
+            if (card.nextElementSibling && card.nextElementSibling.classList.contains('placeholder')) {
+                card.parentNode.removeChild(card.nextElementSibling);
+            }
+        }
 
-window.addEventListener('scroll', updateEnlargedCardPosition);
-window.addEventListener('resize', updateEnlargedCardPosition);
+        leftNav.addEventListener('click', () => {
+            currentPosition = Math.min(currentPosition + 800, 0);
+            updateContainerPosition();
+        });
+
+        rightNav.addEventListener('click', () => {
+            const maxPosition = -(container.scrollWidth - window.innerWidth);
+            currentPosition = Math.max(currentPosition - 800, maxPosition);
+            updateContainerPosition();
+        });
+
+        function updateContainerPosition() {
+            container.style.transform = `translateX(${currentPosition}px)`;
+        }
+
+        window.addEventListener('resize', centerActiveCard);
+        window.addEventListener('scroll', centerActiveCard);
     </script>
 </body>
 </html>
