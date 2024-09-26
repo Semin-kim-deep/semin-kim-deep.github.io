@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Auto Celebrate Animation</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100&display=swap");
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        body {
+            --c1: #fbda61;
+            --c2: #ff5acd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: "Roboto Flex", sans-serif;
+        }
+        .container {
+            width: 360px;
+            height: 780px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .counter {
+            position: relative;
+            font-size: 3rem;
+            font-variation-settings: "wght" var(--font-variation-weight, 600);
+            text-align: center;
+        }
+        .celebrate {
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            background-color: #4158d0;
+            background-image: linear-gradient(45deg, var(--c2), var(--c1), var(--c2));
+            background-size: 200% auto;
+            filter: drop-shadow(white 1px 1px 0) drop-shadow(#fbda61 2px 2px 2px);
+            animation: bg 4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        @media (scripting: enabled) {
+            .counter {
+                opacity: 0;
+            }
+        }
+        @keyframes bg {
+            100% {
+                background-position: 200% center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="counter" data-count-start="0">1,000,000</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script>
+        // Confetti 라이브러리 코드 (간소화 버전)
+        function confetti(options) {
+            const defaults = {
+                particleCount: 50,
+                spread: 70,
+                origin: { y: 0.6 }
+            };
+            const opts = { ...defaults, ...options };
+            const canvas = document.createElement('canvas');
+            canvas.style.position = 'fixed';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.pointerEvents = 'none';
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            document.body.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+            const particles = [];
+
+            for (let i = 0; i < opts.particleCount; i++) {
+                particles.push({
+                    x: opts.origin.x * canvas.width,
+                    y: opts.origin.y * canvas.height,
+                    radius: Math.random() * 4 + 1,
+                    color: opts.colors[Math.floor(Math.random() * opts.colors.length)],
+                    speed: {
+                        x: Math.random() * opts.spread - (opts.spread / 2),
+                        y: Math.random() * -opts.spread - 3
+                    }
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach((p, index) => {
+                    p.x += p.speed.x;
+                    p.y += p.speed.y;
+                    p.speed.y += 0.1;
+                    if (p.y > canvas.height) particles.splice(index, 1);
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                });
+                if (particles.length > 0) requestAnimationFrame(animate);
+                else canvas.remove();
+            }
+            animate();
+        }
+
+        const counter = document.querySelector(".counter");
+        const tl = gsap.timeline();
+        const colors = [
+            getComputedStyle(document.body).getPropertyValue("--c1"),
+            getComputedStyle(document.body).getPropertyValue("--c2")
+        ];
+
+        // 페이지 로드 시 자동으로 애니메이션 시작
+        document.addEventListener('DOMContentLoaded', () => {
+            animateCount(counter);
+        });
+
+        function animateCount(el) {
+            const start = removeCommas(el.dataset.countStart);
+            const end = removeCommas(el.textContent);
+            tl.set(el, { opacity: 1 })
+                .fromTo(
+                    el,
+                    {
+                        innerText: start,
+                        "--font-variation-weight": 300,
+                        scale: 0.8
+                    },
+                    {
+                        innerText: end,
+                        snap: { innerText: 1 },
+                        duration: 3,
+                        ease: "linear",
+                        onUpdate: () => {
+                            el.innerHTML = formatNumber(el.innerText);
+                        },
+                        onComplete: celebrate
+                    }
+                )
+                .to(el, {
+                    scale: 1,
+                    "--font-variation-weight": 600,
+                    ease: "elastic.out(1, 0.2)",
+                    duration: 1.2
+                });
+        }
+
+        function celebrate() {
+            setCelebrateClass(true);
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: colors
+            });
+        }
+
+        function setCelebrateClass(enabled) {
+            counter.classList.toggle("celebrate", enabled);
+        }
+
+        function removeCommas(num) {
+            return num.replace(/,/g, "");
+        }
+
+        function formatNumber(num) {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+        }
+    </script>
+</body>
+</html>
