@@ -90,10 +90,21 @@
             flex-shrink: 0;
             visibility: hidden;
         }
-        .nav-button {
-    display: none;
-}
-   
+           .nav-button {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 100;
+        }
+        .nav-button.left {
+            left: 20px;
+        }
+        .nav-button.right {
+            right: 20px;
+        }
         .container {
     overflow-x: auto;
     white-space: nowrap;
@@ -117,10 +128,11 @@
 
 <script>
     const container = document.getElementById('container');
-    // const leftNav = document.querySelector('.nav-button.left');
-    // const rightNav = document.querySelector('.nav-button.right');
+    const leftNav = document.querySelector('.nav-button.left');
+    const rightNav = document.querySelector('.nav-button.right');
     let activeCard = null;
     let containerWidth = 0;
+    const scrollDistance = 800; // 버튼 클릭 시 스크롤할 거리
 
     const cardData = [
         {image: "atc01.png"}, {image: "atc02.png"}, {image: "atc03.png"},
@@ -165,15 +177,15 @@
         const cardRect = card.getBoundingClientRect();
         const containerRect = container.getBoundingClientRect();
         return {
-            left: cardRect.left - containerRect.left + container.scrollLeft,
+            left: cardRect.left - containerRect.left,
             top: cardRect.top - containerRect.top
         };
     }
 
     function enlargeCard(card) {
-        const cardPosition = getCardPosition(card);
         const viewportWidth = document.documentElement.clientWidth;
         const viewportHeight = document.documentElement.clientHeight;
+        const cardPosition = getCardPosition(card);
 
         card.style.transition = 'all 0.4s ease';
         card.classList.add('active');
@@ -181,14 +193,8 @@
         const enlargedWidth = 427.2;
         const enlargedHeight = 712.8;
 
-        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        const centerX = scrollLeft + viewportWidth / 2;
-        const centerY = scrollTop + viewportHeight / 2;
-
-        const newLeft = centerX - enlargedWidth / 2;
-        const newTop = centerY - enlargedHeight / 2;
+        const newLeft = (viewportWidth - enlargedWidth) / 2;
+        const newTop = (viewportHeight - enlargedHeight) / 2;
 
         card.style.position = 'fixed';
         card.style.left = `${newLeft}px`;
@@ -255,10 +261,9 @@
         }
     });
 
-    // 좌우 네비게이션 버튼 리스너 (주석 처리)
-    /*
+    // 좌우 네비게이션 버튼 리스너
     leftNav.addEventListener('click', () => {
-        container.scrollBy({left: -800, behavior: 'smooth'});
+        container.scrollBy({left: -scrollDistance, behavior: 'smooth'});
         if (activeCard) {
             returnToOriginalPosition(activeCard);
             activeCard = null;
@@ -266,13 +271,12 @@
     });
 
     rightNav.addEventListener('click', () => {
-        container.scrollBy({left: 800, behavior: 'smooth'});
+        container.scrollBy({left: scrollDistance, behavior: 'smooth'});
         if (activeCard) {
             returnToOriginalPosition(activeCard);
             activeCard = null;
         }
     });
-    */
 
     window.addEventListener('load', () => {
         cardData.forEach((data, index) => {
@@ -282,12 +286,6 @@
     });
     
     window.addEventListener('resize', handleResize);
-    
-    window.addEventListener('scroll', () => {
-        if (activeCard) {
-            enlargeCard(activeCard);
-        }
-    });
 
     // 초기 업데이트
     updateContainerWidth();
