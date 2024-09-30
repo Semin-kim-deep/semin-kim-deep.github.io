@@ -170,7 +170,7 @@
         const cardRect = card.getBoundingClientRect();
         const containerRect = container.getBoundingClientRect();
         return {
-            left: cardRect.left - containerRect.left,
+            left: cardRect.left - containerRect.left + Math.abs(currentPosition),
             top: cardRect.top - containerRect.top
         };
     }
@@ -186,8 +186,11 @@
         const enlargedWidth = 427.2;
         const enlargedHeight = 712.8;
 
-        const centerX = viewportWidth / 2;
-        const centerY = viewportHeight / 2;
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        const centerX = scrollLeft + viewportWidth / 2;
+        const centerY = scrollTop + viewportHeight / 2;
 
         const newLeft = centerX - enlargedWidth / 2;
         const newTop = centerY - enlargedHeight / 2;
