@@ -126,7 +126,6 @@
     let activeCard = null;
     let currentPosition = 0;
     let containerWidth = 0;
-    let containerRect;
 
     const cardData = [
         {image: "atc01.png"}, {image: "atc02.png"}, {image: "atc03.png"},
@@ -167,20 +166,16 @@
         return placeholder;
     }
 
-    function updateContainerRect() {
-        containerRect = container.getBoundingClientRect();
-    }
-
     function getCardPosition(card) {
         const cardRect = card.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
         return {
-            left: cardRect.left - containerRect.left + Math.abs(currentPosition),
+            left: cardRect.left - containerRect.left,
             top: cardRect.top - containerRect.top
         };
     }
 
     function enlargeCard(card) {
-        updateContainerRect();
         const cardPosition = getCardPosition(card);
         const viewportWidth = document.documentElement.clientWidth;
         const viewportHeight = document.documentElement.clientHeight;
@@ -244,7 +239,6 @@
 
     function handleResize() {
         updateContainerWidth();
-        updateContainerRect();
         if (activeCard) {
             enlargeCard(activeCard);
         } else {
@@ -274,7 +268,6 @@
     leftNav.addEventListener('click', () => {
         currentPosition = Math.min(currentPosition + 800, 0);
         updateContainerPosition();
-        updateContainerRect();
         if (activeCard) {
             returnToOriginalPosition(activeCard);
             activeCard = null;
@@ -285,7 +278,6 @@
         const maxPosition = -(containerWidth - window.innerWidth);
         currentPosition = Math.max(currentPosition - 800, maxPosition);
         updateContainerPosition();
-        updateContainerRect();
         if (activeCard) {
             returnToOriginalPosition(activeCard);
             activeCard = null;
@@ -297,9 +289,10 @@
             container.appendChild(createCard(data, index));
         });
         updateContainerWidth();
-        updateContainerRect();
     });
+    
     window.addEventListener('resize', handleResize);
+    
     window.addEventListener('scroll', () => {
         if (activeCard) {
             enlargeCard(activeCard);
@@ -308,7 +301,6 @@
 
     // 초기 업데이트
     updateContainerWidth();
-    updateContainerRect();
 </script>
 </body>
 </html>
