@@ -91,20 +91,15 @@
             visibility: hidden;
         }
         .nav-button {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            z-index: 100;
-        }
-        .nav-button.left {
-            left: 20px;
-        }
-        .nav-button.right {
-            right: 20px;
-        }
+    display: none;
+}
+   
+        .container {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
     </style>
 </head>
 <body>
@@ -119,12 +114,12 @@
     <img src="images/left_indi.png" alt="Left Navigation" class="nav-button left">
     <img src="images/right_indi.png" alt="Right Navigation" class="nav-button right">
 
+
 <script>
     const container = document.getElementById('container');
-    const leftNav = document.querySelector('.nav-button.left');
-    const rightNav = document.querySelector('.nav-button.right');
+    // const leftNav = document.querySelector('.nav-button.left');
+    // const rightNav = document.querySelector('.nav-button.right');
     let activeCard = null;
-    let currentPosition = 0;
     let containerWidth = 0;
 
     const cardData = [
@@ -170,7 +165,7 @@
         const cardRect = card.getBoundingClientRect();
         const containerRect = container.getBoundingClientRect();
         return {
-            left: cardRect.left - containerRect.left - currentPosition,
+            left: cardRect.left - containerRect.left + container.scrollLeft,
             top: cardRect.top - containerRect.top
         };
     }
@@ -186,8 +181,11 @@
         const enlargedWidth = 427.2;
         const enlargedHeight = 712.8;
 
-        const centerX = viewportWidth / 2;
-        const centerY = viewportHeight / 2;
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        const centerX = scrollLeft + viewportWidth / 2;
+        const centerY = scrollTop + viewportHeight / 2;
 
         const newLeft = centerX - enlargedWidth / 2;
         const newTop = centerY - enlargedHeight / 2;
@@ -233,18 +231,10 @@
         containerWidth = container.scrollWidth;
     }
 
-    function updateContainerPosition() {
-        container.style.transform = `translateX(${currentPosition}px)`;
-    }
-
     function handleResize() {
         updateContainerWidth();
         if (activeCard) {
             enlargeCard(activeCard);
-        } else {
-            const maxPosition = -(containerWidth - window.innerWidth);
-            currentPosition = Math.max(currentPosition, maxPosition);
-            updateContainerPosition();
         }
     }
 
@@ -265,9 +255,10 @@
         }
     });
 
+    // 좌우 네비게이션 버튼 리스너 (주석 처리)
+    /*
     leftNav.addEventListener('click', () => {
-        currentPosition = Math.min(currentPosition + 800, 0);
-        updateContainerPosition();
+        container.scrollBy({left: -800, behavior: 'smooth'});
         if (activeCard) {
             returnToOriginalPosition(activeCard);
             activeCard = null;
@@ -275,14 +266,13 @@
     });
 
     rightNav.addEventListener('click', () => {
-        const maxPosition = -(containerWidth - window.innerWidth);
-        currentPosition = Math.max(currentPosition - 800, maxPosition);
-        updateContainerPosition();
+        container.scrollBy({left: 800, behavior: 'smooth'});
         if (activeCard) {
             returnToOriginalPosition(activeCard);
             activeCard = null;
         }
     });
+    */
 
     window.addEventListener('load', () => {
         cardData.forEach((data, index) => {
@@ -292,6 +282,12 @@
     });
     
     window.addEventListener('resize', handleResize);
+    
+    window.addEventListener('scroll', () => {
+        if (activeCard) {
+            enlargeCard(activeCard);
+        }
+    });
 
     // 초기 업데이트
     updateContainerWidth();
