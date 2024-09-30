@@ -120,181 +120,145 @@
     <img src="images/right_indi.png" alt="Right Navigation" class="nav-button right">
 
     <script>
-        const container = document.getElementById('container');
-        const leftNav = document.querySelector('.nav-button.left');
-        const rightNav = document.querySelector('.nav-button.right');
-        let activeCard = null;
-        let currentPosition = 0;
-        let containerWidth = 0;
+let containerRect;
 
-        const cardData = [
-            {image: "atc01.png"}, {image: "atc02.png"}, {image: "atc03.png"},
-            {image: "atc04_2.png"}, {image: "atc05.png"}, {image: "atc06.png"},
-            {image: "atc07.png"}, {image: "atc08.png"}, {image: "atc09.png"},
-            {image: "atc10.png"}, {image: "atc11.png"}, {image: "atc12.png"},
-            {image: "atc13.png"}, {image: "atc14.png"}, {image: "atc15.png"},
-            {image: "atc16.png"}, {image: "atc17.png"}, {image: "atc18.png"}
-        ];
+function updateContainerRect() {
+    containerRect = container.getBoundingClientRect();
+}
 
-        function createCard(data, index) {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <div class="card__front">
-                    <img src="images/${data.image}" alt="Anti-Tarot Card Front">
-                </div>
-                <div class="card__back">
-                    <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-                </div>
-            `;
-            card.style.transform = getInitialTransform(index);
-            return card;
-        }
+function getCardPosition(card) {
+    const cardRect = card.getBoundingClientRect();
+    return {
+        left: cardRect.left - containerRect.left + Math.abs(currentPosition),
+        top: cardRect.top - containerRect.top
+    };
+}
 
-        function getInitialTransform(index) {
-            switch(index % 4) {
-                case 0: return 'rotateX(5deg) rotateY(-5deg)';
-                case 1: return 'rotateX(-5deg) rotateY(5deg)';
-                case 2: return 'rotateX(10deg) rotateY(0deg)';
-                case 3: return 'rotateX(0deg) rotateY(-10deg)';
-            }
-        }
+function enlargeCard(card) {
+    updateContainerRect();
+    const cardPosition = getCardPosition(card);
+    const viewportWidth = document.documentElement.clientWidth;
+    const viewportHeight = document.documentElement.clientHeight;
 
-        function createPlaceholder() {
-            const placeholder = document.createElement('div');
-            placeholder.className = 'placeholder';
-            return placeholder;
-        }
+    card.style.transition = 'all 0.4s ease';
+    card.classList.add('active');
+    
+    const enlargedWidth = 427.2;
+    const enlargedHeight = 712.8;
 
-        cardData.forEach((data, index) => {
-            container.appendChild(createCard(data, index));
-        });
+    // 화면 중앙 좌표 계산
+    const centerX = viewportWidth / 2;
+    const centerY = viewportHeight / 2;
 
-        function updateContainerWidth() {
-            containerWidth = container.scrollWidth;
-        }
+    // 카드의 새로운 위치 계산
+    const newLeft = centerX - enlargedWidth / 2;
+    const newTop = centerY - enlargedHeight / 2;
 
-        function getCardPosition(card) {
-            const rect = card.getBoundingClientRect();
-            const containerRect = container.getBoundingClientRect();
-            return {
-                left: rect.left - containerRect.left - currentPosition,
-                top: rect.top - containerRect.top
-            };
-        }
+    card.style.position = 'fixed';
+    card.style.left = `${newLeft}px`;
+    card.style.top = `${newTop}px`;
+    card.style.width = `${enlargedWidth}px`;
+    card.style.height = `${enlargedHeight}px`;
+    card.style.zIndex = '1000';
+    
+    const placeholder = createPlaceholder();
+    card.parentNode.insertBefore(placeholder, card.nextSibling);
 
-        function enlargeCard(card) {
-            const cardPosition = getCardPosition(card);
-            const viewportWidth = document.documentElement.clientWidth;
-            const viewportHeight = document.documentElement.clientHeight;
+    setTimeout(() => {
+        card.style.transform = 'rotateY(180deg)';
+    }, 200);
+    setTimeout(() => {
+        card.style.transform = 'none';
+    }, 600);
+}
 
-            card.style.transition = 'all 0.4s ease';
-            card.classList.add('active');
-            
-            const scaleFactor = 427.2 / 213.6; // 확대 비율
-            const enlargedWidth = 427.2;
-            const enlargedHeight = 712.8;
+function returnToOriginalPosition(card) {
+    const placeholder = card.nextElementSibling;
+    const index = Array.from(container.children).indexOf(placeholder);
 
-            // 뷰포트 내에서의 카드 위치 계산
-            const cardCenterX = cardPosition.left + 213.6 / 2;
-            const cardCenterY = cardPosition.top + 356.4 / 2;
+    card.classList.remove('active');
+    card.style.transition = 'all 0.4s ease';
+    card.style.position = '';
+    card.style.left = '';
+    card.style.top = '';
+    card.style.width = '';
+    card.style.height = '';
+    card.style.zIndex = '';
+    card.style.transform = getInitialTransform(index);
 
-            // 화면 중앙으로부터의 오프셋 계산
-            const offsetX = (viewportWidth / 2 - cardCenterX) * scaleFactor;
-            const offsetY = (viewportHeight / 2 - cardCenterY) * scaleFactor;
+    if (placeholder && placeholder.classList.contains('placeholder')) {
+        placeholder.parentNode.removeChild(placeholder);
+    }
+}
 
-            card.style.position = 'fixed';
-            card.style.left = `${cardPosition.left + offsetX}px`;
-            card.style.top = `${cardPosition.top + offsetY}px`;
-            card.style.width = `${enlargedWidth}px`;
-            card.style.height = `${enlargedHeight}px`;
-            card.style.zIndex = '1000';
-            
-            const placeholder = createPlaceholder();
-            card.parentNode.insertBefore(placeholder, card.nextSibling);
-
-            setTimeout(() => {
-                card.style.transform = 'rotateY(180deg)';
-            }, 200);
-            setTimeout(() => {
-                card.style.transform = 'none';
-            }, 600);
-        }
-
-        function returnToOriginalPosition(card) {
-            const placeholder = card.nextElementSibling;
-            const index = Array.from(container.children).indexOf(placeholder);
-
-            card.classList.remove('active');
-            card.style.transition = 'all 0.4s ease';
-            card.style.position = '';
-            card.style.left = '';
-            card.style.top = '';
-            card.style.width = '';
-            card.style.height = '';
-            card.style.zIndex = '';
-            card.style.transform = getInitialTransform(index);
-
-            if (placeholder && placeholder.classList.contains('placeholder')) {
-                card.parentNode.removeChild(placeholder);
-            }
-        }
-
-        container.addEventListener('click', function(e) {
-            const clickedCard = e.target.closest('.card');
-            if (clickedCard) {
-                if (activeCard === clickedCard) {
-                    returnToOriginalPosition(clickedCard);
-                    activeCard = null;
-                } else {
-                    if (activeCard) {
-                        returnToOriginalPosition(activeCard);
-                    }
-                    enlargeCard(clickedCard);
-                    activeCard = clickedCard;
-                }
-            }
-        });
-
-        leftNav.addEventListener('click', () => {
-            currentPosition = Math.min(currentPosition + 800, 0);
-            updateContainerPosition();
+// 이벤트 리스너 수정
+container.addEventListener('click', function(e) {
+    const clickedCard = e.target.closest('.card');
+    if (clickedCard) {
+        if (activeCard === clickedCard) {
+            returnToOriginalPosition(clickedCard);
+            activeCard = null;
+        } else {
             if (activeCard) {
                 returnToOriginalPosition(activeCard);
-                activeCard = null;
             }
-        });
-
-        rightNav.addEventListener('click', () => {
-            const maxPosition = -(containerWidth - window.innerWidth);
-            currentPosition = Math.max(currentPosition - 800, maxPosition);
-            updateContainerPosition();
-            if (activeCard) {
-                returnToOriginalPosition(activeCard);
-                activeCard = null;
-            }
-        });
-
-        function updateContainerPosition() {
-            container.style.transform = `translateX(${currentPosition}px)`;
+            enlargeCard(clickedCard);
+            activeCard = clickedCard;
         }
+    }
+});
 
-        function handleResize() {
-            updateContainerWidth();
-            if (activeCard) {
-                enlargeCard(activeCard);
-            } else {
-                const maxPosition = -(containerWidth - window.innerWidth);
-                currentPosition = Math.max(currentPosition, maxPosition);
-                updateContainerPosition();
-            }
-        }
+leftNav.addEventListener('click', () => {
+    currentPosition = Math.min(currentPosition + 800, 0);
+    updateContainerPosition();
+    updateContainerRect();
+    if (activeCard) {
+        returnToOriginalPosition(activeCard);
+        activeCard = null;
+    }
+});
 
-        window.addEventListener('load', updateContainerWidth);
-        window.addEventListener('resize', handleResize);
+rightNav.addEventListener('click', () => {
+    const maxPosition = -(containerWidth - window.innerWidth);
+    currentPosition = Math.max(currentPosition - 800, maxPosition);
+    updateContainerPosition();
+    updateContainerRect();
+    if (activeCard) {
+        returnToOriginalPosition(activeCard);
+        activeCard = null;
+    }
+});
 
-        // Initial update
-        updateContainerWidth();
+function updateContainerPosition() {
+    container.style.transform = `translateX(${currentPosition}px)`;
+}
+
+function handleResize() {
+    updateContainerWidth();
+    updateContainerRect();
+    if (activeCard) {
+        enlargeCard(activeCard);
+    } else {
+        const maxPosition = -(containerWidth - window.innerWidth);
+        currentPosition = Math.max(currentPosition, maxPosition);
+        updateContainerPosition();
+    }
+}
+
+window.addEventListener('load', () => {
+    updateContainerWidth();
+    updateContainerRect();
+});
+window.addEventListener('resize', handleResize);
+window.addEventListener('scroll', () => {
+    if (activeCard) {
+        enlargeCard(activeCard);
+    }
+});
+
+// 초기 업데이트
+updateContainerWidth();
+updateContainerRect();
     </script>
 </body>
 </html>
