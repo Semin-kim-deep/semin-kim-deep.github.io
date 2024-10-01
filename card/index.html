@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anti-Tarot Cards with 80% Enlarged Active Card</title>
+    <title>Anti-Tarot Cards with Info Box</title>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@500&display=swap" rel="stylesheet">
     <style>
@@ -61,14 +61,14 @@
             cursor: pointer;
             position: relative;
             transform-style: preserve-3d;
-            border-radius: 14px; /* 작은 카드에 14px 라운드 적용 */
+            border-radius: 14px;
         }
         .card.active {
             width: 284px;
             height: 474.4px;
             position: fixed;
             z-index: 1000;
-            border-radius: 18px; /* 큰 카드에 18px 라운드 적용 */
+            border-radius: 18px;
         }
         .card__front, .card__back {
             position: absolute;
@@ -77,8 +77,8 @@
             backface-visibility: hidden;
             transition: transform 0.4s ease;
             box-shadow: 0 8.4px 16.8px rgba(0,0,0,0.25), 0 6px 6px rgba(0,0,0,0.22);
-            border-radius: inherit; /* 부모 요소의 border-radius 상속 */
-            overflow: hidden; /* 이미지가 라운드 밖으로 나가지 않도록 */
+            border-radius: inherit;
+            overflow: hidden;
         }
         .card__back {
             transform: rotateY(180deg);
@@ -116,6 +116,15 @@
             -webkit-overflow-scrolling: touch;
             scroll-behavior: smooth;
         }
+        .info-box {
+            width: 284px;
+            height: 474.4px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 18px;
+            position: fixed;
+            z-index: 999;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -127,6 +136,7 @@
     <div class="container" id="container">
         <!-- Cards will be dynamically added here -->
     </div>
+    <div class="info-box" id="infoBox"></div>
     <img src="images/left_indi3.png" alt="Left Navigation" class="nav-button left">
     <img src="images/right_indi3.png" alt="Right Navigation" class="nav-button right">
 
@@ -134,6 +144,7 @@
     const container = document.getElementById('container');
     const leftNav = document.querySelector('.nav-button.left');
     const rightNav = document.querySelector('.nav-button.right');
+    const infoBox = document.getElementById('infoBox');
     let activeCard = null;
     let containerWidth = 0;
     const scrollDistance = 800;
@@ -197,7 +208,7 @@
         const enlargedWidth = 284;
         const enlargedHeight = 474.4;
 
-        const newLeft = (viewportWidth - enlargedWidth) / 2;
+        const newLeft = (viewportWidth - enlargedWidth * 2 - 15) / 2;
         const newTop = (viewportHeight - enlargedHeight) / 2;
 
         card.style.position = 'fixed';
@@ -209,6 +220,11 @@
         
         const placeholder = createPlaceholder();
         card.parentNode.insertBefore(placeholder, card.nextSibling);
+
+        // Info box 표시
+        infoBox.style.display = 'block';
+        infoBox.style.left = `${newLeft + enlargedWidth + 15}px`;
+        infoBox.style.top = `${newTop}px`;
 
         setTimeout(() => {
             card.style.transform = 'rotateY(180deg)';
@@ -231,6 +247,9 @@
         card.style.height = '';
         card.style.zIndex = '';
         card.style.transform = getInitialTransform(index);
+
+        // Info box 숨기기
+        infoBox.style.display = 'none';
 
         if (placeholder && placeholder.classList.contains('placeholder')) {
             placeholder.parentNode.removeChild(placeholder);
