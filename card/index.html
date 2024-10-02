@@ -52,11 +52,20 @@
             margin-top: 10px;
             margin-bottom: 5px;
         }
-        .container-wrapper {
-            flex-grow: 1;
+        .content-wrapper {
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
+            flex-grow: 1;
+        }
+        .description-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            color: white;
+            text-align: center;
+        }
+        .container-wrapper {
+            margin-top: auto;
         }
         .container {
             display: flex;
@@ -140,13 +149,6 @@
             transform: translateX(-100%);
             transition: transform 0.4s ease;
         }
-        .description-container {
-            max-width: 800px;
-            margin: 100px auto;
-            padding: 0 20px;
-            color: white;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -157,24 +159,27 @@
         <p class="instruction">각 카드를 눌러 카드에 담긴 이야기를 확인하세요.</p>
         <p class="instruction-en">Click on each card to see the story it contains. </p>
     </div>
-    <div class="container-wrapper">
-        <div class="container" id="container">
-            <!-- Cards will be dynamically added here -->
+    <div class="content-wrapper">
+        <div class="description-container">
+            <p class="description">
+                영험하다는 뜻은 사람의 기원대로 되는 신기한 징험이 있다는 뜻이라고 합니다.<br>
+                우리는 그런 영험한 기운에 기대고 싶은 바람이 있죠.<br>
+                마냥 영험한 기운을 기다리기보다, 그 기운을 만들 수 있어요. 이루어지길 바라면서 할 수 있는 것을 하고, 작은 것부터 이루어가요.<br>
+                때때로 풀이 죽고, 실망하고, 괴로워하더라도 다른 무엇보다 열심히 한 나 자신이 타로카드보다 기억에 남을거에요.
+            </p>
+        </div>
+        <div class="container-wrapper">
+            <div class="container" id="container">
+                <!-- Cards will be dynamically added here -->
+            </div>
         </div>
     </div>
     <div class="info-box" id="infoBox"></div>
     <img src="images/left_indi3.png" alt="Left Navigation" class="nav-button left">
     <img src="images/right_indi3.png" alt="Right Navigation" class="nav-button right">
-    <div class="description-container">
-        <p class="description">
-            영험하다는 뜻은 사람의 기원대로 되는 신기한 징험이 있다는 뜻이라고 합니다.<br>
-            우리는 그런 영험한 기운에 기대고 싶은 바람이 있죠.<br>
-            마냥 영험한 기운을 기다리기보다, 그 기운을 만들 수 있어요. 이루어지길 바라면서 할 수 있는 것을 하고, 작은 것부터 이루어가요.<br>
-            때때로 풀이 죽고, 실망하고, 괴로워하더라도 다른 무엇보다 열심히 한 나 자신이 타로카드보다 기억에 남을거에요.
-        </p>
-    </div>
 
-<script>
+    <script>
+
     const container = document.getElementById('container');
 const leftNav = document.querySelector('.nav-button.left');
 const rightNav = document.querySelector('.nav-button.right');
