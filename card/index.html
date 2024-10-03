@@ -174,8 +174,8 @@
         <h1>Anti-Tarot Card</h1>
         <p class="subtitle">안티타로카드, 미래는 알 수 없으니까 지금 할 수 있는 일을 해요.</p>
         <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
-        <p class="instruction">각 카드를 눌러 카드에 담긴 이야기를 확인하세요.
-       Click on each card to see the story it contains. </p>
+        <p class="instruction">각 카드를 눌러 카드에 담긴 이야기를 확인하세요.</p>
+        <p class="instruction-en">Click on each card to see the story it contains. </p>
     </div>
     <div class="content-wrapper">
         <div class="cards-container">
@@ -199,7 +199,7 @@
         <div class="scroll-content"></div>
     </div>
 
-<script>
+    <script>
 const container = document.getElementById('container');
 const leftNav = document.querySelector('.nav-button.left');
 const rightNav = document.querySelector('.nav-button.right');
@@ -366,22 +366,28 @@ container.addEventListener('click', function(e) {
     }
 });
 
-// 좌우 네비게이션 버튼 리스너
-leftNav.addEventListener('click', () => {
-    container.scrollLeft -= scrollDistance;
-    if (activeCard) {
-        returnToOriginalPosition(activeCard);
-        activeCard = null;
+// 수정된 네비게이션 함수
+function scrollContainer(direction) {
+    const scrollAmount = direction * scrollDistance;
+    const currentTransform = new DOMMatrixReadOnly(getComputedStyle(container).transform);
+    const currentTranslateX = currentTransform.m41;
+    const newTranslateX = currentTranslateX - scrollAmount;
+    
+    const maxScroll = -(containerWidth - container.offsetWidth + 120);
+    
+    if (newTranslateX <= 0 && newTranslateX >= maxScroll) {
+        container.style.transform = `translateX(${newTranslateX}px)`;
     }
-});
 
-rightNav.addEventListener('click', () => {
-    container.scrollLeft += scrollDistance;
     if (activeCard) {
         returnToOriginalPosition(activeCard);
         activeCard = null;
     }
-});
+}
+
+// 좌우 네비게이션 버튼 리스너
+leftNav.addEventListener('click', () => scrollContainer(1));
+rightNav.addEventListener('click', () => scrollContainer(-1));
 
 window.addEventListener('load', () => {
     cardData.forEach((data, index) => {
