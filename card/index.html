@@ -140,12 +140,12 @@
             font-family: 'Pretendard', sans-serif;
         }
         .info-box h2 {
-            font-size: 30pt;
+            font-size: 20pt;
             color: black;
             margin-bottom: 20px;
         }
         .info-box p {
-            font-size: 20pt;
+            font-size: 15pt;
             color: black;
             line-height: 1.5;
         }
@@ -170,7 +170,7 @@
     <img src="images/right_indi3.png" alt="Right Navigation" class="nav-button right">
 
 <script>
-const container = document.getElementById('container');
+   const container = document.getElementById('container');
 const leftNav = document.querySelector('.nav-button.left');
 const rightNav = document.querySelector('.nav-button.right');
 const infoBox = document.getElementById('infoBox');
@@ -278,10 +278,17 @@ function enlargeCard(card) {
         setTimeout(() => {
             infoBox.style.transform = 'translateX(0)';
             infoBox.style.opacity = '1';
-            typeText(infoTitle, "마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록");
-            setTimeout(() => {
-                typeText(infoDescription, "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상한 하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 것들을 시작했어요. 쉽지 않지만 일단은 합니다.");
-            }, 2000);
+            if (Array.from(container.children).indexOf(card) === 0) {
+                infoTitle.style.fontSize = '20pt';
+                infoDescription.style.fontSize = '15pt';
+                typeText(infoTitle, "마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록");
+                setTimeout(() => {
+                    typeText(infoDescription, "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상한 하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 것들을 시작했어요. 쉽지 않지만 일단은 합니다.");
+                }, 2000);
+            } else {
+                infoTitle.innerHTML = '';
+                infoDescription.innerHTML = '';
+            }
         }, 50);
     }, 600);
 }
