@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anti-Tarot Cards with Updated Layout</title>
+    <title>Anti-Tarot Cards with Animated Info Box</title>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@500&display=swap" rel="stylesheet">
     <style>
         body, html {
             margin: 0;
             padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
             font-family: 'Jost', sans-serif;
             background-image: url('../images/bg_hp.jpg');
             background-size: cover;
             background-position: top center;
             background-repeat: no-repeat;
-            background-attachment: fixed;
             perspective: 1000px;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
         .title-container {
             text-align: center;
@@ -32,7 +31,7 @@
             font-size: 48px;
             margin: 0;
         }
-        .subtitle, .description {
+        .subtitle {
             font-family: 'Pretendard', sans-serif;
             font-weight: 500;
             font-size: 18px;
@@ -44,36 +43,21 @@
             font-size: 18px;
             margin: 0;
         }
-        .instruction, .instruction-en {
+          .subtitle_s {
             font-family: 'Pretendard', sans-serif;
-            font-weight: 500;
-            font-size: 14.4px;
+            font-weight: 300;
+            font-size: 12px;
             margin-top: 10px;
             margin-bottom: 5px;
         }
-        .content-wrapper {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        .cards-container {
-            height: 500px;
-            position: relative;
-            margin-bottom: 40px;
-            overflow: hidden;
-        }
+        
         .container {
             display: flex;
             align-items: center;
-            height: 100%;
+            height: calc(100vh - 150px);
             padding-left: 120px;
-            position: absolute;
+            position: relative;
             transition: transform 0.4s ease;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            scroll-behavior: smooth;
-            width: calc(100% - 120px);
-            box-sizing: border-box;
         }
         .card {
             width: 213.6px;
@@ -120,7 +104,7 @@
             visibility: hidden;
         }
         .nav-button {
-            position: absolute;
+            position: fixed;
             top: 50%;
             transform: translateY(-50%);
             width: 46px;
@@ -134,10 +118,16 @@
         .nav-button.right {
             right: 0px;
         }
+        .container {
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
         .info-box {
             width: 284px;
             height: 474.4px;
-            background-color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(0, 0, 0, 0.6);
             border-radius: 18px;
             position: fixed;
             z-index: 999;
@@ -145,264 +135,220 @@
             transform: translateX(-100%);
             transition: transform 0.4s ease;
         }
-        .description-container {
-            max-width: 800px;
-            margin: 0 auto 40px;
-            padding: 0 20px;
-            color: white;
-            text-align: center;
-        }
-        .scroll-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            overflow-x: auto;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            scroll-behavior: smooth;
-            background-color: rgba(0, 0, 0, 0.3);
-        }
-        .scroll-content {
-            height: 10px;
-            width: 200%;
-        }
     </style>
 </head>
 <body>
     <div class="title-container">
         <h1>Anti-Tarot Card</h1>
         <p class="subtitle">안티타로카드, 미래는 알 수 없으니까 지금 할 수 있는 일을 해요.</p>
-        <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
-        <p class="instruction">각 카드를 눌러 카드에 담긴 이야기를 확인하세요.</p>
-        <p class="instruction-en">Click on each card to see the story it contains. </p>
+        <p class="subtitle-en">We don't know the future, so we just do what we can do now.(dr)</p>
+            <p class="subtitle_s">각 카드를 눌러보세요. Click on each card. </p>.
     </div>
-    <div class="content-wrapper">
-        <div class="cards-container">
-            <div class="container" id="container">
-                <!-- Cards will be dynamically added here -->
-            </div>
-            <img src="images/left_indi3.png" alt="Left Navigation" class="nav-button left">
-            <img src="images/right_indi3.png" alt="Right Navigation" class="nav-button right">
-        </div>
-        <div class="description-container">
-            <p class="description">
-                영험하다는 뜻은 사람의 기원대로 되는 신기한 징험이 있다는 뜻이라고 합니다.<br>
-                우리는 그런 영험한 기운에 기대고 싶은 바람이 있죠.<br>
-                마냥 영험한 기운을 기다리기보다, 그 기운을 만들 수 있어요. 이루어지길 바라면서 할 수 있는 것을 하고, 작은 것부터 이루어가요.<br>
-                때때로 풀이 죽고, 실망하고, 괴로워하더라도 다른 무엇보다 열심히 한 나 자신이 타로카드보다 기억에 남을거에요.
-            </p>
-        </div>
+    <div class="container" id="container">
+        <!-- Cards will be dynamically added here -->
     </div>
     <div class="info-box" id="infoBox"></div>
-    <div class="scroll-container">
-        <div class="scroll-content"></div>
-    </div>
+    <img src="images/left_indi3.png" alt="Left Navigation" class="nav-button left">
+    <img src="images/right_indi3.png" alt="Right Navigation" class="nav-button right">
 
-    <script>
-const container = document.getElementById('container');
-const leftNav = document.querySelector('.nav-button.left');
-const rightNav = document.querySelector('.nav-button.right');
-const infoBox = document.getElementById('infoBox');
-let activeCard = null;
-let containerWidth = 0;
-const scrollDistance = 800;
+<script>
+    const container = document.getElementById('container');
+    const leftNav = document.querySelector('.nav-button.left');
+    const rightNav = document.querySelector('.nav-button.right');
+    const infoBox = document.getElementById('infoBox');
+    let activeCard = null;
+    let containerWidth = 0;
+    const scrollDistance = 800;
 
-const cardData = [
-    {image: "atc01.png"}, {image: "atc02.png"}, {image: "atc03.png"},
-    {image: "atc04_2.png"}, {image: "atc05.png"}, {image: "atc06.png"},
-    {image: "atc07.png"}, {image: "atc08.png"}, {image: "atc09.png"},
-    {image: "atc10.png"}, {image: "atc11.png"}, {image: "atc12.png"},
-    {image: "atc13.png"}, {image: "atc14.png"}, {image: "atc15.png"},
-    {image: "atc16.png"}, {image: "atc17.png"}, {image: "atc18.png"}
-];
+    const cardData = [
+        {image: "atc01.png"}, {image: "atc02.png"}, {image: "atc03.png"},
+        {image: "atc04_2.png"}, {image: "atc05.png"}, {image: "atc06.png"},
+        {image: "atc07.png"}, {image: "atc08.png"}, {image: "atc09.png"},
+        {image: "atc10.png"}, {image: "atc11.png"}, {image: "atc12.png"},
+        {image: "atc13.png"}, {image: "atc14.png"}, {image: "atc15.png"},
+        {image: "atc16.png"}, {image: "atc17.png"}, {image: "atc18.png"}
+    ];
 
-function createCard(data, index) {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-        <div class="card__front">
-            <img src="images/${data.image}" alt="Anti-Tarot Card Front">
-        </div>
-        <div class="card__back">
-            <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
-        </div>
-    `;
-    card.style.transform = getInitialTransform(index);
-    return card;
-}
-
-function getInitialTransform(index) {
-    switch(index % 4) {
-        case 0: return 'rotateX(5deg) rotateY(-5deg)';
-        case 1: return 'rotateX(-5deg) rotateY(5deg)';
-        case 2: return 'rotateX(10deg) rotateY(0deg)';
-        case 3: return 'rotateX(0deg) rotateY(-10deg)';
+    function createCard(data, index) {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <div class="card__front">
+                <img src="images/${data.image}" alt="Anti-Tarot Card Front">
+            </div>
+            <div class="card__back">
+                <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
+            </div>
+        `;
+        card.style.transform = getInitialTransform(index);
+        return card;
     }
-}
 
-function createPlaceholder() {
-    const placeholder = document.createElement('div');
-    placeholder.className = 'placeholder';
-    return placeholder;
-}
-
-function getCardPosition(card) {
-    const cardRect = card.getBoundingClientRect();
-    const containerRect = container.getBoundingClientRect();
-    return {
-        left: cardRect.left - containerRect.left,
-        top: cardRect.top - containerRect.top
-    };
-}
-
-function enlargeCard(card) {
-    const viewportWidth = document.documentElement.clientWidth;
-    const viewportHeight = document.documentElement.clientHeight;
-    const cardPosition = getCardPosition(card);
-
-    card.style.transition = 'all 0.4s ease';
-    card.classList.add('active');
-    
-    const enlargedWidth = 284;
-    const enlargedHeight = 474.4;
-
-    const newLeft = (viewportWidth - enlargedWidth * 2 - 15) / 2;
-    const newTop = (viewportHeight - enlargedHeight) / 2;
-
-    card.style.position = 'fixed';
-    card.style.left = `${newLeft}px`;
-    card.style.top = `${newTop}px`;
-    card.style.width = `${enlargedWidth}px`;
-    card.style.height = `${enlargedHeight}px`;
-    card.style.zIndex = '1000';
-    
-    const placeholder = createPlaceholder();
-    card.parentNode.insertBefore(placeholder, card.nextSibling);
-
-    setTimeout(() => {
-        card.style.transform = 'rotateY(180deg)';
-    }, 200);
-
-    setTimeout(() => {
-        card.style.transform = 'none';
-        // Info box 표시
-        infoBox.style.display = 'block';
-        infoBox.style.left = `${newLeft + enlargedWidth + 15}px`;
-        infoBox.style.top = `${newTop}px`;
-        setTimeout(() => {
-            infoBox.style.transform = 'translateX(0)';
-        }, 50);
-    }, 600);
-}
-
-function returnToOriginalPosition(card) {
-    const placeholder = card.nextElementSibling;
-    const index = Array.from(container.children).indexOf(placeholder);
-
-    // Info box 숨기기
-    infoBox.style.transform = 'translateX(-100%)';
-    setTimeout(() => {
-        infoBox.style.display = 'none';
-    }, 400);
-
-    card.classList.remove('active');
-    card.style.transition = 'all 0.4s ease';
-    card.style.position = '';
-    card.style.left = '';
-    card.style.top = '';
-    card.style.width = '';
-    card.style.height = '';
-    card.style.zIndex = '';
-    card.style.transform = getInitialTransform(index);
-
-    if (placeholder && placeholder.classList.contains('placeholder')) {
-        placeholder.parentNode.removeChild(placeholder);
-    }
-}
-
-function updateContainerWidth() {
-    containerWidth = container.scrollWidth;
-}
-
-function handleResize() {
-    updateContainerWidth();
-    if (activeCard) {
-        enlargeCard(activeCard);
-    }
-}
-
-function handleMouseMove(e) {
-    if (this.classList.contains('active')) return;
-    const rect = this.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
-    const dx = (mx - rect.width / 2) / 10;
-    const dy = (my - rect.height / 2) / 10;
-
-    this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
-}
-
-function handleMouseLeave() {
-    if (this.classList.contains('active')) return;
-    const index = Array.from(container.children).indexOf(this);
-    this.style.transform = getInitialTransform(index);
-}
-
-// 이벤트 리스너
-container.addEventListener('click', function(e) {
-    const clickedCard = e.target.closest('.card');
-    if (clickedCard) {
-        if (activeCard === clickedCard) {
-            returnToOriginalPosition(clickedCard);
-            activeCard = null;
-        } else {
-            if (activeCard) {
-                returnToOriginalPosition(activeCard);
-            }
-            enlargeCard(clickedCard);
-            activeCard = clickedCard;
+    function getInitialTransform(index) {
+        switch(index % 4) {
+            case 0: return 'rotateX(5deg) rotateY(-5deg)';
+            case 1: return 'rotateX(-5deg) rotateY(5deg)';
+            case 2: return 'rotateX(10deg) rotateY(0deg)';
+            case 3: return 'rotateX(0deg) rotateY(-10deg)';
         }
     }
-});
 
-// 수정된 네비게이션 함수
-function scrollContainer(direction) {
-    const scrollAmount = direction * scrollDistance;
-    const currentTransform = new DOMMatrixReadOnly(getComputedStyle(container).transform);
-    const currentTranslateX = currentTransform.m41;
-    const newTranslateX = currentTranslateX - scrollAmount;
-    
-    const maxScroll = -(containerWidth - container.offsetWidth + 120);
-    
-    if (newTranslateX <= 0 && newTranslateX >= maxScroll) {
-        container.style.transform = `translateX(${newTranslateX}px)`;
+    function createPlaceholder() {
+        const placeholder = document.createElement('div');
+        placeholder.className = 'placeholder';
+        return placeholder;
     }
 
-    if (activeCard) {
-        returnToOriginalPosition(activeCard);
-        activeCard = null;
+    function getCardPosition(card) {
+        const cardRect = card.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        return {
+            left: cardRect.left - containerRect.left,
+            top: cardRect.top - containerRect.top
+        };
     }
-}
 
-// 좌우 네비게이션 버튼 리스너
-leftNav.addEventListener('click', () => scrollContainer(1));
-rightNav.addEventListener('click', () => scrollContainer(-1));
+    function enlargeCard(card) {
+        const viewportWidth = document.documentElement.clientWidth;
+        const viewportHeight = document.documentElement.clientHeight;
+        const cardPosition = getCardPosition(card);
 
-window.addEventListener('load', () => {
-    cardData.forEach((data, index) => {
-        const card = createCard(data, index);
-        card.addEventListener('mousemove', handleMouseMove);
-        card.addEventListener('mouseleave', handleMouseLeave);
-        container.appendChild(card);
+        card.style.transition = 'all 0.4s ease';
+        card.classList.add('active');
+        
+        const enlargedWidth = 284;
+        const enlargedHeight = 474.4;
+
+        const newLeft = (viewportWidth - enlargedWidth * 2 - 15) / 2;
+        const newTop = (viewportHeight - enlargedHeight) / 2;
+
+        card.style.position = 'fixed';
+        card.style.left = `${newLeft}px`;
+        card.style.top = `${newTop}px`;
+        card.style.width = `${enlargedWidth}px`;
+        card.style.height = `${enlargedHeight}px`;
+        card.style.zIndex = '1000';
+        
+        const placeholder = createPlaceholder();
+        card.parentNode.insertBefore(placeholder, card.nextSibling);
+
+        setTimeout(() => {
+            card.style.transform = 'rotateY(180deg)';
+        }, 200);
+
+        setTimeout(() => {
+            card.style.transform = 'none';
+            // Info box 표시
+            infoBox.style.display = 'block';
+            infoBox.style.left = `${newLeft + enlargedWidth + 15}px`;
+            infoBox.style.top = `${newTop}px`;
+            setTimeout(() => {
+                infoBox.style.transform = 'translateX(0)';
+            }, 50);
+        }, 600);
+    }
+
+    function returnToOriginalPosition(card) {
+        const placeholder = card.nextElementSibling;
+        const index = Array.from(container.children).indexOf(placeholder);
+
+        // Info box 숨기기
+        infoBox.style.transform = 'translateX(-100%)';
+        setTimeout(() => {
+            infoBox.style.display = 'none';
+        }, 400);
+
+        card.classList.remove('active');
+        card.style.transition = 'all 0.4s ease';
+        card.style.position = '';
+        card.style.left = '';
+        card.style.top = '';
+        card.style.width = '';
+        card.style.height = '';
+        card.style.zIndex = '';
+        card.style.transform = getInitialTransform(index);
+
+        if (placeholder && placeholder.classList.contains('placeholder')) {
+            placeholder.parentNode.removeChild(placeholder);
+        }
+    }
+
+    function updateContainerWidth() {
+        containerWidth = container.scrollWidth;
+    }
+
+    function handleResize() {
+        updateContainerWidth();
+        if (activeCard) {
+            enlargeCard(activeCard);
+        }
+    }
+
+    function handleMouseMove(e) {
+        if (this.classList.contains('active')) return;
+        const rect = this.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        const dx = (mx - rect.width / 2) / 10;
+        const dy = (my - rect.height / 2) / 10;
+
+        this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
+    }
+
+    function handleMouseLeave() {
+        if (this.classList.contains('active')) return;
+        const index = Array.from(container.children).indexOf(this);
+        this.style.transform = getInitialTransform(index);
+    }
+
+    // 이벤트 리스너
+    container.addEventListener('click', function(e) {
+        const clickedCard = e.target.closest('.card');
+        if (clickedCard) {
+            if (activeCard === clickedCard) {
+                returnToOriginalPosition(clickedCard);
+                activeCard = null;
+            } else {
+                if (activeCard) {
+                    returnToOriginalPosition(activeCard);
+                }
+                enlargeCard(clickedCard);
+                activeCard = clickedCard;
+            }
+        }
     });
+
+    // 좌우 네비게이션 버튼 리스너
+    leftNav.addEventListener('click', () => {
+        container.scrollBy({left: -scrollDistance, behavior: 'smooth'});
+        if (activeCard) {
+            returnToOriginalPosition(activeCard);
+            activeCard = null;
+        }
+    });
+
+    rightNav.addEventListener('click', () => {
+        container.scrollBy({left: scrollDistance, behavior: 'smooth'});
+        if (activeCard) {
+            returnToOriginalPosition(activeCard);
+            activeCard = null;
+        }
+    });
+
+    window.addEventListener('load', () => {
+        cardData.forEach((data, index) => {
+            const card = createCard(data, index);
+            card.addEventListener('mousemove', handleMouseMove);
+            card.addEventListener('mouseleave', handleMouseLeave);
+            container.appendChild(card);
+        });
+        updateContainerWidth();
+    });
+    
+    window.addEventListener('resize', handleResize);
+
+    // 초기 업데이트
     updateContainerWidth();
-});
-
-window.addEventListener('resize', handleResize);
-
-// 초기 업데이트
-updateContainerWidth();
 </script>
 </body>
 </html>
