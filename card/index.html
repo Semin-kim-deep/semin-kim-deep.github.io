@@ -199,8 +199,7 @@
         <div class="scroll-content"></div>
     </div>
 
-    <script>
-      
+<script>
 const container = document.getElementById('container');
 const leftNav = document.querySelector('.nav-button.left');
 const rightNav = document.querySelector('.nav-button.right');
@@ -369,7 +368,7 @@ container.addEventListener('click', function(e) {
 
 // 좌우 네비게이션 버튼 리스너
 leftNav.addEventListener('click', () => {
-    container.scrollBy({left: -scrollDistance, behavior: 'smooth'});
+    container.scrollLeft -= scrollDistance;
     if (activeCard) {
         returnToOriginalPosition(activeCard);
         activeCard = null;
@@ -377,7 +376,7 @@ leftNav.addEventListener('click', () => {
 });
 
 rightNav.addEventListener('click', () => {
-    container.scrollBy({left: scrollDistance, behavior: 'smooth'});
+    container.scrollLeft += scrollDistance;
     if (activeCard) {
         returnToOriginalPosition(activeCard);
         activeCard = null;
