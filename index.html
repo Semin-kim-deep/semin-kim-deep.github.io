@@ -259,6 +259,9 @@
             }
         }
         @media (max-width: 768px) {
+            body {
+                background-image: url('images/m_bg.jpg');
+            }
             .changing-image {
                 width: 400px;
                 height: 400px;
@@ -283,6 +286,9 @@
                 width: 200px;
                 height: 200px;
             }
+            .info-description, .it-seodanggae-description {
+                display: none;
+            }
         }
         @media (max-width: 480px) {
             .container {
@@ -292,14 +298,11 @@
                 font-size: 36px;
             }
             .changing-image {
-                width: 300px;
-                height: 300px;
+                width: 250px;
+                height: 250px;
             }
             .info-title, .it-seodanggae-title, .scroll-more {
                 font-size: 36px;
-            }
-            .info-description, .it-seodanggae-description {
-                font-size: 14px;
             }
             .it-seodanggae-image {
                 width: 150px;
@@ -365,7 +368,7 @@
     <div class="scroll-more">Scroll More</div>
     <div class="anti-tarot-card">Anti-Tarot Card</div>
     <script>
-document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     const changingImage = document.querySelector('.changing-image');
     const aboutSection = document.querySelector('#about-section');
     const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
@@ -390,7 +393,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.height = `${pageHeight}px`;
             document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
         }
-        bgImage.src = 'images/bg_hp.jpg';
+        bgImage.src = window.innerWidth <= 768 ? 'images/m_bg.jpg' : 'images/bg_hp.jpg';
     }
 
     setPageSize();
@@ -412,13 +415,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const bounceOffset = Math.sin(bounce) * 10;
         changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
         
+        const isMobile = window.innerWidth <= 768;
+        
         // About 섹션 애니메이션
-        if (scrollTop > 0 && scrollTop <= 430) {
+        if (scrollTop > 0 && scrollTop <= (isMobile ? 200 : 430)) {
             const opacity = Math.min(scrollTop / 100, 1);
             aboutSection.style.opacity = opacity;
             aboutSection.style.transform = `translateY(calc(-50% + ${Math.max(50 - scrollTop / 2, 0)}px))`;
-        } else if (scrollTop > 430 && scrollTop <= 530) {
-            const opacity = Math.max(1 - (scrollTop - 430) / 100, 0);
+        } else if (scrollTop > (isMobile ? 200 : 430) && scrollTop <= (isMobile ? 300 : 530)) {
+            const opacity = Math.max(1 - (scrollTop - (isMobile ? 200 : 430)) / 100, 0);
             aboutSection.style.opacity = opacity;
             aboutSection.style.transform = 'translateY(-50%)';
         } else {
@@ -426,18 +431,18 @@ document.addEventListener('DOMContentLoaded', function() {
             aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
-        // IT Seodanggae 섹션 애니메이션 (아래에서 위로 페이드인)
-        if (scrollTop > 530 && scrollTop <= 730) {
-            const opacity = Math.min((scrollTop - 530) / 200, 1);
-            const translateY = Math.max(50 - (scrollTop - 530) / 4, 0);
+        // IT Seodanggae 섹션 애니메이션
+        if (scrollTop > (isMobile ? 300 : 530) && scrollTop <= (isMobile ? 500 : 730)) {
+            const opacity = Math.min((scrollTop - (isMobile ? 300 : 530)) / 200, 1);
+            const translateY = Math.max(50 - (scrollTop - (isMobile ? 300 : 530)) / 4, 0);
             itSeodanggaeGroup.style.opacity = opacity;
             itSeodanggaeGroup.style.transform = `translateY(calc(-50% + ${translateY}px))`;
-        } else if (scrollTop > 730 && scrollTop <= 1230) {
+        } else if (scrollTop > (isMobile ? 500 : 730) && scrollTop <= (isMobile ? 700 : 1230)) {
             itSeodanggaeGroup.style.opacity = '1';
             itSeodanggaeGroup.style.transform = 'translateY(-50%)';
-        } else if (scrollTop > 1230 && scrollTop <= 1330) {
-            const opacity = Math.max(1 - (scrollTop - 1230) / 100, 0);
-            const translateY = Math.min((scrollTop - 1230) / 2, 50);
+        } else if (scrollTop > (isMobile ? 700 : 1230) && scrollTop <= (isMobile ? 800 : 1330)) {
+            const opacity = Math.max(1 - (scrollTop - (isMobile ? 700 : 1230)) / 100, 0);
+            const translateY = Math.min((scrollTop - (isMobile ? 700 : 1230)) / 2, 50);
             itSeodanggaeGroup.style.opacity = opacity;
             itSeodanggaeGroup.style.transform = `translateY(calc(-50% - ${translateY}px))`;
             scrollMore.style.opacity = 1 - opacity;
@@ -448,11 +453,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Scroll More 텍스트 애니메이션
-        if (scrollTop > 1330 && scrollTop <= 1830) {
+        if (scrollTop > (isMobile ? 800 : 1330) && scrollTop <= (isMobile ? 1000 : 1830)) {
             scrollMore.style.opacity = '1';
             scrollMore.style.transform = 'translateY(-50%)';
-        } else if (scrollTop > 1830 && scrollTop <= 1930) {
-            const opacity = Math.max(1 - (scrollTop - 1830) / 100, 0);
+        } else if (scrollTop > (isMobile ? 1000 : 1830) && scrollTop <= (isMobile ? 1100 : 1930)) {
+            const opacity = Math.max(1 - (scrollTop - (isMobile ? 1000 : 1830)) / 100, 0);
             scrollMore.style.opacity = opacity;
             scrollMore.style.transform = 'translateY(-50%)';
         } else {
