@@ -43,7 +43,7 @@
             font-size: 18px;
             margin: 0;
         }
-          .subtitle_s {
+        .subtitle_s {
             font-family: 'Pretendard', sans-serif;
             font-weight: 300;
             font-size: 14px;
@@ -127,13 +127,14 @@
         .info-box {
             width: 284px;
             height: 474.4px;
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 18px;
             position: fixed;
             z-index: 999;
             display: none;
             transform: translateX(-100%);
-            transition: transform 0.4s ease;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            opacity: 0;
         }
     </style>
 </head>
@@ -245,6 +246,7 @@
             infoBox.style.top = `${newTop}px`;
             setTimeout(() => {
                 infoBox.style.transform = 'translateX(0)';
+                infoBox.style.opacity = '1';
             }, 50);
         }, 600);
     }
@@ -254,7 +256,8 @@
         const index = Array.from(container.children).indexOf(placeholder);
 
         // Info box 숨기기
-        infoBox.style.transform = 'translateX(-100%)';
+        infoBox.style.transform = 'translateX(0)';
+        infoBox.style.opacity = '0';
         setTimeout(() => {
             infoBox.style.display = 'none';
         }, 400);
