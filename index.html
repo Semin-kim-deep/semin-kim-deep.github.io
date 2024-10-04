@@ -258,38 +258,47 @@
                 right: 20px;
             }
         }
-        @media (max-width: 768px) {
-            body {
-                background-image: url('images/m_bg.jpg');
-            }
-            .changing-image {
-                width: 500px;  /* 2배로 증가 */
-                height: 500px;  /* 2배로 증가 */
-            }
-            .gallery {
-                flex-direction: column;
-                align-items: center;
-            }
-            .circular-image-container {
-                width: 60%;
-                padding-bottom: 60%;
-                margin: 20px 0;
-            }
-            .video-container, .mpic01-container {
-                width: 80%;
-                margin: 20px 0;
-            }
-            .video-container {
-                margin-right: 0;
-            }
-            .it-seodanggae-image {
-                width: 200px;
-                height: 200px;
-            }
-            .info-description, .it-seodanggae-description {
-                display: none;
-            }
-        }
+ @media (max-width: 768px) {
+    body {
+        background-image: url('images/m_bg.jpg');
+        background-size: cover;
+    }
+    .changing-image {
+        width: 100%;
+        height: auto;
+        max-width: 500px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .gallery {
+        flex-direction: column;
+        align-items: center;
+    }
+    .circular-image-container {
+        width: 60%;
+        padding-bottom: 60%;
+        margin: 20px 0;
+    }
+    .video-container, .mpic01-container {
+        width: 100%;
+        max-width: 80%;
+        margin: 20px auto;
+    }
+    .it-seodanggae-image {
+        width: 200px;
+        height: 200px;
+    }
+    .info-description, .it-seodanggae-description {
+        display: none;
+    }
+    .container {
+        padding: 0 20px;
+    }
+    h1 {
+        font-size: 33.6px; /* 48px의 70% */
+    }
+}
+        
         @media (max-width: 480px) {
             .container {
                 padding: 0 10px;
