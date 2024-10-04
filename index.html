@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +27,7 @@
         }
         header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             padding: 20px 0;
         }
@@ -42,241 +43,329 @@
             text-rendering: optimizeLegibility;
             text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
         }
-        .hamburger {
-            display: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
+        .gallery {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 300px;
         }
-        .menu-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.8);
-            z-index: 1000;
+        .circular-image-container {
+            position: relative;
+            width: 30%;
+            padding-bottom: 30%;
+            overflow: hidden;
+            margin: 0 100px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
         }
-        .menu-content {
+        .circular-image {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            width: 70%;
+            height: 70%;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .circular-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .higher-image { 
+            margin-top: -100px;
+        }
+        .video-mpic-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px;
+        }
+        .video-container {
+            width: 30%;
+            margin-right: 350px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
+        }
+        .video-container video {
+            width: 100%;
+            display: block;
+        }
+        .mpic01-container {
+            width: 30%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
+        }
+        .mpic01-container img {
+            width: 100%;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .changing-image {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+        .description {
+            margin-top: 40px;
             text-align: center;
         }
-        .menu-content a {
-            display: block;
+        .about-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .info-section {
+            position: fixed;
+            left: calc(50% - 550px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .info-title {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .info-description {
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 500px;
+        }
+        .info-description p:first-child {
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        .info-description p:nth-child(2) {
+            font-family: 'Jost', sans-serif;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .info-more {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        .info-more a {
+            color: white;
+            text-decoration: none;
+        }
+        .info-more-it {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+        }
+           .info-more-it a {
+            color: #282828;
+            text-decoration: none;
+        }
+        .it-seodanggae-group {
+            position: fixed;
+            right: calc(50% - 660px); /* 80px 오른쪽으로 이동 */
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: left;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            color: #282828;
+        }
+        .it-seodanggae-image {
+            width: 300px;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        .it-seodanggae-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .it-seodanggae-title {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .it-seodanggae-description {
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 400px; /* Reduced from 500px to 400px */
+        }
+        .scroll-more {
+            position: fixed;
+            left: calc(50% - 550px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+        }
+        .anti-tarot-card {
+            position: absolute;
+            bottom: 300px;
+            left: 50%;
+            transform: translateX(-50%);
             font-family: 'Jost', sans-serif;
             font-weight: 700;
             font-size: 24px;
             color: black;
-            text-decoration: none;
-            margin: 20px 0;
+            text-align: center;
+            width: 100%;
         }
-        .close-menu {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
-            color: black;
-            cursor: pointer;
+        @media (max-width: 1024px) {
+            .container {
+                max-width: 1024px;
+                padding: 0 20px;
+            }
+            .changing-image {
+                width: 500px;
+                height: 500px;
+            }
+            .gallery {
+                margin-top: 200px;
+            }
+            .circular-image-container {
+                margin: 0 50px;
+            }
+            .video-container {
+                margin-right: 150px;
+            }
+            .info-section, .scroll-more {
+                left: 20px;
+            }
+            .it-seodanggae-group {
+                right: 20px;
+            }
         }
-    .gallery {
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        margin-top: 300px;
-    }
-    .circular-image-container {
-        position: relative;
-        width: 30%;
-        padding-bottom: 30%;
-        overflow: hidden;
-        margin: 0 100px;
-        opacity: 0;
-        transform: translateY(50px);
-        transition: opacity 1s, transform 1s;
-    }
-    .circular-image {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 70%;
-        height: 70%;
-        border-radius: 50%;
-        overflow: hidden;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .circular-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .higher-image { 
-        margin-top: -100px;
-    }
-    .video-mpic-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 100px;
-    }
-    .video-container {
-        width: 30%;
-        margin-right: 350px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        opacity: 0;
-        transform: translateY(50px);
-        transition: opacity 1s, transform 1s;
-    }
-    .video-container video {
-        width: 100%;
-        display: block;
-    }
-    .mpic01-container {
-        width: 30%;
-        text-align: center;
-        opacity: 0;
-        transform: translateY(50px);
-        transition: opacity 1s, transform 1s;
-    }
-    .mpic01-container img {
-        width: 100%;
-        display: inline-block;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .changing-image {
-        position: absolute;
-        top: 100px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 600px;
-        height: 600px;
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-        z-index: 1;
-    }
-@media (max-width: 768px) {
-        body {
-            background-image: url('images/m_bg.jpg');
-            background-size: 100% auto;
+        @media (max-width: 768px) {
+            .changing-image {
+                width: 400px;
+                height: 400px;
+            }
+            .gallery {
+                flex-direction: column;
+                align-items: center;
+            }
+            .circular-image-container {
+                width: 60%;
+                padding-bottom: 60%;
+                margin: 20px 0;
+            }
+            .video-container, .mpic01-container {
+                width: 80%;
+                margin: 20px 0;
+            }
+            .video-container {
+                margin-right: 0;
+            }
+            .it-seodanggae-image {
+                width: 200px;
+                height: 200px;
+            }
         }
-        .container {
-            padding: 0 15px;
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+            h1 {
+                font-size: 36px;
+            }
+            .changing-image {
+                width: 300px;
+                height: 300px;
+            }
+            .info-title, .it-seodanggae-title, .scroll-more {
+                font-size: 36px;
+            }
+            .info-description, .it-seodanggae-description {
+                font-size: 14px;
+            }
+            .it-seodanggae-image {
+                width: 150px;
+                height: 150px;
+            }
         }
-        h1 {
-            font-size: 38.4px; /* 80% of 48px */
-        }
-        .hamburger {
-            display: block;
-        }
-        .changing-image {
-            width: 90vw;
-            height: 90vw;
-            max-width: 500px;
-            max-height: 500px;
-        }
-        .gallery {
-            flex-direction: column;
-            align-items: center;
-            margin-top: 150px;
-        }
-        .circular-image-container {
-            width: 60%;
-            padding-bottom: 60%;
-            margin: 20px 0;
-        }
-
-    
-
-
-        /* ... 스타일 계속 ... */
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>Deepdown Studio</h1>
-            <div class="hamburger">&#9776;</div>
         </header>
         <div class="changing-image"></div>
-        <!-- ... HTML 구조 계속 ... -->
-    </div>
-
-    <!-- ... 더 많은 HTML 구조 ... -->
-<div class="gallery">
-    <div class="circular-image-container higher-image">
-        <div class="circular-image">
-            <img src="images/Thank-you3_web.png" alt="Image 2">
+        <div class="gallery">
+            <div class="circular-image-container higher-image">
+                <div class="circular-image">
+                    <img src="images/Thank-you3_web.png" alt="Image 2">
+                </div>
+            </div>
+            <div class="circular-image-container">
+                <div class="circular-image">
+                    <img src="images/a_1253.png" alt="Image 1">
+                </div>
+            </div>
+        </div>
+        <div class="video-mpic-container">
+            <div class="video-container">
+                <video id="myVideo" muted autoplay loop>
+                    <source src="images/anti_tarotcard.MP4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="mpic01-container">
+                <img src="images/mpic01_2.png" alt="Image 5">
+            </div>
+        </div>
+        <div class="description">
+            <p></p>
         </div>
     </div>
-    <div class="circular-image-container">
-        <div class="circular-image">
-            <img src="images/a_1253.png" alt="Image 1">
+    <div class="info-section" id="about-section">
+        <div class="info-title">About</div>
+        <div class="info-description">
+            <p>딥다운 스튜디오는 일러스트를 중심으로 다양한 제품을 만들고 있어요.<br>
+            음악과 책 등에서 영감을 받고, 재미있는 것들을 만들고자 해요.</p>
+            <p>Deepdown Studio creates a variety of products with a focus on illustration.<br>
+            <span style="font-family: 'Jost', sans-serif; font-weight: 500;">I got inspiration from music and books, and my goal is to make fun and interesting things.</span></p>
+            <p class="info-more"><a href="about.html">More ></a></p>
         </div>
     </div>
-</div>
-<div class="video-mpic-container">
-    <div class="video-container">
-        <video id="myVideo" muted autoplay loop>
-            <source src="images/anti_tarotcard.MP4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+    <div class="it-seodanggae-group">
+        <div class="it-seodanggae-image">
+            <img src="images/a_1253.png" alt="IT Seodanggae Image">
+        </div>
+        <div class="it-seodanggae-title">IT Seodanggae</div>
+        <div class="it-seodanggae-description">
+            <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. IT라인의 브랜드는 IT서당개입니다.</p>
+            <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' This IT brand is called 'IT Seodanggae.</span></p>
+            <p class="info-more-it"><a href="it.html">More ></a></p>
+        </div>
     </div>
-    <div class="mpic01-container">
-        <img src="images/mpic01_2.png" alt="Image 5">
-    </div>
-</div>
-
-<div class="info-section" id="about-section">
-    <div class="info-title">About</div>
-    <div class="info-description">
-        <p>딥다운 스튜디오는 일러스트를 중심으로 다양한 제품을 만들고 있어요.<br>
-        음악과 책 등에서 영감을 받고, 재미있는 것들을 만들고자 해요.</p>
-        <p>Deepdown Studio creates a variety of products with a focus on illustration.<br>
-        <span style="font-family: 'Jost', sans-serif; font-weight: 500;">I got inspiration from music and books, and my goal is to make fun and interesting things.</span></p>
-        <p class="info-more"><a href="about.html">More ></a></p>
-    </div>
-</div>
-<div class="it-seodanggae-group">
-    <div class="it-seodanggae-image">
-        <img src="images/a_1253.png" alt="IT Seodanggae Image">
-    </div>
-    <div class="it-seodanggae-title">IT Seodanggae</div>
-    <div class="it-seodanggae-description">
-        <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. IT라인의 브랜드는 IT서당개입니다.</p>
-        <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' This IT brand is called 'IT Seodanggae.</span></p>
-        <p class="info-more-it"><a href="it.html">More ></a></p>
-    </div>
-</div>
-<div class="scroll-more">Scroll More</div>
-<div class="anti-tarot-card">Anti-Tarot Card</div>
-
-<div class="menu-overlay">
-    <div class="close-menu">&times;</div>
-    <div class="menu-content">
-        <a href="#">About</a>
-        <a href="#">Shop</a>
-        <a href="#">IT Line</a>
-        <a href="#">Anti-Tarot Card</a>
-        <a href="#">Calendar</a>
-    </div>
-</div>
-
-<script>
+    <div class="scroll-more">Scroll More</div>
+    <div class="anti-tarot-card">Anti-Tarot Card</div>
+ <script>
 document.addEventListener('DOMContentLoaded', function() {
     const changingImage = document.querySelector('.changing-image');
-    const aboutSection = document.querySelector('#about-section');
-    const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
-    const scrollMore = document.querySelector('.scroll-more');
-    const antiTarotCard = document.querySelector('.anti-tarot-card');
-    const hamburger = document.querySelector('.hamburger');
-    const menuOverlay = document.querySelector('.menu-overlay');
-    const closeMenu = document.querySelector('.close-menu');
-
     let isFirstImage = true;
     function changeImage() {
         const imageUrl = isFirstImage ? 'images/a_1.png' : 'images/a_2.png';
@@ -295,7 +384,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.height = `${pageHeight}px`;
             document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
         }
-        bgImage.src = window.innerWidth <= 768 ? 'images/m_bg.jpg' : 'images/bg_hp.jpg';
+        bgImage.src = 'images/bg_hp.jpg';
     }
 
     setPageSize();
@@ -304,93 +393,67 @@ document.addEventListener('DOMContentLoaded', function() {
     let bounce = 0;
     function animate() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const windowHeight = window.innerHeight;
-        const documentHeight = Math.max(
-            document.body.scrollHeight,
-            document.body.offsetHeight,
-            document.documentElement.clientHeight,
-            document.documentElement.scrollHeight,
-            document.documentElement.offsetHeight
-        );
-
         bounce += 0.05;
         const bounceOffset = Math.sin(bounce) * 10;
         changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
         
-        const isMobile = window.innerWidth <= 768;
+        const aboutSection = document.querySelector('#about-section');
+        const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
+        const scrollMore = document.querySelector('.scroll-more');
+        const antiTarotCard = document.querySelector('.anti-tarot-card');
         
-        // About 섹션 애니메이션
-        if (scrollTop > 0 && scrollTop <= (isMobile ? 300 : 430)) {
+        // About 섹션이 스크롤 시작 시 바로 나타나도록 변경
+        if (scrollTop > 0) {
             const opacity = Math.min(scrollTop / 100, 1);
             aboutSection.style.opacity = opacity;
-            aboutSection.style.transform = `translateY(calc(-50% + ${Math.max(75 - scrollTop / 2, 0)}px))`;
-        } else if (scrollTop > (isMobile ? 300 : 430) && scrollTop <= (isMobile ? 450 : 530)) {
-            const opacity = Math.max(1 - (scrollTop - (isMobile ? 300 : 430)) / 150, 0);
-            aboutSection.style.opacity = opacity;
-            aboutSection.style.transform = 'translateY(-50%)';
+            aboutSection.style.transform = `translateY(calc(-50% + ${Math.max(50 - scrollTop / 2, 0)}px))`;
         } else {
             aboutSection.style.opacity = '0';
-            aboutSection.style.transform = 'translateY(calc(-50% + 75px))';
+            aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
-        // IT Seodanggae 섹션 애니메이션
-        if (scrollTop > (isMobile ? 450 : 530) && scrollTop <= (isMobile ? 750 : 730)) {
-            const opacity = Math.min((scrollTop - (isMobile ? 450 : 530)) / 300, 1);
-            const translateY = Math.max(75 - (scrollTop - (isMobile ? 450 : 530)) / 4, 0);
+        if (scrollTop > 430 && scrollTop <= 530) {
+            const opacity = Math.max(1 - (scrollTop - 430) / 100, 0);
+            aboutSection.style.opacity = opacity;
+        } else if (scrollTop > 530 && scrollTop <= 730) {
+            const opacity = Math.min((scrollTop - 530) / 200, 1);
+            const translateY = Math.max(100 - (scrollTop - 530) / 2, 0);
             itSeodanggaeGroup.style.opacity = opacity;
             itSeodanggaeGroup.style.transform = `translateY(calc(-50% + ${translateY}px))`;
-        } else if (scrollTop > (isMobile ? 750 : 730) && scrollTop <= (isMobile ? 1050 : 1230)) {
+        } else if (scrollTop > 730 && scrollTop <= 1230) {
             itSeodanggaeGroup.style.opacity = '1';
             itSeodanggaeGroup.style.transform = 'translateY(-50%)';
-        } else if (scrollTop > (isMobile ? 1050 : 1230) && scrollTop <= (isMobile ? 1200 : 1330)) {
-            const opacity = Math.max(1 - (scrollTop - (iMobile ? 1050 : 1230)) / 150, 0);
-            const translateY = Math.min((scrollTop - (isMobile ? 1050 : 1230)) / 2, 75);
+        } else if (scrollTop > 1230 && scrollTop <= 1330) {
+            const opacity = Math.max(1 - (scrollTop - 1230) / 100, 0);
+            const translateY = Math.min((scrollTop - 1230) / 2, 50);
             itSeodanggaeGroup.style.opacity = opacity;
             itSeodanggaeGroup.style.transform = `translateY(calc(-50% - ${translateY}px))`;
             scrollMore.style.opacity = 1 - opacity;
-            scrollMore.style.transform = `translateY(calc(-50% + ${75 - translateY}px))`;
-        } else {
+            scrollMore.style.transform = `translateY(calc(-50% + ${50 - translateY}px))`;
+        } else if (scrollTop > 1330 && scrollTop <= 1830) {
             itSeodanggaeGroup.style.opacity = '0';
-            itSeodanggaeGroup.style.transform = 'translateY(calc(-50% + 75px))';
-        }
-
-        // Scroll More 텍스트 애니메이션
-        if (scrollTop > (isMobile ? 1200 : 1330) && scrollTop <= (iMobile ? 1500 : 1830)) {
+            itSeodanggaeGroup.style.transform = 'translateY(calc(-50% - 50px))';
             scrollMore.style.opacity = '1';
             scrollMore.style.transform = 'translateY(-50%)';
-        } else if (scrollTop > (iMobile ? 1500 : 1830) && scrollTop <= (iMobile ? 1650 : 1930)) {
-            const opacity = Math.max(1 - (scrollTop - (iMobile ? 1500 : 1830)) / 150, 0);
+        } else if (scrollTop > 1830 && scrollTop <= 1930) {
+            const opacity = Math.max(1 - (scrollTop - 1830) / 100, 0);
             scrollMore.style.opacity = opacity;
             scrollMore.style.transform = 'translateY(-50%)';
-        } else {
+        } else if (scrollTop > 1930) {
             scrollMore.style.opacity = '0';
-            scrollMore.style.transform = 'translateY(calc(-50% + 75px))';
+            scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
-        // Anti-Tarot Card 애니메이션 (스크롤 끝에서 나타남)
-        if (scrollTop + windowHeight >= documentHeight - 1) {
-            antiTarotCard.style.opacity = '1';
-        } else {
-            antiTarotCard.style.opacity = '0';
-        }
+        // Anti-Tarot Card 위치 조정
+        const pageHeight = document.body.scrollHeight;
+        antiTarotCard.style.bottom = `${300 + (pageHeight - scrollTop - window.innerHeight)}px`;
 
         requestAnimationFrame(animate);
     }
 
+
     animate();
-
-    hamburger.addEventListener('click', function() {
-        menuOverlay.style.display = 'block';
-    });
-
-    closeMenu.addEventListener('click', function() {
-        menuOverlay.style.display = 'none';
-    });
 });
 </script>
 </body>
 </html>
-
-
-
-        
