@@ -309,12 +309,33 @@
                 height: 150px;
             }
         }
+.hamburger {
+    display: none;
+    font-size: 30px;
+    color: white;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 33.6px; /* 48px의 70% */
+    }
+    .hamburger {
+        display: block;
+    }
+}
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>Deepdown Studio</h1>
+    <h1>Deepdown Studio</h1>
+    <div class="hamburger">☰</div>
+</header>
         </header>
         <div class="changing-image"></div>
         <div class="gallery">
@@ -367,6 +388,14 @@
     </div>
     <div class="scroll-more">Scroll More</div>
     <div class="anti-tarot-card">Anti-Tarot Card</div>
+<div id="mobileMenu" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000;">
+    <div style="position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer;">×</div>
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
+        <a href="#" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">Home</a>
+        <a href="about.html" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">About</a>
+        <a href="it.html" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">IT Seodanggae</a>
+    </div>
+</div>
     <script>
 document.addEventListener('DOMContentLoaded', function() {
     const changingImage = document.querySelector('.changing-image');
@@ -476,6 +505,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     animate();
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = mobileMenu.querySelector('div:first-child');
+
+    hamburger.addEventListener('click', function() {
+        mobileMenu.style.display = 'block';
+    });
+
+    closeMenu.addEventListener('click', function() {
+        mobileMenu.style.display = 'none';
+    });
+
+    // 기존의 DOMContentLoaded 이벤트 리스너 내용...
 });
 </script>
 </body>
