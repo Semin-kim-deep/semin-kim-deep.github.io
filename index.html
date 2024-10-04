@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,7 +74,7 @@
             height: 100%;
             object-fit: cover;
         }
-        .higher-image { 
+        .higher-image {
             margin-top: -100px;
         }
         .video-mpic-container {
@@ -172,13 +171,13 @@
             font-weight: 700;
             font-size: 24px;
         }
-           .info-more-it a {
+        .info-more-it a {
             color: #282828;
             text-decoration: none;
         }
         .it-seodanggae-group {
             position: fixed;
-            right: calc(50% - 660px); /* 80px 오른쪽으로 이동 */
+            right: calc(50% - 660px);
             top: 50%;
             transform: translateY(-50%);
             text-align: left;
@@ -206,7 +205,7 @@
         .it-seodanggae-description {
             font-size: 16px;
             line-height: 1.5;
-            max-width: 400px; /* Reduced from 500px to 400px */
+            max-width: 400px;
         }
         .scroll-more {
             position: fixed;
@@ -222,7 +221,7 @@
         }
         .anti-tarot-card {
             position: absolute;
-            bottom: 300px;
+            bottom: 150px;
             left: 50%;
             transform: translateX(-50%);
             font-family: 'Jost', sans-serif;
@@ -231,6 +230,8 @@
             color: black;
             text-align: center;
             width: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
         @media (max-width: 1024px) {
             .container {
@@ -258,18 +259,32 @@
             }
         }
         @media (max-width: 768px) {
+            body {
+                background-image: url('images/m_bg.jpg');
+                background-size: 100% auto;
+            }
+            .container {
+                padding: 0 15px;
+            }
             .changing-image {
-                width: 400px;
-                height: 400px;
+                width: 90vw;
+                height: 90vw;
+                max-width: 500px;
+                max-height: 500px;
             }
             .gallery {
                 flex-direction: column;
                 align-items: center;
+                margin-top: 150px;
             }
             .circular-image-container {
                 width: 60%;
                 padding-bottom: 60%;
                 margin: 20px 0;
+            }
+            .video-mpic-container {
+                flex-direction: column;
+                margin-top: 50px;
             }
             .video-container, .mpic01-container {
                 width: 80%;
@@ -282,6 +297,18 @@
                 width: 200px;
                 height: 200px;
             }
+            .info-description, .it-seodanggae-description {
+                display: none;
+            }
+            .info-section, .it-seodanggae-group, .scroll-more {
+                position: static;
+                transform: none;
+                margin: 20px 0;
+                text-align: center;
+            }
+            .info-title, .it-seodanggae-title, .scroll-more {
+                font-size: 36px;
+            }
         }
         @media (max-width: 480px) {
             .container {
@@ -291,14 +318,8 @@
                 font-size: 36px;
             }
             .changing-image {
-                width: 300px;
-                height: 300px;
-            }
-            .info-title, .it-seodanggae-title, .scroll-more {
-                font-size: 36px;
-            }
-            .info-description, .it-seodanggae-description {
-                font-size: 14px;
+                width: 90vw;
+                height: 90vw;
             }
             .it-seodanggae-image {
                 width: 150px;
@@ -363,9 +384,15 @@
     </div>
     <div class="scroll-more">Scroll More</div>
     <div class="anti-tarot-card">Anti-Tarot Card</div>
- <script>
+
+    <script>
 document.addEventListener('DOMContentLoaded', function() {
     const changingImage = document.querySelector('.changing-image');
+    const aboutSection = document.querySelector('#about-section');
+    const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
+    const scrollMore = document.querySelector('.scroll-more');
+    const antiTarotCard = document.querySelector('.anti-tarot-card');
+
     let isFirstImage = true;
     function changeImage() {
         const imageUrl = isFirstImage ? 'images/a_1.png' : 'images/a_2.png';
@@ -384,7 +411,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.height = `${pageHeight}px`;
             document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
         }
-        bgImage.src = 'images/bg_hp.jpg';
+        bgImage.src = window.innerWidth <= 768 ? 'images/m_bg.jpg' : 'images/bg_hp.jpg';
     }
 
     setPageSize();
@@ -393,64 +420,78 @@ document.addEventListener('DOMContentLoaded', function() {
     let bounce = 0;
     function animate() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        const documentHeight = Math.max(
+            document.body.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.clientHeight,
+            document.documentElement.scrollHeight,
+            document.documentElement.offsetHeight
+        );
+
         bounce += 0.05;
         const bounceOffset = Math.sin(bounce) * 10;
         changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
-        
-        const aboutSection = document.querySelector('#about-section');
-        const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
-        const scrollMore = document.querySelector('.scroll-more');
-        const antiTarotCard = document.querySelector('.anti-tarot-card');
-        
-        // About 섹션이 스크롤 시작 시 바로 나타나도록 변경
-        if (scrollTop > 0) {
+       
+        const isMobile = window.innerWidth <= 768;
+       
+        // About 섹션 애니메이션
+        if (scrollTop > 0 && scrollTop <= (isMobile ? 200 : 430)) {
             const opacity = Math.min(scrollTop / 100, 1);
             aboutSection.style.opacity = opacity;
             aboutSection.style.transform = `translateY(calc(-50% + ${Math.max(50 - scrollTop / 2, 0)}px))`;
+        } else if (scrollTop > (isMobile ? 200 : 430) && scrollTop <= (isMobile ? 300 : 530)) {
+            const opacity = Math.max(1 - (scrollTop - (isMobile ? 200 : 430)) / 100, 0);
+            aboutSection.style.opacity = opacity;
+            aboutSection.style.transform = 'translateY(-50%)';
         } else {
             aboutSection.style.opacity = '0';
             aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
-        if (scrollTop > 430 && scrollTop <= 530) {
-            const opacity = Math.max(1 - (scrollTop - 430) / 100, 0);
-            aboutSection.style.opacity = opacity;
-        } else if (scrollTop > 530 && scrollTop <= 730) {
-            const opacity = Math.min((scrollTop - 530) / 200, 1);
-            const translateY = Math.max(100 - (scrollTop - 530) / 2, 0);
+        // IT Seodanggae 섹션 애니메이션
+        if (scrollTop > (isMobile ? 300 : 530) && scrollTop <= (isMobile ? 500 : 730)) {
+            const opacity = Math.min((scrollTop - (isMobile ? 300 : 530)) / 200, 1);
+            const translateY = Math.max(50 - (scrollTop - (isMobile ? 300 : 530)) / 4, 0);
             itSeodanggaeGroup.style.opacity = opacity;
             itSeodanggaeGroup.style.transform = `translateY(calc(-50% + ${translateY}px))`;
-        } else if (scrollTop > 730 && scrollTop <= 1230) {
+        } else if (scrollTop > (isMobile ? 500 : 730) && scrollTop <= (isMobile ? 700 : 1230)) {
             itSeodanggaeGroup.style.opacity = '1';
             itSeodanggaeGroup.style.transform = 'translateY(-50%)';
-        } else if (scrollTop > 1230 && scrollTop <= 1330) {
-            const opacity = Math.max(1 - (scrollTop - 1230) / 100, 0);
-            const translateY = Math.min((scrollTop - 1230) / 2, 50);
+        } else if (scrollTop > (isMobile ? 700 : 1230) && scrollTop <= (isMobile ? 800 : 1330)) {
+            const opacity = Math.max(1 - (scrollTop - (isMobile ? 700 : 1230)) / 100, 0);
+            const translateY = Math.min((scrollTop - (isMobile ? 700 : 1230)) / 2, 50);
             itSeodanggaeGroup.style.opacity = opacity;
             itSeodanggaeGroup.style.transform = `translateY(calc(-50% - ${translateY}px))`;
             scrollMore.style.opacity = 1 - opacity;
             scrollMore.style.transform = `translateY(calc(-50% + ${50 - translateY}px))`;
-        } else if (scrollTop > 1330 && scrollTop <= 1830) {
+        } else {
             itSeodanggaeGroup.style.opacity = '0';
-            itSeodanggaeGroup.style.transform = 'translateY(calc(-50% - 50px))';
+            itSeodanggaeGroup.style.transform = 'translateY(calc(-50% + 50px))';
+        }
+
+        // Scroll More 텍스트 애니메이션
+        if (scrollTop > (isMobile ? 800 : 1330) && scrollTop <= (isMobile ? 1000 : 1830)) {
             scrollMore.style.opacity = '1';
             scrollMore.style.transform = 'translateY(-50%)';
-        } else if (scrollTop > 1830 && scrollTop <= 1930) {
-            const opacity = Math.max(1 - (scrollTop - 1830) / 100, 0);
+        } else if (scrollTop > (isMobile ? 1000 : 1830) && scrollTop <= (isMobile ? 1100 : 1930)) {
+            const opacity = Math.max(1 - (scrollTop - (isMobile ? 1000 : 1830)) / 100, 0);
             scrollMore.style.opacity = opacity;
             scrollMore.style.transform = 'translateY(-50%)';
-        } else if (scrollTop > 1930) {
+        } else {
             scrollMore.style.opacity = '0';
             scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
-        // Anti-Tarot Card 위치 조정
-        const pageHeight = document.body.scrollHeight;
-        antiTarotCard.style.bottom = `${300 + (pageHeight - scrollTop - window.innerHeight)}px`;
+        // Anti-Tarot Card 애니메이션 (스크롤 끝에서 나타남)
+        if (scrollTop + windowHeight >= documentHeight - 1) {
+            antiTarotCard.style.opacity = '1';
+        } else {
+            antiTarotCard.style.opacity = '0';
+        }
 
         requestAnimationFrame(animate);
     }
-
 
     animate();
 });
