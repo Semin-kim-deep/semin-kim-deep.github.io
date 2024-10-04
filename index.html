@@ -263,8 +263,8 @@
                 background-image: url('images/m_bg.jpg');
             }
             .changing-image {
-                width: 400px;
-                height: 400px;
+                width: 500px;  /* 2배로 증가 */
+                height: 500px;  /* 2배로 증가 */
             }
             .gallery {
                 flex-direction: column;
@@ -298,8 +298,8 @@
                 font-size: 36px;
             }
             .changing-image {
-                width: 250px;
-                height: 250px;
+                width: 500px;  /* 모바일에서도 500px 유지 */
+                height: 500px;  /* 모바일에서도 500px 유지 */
             }
             .info-title, .it-seodanggae-title, .scroll-more {
                 font-size: 36px;
@@ -377,106 +377,4 @@
 
     let isFirstImage = true;
     function changeImage() {
-        const imageUrl = isFirstImage ? 'images/a_1.png' : 'images/a_2.png';
-        changingImage.style.backgroundImage = `url('${imageUrl}')`;
-        isFirstImage = !isFirstImage;
-    }
-    changeImage();
-    setInterval(changeImage, 1000);
-
-    function setPageSize() {
-        const bgImage = new Image();
-        bgImage.onload = function() {
-            const aspectRatio = bgImage.width / bgImage.height;
-            const pageWidth = Math.min(window.innerWidth, bgImage.width);
-            const pageHeight = pageWidth / aspectRatio;
-            document.body.style.height = `${pageHeight}px`;
-            document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
-        }
-        bgImage.src = window.innerWidth <= 768 ? 'images/m_bg.jpg' : 'images/bg_hp.jpg';
-    }
-
-    setPageSize();
-    window.addEventListener('resize', setPageSize);
-
-    let bounce = 0;
-    function animate() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const windowHeight = window.innerHeight;
-        const documentHeight = Math.max(
-            document.body.scrollHeight,
-            document.body.offsetHeight,
-            document.documentElement.clientHeight,
-            document.documentElement.scrollHeight,
-            document.documentElement.offsetHeight
-        );
-
-        bounce += 0.05;
-        const bounceOffset = Math.sin(bounce) * 10;
-        changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
-        
-        const isMobile = window.innerWidth <= 768;
-        
-        // About 섹션 애니메이션
-        if (scrollTop > 0 && scrollTop <= (isMobile ? 200 : 430)) {
-            const opacity = Math.min(scrollTop / 100, 1);
-            aboutSection.style.opacity = opacity;
-            aboutSection.style.transform = `translateY(calc(-50% + ${Math.max(50 - scrollTop / 2, 0)}px))`;
-        } else if (scrollTop > (isMobile ? 200 : 430) && scrollTop <= (isMobile ? 300 : 530)) {
-            const opacity = Math.max(1 - (scrollTop - (isMobile ? 200 : 430)) / 100, 0);
-            aboutSection.style.opacity = opacity;
-            aboutSection.style.transform = 'translateY(-50%)';
-        } else {
-            aboutSection.style.opacity = '0';
-            aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
-        }
-
-        // IT Seodanggae 섹션 애니메이션
-        if (scrollTop > (isMobile ? 300 : 530) && scrollTop <= (isMobile ? 500 : 730)) {
-            const opacity = Math.min((scrollTop - (isMobile ? 300 : 530)) / 200, 1);
-            const translateY = Math.max(50 - (scrollTop - (isMobile ? 300 : 530)) / 4, 0);
-            itSeodanggaeGroup.style.opacity = opacity;
-            itSeodanggaeGroup.style.transform = `translateY(calc(-50% + ${translateY}px))`;
-        } else if (scrollTop > (isMobile ? 500 : 730) && scrollTop <= (isMobile ? 700 : 1230)) {
-            itSeodanggaeGroup.style.opacity = '1';
-            itSeodanggaeGroup.style.transform = 'translateY(-50%)';
-        } else if (scrollTop > (isMobile ? 700 : 1230) && scrollTop <= (isMobile ? 800 : 1330)) {
-            const opacity = Math.max(1 - (scrollTop - (isMobile ? 700 : 1230)) / 100, 0);
-            const translateY = Math.min((scrollTop - (isMobile ? 700 : 1230)) / 2, 50);
-            itSeodanggaeGroup.style.opacity = opacity;
-            itSeodanggaeGroup.style.transform = `translateY(calc(-50% - ${translateY}px))`;
-            scrollMore.style.opacity = 1 - opacity;
-            scrollMore.style.transform = `translateY(calc(-50% + ${50 - translateY}px))`;
-        } else {
-            itSeodanggaeGroup.style.opacity = '0';
-            itSeodanggaeGroup.style.transform = 'translateY(calc(-50% + 50px))';
-        }
-
-        // Scroll More 텍스트 애니메이션
-        if (scrollTop > (isMobile ? 800 : 1330) && scrollTop <= (isMobile ? 1000 : 1830)) {
-            scrollMore.style.opacity = '1';
-            scrollMore.style.transform = 'translateY(-50%)';
-        } else if (scrollTop > (isMobile ? 1000 : 1830) && scrollTop <= (isMobile ? 1100 : 1930)) {
-            const opacity = Math.max(1 - (scrollTop - (isMobile ? 1000 : 1830)) / 100, 0);
-            scrollMore.style.opacity = opacity;
-            scrollMore.style.transform = 'translateY(-50%)';
-        } else {
-            scrollMore.style.opacity = '0';
-            scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
-        }
-
-        // Anti-Tarot Card 애니메이션 (스크롤 끝에서 나타남)
-        if (scrollTop + windowHeight >= documentHeight - 1) {
-            antiTarotCard.style.opacity = '1';
-        } else {
-            antiTarotCard.style.opacity = '0';
-        }
-
-        requestAnimationFrame(animate);
-    }
-
-    animate();
-});
-</script>
-</body>
-</html>
+        const imageUrl = isFirstImage ? 'images/a_1.png' : 'images
