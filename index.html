@@ -261,19 +261,30 @@
         @media (max-width: 768px) {
             body {
                 background-image: url('images/m_bg.jpg');
+                background-size: 100% auto;
+            }
+            .container {
+                padding: 0 15px;
             }
             .changing-image {
-                width: 500px;  /* 2배로 증가 */
-                height: 500px;  /* 2배로 증가 */
+                width: 90vw;
+                height: 90vw;
+                max-width: 500px;
+                max-height: 500px;
             }
             .gallery {
                 flex-direction: column;
                 align-items: center;
+                margin-top: 150px;
             }
             .circular-image-container {
                 width: 60%;
                 padding-bottom: 60%;
                 margin: 20px 0;
+            }
+            .video-mpic-container {
+                flex-direction: column;
+                margin-top: 50px;
             }
             .video-container, .mpic01-container {
                 width: 80%;
@@ -289,6 +300,15 @@
             .info-description, .it-seodanggae-description {
                 display: none;
             }
+            .info-section, .it-seodanggae-group, .scroll-more {
+                position: static;
+                transform: none;
+                margin: 20px 0;
+                text-align: center;
+            }
+            .info-title, .it-seodanggae-title, .scroll-more {
+                font-size: 36px;
+            }
         }
         @media (max-width: 480px) {
             .container {
@@ -298,11 +318,8 @@
                 font-size: 36px;
             }
             .changing-image {
-                width: 500px;  /* 모바일에서도 500px 유지 */
-                height: 500px;  /* 모바일에서도 500px 유지 */
-            }
-            .info-title, .it-seodanggae-title, .scroll-more {
-                font-size: 36px;
+                width: 90vw;
+                height: 90vw;
             }
             .it-seodanggae-image {
                 width: 150px;
@@ -367,6 +384,7 @@
     </div>
     <div class="scroll-more">Scroll More</div>
     <div class="anti-tarot-card">Anti-Tarot Card</div>
+
     <script>
 document.addEventListener('DOMContentLoaded', function() {
     const changingImage = document.querySelector('.changing-image');
