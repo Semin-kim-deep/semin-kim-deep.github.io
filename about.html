@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deepdown Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
     <style>
         body, html {
@@ -76,11 +76,15 @@
         p {
             font-size: 16px;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 10px; /* 줄였습니다 */
         }
         .en {
             font-family: 'Jost', sans-serif;
-            font-weight: 400;
+            font-weight: 500; /* medium으로 변경 */
+            margin-top: 0; /* 위 여백 제거 */
+        }
+        .text-group {
+            margin-bottom: 20px; /* 그룹 간 여백 추가 */
         }
         .activities {
             margin-top: 40px;
@@ -110,15 +114,19 @@
         <div class="search-icon"></div>
     </header>
     <div class="container">
-        <img src="images/Thank-you3_web.png" alt="Deepdown Studio" class="center-image">
+        <img src="images/Thank-you3_2_web.png" alt="Deepdown Studio" class="center-image">
         
-        <p>일러스트레이션/디자인 상품을 제작하는 딥다운 스튜디오에 오신 것을 환영합니다.</p>
-        <p class="en">Welcome to Deepdown Studio, where we create illustration and design products.</p>
+        <div class="text-group">
+            <p>일러스트레이션/디자인 상품을 제작하는 딥다운 스튜디오에 오신 것을 환영합니다.</p>
+            <p class="en">Welcome to Deepdown Studio, where we create illustration and design products.</p>
+        </div>
         
-        <p>딥다운 스튜디오는 음악과 책 그리고 다른 예술에서 영감을 받습니다.<br>
-        이곳의 상품이 마음에 드셔서, 저와 제품들만 등그러니 남아있지 않기를 바랍니다.</p>
-        
-        <p class="en">Deepdown Studio draws inspiration from music, books, and other art forms. I hope you enjoy our products, and that it won't be just me and the products left all alone (please).</p>
+        <div class="text-group">
+            <p>딥다운 스튜디오는 음악과 책 그리고 다른 예술에서 영감을 받습니다.<br>
+            이곳의 상품이 마음에 드셔서, 저와 제품들만 등그러니 남아있지 않기를 바랍니다.</p>
+            
+            <p class="en">Deepdown Studio draws inspiration from music, books, and other art forms. I hope you enjoy our products, and that it won't be just me and the products left all alone (please).</p>
+        </div>
         
         <div class="activities">
             <h2>대외활동</h2>
