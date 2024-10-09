@@ -77,36 +77,6 @@
         .higher-image { 
             margin-top: -100px;
         }
-        .video-mpic-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 100px;
-        }
-        .video-container {
-            width: 30%;
-            margin-right: 350px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s, transform 1s;
-        }
-        .video-container video {
-            width: 100%;
-            display: block;
-        }
-        .mpic01-container {
-            width: 30%;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s, transform 1s;
-        }
-        .mpic01-container img {
-            width: 100%;
-            display: inline-block;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
         .changing-image {
             position: absolute;
             top: 100px;
@@ -175,7 +145,7 @@
             color: #282828;
             text-decoration: none;
         }
-        .it-seodanggae-group {
+        .it-line-group {
             position: fixed;
             right: calc(50% - 660px);
             top: 50%;
@@ -185,24 +155,24 @@
             transition: opacity 0.5s ease, transform 0.5s ease;
             color: #282828;
         }
-        .it-seodanggae-image {
+        .it-line-image {
             width: 300px;
             height: 300px;
             margin-bottom: 20px;
         }
-        .it-seodanggae-image img {
+        .it-line-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
         }
-        .it-seodanggae-title {
+        .it-line-title {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
             font-size: 36px;
             margin-bottom: 20px;
         }
-        .it-seodanggae-description {
+        .it-line-description {
             font-size: 16px;
             line-height: 1.5;
             max-width: 400px;
@@ -254,7 +224,7 @@
             .info-section, .scroll-more {
                 left: 20px;
             }
-            .it-seodanggae-group {
+            .it-line-group {
                 right: 20px;
             }
         }
@@ -275,25 +245,16 @@
         left: 50%;
         transform: translateX(-50%);
     }
-    .gallery {
-        flex-direction: column;
-        align-items: center;
-    }
     .circular-image-container {
         width: 60%;
         padding-bottom: 60%;
         margin: 20px 0;
     }
-    .video-container, .mpic01-container {
-        width: 100%;
-        max-width: 80%;
-        margin: 20px auto;
-    }
-    .it-seodanggae-image {
+    .it-line-image {
         width: 200px;
         height: 200px;
     }
-    .info-description, .it-seodanggae-description {
+    .info-description, .it-line-description {
         display: none;
     }
     .container {
@@ -315,10 +276,10 @@
                 width: 500px;  /* 모바일에서도 500px 유지 */
                 height: 500px;  /* 모바일에서도 500px 유지 */
             }
-            .info-title, .it-seodanggae-title, .scroll-more {
+            .info-title, .it-line-title, .scroll-more {
                 font-size: 36px;
             }
-            .it-seodanggae-image {
+            .it-line-image {
                 width: 150px;
                 height: 150px;
             }
@@ -358,23 +319,6 @@
                     <img src="images/Thank-you3_web.png" alt="Image 2">
                 </div>
             </div>
-            <div class="circular-image-container">
-                <div class="circular-image">
-                    <img src="images/a_1253.png" alt="Image 1">
-                </div>
-            </div>
-        </div>
-        <div class="video-mpic-container">
-            <div class="video-container">
-                <video id="myVideo" muted autoplay loop>
-                    <source src="images/anti_tarotcard.MP4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-            <div class="mpic01-container">
-                <img src="images/mpic01_2.png" alt="Image 5">
-            </div>
-        </div>
         <div class="description">
             <p></p>
         </div>
@@ -389,14 +333,14 @@
             <p class="info-more"><a href="about.html">More ></a></p>
         </div>
     </div>
-    <div class="it-seodanggae-group">
-        <div class="it-seodanggae-image">
-            <img src="images/a_1253.png" alt="IT Seodanggae Image">
+    <div class="it-line-group">
+        <div class="it-line-image">
+            <img src="images/a_1253.png" alt="IT line Image">
         </div>
-        <div class="it-seodanggae-title">IT Seodanggae</div>
-        <div class="it-seodanggae-description">
-            <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. IT라인의 브랜드는 IT서당개입니다.</p>
-            <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' This IT brand is called 'IT Seodanggae.</span></p>
+        <div class="it-line-title">IT line</div>
+        <div class="it-line-description">
+            <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. </p>
+            <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' </span></p>
             <p class="info-more-it"><a href="it.html">More ></a></p>
         </div>
     </div>
@@ -407,14 +351,14 @@
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
         <a href="#" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">Home</a>
         <a href="about.html" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">About</a>
-        <a href="it.html" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">IT Seodanggae</a>
+        <a href="it.html" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">IT line</a>
     </div>
 </div>
     <script>
 document.addEventListener('DOMContentLoaded', function() {
     const changingImage = document.querySelector('.changing-image');
     const aboutSection = document.querySelector('#about-section');
-    const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
+    const itlineGroup = document.querySelector('.it-line-group');
     const scrollMore = document.querySelector('.scroll-more');
     const antiTarotCard = document.querySelector('.anti-tarot-card');
 
@@ -474,25 +418,25 @@ document.addEventListener('DOMContentLoaded', function() {
             aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
-        // IT Seodanggae 섹션 애니메이션
+        // IT line 섹션 애니메이션
         if (scrollTop > (isMobile ? 300 : 530) && scrollTop <= (isMobile ? 500 : 730)) {
             const opacity = Math.min((scrollTop - (isMobile ? 300 : 530)) / 200, 1);
             const translateY = Math.max(50 - (scrollTop - (isMobile ? 300 : 530)) / 4, 0);
-            itSeodanggaeGroup.style.opacity = opacity;
-            itSeodanggaeGroup.style.transform = `translateY(calc(-50% + ${translateY}px))`;
+            itlineGroup.style.opacity = opacity;
+            itlineGroup.style.transform = `translateY(calc(-50% + ${translateY}px))`;
         } else if (scrollTop > (isMobile ? 500 : 730) && scrollTop <= (isMobile ? 700 : 1230)) {
-            itSeodanggaeGroup.style.opacity = '1';
-            itSeodanggaeGroup.style.transform = 'translateY(-50%)';
+            itlineGroup.style.opacity = '1';
+            itlineGroup.style.transform = 'translateY(-50%)';
         } else if (scrollTop > (isMobile ? 700 : 1230) && scrollTop <= (isMobile ? 800 : 1330)) {
             const opacity = Math.max(1 - (scrollTop - (isMobile ? 700 : 1230)) / 100, 0);
             const translateY = Math.min((scrollTop - (isMobile ? 700 : 1230)) / 2, 50);
-            itSeodanggaeGroup.style.opacity = opacity;
-            itSeodanggaeGroup.style.transform = `translateY(calc(-50% - ${translateY}px))`;
+            itlineGroup.style.opacity = opacity;
+            itlineGroup.style.transform = `translateY(calc(-50% - ${translateY}px))`;
             scrollMore.style.opacity = 1 - opacity;
             scrollMore.style.transform = `translateY(calc(-50% + ${50 - translateY}px))`;
         } else {
-            itSeodanggaeGroup.style.opacity = '0';
-            itSeodanggaeGroup.style.transform = 'translateY(calc(-50% + 50px))';
+            itlineGroup.style.opacity = '0';
+            itlineGroup.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
         // Scroll More 텍스트 애니메이션
