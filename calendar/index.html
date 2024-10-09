@@ -4,96 +4,106 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>React Carousel</title>
+  <script type="module" crossorigin src="https://cdn.skypack.dev/react"></script>
+  <script type="module" crossorigin src="https://cdn.skypack.dev/react-dom"></script>
+  <script type="module" crossorigin src="https://cdn.skypack.dev/react-icons@4.12.0/ti"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
-    }
-    
-    .app {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
     }
-
     .carousel {
       display: flex;
       align-items: center;
+      justify-content: center;
       position: relative;
-      width: 60%;
     }
-
+    .card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 0 10px;
+      width: 200px;
+      text-align: center;
+    }
     .nav {
       background: none;
       border: none;
       font-size: 2rem;
       cursor: pointer;
+      color: white;
     }
-
     .card-container {
       transition: transform 0.3s ease, opacity 0.3s ease;
-      transform: translateX(calc(var(--offset) * 100%)) scale(calc(1 - var(--abs-offset)));
-      opacity: var(--active);
-      position: absolute;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .card {
-      width: 300px;
-      height: 200px;
-      background-color: #f4f4f4;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      text-align: center;
-    }
-
-    .card h2 {
-      margin-bottom: 10px;
-      font-size: 1.5rem;
-    }
-
-    .card p {
-      font-size: 1rem;
     }
   </style>
+</head>
+<body>
+  <div id="root"></div>
+
   <script type="module">
     import React, { useState } from 'https://cdn.skypack.dev/react';
     import ReactDOM from 'https://cdn.skypack.dev/react-dom';
-    import { TiChevronLeftOutline, TiChevronRightOutline } from 'https://cdn.skypack.dev/react-icons@4.12.0/ti';
+    import {TiChevronLeftOutline, TiChevronRightOutline} from 'https://cdn.skypack.dev/react-icons@4.12.0/ti';
 
     const CARDS = 10;
     const MAX_VISIBILITY = 3;
 
-    const Card = ({ title, content }) => (
+    const Card = ({title, content}) => (
       <div className='card'>
         <h2>{title}</h2>
         <p>{content}</p>
       </div>
     );
 
-    const Carousel = ({ children }) => {
+    const Carousel = ({children}) => {
       const [active, setActive] = useState(2);
       const count = React.Children.count(children);
 
+      console.log('Total Cards:', count);
+      console.log('Currently Active Card:', active);
+
       return (
         <div className='carousel'>
-          {active > 0 && <button className='nav left' onClick={() => setActive(i => i - 1)}><TiChevronLeftOutline /></button>}
-          {React.Children.map(children, (child, i) => (
-            <div className='card-container' style={{
-              '--active': i === active ? 1 : 0,
-              '--offset': (active - i) / 3,
-              '--direction': Math.sign(active - i),
-              '--abs-offset': Math.abs(active - i) / 3,
-              'pointer-events': active === i ? 'auto' : 'none',
-              'opacity': Math.abs(active - i) >= MAX_VISIBILITY ? '0' : '1',
-              'display': Math.abs(active - i) > MAX_VISIBILITY ? 'none' : 'block',
+          {active > 0 && (
+            <button className='nav left' onClick={() => {
+              console.log('Navigating Left');
+              setActive(i => i - 1);
             }}>
-              {child}
-            </div>
-          ))}
-          {active < count - 1 && <button className='nav right' onClick={() => setActive(i => i + 1)}><TiChevronRightOutline /></button>}
+              <TiChevronLeftOutline/>
+            </button>
+          )}
+          {React.Children.map(children, (child, i) => {
+            console.log(`Rendering Card ${i + 1}: Active - ${active === i}`);
+            return (
+              <div className='card-container' style={{
+                '--active': i === active ? 1 : 0,
+                '--offset': (active - i) / 3,
+                '--direction': Math.sign(active - i),
+                '--abs-offset': Math.abs(active - i) / 3,
+                'pointer-events': active === i ? 'auto' : 'none',
+                'opacity': Math.abs(active - i) >= MAX_VISIBILITY ? '0' : '1',
+                'display': Math.abs(active - i) > MAX_VISIBILITY ? 'none' : 'block',
+              }}>
+                {child}
+              </div>
+            );
+          })}
+          {active < count - 1 && (
+            <button className='nav right' onClick={() => {
+              console.log('Navigating Right');
+              setActive(i => i + 1);
+            }}>
+              <TiChevronRightOutline/>
+            </button>
+          )}
         </div>
       );
     };
@@ -102,18 +112,20 @@
       <div className='app'>
         <Carousel>
           {[...new Array(CARDS)].map((_, i) => (
-            <Card title={'Card ' + (i + 1)} content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' />
+            <Card
+              key={i}
+              title={`Card ${i + 1}`}
+              content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+            />
           ))}
         </Carousel>
       </div>
     );
 
     ReactDOM.render(
-      <App />,
-      document.body
+      <App/>,
+      document.getElementById('root')
     );
   </script>
-</head>
-<body>
 </body>
 </html>
