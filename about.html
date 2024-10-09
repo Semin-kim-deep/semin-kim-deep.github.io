@@ -34,14 +34,17 @@
             height: 2px;
             background-color: #7f7f7f;
         }
+        .logo-container {
+            flex-grow: 1;
+            text-align: center;
+        }
         .logo {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
             font-size: 26.4px;
             text-decoration: none;
             color: black;
-            flex-grow: 1;
-            text-align: center;
+            display: inline-block;
         }
         .container {
             max-width: 800px;
@@ -119,7 +122,7 @@
             text-decoration: none;
             color: #414141;
             font-family: 'Jost', sans-serif;
-            font-size: 14.4px;  /* 60% of 24px */
+            font-size: 18px;
             font-weight: 700;
         }
         .menu-open {
@@ -180,7 +183,9 @@
             <span></span>
             <span></span>
         </div>
-        <a href="/" class="logo">Deepdown Studio</a>
+        <div class="logo-container">
+            <a href="/" class="logo">Deepdown Studio</a>
+        </div>
         <div style="width: 18px;"></div>
     </header>
     
