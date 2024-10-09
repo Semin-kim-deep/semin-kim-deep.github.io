@@ -18,6 +18,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px;
+            position: relative;
+            z-index: 1000;
         }
         .hamburger {
             width: 18px;
@@ -98,11 +100,59 @@
                 margin-right: -20%;
             }
         }
+        .menu-items {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: white;
+            transition: left 0.3s ease-in-out;
+            padding: 40px;
+            box-sizing: border-box;
+            z-index: 1001;
+        }
+        .menu-items a {
+            display: block;
+            padding: 15px 0;
+            text-decoration: none;
+            color: black;
+            font-family: 'Jost', sans-serif;
+            font-size: 24px;
+            font-weight: 500;
+        }
+        .menu-open {
+            left: 0;
+        }
+        .dimmed-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .menu-title {
+            font-family: 'Jost', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
     </style>
 </head>
 <body>
+    <div class="dimmed-background" id="dimmed-bg"></div>
     <header class="header">
-        <div class="hamburger">
+        <div class="hamburger" id="hamburger-menu">
             <span></span>
             <span></span>
             <span></span>
@@ -110,6 +160,17 @@
         <a href="/" class="logo">Deepdown Studio</a>
         <div style="width: 18px;"></div>
     </header>
+    
+    <div class="menu-items" id="menu-items">
+        <div class="close-btn" id="close-menu">×</div>
+        <div class="menu-title">Deepdown Studio</div>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Shop</a>
+        <a href="#">Magazine</a>
+        <a href="#">Community</a>
+    </div>
+
     <div class="container">
         <img src="images/Thank-you3_2_web.png" alt="Deepdown Studio" class="center-image">
         
@@ -145,5 +206,28 @@
             </ul>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger-menu');
+            const menuItems = document.getElementById('menu-items');
+            const closeBtn = document.getElementById('close-menu');
+            const dimmedBg = document.getElementById('dimmed-bg');
+
+            function openMenu() {
+                menuItems.classList.add('menu-open');
+                dimmedBg.style.display = 'block';
+            }
+
+            function closeMenu() {
+                menuItems.classList.remove('menu-open');
+                dimmedBg.style.display = 'none';
+            }
+
+            hamburger.addEventListener('click', openMenu);
+            closeBtn.addEventListener('click', closeMenu);
+            dimmedBg.addEventListener('click', closeMenu);
+        });
+    </script>
 </body>
 </html>
