@@ -34,13 +34,12 @@
         }
         .logo {
             font-family: 'Jost', sans-serif;
-            font-weight: 700;  /* Changed to bold */
+            font-weight: 700;
             font-size: 26.4px;
             text-decoration: none;
             color: black;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            flex-grow: 1;
+            text-align: center;
         }
         .container {
             max-width: 800px;
@@ -80,7 +79,7 @@
             font-family: 'Jost', sans-serif;
             font-weight: 700;
             font-size: 16.8px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         ul {
             padding-left: 20px;
@@ -98,6 +97,7 @@
             <span></span>
         </div>
         <a href="/" class="logo">Deepdown Studio</a>
+        <div style="width: 24px;"></div>
     </header>
     <div class="container">
         <img src="images/Thank-you3_2_web.png" alt="Deepdown Studio" class="center-image">
