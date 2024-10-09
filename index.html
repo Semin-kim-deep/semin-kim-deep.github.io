@@ -12,16 +12,17 @@
             margin: 0;
             padding: 0;
             background-image: url('images/bg_hp.jpg');
-            background-size: auto;
+            background-size: contain;
             background-position: center top;
             background-repeat: no-repeat;
-            height: 4000px;
+            overflow-x: hidden;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 50px;
             box-sizing: border-box;
+            position: relative;
         }
         header {
             display: flex;
@@ -41,70 +42,16 @@
             text-rendering: optimizeLegibility;
             text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
         }
-        .gallery {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            margin-top: 300px;
-        }
-        .circular-image-container {
-            position: relative;
-            width: 30%;
-            padding-bottom: 30%;
-            overflow: hidden;
-            margin: 0 100px;
-        }
-        .circular-image {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70%;
-            height: 70%;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .circular-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
         .higher-image { 
             margin-top: -100px;
         }
-        .video-mpic-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 100px;
-        }
-        .video-container {
-            width: 30%;
-            margin-right: 350px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .video-container video {
-            width: 100%;
-            display: block;
-        }
-        .mpic01-container {
-            width: 30%;
-            text-align: center;
-        }
-        .mpic01-container img {
-            width: 100%;
-            display: inline-block;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
         .changing-image {
-            position: fixed;
+            position: absolute;
             top: 100px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100%;
-            max-width: 1200px;
-            height: auto;
+            width: 600px;
+            height: 600px;
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
@@ -118,23 +65,154 @@
             text-align: center;
             margin-top: 20px;
         }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .circular-image-container, .video-container, .mpic01-container {
+        .info-section {
+            position: fixed;
+            left: calc(50% - 550px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
             opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
-        .animated {
-            animation: fadeInUp 1s ease-out forwards;
+        .info-title {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .info-description {
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 500px;
+        }
+        .info-description p:first-child {
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        .info-description p:nth-child(2) {
+            font-family: 'Jost', sans-serif;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .info-more {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        .info-more a {
+            color: white;
+            text-decoration: none;
+        }
+        .info-more-it {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        .info-more-it a {
+            color: #282828;
+            text-decoration: none;
+        }
+        .it-seodanggae-group {
+            position: fixed;
+            right: calc(50% - 660px);
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: left;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            color: #282828;
+        }
+        .it-seodanggae-image {
+            width: 300px;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        .it-seodanggae-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .it-seodanggae-title {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .it-seodanggae-description {
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 400px;
+        }
+        .scroll-more {
+            position: fixed;
+            left: calc(50% - 550px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+        }
+        .anti-tarot-card {
+            position: absolute;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: black;
+            text-align: center;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        @media (max-width: 1024px) {
+            .container {
+                max-width: 1024px;
+                padding: 0 20px;
+            }
+            .changing-image {
+                width: 500px;
+                height: 500px;
+            }
+            .gallery {
+                margin-top: 200px;
+            }
+            .circular-image-container {
+                margin: 0 50px;
+            }
+            .video-container {
+                margin-right: 150px;
+            }
+            .info-section, .scroll-more {
+                left: 20px;
+            }
+            .it-seodanggae-group {
+                right: 20px;
+            }
         }
         @media (max-width: 768px) {
+            html, body {
+                overflow-x: hidden;
+                width: 100%;
+                position: relative;
+            }
+            body {
+                background-image: url('images/m_bg.jpg');
+                background-size: cover;
+            }
+            .changing-image {
+                width: 100%;
+                height: auto;
+                max-width: 500px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
             .gallery {
                 flex-direction: column;
                 align-items: center;
@@ -145,18 +223,44 @@
                 margin: 20px 0;
             }
             .video-container, .mpic01-container {
-                width: 80%;
-                margin: 20px 0;
+                width: 100%;
+                max-width: 80%;
+                margin: 20px auto;
             }
-        }
-        @media (max-width: 480px) {
+            .it-seodanggae-image {
+                width: 200px;
+                height: 200px;
+            }
+            .info-description, .it-seodanggae-description {
+                display: none;
+            }
             .container {
                 padding: 0 20px;
             }
             h1 {
-                font-size: 36px;
+                font-size: 33.6px;
             }
         }
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .changing-image {
+                width: 500px;
+                height: 500px;
+            }
+            .info-title, .it-seodanggae-title, .scroll-more {
+                font-size: 36px;
+            }
+            .it-seodanggae-image {
+                width: 150px;
+                height: 150px;
+            }
+        }
+        /* New menu styles */
         .hamburger {
             width: 18px;
             height: 16px;
@@ -164,7 +268,9 @@
             flex-direction: column;
             justify-content: space-between;
             cursor: pointer;
-            margin-right: auto;
+            position: absolute;
+            top: 20px;
+            left: 20px;
         }
         .hamburger span {
             width: 100%;
@@ -283,79 +389,162 @@
             <p></p>
         </div>
     </div>
-    <div class="menu-items" id="menu-items">
-        <div class="close-btn" id="close-menu"></div>
-        <div class="menu-title">Deepdown Studio</div>
-        <a href="/">Home</a>
-        <a href="about.html">About</a>
-        <a href="https://smartstore.naver.com/deepdown-studio/" target="_blank">Shop</a>
-        <a href="/card/index.html">Anti-Tarot Card</a>
-        <a href="/calendar/">Calendar 2025</a>
+    <div class="info-section" id="about-section">
+        <div class="info-title">About</div>
+        <div class="info-description">
+            <p>딥다운 스튜디오는 일러스트를 중심으로 다양한 제품을 만들고 있어요.<br>
+            음악과 책 등에서 영감을 받고, 재미있는 것들을 만들고자 해요.</p>
+            <p>Deepdown Studio creates a variety of products with a focus on illustration.<br>
+            <span style="font-family: 'Jost', sans-serif; font-weight: 500;">I got inspiration from music and books, and my goal is to make fun and interesting things.</span></p>
+            <p class="info-more"><a href="about.html">More ></a></p>
+        </div>
     </div>
+    <div class="it-seodanggae-group">
+        <div class="it-seodanggae-image">
+            <img src="images/a_1253.png" alt="IT Seodanggae Image">
+        </div>
+        <div class="it-seodanggae-title">IT Line</div>
+        <div class="it-seodanggae-description">
+            <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. IT라인의 브랜드는 IT서당개입니다.</p>
+            <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' </span></p>
+            <p class="info-more-it"><a href="https://www.figma.com/@itseodanggae">More ></a></p>
+        </div>
+    </div>
+    <div class="scroll-more">Scroll More</div>
+    <div class="anti-tarot-card">Anti-Tarot Card</div>
+<div id="mobileMenu" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000;">
+    <div style="position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer;">×</div>
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
+        <a href="#" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">Home</a>
+        <a href="about.html" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">About</a>
+        <a href="it.html" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">IT Seodanggae</a>
+    </div>
+</div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const changingImage = document.querySelector('.changing-image');
-            const items = document.querySelectorAll('.circular-image-container, .video-container, .mpic01-container');
-            const hamburger = document.getElementById('hamburger-menu');
-            const menuItems = document.getElementById('menu-items');
-            const closeBtn = document.getElementById('close-menu');
-            const dimmedBg = document.getElementById('dimmed-bg');
+document.addEventListener('DOMContentLoaded', function() {
+    const changingImage = document.querySelector('.changing-image');
+    const aboutSection = document.querySelector('#about-section');
+    const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
+    const scrollMore = document.querySelector('.scroll-more');
+    const antiTarotCard = document.querySelector('.anti-tarot-card');
 
-            let isFirstImage = true;
-            function changeImage() {
-                const imageUrl = isFirstImage ? 'images/a_1.png' : 'images/a_2.png';
-                changingImage.style.backgroundImage = `url('${imageUrl}')`;
-                isFirstImage = !isFirstImage;
-            }
-            changeImage();
-            setInterval(changeImage, 1000);
+    let isFirstImage = true;
+    function changeImage() {
+        const imageUrl = isFirstImage ? 'images/a_1.png' : 'images/a_2.png';
+        changingImage.style.backgroundImage = `url('${imageUrl}')`;
+        isFirstImage = !isFirstImage;
+    }
+    changeImage();
+    setInterval(changeImage, 1000);
 
-            function setPageSize() {
-                const bgImage = new Image();
-                bgImage.onload = function() {
-                    const aspectRatio = bgImage.width / bgImage.height;
-                    const pageWidth = Math.min(window.innerWidth, bgImage.width);
-                    const pageHeight = pageWidth / aspectRatio;
-                    document.body.style.height = `${pageHeight}px`;
-                    document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
-                }
-                bgImage.src = window.innerWidth <= 768 ? 'images/m_bg.jpg' : 'images/bg_hp.jpg';
-            }
+    function setPageSize() {
+        const bgImage = new Image();
+        bgImage.onload = function() {
+            const aspectRatio = bgImage.width / bgImage.height;
+            const pageWidth = Math.min(window.innerWidth, bgImage.width);
+            const pageHeight = pageWidth / aspectRatio;
+            document.body.style.height = `${pageHeight}px`;
+            document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
+        }
+        bgImage.src = window.innerWidth <= 768 ? 'images/m_bg.jpg' : 'images/bg_hp.jpg';
+    }
 
-            setPageSize();
-            window.addEventListener('resize', setPageSize);
+    setPageSize();
+    window.addEventListener('resize', setPageSize);
 
-            items.forEach((item, index) => {
-                setTimeout(() => {
-                    item.classList.add('animated');
-                }, index * 200);
-            });
+    let bounce = 0;
+    function animate() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        const documentHeight = Math.max(
+            document.body.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.clientHeight,
+            document.documentElement.scrollHeight,
+            document.documentElement.offsetHeight
+        );
 
-            let bounce = 0;
-            function animate() {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                bounce += 0.05;
-                const bounceOffset = Math.sin(bounce) * 10;
-                changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
-                requestAnimationFrame(animate);
-            }
+        bounce += 0.05;
+        const bounceOffset = Math.sin(bounce) * 10;
+        changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
+        
+        const isMobile = window.innerWidth <= 768;
+        
+        // About 섹션 애니메이션
+        if (scrollTop > 0 && scrollTop <= (isMobile ? 200 : 430)) {
+            const opacity = Math.min(scrollTop / 100, 1);
+            aboutSection.style.opacity = opacity;
+            aboutSection.style.transform = `translateY(calc(-50% + ${Math.max(50 - scrollTop / 2, 0)}px))`;
+        } else if (scrollTop > (isMobile ? 200 : 430) && scrollTop <= (isMobile ? 300 : 530)) {
+            const opacity = Math.max(1 - (scrollTop - (isMobile ? 200 : 430)) / 100, 0);
+            aboutSection.style.opacity = opacity;
+            aboutSection.style.transform = 'translateY(-50%)';
+        } else {
+            aboutSection.style.opacity = '0';
+            aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
+        }
 
-            animate();
+        // IT Seodanggae 섹션 애니메이션
+        if (scrollTop > (isMobile ? 300 : 530) && scrollTop <= (isMobile ? 500 : 730)) {
+            const opacity = Math.min((scrollTop - (isMobile ? 300 : 530)) / 200, 1);
+            const translateY = Math.max(50 - (scrollTop - (isMobile ? 300 : 530)) / 4, 0);
+            itSeodanggaeGroup.style.opacity = opacity;
+            itSeodanggaeGroup.style.transform = `translateY(calc(-50% + ${translateY}px))`;
+        } else if (scrollTop > (isMobile ? 500 : 730) && scrollTop <= (isMobile ? 700 : 1230)) {
+            itSeodanggaeGroup.style.opacity = '1';
+            itSeodanggaeGroup.style.transform = 'translateY(-50%)';
+        } else if (scrollTop > (isMobile ? 700 : 1230) && scrollTop <= (isMobile ? 800 : 1330)) {
+            const opacity = Math.max(1 - (scrollTop - (isMobile ? 700 : 1230)) / 100, 0);
+            const translateY = Math.min((scrollTop - (isMobile ? 700 : 1230)) / 2, 50);
+            itSeodanggaeGroup.style.opacity = opacity;
+            itSeodanggaeGroup.style.transform = `translateY(calc(-50% - ${translateY}px))`;
+            scrollMore.style.opacity = 1 - opacity;
+            scrollMore.style.transform = `translateY(calc(-50% + ${50 - translateY}px))`;
+        } else {
+            itSeodanggaeGroup.style.opacity = '0';
+            itSeodanggaeGroup.style.transform = 'translateY(calc(-50% + 50px))';
+        }
 
-            function openMenu() {
-                menuItems.classList.add('menu-open');
-                dimmedBg.style.display = 'block';
-            }
+        // Scroll More 텍스트 애니메이션
+        if (scrollTop > (isMobile ? 800 : 1330) && scrollTop <= (isMobile ? 1000 : 1830)) {
+            scrollMore.style.opacity = '1';
+            scrollMore.style.transform = 'translateY(-50%)';
+        } else if (scrollTop > (isMobile ? 1000 : 1830) && scrollTop <= (isMobile ? 1100 : 1930)) {
+            const opacity = Math.max(1 - (scrollTop - (isMobile ? 1000 : 1830)) / 100, 0);
+            scrollMore.style.opacity = opacity;
+            scrollMore.style.transform = 'translateY(-50%)';
+        } else {
+            scrollMore.style.opacity = '0';
+            scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
+        }
 
-            function closeMenu() {
-                menuItems.classList.remove('menu-open');
-                dimmedBg.style.display = 'none';
-            }
+        // Anti-Tarot Card 애니메이션 (스크롤 끝에서 나타남)
+        if (scrollTop + windowHeight >= documentHeight - 1) {
+            antiTarotCard.style.opacity = '1';
+        } else {
+            antiTarotCard.style.opacity = '0';
+        }
 
-            hamburger.addEventListener('click', openMenu);
-            closeBtn.addEventListener('click', closeMenu);
-            dimmedBg.addEventListener('click', closeMenu);
-        });
-    </script>
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = mobileMenu.querySelector('div:first-child');
+
+    hamburger.addEventListener('click', function() {
+        mobileMenu.style.display = 'block';
+    });
+
+    closeMenu.addEventListener('click', function() {
+        mobileMenu.style.display = 'none';
+    });
+
+    // 기존의 DOMContentLoaded 이벤트 리스너 내용...
+});
+</script>
 </body>
 </html>
