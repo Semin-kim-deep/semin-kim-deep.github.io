@@ -12,21 +12,20 @@
             margin: 0;
             padding: 0;
             background-image: url('images/bg_hp.jpg');
-            background-size: contain;
+            background-size: auto;
             background-position: center top;
             background-repeat: no-repeat;
-            overflow-x: hidden;
+            height: 4000px;
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 50px;
             box-sizing: border-box;
-            position: relative;
         }
         header {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             padding: 20px 0;
         }
@@ -54,9 +53,6 @@
             padding-bottom: 30%;
             overflow: hidden;
             margin: 0 100px;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s, transform 1s;
         }
         .circular-image {
             position: absolute;
@@ -87,9 +83,6 @@
             width: 30%;
             margin-right: 350px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s, transform 1s;
         }
         .video-container video {
             width: 100%;
@@ -98,9 +91,6 @@
         .mpic01-container {
             width: 30%;
             text-align: center;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s, transform 1s;
         }
         .mpic01-container img {
             width: 100%;
@@ -108,12 +98,13 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .changing-image {
-            position: absolute;
+            position: fixed;
             top: 100px;
             left: 50%;
             transform: translateX(-50%);
-            width: 600px;
-            height: 600px;
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
@@ -127,229 +118,142 @@
             text-align: center;
             margin-top: 20px;
         }
-        .info-section {
-            position: fixed;
-            left: calc(50% - 550px);
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        .info-title {
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-        .info-description {
-            font-size: 16px;
-            line-height: 1.5;
-            max-width: 500px;
-        }
-        .info-description p:first-child {
-            font-family: 'Pretendard', sans-serif;
-            font-weight: 400;
-            margin-bottom: 10px;
-        }
-        .info-description p:nth-child(2) {
-            font-family: 'Jost', sans-serif;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-        .info-more {
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            font-size: 24px;
-        }
-        .info-more a {
-            color: white;
-            text-decoration: none;
-        }
-        .info-more-it {
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            font-size: 24px;
-        }
-        .info-more-it a {
-            color: #282828;
-            text-decoration: none;
-        }
-        .it-seodanggae-group {
-            position: fixed;
-            right: calc(50% - 660px);
-            top: 50%;
-            transform: translateY(-50%);
-            text-align: left;
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            color: #282828;
-        }
-        .it-seodanggae-image {
-            width: 300px;
-            height: 300px;
-            margin-bottom: 20px;
-        }
-        .it-seodanggae-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-        .it-seodanggae-title {
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-        .it-seodanggae-description {
-            font-size: 16px;
-            line-height: 1.5;
-            max-width: 400px;
-        }
-        .scroll-more {
-            position: fixed;
-            left: calc(50% - 550px);
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            font-size: 48px;
-        }
-        .anti-tarot-card {
-            position: absolute;
-            bottom: 150px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            font-size: 24px;
-            color: black;
-            text-align: center;
-            width: 100%;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        @media (max-width: 1024px) {
-            .container {
-                max-width: 1024px;
-                padding: 0 20px;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
             }
-            .changing-image {
-                width: 500px;
-                height: 500px;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
+        }
+        .circular-image-container, .video-container, .mpic01-container {
+            opacity: 0;
+        }
+        .animated {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        @media (max-width: 768px) {
             .gallery {
-                margin-top: 200px;
+                flex-direction: column;
+                align-items: center;
             }
             .circular-image-container {
-                margin: 0 50px;
+                width: 60%;
+                padding-bottom: 60%;
+                margin: 20px 0;
             }
-            .video-container {
-                margin-right: 150px;
-            }
-            .info-section, .scroll-more {
-                left: 20px;
-            }
-            .it-seodanggae-group {
-                right: 20px;
+            .video-container, .mpic01-container {
+                width: 80%;
+                margin: 20px 0;
             }
         }
- @media (max-width: 768px) {
-     html, body {
-        overflow-x: hidden;
-        width: 100%;
-        position: relative;
-    }
-     body {
-        background-image: url('images/m_bg.jpg');
-        background-size: cover;
-    }
-    .changing-image {
-        width: 100%;
-        height: auto;
-        max-width: 500px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    .gallery {
-        flex-direction: column;
-        align-items: center;
-    }
-    .circular-image-container {
-        width: 60%;
-        padding-bottom: 60%;
-        margin: 20px 0;
-    }
-    .video-container, .mpic01-container {
-        width: 100%;
-        max-width: 80%;
-        margin: 20px auto;
-    }
-    .it-seodanggae-image {
-        width: 200px;
-        height: 200px;
-    }
-    .info-description, .it-seodanggae-description {
-        display: none;
-    }
-    .container {
-        padding: 0 20px;
-    }
-    h1 {
-        font-size: 33.6px; /* 48px의 70% */
-    }
-}
-        
         @media (max-width: 480px) {
             .container {
-                padding: 0 10px;
+                padding: 0 20px;
             }
             h1 {
-                font-size: 24px;
-            }
-            .changing-image {
-                width: 500px;  /* 모바일에서도 500px 유지 */
-                height: 500px;  /* 모바일에서도 500px 유지 */
-            }
-            .info-title, .it-seodanggae-title, .scroll-more {
                 font-size: 36px;
             }
-            .it-seodanggae-image {
-                width: 150px;
-                height: 150px;
-            }
         }
-.hamburger {
-    display: none;
-    font-size: 30px;
-    color: white;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-}
-
-@media (max-width: 768px) {
-    h1 {
-        font-size: 24px; /* 48px의 70% */
-    }
-    .hamburger {
-        display: block;
-    }
-}
+        .hamburger {
+            width: 18px;
+            height: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            margin-right: auto;
+        }
+        .hamburger span {
+            width: 100%;
+            height: 2px;
+            background-color: white;
+        }
+        .menu-items {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: #f5f3f2;
+            transition: left 0.3s ease-in-out;
+            padding: 40px;
+            box-sizing: border-box;
+            z-index: 1001;
+            text-align: center;
+        }
+        .menu-items a {
+            display: block;
+            padding: 10px 0;
+            text-decoration: none;
+            color: #414141;
+            font-family: 'Jost', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+        }
+        .menu-open {
+            left: 0;
+        }
+        .dimmed-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+            line-height: 18px;
+            text-align: center;
+            color: #414141;
+        }
+        .close-btn::before,
+        .close-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #414141;
+        }
+        .close-btn::before {
+            transform: rotate(45deg);
+        }
+        .close-btn::after {
+            transform: rotate(-45deg);
+        }
+        .menu-title {
+            font-family: 'Jost', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: black;
+        }
     </style>
 </head>
 <body>
+    <div class="dimmed-background" id="dimmed-bg"></div>
     <div class="container">
         <header>
-
-    <h1>Deepdown Studio</h1>
-    <div class="hamburger">☰</div>
-</header>
+            <div class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <h1>Deepdown Studio</h1>
+            <div style="width: 18px;"></div>
         </header>
         <div class="changing-image"></div>
         <div class="gallery">
@@ -379,162 +283,79 @@
             <p></p>
         </div>
     </div>
-    <div class="info-section" id="about-section">
-        <div class="info-title">About</div>
-        <div class="info-description">
-            <p>딥다운 스튜디오는 일러스트를 중심으로 다양한 제품을 만들고 있어요.<br>
-            음악과 책 등에서 영감을 받고, 재미있는 것들을 만들고자 해요.</p>
-            <p>Deepdown Studio creates a variety of products with a focus on illustration.<br>
-            <span style="font-family: 'Jost', sans-serif; font-weight: 500;">I got inspiration from music and books, and my goal is to make fun and interesting things.</span></p>
-            <p class="info-more"><a href="about.html">More ></a></p>
-        </div>
+    <div class="menu-items" id="menu-items">
+        <div class="close-btn" id="close-menu"></div>
+        <div class="menu-title">Deepdown Studio</div>
+        <a href="/">Home</a>
+        <a href="about.html">About</a>
+        <a href="https://smartstore.naver.com/deepdown-studio/" target="_blank">Shop</a>
+        <a href="/card/index.html">Anti-Tarot Card</a>
+        <a href="/calendar/">Calendar 2025</a>
     </div>
-    <div class="it-seodanggae-group">
-        <div class="it-seodanggae-image">
-            <img src="images/a_1253.png" alt="IT Seodanggae Image">
-        </div>
-        <div class="it-seodanggae-title">IT Line</div>
-        <div class="it-seodanggae-description">
-            <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. IT라인의 브랜드는 IT서당개입니다.</p>
-            <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' </span></p>
-            <p class="info-more-it"><a href="https://www.figma.com/@itseodanggae">More ></a></p>
-        </div>
-    </div>
-    <div class="scroll-more">Scroll More</div>
-    <div class="anti-tarot-card">Anti-Tarot Card</div>
-<div id="mobileMenu" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000;">
-    <div style="position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer;">×</div>
-    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
-        <a href="#" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">Home</a>
-        <a href="about.html" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">About</a>
-        <a href="it.html" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">IT Seodanggae</a>
-    </div>
-</div>
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const changingImage = document.querySelector('.changing-image');
-    const aboutSection = document.querySelector('#about-section');
-    const itSeodanggaeGroup = document.querySelector('.it-seodanggae-group');
-    const scrollMore = document.querySelector('.scroll-more');
-    const antiTarotCard = document.querySelector('.anti-tarot-card');
+        document.addEventListener('DOMContentLoaded', function() {
+            const changingImage = document.querySelector('.changing-image');
+            const items = document.querySelectorAll('.circular-image-container, .video-container, .mpic01-container');
+            const hamburger = document.getElementById('hamburger-menu');
+            const menuItems = document.getElementById('menu-items');
+            const closeBtn = document.getElementById('close-menu');
+            const dimmedBg = document.getElementById('dimmed-bg');
 
-    let isFirstImage = true;
-    function changeImage() {
-        const imageUrl = isFirstImage ? 'images/a_1.png' : 'images/a_2.png';
-        changingImage.style.backgroundImage = `url('${imageUrl}')`;
-        isFirstImage = !isFirstImage;
-    }
-    changeImage();
-    setInterval(changeImage, 1000);
+            let isFirstImage = true;
+            function changeImage() {
+                const imageUrl = isFirstImage ? 'images/a_1.png' : 'images/a_2.png';
+                changingImage.style.backgroundImage = `url('${imageUrl}')`;
+                isFirstImage = !isFirstImage;
+            }
+            changeImage();
+            setInterval(changeImage, 1000);
 
-    function setPageSize() {
-        const bgImage = new Image();
-        bgImage.onload = function() {
-            const aspectRatio = bgImage.width / bgImage.height;
-            const pageWidth = Math.min(window.innerWidth, bgImage.width);
-            const pageHeight = pageWidth / aspectRatio;
-            document.body.style.height = `${pageHeight}px`;
-            document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
-        }
-        bgImage.src = window.innerWidth <= 768 ? 'images/m_bg.jpg' : 'images/bg_hp.jpg';
-    }
+            function setPageSize() {
+                const bgImage = new Image();
+                bgImage.onload = function() {
+                    const aspectRatio = bgImage.width / bgImage.height;
+                    const pageWidth = Math.min(window.innerWidth, bgImage.width);
+                    const pageHeight = pageWidth / aspectRatio;
+                    document.body.style.height = `${pageHeight}px`;
+                    document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
+                }
+                bgImage.src = window.innerWidth <= 768 ? 'images/m_bg.jpg' : 'images/bg_hp.jpg';
+            }
 
-    setPageSize();
-    window.addEventListener('resize', setPageSize);
+            setPageSize();
+            window.addEventListener('resize', setPageSize);
 
-    let bounce = 0;
-    function animate() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const windowHeight = window.innerHeight;
-        const documentHeight = Math.max(
-            document.body.scrollHeight,
-            document.body.offsetHeight,
-            document.documentElement.clientHeight,
-            document.documentElement.scrollHeight,
-            document.documentElement.offsetHeight
-        );
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('animated');
+                }, index * 200);
+            });
 
-        bounce += 0.05;
-        const bounceOffset = Math.sin(bounce) * 10;
-        changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
-        
-        const isMobile = window.innerWidth <= 768;
-        
-        // About 섹션 애니메이션
-        if (scrollTop > 0 && scrollTop <= (isMobile ? 200 : 430)) {
-            const opacity = Math.min(scrollTop / 100, 1);
-            aboutSection.style.opacity = opacity;
-            aboutSection.style.transform = `translateY(calc(-50% + ${Math.max(50 - scrollTop / 2, 0)}px))`;
-        } else if (scrollTop > (isMobile ? 200 : 430) && scrollTop <= (isMobile ? 300 : 530)) {
-            const opacity = Math.max(1 - (scrollTop - (isMobile ? 200 : 430)) / 100, 0);
-            aboutSection.style.opacity = opacity;
-            aboutSection.style.transform = 'translateY(-50%)';
-        } else {
-            aboutSection.style.opacity = '0';
-            aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
-        }
+            let bounce = 0;
+            function animate() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                bounce += 0.05;
+                const bounceOffset = Math.sin(bounce) * 10;
+                changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
+                requestAnimationFrame(animate);
+            }
 
-        // IT Seodanggae 섹션 애니메이션
-        if (scrollTop > (isMobile ? 300 : 530) && scrollTop <= (isMobile ? 500 : 730)) {
-            const opacity = Math.min((scrollTop - (isMobile ? 300 : 530)) / 200, 1);
-            const translateY = Math.max(50 - (scrollTop - (isMobile ? 300 : 530)) / 4, 0);
-            itSeodanggaeGroup.style.opacity = opacity;
-            itSeodanggaeGroup.style.transform = `translateY(calc(-50% + ${translateY}px))`;
-        } else if (scrollTop > (isMobile ? 500 : 730) && scrollTop <= (isMobile ? 700 : 1230)) {
-            itSeodanggaeGroup.style.opacity = '1';
-            itSeodanggaeGroup.style.transform = 'translateY(-50%)';
-        } else if (scrollTop > (isMobile ? 700 : 1230) && scrollTop <= (isMobile ? 800 : 1330)) {
-            const opacity = Math.max(1 - (scrollTop - (isMobile ? 700 : 1230)) / 100, 0);
-            const translateY = Math.min((scrollTop - (isMobile ? 700 : 1230)) / 2, 50);
-            itSeodanggaeGroup.style.opacity = opacity;
-            itSeodanggaeGroup.style.transform = `translateY(calc(-50% - ${translateY}px))`;
-            scrollMore.style.opacity = 1 - opacity;
-            scrollMore.style.transform = `translateY(calc(-50% + ${50 - translateY}px))`;
-        } else {
-            itSeodanggaeGroup.style.opacity = '0';
-            itSeodanggaeGroup.style.transform = 'translateY(calc(-50% + 50px))';
-        }
+            animate();
 
-        // Scroll More 텍스트 애니메이션
-        if (scrollTop > (isMobile ? 800 : 1330) && scrollTop <= (isMobile ? 1000 : 1830)) {
-            scrollMore.style.opacity = '1';
-            scrollMore.style.transform = 'translateY(-50%)';
-        } else if (scrollTop > (isMobile ? 1000 : 1830) && scrollTop <= (isMobile ? 1100 : 1930)) {
-            const opacity = Math.max(1 - (scrollTop - (isMobile ? 1000 : 1830)) / 100, 0);
-            scrollMore.style.opacity = opacity;
-            scrollMore.style.transform = 'translateY(-50%)';
-        } else {
-            scrollMore.style.opacity = '0';
-            scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
-        }
+            function openMenu() {
+                menuItems.classList.add('menu-open');
+                dimmedBg.style.display = 'block';
+            }
 
-        // Anti-Tarot Card 애니메이션 (스크롤 끝에서 나타남)
-        if (scrollTop + windowHeight >= documentHeight - 1) {
-            antiTarotCard.style.opacity = '1';
-        } else {
-            antiTarotCard.style.opacity = '0';
-        }
+            function closeMenu() {
+                menuItems.classList.remove('menu-open');
+                dimmedBg.style.display = 'none';
+            }
 
-        requestAnimationFrame(animate);
-    }
-
-    animate();
-});
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.querySelector('.hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const closeMenu = mobileMenu.querySelector('div:first-child');
-
-    hamburger.addEventListener('click', function() {
-        mobileMenu.style.display = 'block';
-    });
-
-    closeMenu.addEventListener('click', function() {
-        mobileMenu.style.display = 'none';
-    });
-
-    // 기존의 DOMContentLoaded 이벤트 리스너 내용...
-});
-</script>
+            hamburger.addEventListener('click', openMenu);
+            closeBtn.addEventListener('click', closeMenu);
+            dimmedBg.addEventListener('click', closeMenu);
+        });
+    </script>
 </body>
 </html>
