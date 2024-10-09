@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carousel with Gradient and Fade</title>
+  <title>Carousel with Gradient Background</title>
   <script type="module" crossorigin src="https://cdn.skypack.dev/react"></script>
   <script type="module" crossorigin src="https://cdn.skypack.dev/react-dom"></script>
   <script type="module" crossorigin src="https://cdn.skypack.dev/react-icons@4.12.0/ti"></script>
@@ -16,7 +16,6 @@
       justify-content: center;
       align-items: center;
       background: linear-gradient(135deg, #ff7e5f, #feb47b);
-      transition: background 2s ease; /* 배경 색상 페이드인 적용 */
       animation: gradientChange 20s infinite; /* 배경 색상 애니메이션 */
     }
 
@@ -76,12 +75,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: opacity 1s ease-in-out; /* 이미지 페이드 효과 */
-      opacity: 0; /* 초기 상태 */
-    }
-
-    .image-container.show {
-      opacity: 1; /* 보이기 상태 */
+      transition: opacity 1s ease-in-out; /* 이미지 전환 효과 */
     }
 
     .image-container img {
@@ -96,7 +90,7 @@
   <div id="root"></div>
 
   <script type="module">
-    import React, { useState, useEffect } from 'https://cdn.skypack.dev/react';
+    import React, { useState } from 'https://cdn.skypack.dev/react';
     import ReactDOM from 'https://cdn.skypack.dev/react-dom';
     import { TiChevronLeftOutline, TiChevronRightOutline } from 'https://cdn.skypack.dev/react-icons@4.12.0/ti';
 
@@ -109,22 +103,13 @@
 
     const Carousel = () => {
       const [activeIndex, setActiveIndex] = useState(0);
-      const [fadeClass, setFadeClass] = useState("show");
 
       const handleNext = () => {
-        setFadeClass(""); // 페이드 아웃
-        setTimeout(() => {
-          setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
-          setFadeClass("show"); // 페이드 인
-        }, 1000); // 1초 후에 이미지 변경
+        setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
       };
 
       const handlePrev = () => {
-        setFadeClass(""); // 페이드 아웃
-        setTimeout(() => {
-          setActiveIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-          setFadeClass("show"); // 페이드 인
-        }, 1000); // 1초 후에 이미지 변경
+        setActiveIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
       };
 
       return (
@@ -132,7 +117,7 @@
           <button className="nav left" onClick={handlePrev}>
             <TiChevronLeftOutline />
           </button>
-          <div className={`image-container ${fadeClass}`}>
+          <div className="image-container">
             <img src={images[activeIndex]} alt={`Image ${activeIndex + 1}`} />
           </div>
           <button className="nav right" onClick={handleNext}>
