@@ -26,7 +26,7 @@
         }
         header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             padding: 20px 0;
         }
@@ -42,8 +42,70 @@
             text-rendering: optimizeLegibility;
             text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
         }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 300px;
+        }
+        .circular-image-container {
+            position: relative;
+            width: 30%;
+            padding-bottom: 30%;
+            overflow: hidden;
+            margin: 0 100px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
+        }
+        .circular-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            height: 70%;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .circular-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
         .higher-image { 
             margin-top: -100px;
+        }
+        .video-mpic-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px;
+        }
+        .video-container {
+            width: 30%;
+            margin-right: 350px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
+        }
+        .video-container video {
+            width: 100%;
+            display: block;
+        }
+        .mpic01-container {
+            width: 30%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
+        }
+        .mpic01-container img {
+            width: 100%;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .changing-image {
             position: absolute;
@@ -196,51 +258,52 @@
                 right: 20px;
             }
         }
-        @media (max-width: 768px) {
-            html, body {
-                overflow-x: hidden;
-                width: 100%;
-                position: relative;
-            }
-            body {
-                background-image: url('images/m_bg.jpg');
-                background-size: cover;
-            }
-            .changing-image {
-                width: 100%;
-                height: auto;
-                max-width: 500px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .gallery {
-                flex-direction: column;
-                align-items: center;
-            }
-            .circular-image-container {
-                width: 60%;
-                padding-bottom: 60%;
-                margin: 20px 0;
-            }
-            .video-container, .mpic01-container {
-                width: 100%;
-                max-width: 80%;
-                margin: 20px auto;
-            }
-            .it-seodanggae-image {
-                width: 200px;
-                height: 200px;
-            }
-            .info-description, .it-seodanggae-description {
-                display: none;
-            }
-            .container {
-                padding: 0 20px;
-            }
-            h1 {
-                font-size: 33.6px;
-            }
-        }
+ @media (max-width: 768px) {
+     html, body {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+    }
+     body {
+        background-image: url('images/m_bg.jpg');
+        background-size: cover;
+    }
+    .changing-image {
+        width: 100%;
+        height: auto;
+        max-width: 500px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .gallery {
+        flex-direction: column;
+        align-items: center;
+    }
+    .circular-image-container {
+        width: 60%;
+        padding-bottom: 60%;
+        margin: 20px 0;
+    }
+    .video-container, .mpic01-container {
+        width: 100%;
+        max-width: 80%;
+        margin: 20px auto;
+    }
+    .it-seodanggae-image {
+        width: 200px;
+        height: 200px;
+    }
+    .info-description, .it-seodanggae-description {
+        display: none;
+    }
+    .container {
+        padding: 0 20px;
+    }
+    h1 {
+        font-size: 33.6px; /* 48px의 70% */
+    }
+}
+        
         @media (max-width: 480px) {
             .container {
                 padding: 0 10px;
@@ -249,8 +312,8 @@
                 font-size: 24px;
             }
             .changing-image {
-                width: 500px;
-                height: 500px;
+                width: 500px;  /* 모바일에서도 500px 유지 */
+                height: 500px;  /* 모바일에서도 500px 유지 */
             }
             .info-title, .it-seodanggae-title, .scroll-more {
                 font-size: 36px;
@@ -260,106 +323,33 @@
                 height: 150px;
             }
         }
-        /* New menu styles */
-        .hamburger {
-            width: 18px;
-            height: 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-            position: absolute;
-            top: 20px;
-            left: 20px;
-        }
-        .hamburger span {
-            width: 100%;
-            height: 2px;
-            background-color: white;
-        }
-        .menu-items {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 300px;
-            height: 100vh;
-            background-color: #f5f3f2;
-            transition: left 0.3s ease-in-out;
-            padding: 40px;
-            box-sizing: border-box;
-            z-index: 1001;
-            text-align: center;
-        }
-        .menu-items a {
-            display: block;
-            padding: 10px 0;
-            text-decoration: none;
-            color: #414141;
-            font-family: 'Jost', sans-serif;
-            font-size: 15px;
-            font-weight: 700;
-        }
-        .menu-open {
-            left: 0;
-        }
-        .dimmed-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            z-index: 1000;
-        }
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 18px;
-            cursor: pointer;
-            width: 18px;
-            height: 18px;
-            line-height: 18px;
-            text-align: center;
-            color: #414141;
-        }
-        .close-btn::before,
-        .close-btn::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background-color: #414141;
-        }
-        .close-btn::before {
-            transform: rotate(45deg);
-        }
-        .close-btn::after {
-            transform: rotate(-45deg);
-        }
-        .menu-title {
-            font-family: 'Jost', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 24px;
-            color: black;
-        }
+.hamburger {
+    display: none;
+    font-size: 30px;
+    color: white;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 24px; /* 48px의 70% */
+    }
+    .hamburger {
+        display: block;
+    }
+}
     </style>
 </head>
 <body>
-    <div class="dimmed-background" id="dimmed-bg"></div>
     <div class="container">
         <header>
-            <div class="hamburger" id="hamburger-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <h1>Deepdown Studio</h1>
-            <div style="width: 18px;"></div>
+
+    <h1>Deepdown Studio</h1>
+    <div class="hamburger">☰</div>
+</header>
         </header>
         <div class="changing-image"></div>
         <div class="gallery">
@@ -403,11 +393,11 @@
         <div class="it-seodanggae-image">
             <img src="images/a_1253.png" alt="IT Seodanggae Image">
         </div>
-        <div class="it-seodanggae-title">IT Line</div>
+        <div class="it-seodanggae-title">IT Seodanggae</div>
         <div class="it-seodanggae-description">
             <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. IT라인의 브랜드는 IT서당개입니다.</p>
-            <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' </span></p>
-            <p class="info-more-it"><a href="https://www.figma.com/@itseodanggae">More ></a></p>
+            <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' This IT brand is called 'IT Seodanggae.</span></p>
+            <p class="info-more-it"><a href="it.html">More ></a></p>
         </div>
     </div>
     <div class="scroll-more">Scroll More</div>
