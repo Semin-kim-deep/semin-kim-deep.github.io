@@ -26,22 +26,9 @@
         }
         header {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             padding: 20px 0;
-        }
-            .hamburger {
-            width: 18px;
-            height: 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-        }
-             .hamburger span {
-            width: 100%;
-            height: 2px;
-            background-color: white;
         }
         h1 {
             font-family: 'Jost', sans-serif;
@@ -87,7 +74,7 @@
             height: 100%;
             object-fit: cover;
         }
-        .higher-image { 
+        .higher-image {
             margin-top: -100px;
         }
         .changing-image {
@@ -216,10 +203,6 @@
             opacity: 0;
             transition: opacity 0.5s ease;
         }
-        @media (min-width: 1920px) {
-            .header {
-                padding-left: 56px;
-            }
         @media (max-width: 1024px) {
             .container {
                 max-width: 1024px;
@@ -244,49 +227,77 @@
             .it-line-group {
                 right: 20px;
             }
-             .header {
-                padding-left: 28px;
+        }
+        @media (max-width: 768px) {
+            html, body {
+                overflow-x: hidden;
+                width: 100%;
+                position: relative;
+            }
+            body {
+                background-image: url('images/m_bg.jpg');
+                background-size: cover;
+            }
+            .changing-image {
+                width: 100%;
+                height: auto;
+                max-width: 500px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .circular-image-container {
+                width: 60%;
+                padding-bottom: 60%;
+                margin: 20px 0;
+            }
+            .it-line-image {
+                width: 200px;
+                height: 200px;
+            }
+            .info-description, .it-line-description {
+                display: none;
+            }
+            .container {
+                padding: 0 20px;
+            }
+            h1 {
+                font-size: 33.6px; /* 48px의 70% */
             }
         }
- @media (max-width: 768px) {
-    h1 {
-        font-size: 24px; /* 48px의 70% */
-    }
-     html, body {
-        overflow-x: hidden;
-        width: 100%;
-        position: relative;
-    }
-     body {
-        background-image: url('images/m_bg.jpg');
-        background-size: cover;
-    }
-    .changing-image {
-        width: 100%;
-        height: auto;
-        max-width: 500px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    .circular-image-container {
-        width: 60%;
-        padding-bottom: 60%;
-        margin: 20px 0;
-    }
-    .it-line-image {
-        width: 200px;
-        height: 200px;
-    }
-    .info-description, .it-line-description {
-        display: none;
-    }
-    .container {
-        padding: 0 20px;
-    }
-    h1 {
-        font-size: 33.6px; /* 48px의 70% */
-    }
-             .menu-items {
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .changing-image {
+                width: 500px;  /* 모바일에서도 500px 유지 */
+                height: 500px;  /* 모바일에서도 500px 유지 */
+            }
+            .info-title, .it-line-title, .scroll-more {
+                font-size: 36px;
+            }
+            .it-line-image {
+                width: 150px;
+                height: 150px;
+            }
+        }
+        /* New hamburger menu styles */
+        .hamburger {
+            width: 18px;
+            height: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 100%;
+            height: 2px;
+            background-color: white;
+        }
+        .menu-items {
             position: fixed;
             top: 0;
             left: -300px;
@@ -356,68 +367,20 @@
             margin-bottom: 24px;
             color: black;
         }
-}
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 10px;
-            }
-            h1 {
-                font-size: 24px;
-            }
-            .changing-image {
-                width: 500px;  /* 모바일에서도 500px 유지 */
-                height: 500px;  /* 모바일에서도 500px 유지 */
-            }
-            .info-title, .it-line-title, .scroll-more {
-                font-size: 36px;
-            }
-            .it-line-image {
-                width: 150px;
-                height: 150px;
-            }
-        }
-.hamburger {
-    display: none;
-    font-size: 30px;
-    color: white;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-}
-}
     </style>
 </head>
 <body>
+    <div class="dimmed-background" id="dimmed-bg"></div>
     <div class="container">
         <header>
-
-    <h1>Deepdown Studio</h1>
-    <div class="hamburger">☰</div>
-</header>
-        <div class="dimmed-background" id="dimmed-bg"></div>
-    <header class="header">
-        <div class="hamburger" id="hamburger-menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="logo-container">
-            <a href="/" class="logo">Deepdown Studio</a>
-        </div>
-        <div style="width: 18px;"></div>
-    </header>
-    
-    <div class="menu-items" id="menu-items">
-        <div class="close-btn" id="close-menu"></div>
-        <div class="menu-title">Deepdown Studio</div>
-        <a href="/">Home</a>
-        <a href="about.html">About</a>
-        <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
-        <a href="/card/index.html">Anti-Tarot Card</a>
-        <a href="/calendar/">Calendar 2025</a>
-    </div>
+            <div class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <h1>Deepdown Studio</h1>
+            <div style="width: 18px;"></div>
+        </header>
         <div class="changing-image"></div>
         <div class="gallery">
             <div class="circular-image-container higher-image">
@@ -425,6 +388,7 @@
                     <img src="images/Thank-you3_web.png" alt="Image 2">
                 </div>
             </div>
+        </div>
         <div class="description">
             <p></p>
         </div>
@@ -439,7 +403,7 @@
             <p class="info-more"><a href="about.html">More ></a></p>
         </div>
     </div>
-    <div class="it-line-group">
+<div class="it-line-group">
         <div class="it-line-image">
             <img src="images/a_1253.png" alt="IT line Image">
         </div>
@@ -452,159 +416,143 @@
     </div>
     <div class="scroll-more">Scroll More</div>
     <div class="anti-tarot-card">Anti-Tarot Card</div>
-<div id="mobileMenu" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000;">
-    <div style="position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer;">×</div>
-    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
-        <a href="#" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">Home</a>
-        <a href="about.html" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">About</a>
-        <a href="it.html" style="color: white; text-decoration: none; font-size: 24px; margin: 10px 0;">IT line</a>
+    <div class="menu-items" id="menu-items">
+        <div class="close-btn" id="close-menu"></div>
+        <div class="menu-title">Deepdown Studio</div>
+        <a href="/">Home</a>
+        <a href="about.html">About</a>
+        <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
+        <a href="/card/index.html">Anti-Tarot Card</a>
+        <a href="/calendar/">Calendar 2025</a>
     </div>
-</div>
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const changingImage = document.querySelector('.changing-image');
-    const aboutSection = document.querySelector('#about-section');
-    const itlineGroup = document.querySelector('.it-line-group');
-    const scrollMore = document.querySelector('.scroll-more');
-    const antiTarotCard = document.querySelector('.anti-tarot-card');
+    document.addEventListener('DOMContentLoaded', function() {
+        const changingImage = document.querySelector('.changing-image');
+        const aboutSection = document.querySelector('#about-section');
+        const itlineGroup = document.querySelector('.it-line-group');
+        const scrollMore = document.querySelector('.scroll-more');
+        const antiTarotCard = document.querySelector('.anti-tarot-card');
+        const hamburger = document.getElementById('hamburger-menu');
+        const menuItems = document.getElementById('menu-items');
+        const closeBtn = document.getElementById('close-menu');
+        const dimmedBg = document.getElementById('dimmed-bg');
 
-    let isFirstImage = true;
-    function changeImage() {
-        const imageUrl = isFirstImage ? 'images/a_1.png' : 'images/a_2.png';
-        changingImage.style.backgroundImage = `url('${imageUrl}')`;
-        isFirstImage = !isFirstImage;
-    }
-    changeImage();
-    setInterval(changeImage, 1000);
-
-    function setPageSize() {
-        const bgImage = new Image();
-        bgImage.onload = function() {
-            const aspectRatio = bgImage.width / bgImage.height;
-            const pageWidth = Math.min(window.innerWidth, bgImage.width);
-            const pageHeight = pageWidth / aspectRatio;
-            document.body.style.height = `${pageHeight}px`;
-            document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
+        let isFirstImage = true;
+        function changeImage() {
+            const imageUrl = isFirstImage ? 'images/a_1.png' : 'images/a_2.png';
+            changingImage.style.backgroundImage = `url('${imageUrl}')`;
+            isFirstImage = !isFirstImage;
         }
-        bgImage.src = window.innerWidth <= 768 ? 'images/m_bg.jpg' : 'images/bg_hp.jpg';
-    }
+        changeImage();
+        setInterval(changeImage, 1000);
 
-    setPageSize();
-    window.addEventListener('resize', setPageSize);
-
-    let bounce = 0;
-    function animate() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const windowHeight = window.innerHeight;
-        const documentHeight = Math.max(
-            document.body.scrollHeight,
-            document.body.offsetHeight,
-            document.documentElement.clientHeight,
-            document.documentElement.scrollHeight,
-            document.documentElement.offsetHeight
-        );
-
-        bounce += 0.05;
-        const bounceOffset = Math.sin(bounce) * 10;
-        changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
-        
-        const isMobile = window.innerWidth <= 768;
-        
-        // About 섹션 애니메이션
-        if (scrollTop > 0 && scrollTop <= (isMobile ? 200 : 430)) {
-            const opacity = Math.min(scrollTop / 100, 1);
-            aboutSection.style.opacity = opacity;
-            aboutSection.style.transform = `translateY(calc(-50% + ${Math.max(50 - scrollTop / 2, 0)}px))`;
-        } else if (scrollTop > (isMobile ? 200 : 430) && scrollTop <= (isMobile ? 300 : 530)) {
-            const opacity = Math.max(1 - (scrollTop - (isMobile ? 200 : 430)) / 100, 0);
-            aboutSection.style.opacity = opacity;
-            aboutSection.style.transform = 'translateY(-50%)';
-        } else {
-            aboutSection.style.opacity = '0';
-            aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
+        function setPageSize() {
+            const bgImage = new Image();
+            bgImage.onload = function() {
+                const aspectRatio = bgImage.width / bgImage.height;
+                const pageWidth = Math.min(window.innerWidth, bgImage.width);
+                const pageHeight = pageWidth / aspectRatio;
+                document.body.style.height = `${pageHeight}px`;
+                document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
+            }
+            bgImage.src = window.innerWidth <= 768 ? 'images/m_bg.jpg' : 'images/bg_hp.jpg';
         }
 
-        // IT line 섹션 애니메이션
-        if (scrollTop > (isMobile ? 300 : 530) && scrollTop <= (isMobile ? 500 : 730)) {
-            const opacity = Math.min((scrollTop - (isMobile ? 300 : 530)) / 200, 1);
-            const translateY = Math.max(50 - (scrollTop - (isMobile ? 300 : 530)) / 4, 0);
-            itlineGroup.style.opacity = opacity;
-            itlineGroup.style.transform = `translateY(calc(-50% + ${translateY}px))`;
-        } else if (scrollTop > (isMobile ? 500 : 730) && scrollTop <= (isMobile ? 700 : 1230)) {
-            itlineGroup.style.opacity = '1';
-            itlineGroup.style.transform = 'translateY(-50%)';
-        } else if (scrollTop > (isMobile ? 700 : 1230) && scrollTop <= (isMobile ? 800 : 1330)) {
-            const opacity = Math.max(1 - (scrollTop - (isMobile ? 700 : 1230)) / 100, 0);
-            const translateY = Math.min((scrollTop - (isMobile ? 700 : 1230)) / 2, 50);
-            itlineGroup.style.opacity = opacity;
-            itlineGroup.style.transform = `translateY(calc(-50% - ${translateY}px))`;
-            scrollMore.style.opacity = 1 - opacity;
-            scrollMore.style.transform = `translateY(calc(-50% + ${50 - translateY}px))`;
-        } else {
-            itlineGroup.style.opacity = '0';
-            itlineGroup.style.transform = 'translateY(calc(-50% + 50px))';
-        }
+        setPageSize();
+        window.addEventListener('resize', setPageSize);
 
-        // Scroll More 텍스트 애니메이션
-        if (scrollTop > (isMobile ? 800 : 1330) && scrollTop <= (isMobile ? 1000 : 1830)) {
-            scrollMore.style.opacity = '1';
-            scrollMore.style.transform = 'translateY(-50%)';
-        } else if (scrollTop > (isMobile ? 1000 : 1830) && scrollTop <= (isMobile ? 1100 : 1930)) {
-            const opacity = Math.max(1 - (scrollTop - (isMobile ? 1000 : 1830)) / 100, 0);
-            scrollMore.style.opacity = opacity;
-            scrollMore.style.transform = 'translateY(-50%)';
-        } else {
-            scrollMore.style.opacity = '0';
-            scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
-        }
+        let bounce = 0;
+        function animate() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const windowHeight = window.innerHeight;
+            const documentHeight = Math.max(
+                document.body.scrollHeight,
+                document.body.offsetHeight,
+                document.documentElement.clientHeight,
+                document.documentElement.scrollHeight,
+                document.documentElement.offsetHeight
+            );
 
-        // Anti-Tarot Card 애니메이션 (스크롤 끝에서 나타남)
-        if (scrollTop + windowHeight >= documentHeight - 1) {
-            antiTarotCard.style.opacity = '1';
-        } else {
-            antiTarotCard.style.opacity = '0';
-        }
-
-        requestAnimationFrame(animate);
-    }
-
-    animate();
-});
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.querySelector('.hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const closeMenu = mobileMenu.querySelector('div:first-child');
-
-    hamburger.addEventListener('click', function() {
-        mobileMenu.style.display = 'block';
-    });
-
-    closeMenu.addEventListener('click', function() {
-        mobileMenu.style.display = 'none';
-    });
-
-    // 기존의 DOMContentLoaded 이벤트 리스너 내용...
-});
-                document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.getElementById('hamburger-menu');
-            const menuItems = document.getElementById('menu-items');
-            const closeBtn = document.getElementById('close-menu');
-            const dimmedBg = document.getElementById('dimmed-bg');
-
-            function openMenu() {
-                menuItems.classList.add('menu-open');
-                dimmedBg.style.display = 'block';
+            bounce += 0.05;
+            const bounceOffset = Math.sin(bounce) * 10;
+            changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
+           
+            const isMobile = window.innerWidth <= 768;
+           
+            // About 섹션 애니메이션
+            if (scrollTop > 0 && scrollTop <= (isMobile ? 200 : 430)) {
+                const opacity = Math.min(scrollTop / 100, 1);
+                aboutSection.style.opacity = opacity;
+                aboutSection.style.transform = `translateY(calc(-50% + ${Math.max(50 - scrollTop / 2, 0)}px))`;
+            } else if (scrollTop > (isMobile ? 200 : 430) && scrollTop <= (isMobile ? 300 : 530)) {
+                const opacity = Math.max(1 - (scrollTop - (isMobile ? 200 : 430)) / 100, 0);
+                aboutSection.style.opacity = opacity;
+                aboutSection.style.transform = 'translateY(-50%)';
+            } else {
+                aboutSection.style.opacity = '0';
+                aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
             }
 
-            function closeMenu() {
-                menuItems.classList.remove('menu-open');
-                dimmedBg.style.display = 'none';
+            // IT line 섹션 애니메이션
+            if (scrollTop > (isMobile ? 300 : 530) && scrollTop <= (isMobile ? 500 : 730)) {
+                const opacity = Math.min((scrollTop - (isMobile ? 300 : 530)) / 200, 1);
+                const translateY = Math.max(50 - (scrollTop - (isMobile ? 300 : 530)) / 4, 0);
+                itlineGroup.style.opacity = opacity;
+                itlineGroup.style.transform = `translateY(calc(-50% + ${translateY}px))`;
+            } else if (scrollTop > (isMobile ? 500 : 730) && scrollTop <= (isMobile ? 700 : 1230)) {
+                itlineGroup.style.opacity = '1';
+                itlineGroup.style.transform = 'translateY(-50%)';
+            } else if (scrollTop > (isMobile ? 700 : 1230) && scrollTop <= (isMobile ? 800 : 1330)) {
+                const opacity = Math.max(1 - (scrollTop - (isMobile ? 700 : 1230)) / 100, 0);
+                const translateY = Math.min((scrollTop - (isMobile ? 700 : 1230)) / 2, 50);
+                itlineGroup.style.opacity = opacity;
+                itlineGroup.style.transform = `translateY(calc(-50% - ${translateY}px))`;
+                scrollMore.style.opacity = 1 - opacity;
+                scrollMore.style.transform = `translateY(calc(-50% + ${50 - translateY}px))`;
+            } else {
+                itlineGroup.style.opacity = '0';
+                itlineGroup.style.transform = 'translateY(calc(-50% + 50px))';
             }
 
-            hamburger.addEventListener('click', openMenu);
-            closeBtn.addEventListener('click', closeMenu);
-            dimmedBg.addEventListener('click', closeMenu);
-        });
-</script>
+            // Scroll More 텍스트 애니메이션
+            if (scrollTop > (isMobile ? 800 : 1330) && scrollTop <= (isMobile ? 1000 : 1830)) {
+                scrollMore.style.opacity = '1';
+                scrollMore.style.transform = 'translateY(-50%)';
+            } else if (scrollTop > (isMobile ? 1000 : 1830) && scrollTop <= (isMobile ? 1100 : 1930)) {
+                const opacity = Math.max(1 - (scrollTop - (isMobile ? 1000 : 1830)) / 100, 0);
+                scrollMore.style.opacity = opacity;
+                scrollMore.style.transform = 'translateY(-50%)';
+            } else {
+                scrollMore.style.opacity = '0';
+                scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
+            }
+
+            // Anti-Tarot Card 애니메이션 (스크롤 끝에서 나타남)
+            if (scrollTop + windowHeight >= documentHeight - 1) {
+                antiTarotCard.style.opacity = '1';
+            } else {
+                antiTarotCard.style.opacity = '0';
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        function openMenu() {
+            menuItems.classList.add('menu-open');
+            dimmedBg.style.display = 'block';
+        }
+
+        function closeMenu() {
+            menuItems.classList.remove('menu-open');
+            dimmedBg.style.display = 'none';
+        }
+
+        hamburger.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        dimmedBg.addEventListener('click', closeMenu);
+    });
+    </script>
 </body>
 </html>
