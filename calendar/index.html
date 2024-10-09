@@ -3,128 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>React Carousel with Image</title>
-  <script type="module" crossorigin src="https://cdn.skypack.dev/react"></script>
-  <script type="module" crossorigin src="https://cdn.skypack.dev/react-dom"></script>
-  <script type="module" crossorigin src="https://cdn.skypack.dev/react-icons@4.12.0/ti"></script>
+  <title>Image Grid with Gradient Background</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      min-height: 100vh;
       background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      animation: gradientChange 10s infinite;
       transition: background 1s ease;
+      flex-wrap: wrap;
     }
-    .carousel {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+
+    @keyframes gradientChange {
+      0% {
+        background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      }
+      25% {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+      }
+      50% {
+        background: linear-gradient(135deg, #00c6ff, #0072ff);
+      }
+      75% {
+        background: linear-gradient(135deg, #f7971e, #ffd200);
+      }
+      100% {
+        background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      }
     }
-    .card {
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
       padding: 20px;
-      margin: 0 10px;
+    }
+
+    .image-grid img {
       width: 200px;
-      text-align: center;
-    }
-    .card img {
-      max-width: 100%;
-      border-radius: 8px;
-    }
-    .nav {
-      background: none;
-      border: none;
-      font-size: 2rem;
-      cursor: pointer;
-      color: white;
-    }
-    .card-container {
-      transition: transform 0.3s ease, opacity 0.3s ease;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
   </style>
 </head>
 <body>
-  <div id="root"></div>
-
-  <script type="module">
-    import React, { useState } from 'https://cdn.skypack.dev/react';
-    import ReactDOM from 'https://cdn.skypack.dev/react-dom';
-    import {TiChevronLeftOutline, TiChevronRightOutline} from 'https://cdn.skypack.dev/react-icons@4.12.0/ti';
-
-    const CARDS = 10;
-    const MAX_VISIBILITY = 3;
-
-    const Card = ({title, content, imageUrl}) => (
-      <div className='card'>
-        {imageUrl ? <img src={imageUrl} alt={title} /> : null}
-        <h2>{title}</h2>
-        <p>{content}</p>
-      </div>
-    );
-
-    const Carousel = ({children}) => {
-      const [active, setActive] = useState(2);
-      const count = React.Children.count(children);
-
-      return (
-        <div className='carousel'>
-          {active > 0 && (
-            <button className='nav left' onClick={() => setActive(i => i - 1)}>
-              <TiChevronLeftOutline/>
-            </button>
-          )}
-          {React.Children.map(children, (child, i) => (
-            <div className='card-container' style={{
-              '--active': i === active ? 1 : 0,
-              '--offset': (active - i) / 3,
-              '--direction': Math.sign(active - i),
-              '--abs-offset': Math.abs(active - i) / 3,
-              'pointer-events': active === i ? 'auto' : 'none',
-              'opacity': Math.abs(active - i) >= MAX_VISIBILITY ? '0' : '1',
-              'display': Math.abs(active - i) > MAX_VISIBILITY ? 'none' : 'block',
-            }}>
-              {child}
-            </div>
-          ))}
-          {active < count - 1 && (
-            <button className='nav right' onClick={() => setActive(i => i + 1)}>
-              <TiChevronRightOutline/>
-            </button>
-          )}
-        </div>
-      );
-    };
-
-    const App = () => (
-      <div className='app'>
-        <Carousel>
-          <Card
-            title="Card 1"
-            content="This is the first card with an image."
-            imageUrl="images/2025_square1.jpg"
-          />
-          {[...new Array(CARDS - 1)].map((_, i) => (
-            <Card
-              key={i + 1}
-              title={`Card ${i + 2}`}
-              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-            />
-          ))}
-        </Carousel>
-      </div>
-    );
-
-    ReactDOM.render(
-      <App/>,
-      document.getElementById('root')
-    );
-  </script>
+  <div class="image-grid">
+    <!-- 12개의 동일한 이미지 배치 -->
+    <img src="images/2025_square1.jpg" alt="Image 1">
+    <img src="images/2025_square1.jpg" alt="Image 2">
+    <img src="images/2025_square1.jpg" alt="Image 3">
+    <img src="images/2025_square1.jpg" alt="Image 4">
+    <img src="images/2025_square1.jpg" alt="Image 5">
+    <img src="images/2025_square1.jpg" alt="Image 6">
+    <img src="images/2025_square1.jpg" alt="Image 7">
+    <img src="images/2025_square1.jpg" alt="Image 8">
+    <img src="images/2025_square1.jpg" alt="Image 9">
+    <img src="images/2025_square1.jpg" alt="Image 10">
+    <img src="images/2025_square1.jpg" alt="Image 11">
+    <img src="images/2025_square1.jpg" alt="Image 12">
+  </div>
 </body>
 </html>
