@@ -3,19 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Grid with Gradient Background</title>
+  <title>Carousel with Gradient and Fade</title>
+  <script type="module" crossorigin src="https://cdn.skypack.dev/react"></script>
+  <script type="module" crossorigin src="https://cdn.skypack.dev/react-dom"></script>
+  <script type="module" crossorigin src="https://cdn.skypack.dev/react-icons@4.12.0/ti"></script>
   <style>
     body {
       margin: 0;
       padding: 0;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
       background: linear-gradient(135deg, #ff7e5f, #feb47b);
-      animation: gradientChange 10s infinite;
-      transition: background 1s ease;
-      flex-wrap: wrap;
+      transition: background 2s ease; /* 페이드인 적용 */
+      animation: gradientChange 20s infinite; /* 배경 색상 애니메이션 */
     }
 
     @keyframes gradientChange {
@@ -36,37 +38,106 @@
       }
     }
 
-    .image-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      padding: 20px;
+    .carousel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
 
-    .image-grid img {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
+    .nav {
+      background: none;
+      border: none;
+      font-size: 3rem;
+      cursor: pointer;
+      color: white;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+
+    .nav.left {
+      left: -50px;
+    }
+
+    .nav.right {
+      right: -50px;
+    }
+
+    .image-container {
+      width: 500px;
+      height: 500px;
+      overflow: hidden;
+      border-radius: 20px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .fade {
+      transition: opacity 1s ease-in-out;
+      opacity: 0;
+    }
+
+    .fade.show {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
-  <div class="image-grid">
-    <!-- 12개의 동일한 이미지 배치 -->
-    <img src="images/2025_square1.jpg" alt="Image 1">
-    <img src="images/2025_square1.jpg" alt="Image 2">
-    <img src="images/2025_square1.jpg" alt="Image 3">
-    <img src="images/2025_square1.jpg" alt="Image 4">
-    <img src="images/2025_square1.jpg" alt="Image 5">
-    <img src="images/2025_square1.jpg" alt="Image 6">
-    <img src="images/2025_square1.jpg" alt="Image 7">
-    <img src="images/2025_square1.jpg" alt="Image 8">
-    <img src="images/2025_square1.jpg" alt="Image 9">
-    <img src="images/2025_square1.jpg" alt="Image 10">
-    <img src="images/2025_square1.jpg" alt="Image 11">
-    <img src="images/2025_square1.jpg" alt="Image 12">
-  </div>
+  <div id="root"></div>
+
+  <script type="module">
+    import React, { useState } from 'https://cdn.skypack.dev/react';
+    import ReactDOM from 'https://cdn.skypack.dev/react-dom';
+    import { TiChevronLeftOutline, TiChevronRightOutline } from 'https://cdn.skypack.dev/react-icons@4.12.0/ti';
+
+    const images = [
+      "images/2025_square1.jpg", "images/2025_square1.jpg", "images/2025_square1.jpg", 
+      "images/2025_square1.jpg", "images/2025_square1.jpg", "images/2025_square1.jpg", 
+      "images/2025_square1.jpg", "images/2025_square1.jpg", "images/2025_square1.jpg", 
+      "images/2025_square1.jpg", "images/2025_square1.jpg", "images/2025_square1.jpg"
+    ];
+
+    const Carousel = () => {
+      const [activeIndex, setActiveIndex] = useState(0);
+
+      const handleNext = () => {
+        setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
+      };
+
+      const handlePrev = () => {
+        setActiveIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+      };
+
+      return (
+        <div className="carousel">
+          <button className="nav left" onClick={handlePrev}>
+            <TiChevronLeftOutline />
+          </button>
+          <div className="image-container fade show">
+            <img src={images[activeIndex]} alt={`Image ${activeIndex + 1}`} />
+          </div>
+          <button className="nav right" onClick={handleNext}>
+            <TiChevronRightOutline />
+          </button>
+        </div>
+      );
+    };
+
+    const App = () => (
+      <div>
+        <Carousel />
+      </div>
+    );
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
 </body>
 </html>
