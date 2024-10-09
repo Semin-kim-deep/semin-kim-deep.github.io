@@ -412,14 +412,6 @@
             <p class="info-more"><a href="about.html">More ></a></p>
         </div>
     </div>
-    <div class="it-line-group">
-        <div class="it-line-image">
-            <img src="images/a_1253.png" alt="IT line Image">
-        </div>
-        <div class="it-line-title">IT line</div>
-        <div class="it-line-description">
-            <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. </p>
-            <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' </span>
 <div class="it-line-group">
         <div class="it-line-image">
             <img src="images/a_1253.png" alt="IT line Image">
@@ -556,19 +548,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     animate();
 
-    function openMenu() {
-        menuItems.style.left = '0';
-        dimmedBg.style.display = 'block';
-    }
+function openMenu() {
+    menuItems.style.left = '0';
+    dimmedBg.style.display = 'block';
+}
 
-    function closeMenu() {
-        menuItems.style.left = '-300px';
-        dimmedBg.style.display = 'none';
-    }
+function closeMenu() {
+    menuItems.style.left = '-300px';
+    dimmedBg.style.display = 'none';
+}
 
-    hamburger.addEventListener('click', openMenu);
-    closeBtn.addEventListener('click', closeMenu);
-    dimmedBg.addEventListener('click', closeMenu);
+hamburger.addEventListener('click', openMenu);
+closeBtn.addEventListener('click', closeMenu);
+dimmedBg.addEventListener('click', closeMenu);
 });
 </script>
 </body>
