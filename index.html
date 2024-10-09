@@ -211,10 +211,6 @@
             flex-direction: column;
             justify-content: space-between;
             cursor: pointer;
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
         }
         .hamburger span {
             width: 100%;
@@ -355,8 +351,6 @@
                 position: absolute;
                 top: 20px;
                 right: 20px;
-                left: auto;
-                transform: none;
             }
         }
         @media (max-width: 480px) {
@@ -382,10 +376,19 @@
             header {
                 padding-left: 28px;
             }
+            .hamburger {
+                position: absolute;
+                left: 28px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
         }
         @media (min-width: 1920px) {
             header {
                 padding-left: 56px;
+            }
+            .hamburger {
+                left: 56px;
             }
         }
     </style>
@@ -424,7 +427,7 @@
             <p class="info-more"><a href="about.html">More ></a></p>
         </div>
     </div>
-  <div class="it-line-group">
+<div class="it-line-group">
         <div class="it-line-image">
             <img src="images/a_1253.png" alt="IT line Image">
         </div>
