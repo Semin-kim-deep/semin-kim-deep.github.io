@@ -63,17 +63,20 @@
       margin-bottom: 20px;
     }
     .image-card-container {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 20px;
+      position: relative;
+      width: 900px;
+      height: 500px;
       margin-top: 20px;
     }
     .image-container {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 500px;
       height: 500px;
       border-radius: 20px;
       overflow: hidden;
+      z-index: 2;
     }
     .image-container img {
       width: 100%;
@@ -81,16 +84,27 @@
       object-fit: cover;
     }
     .rounded-box {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 900px;
       height: 500px;
       background-color: rgba(255, 255, 255, 0.8);
       border-radius: 20px;
-      padding: 12px;
+      padding: 20px;
       box-sizing: border-box;
       color: black;
       font-family: 'Pretendard', sans-serif;
-      font-size: 12pt;
+      font-size: 14pt;
       line-height: 1.5;
+      z-index: 1;
+    }
+    .text-content {
+      position: absolute;
+      top: 20px;
+      left: 520px;
+      width: 360px;
+      height: 460px;
       overflow-y: auto;
     }
   </style>
@@ -109,11 +123,13 @@
       여러분의 월별 플레이 리스트도 만들어보세요.
     </div>
     <div class="image-card-container">
+      <div class="rounded-box">
+        <div class="text-content">
+          1월하면, 새해하면 새로운 시작이 생각나죠. 새로운 마음으로 시작할 새해를 Songs & Scenes 달력으로 맞아보세요! 시작하면 빠질 수 없는 곡, John Lennon의 Starting over 입니다.
+        </div>
+      </div>
       <div class="image-container">
         <img src="images/2025_square1.jpg" alt="2025 Calendar Image">
-      </div>
-      <div class="rounded-box">
-        1월하면, 새해하면 새로운 시작이 생각나죠. 새로운 마음으로 시작할 새해를 Songs & Scenes 달력으로 맞아보세요! 시작하면 빠질 수 없는 곡, John Lennon의 Starting over 입니다.
       </div>
     </div>
   </div>
