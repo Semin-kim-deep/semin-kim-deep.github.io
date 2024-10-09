@@ -17,6 +17,7 @@
       justify-content: center;
       align-items: center;
       background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      transition: background 1s ease;
     }
     .carousel {
       display: flex;
@@ -126,6 +127,22 @@
       <App/>,
       document.getElementById('root')
     );
+
+    // JavaScript to change the background color every few seconds
+    const gradients = [
+      'linear-gradient(135deg, #ff7e5f, #feb47b)',  // warm gradient
+      'linear-gradient(135deg, #00c6ff, #0072ff)',  // blue gradient
+      'linear-gradient(135deg, #f7971e, #ffd200)',  // orange gradient
+      'linear-gradient(135deg, #43cea2, #185a9d)',  // green/blue gradient
+      'linear-gradient(135deg, #f85032, #e73827)',  // red gradient
+    ];
+
+    let currentGradient = 0;
+
+    setInterval(() => {
+      document.body.style.background = gradients[currentGradient];
+      currentGradient = (currentGradient + 1) % gradients.length;
+    }, 3000);  // Change background every 3 seconds
   </script>
 </body>
 </html>
