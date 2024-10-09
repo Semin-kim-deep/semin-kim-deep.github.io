@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>React Carousel</title>
+  <title>React Carousel with Image</title>
   <script type="module" crossorigin src="https://cdn.skypack.dev/react"></script>
   <script type="module" crossorigin src="https://cdn.skypack.dev/react-dom"></script>
   <script type="module" crossorigin src="https://cdn.skypack.dev/react-icons@4.12.0/ti"></script>
@@ -34,6 +34,10 @@
       width: 200px;
       text-align: center;
     }
+    .card img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
     .nav {
       background: none;
       border: none;
@@ -57,8 +61,9 @@
     const CARDS = 10;
     const MAX_VISIBILITY = 3;
 
-    const Card = ({title, content}) => (
+    const Card = ({title, content, imageUrl}) => (
       <div className='card'>
+        {imageUrl ? <img src={imageUrl} alt={title} /> : null}
         <h2>{title}</h2>
         <p>{content}</p>
       </div>
@@ -68,40 +73,28 @@
       const [active, setActive] = useState(2);
       const count = React.Children.count(children);
 
-      console.log('Total Cards:', count);
-      console.log('Currently Active Card:', active);
-
       return (
         <div className='carousel'>
           {active > 0 && (
-            <button className='nav left' onClick={() => {
-              console.log('Navigating Left');
-              setActive(i => i - 1);
-            }}>
+            <button className='nav left' onClick={() => setActive(i => i - 1)}>
               <TiChevronLeftOutline/>
             </button>
           )}
-          {React.Children.map(children, (child, i) => {
-            console.log(`Rendering Card ${i + 1}: Active - ${active === i}`);
-            return (
-              <div className='card-container' style={{
-                '--active': i === active ? 1 : 0,
-                '--offset': (active - i) / 3,
-                '--direction': Math.sign(active - i),
-                '--abs-offset': Math.abs(active - i) / 3,
-                'pointer-events': active === i ? 'auto' : 'none',
-                'opacity': Math.abs(active - i) >= MAX_VISIBILITY ? '0' : '1',
-                'display': Math.abs(active - i) > MAX_VISIBILITY ? 'none' : 'block',
-              }}>
-                {child}
-              </div>
-            );
-          })}
-          {active < count - 1 && (
-            <button className='nav right' onClick={() => {
-              console.log('Navigating Right');
-              setActive(i => i + 1);
+          {React.Children.map(children, (child, i) => (
+            <div className='card-container' style={{
+              '--active': i === active ? 1 : 0,
+              '--offset': (active - i) / 3,
+              '--direction': Math.sign(active - i),
+              '--abs-offset': Math.abs(active - i) / 3,
+              'pointer-events': active === i ? 'auto' : 'none',
+              'opacity': Math.abs(active - i) >= MAX_VISIBILITY ? '0' : '1',
+              'display': Math.abs(active - i) > MAX_VISIBILITY ? 'none' : 'block',
             }}>
+              {child}
+            </div>
+          ))}
+          {active < count - 1 && (
+            <button className='nav right' onClick={() => setActive(i => i + 1)}>
               <TiChevronRightOutline/>
             </button>
           )}
@@ -112,11 +105,16 @@
     const App = () => (
       <div className='app'>
         <Carousel>
-          {[...new Array(CARDS)].map((_, i) => (
+          <Card
+            title="Card 1"
+            content="This is the first card with an image."
+            imageUrl="images/2025_square1.jpg"
+          />
+          {[...new Array(CARDS - 1)].map((_, i) => (
             <Card
-              key={i}
-              title={`Card ${i + 1}`}
-              content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+              key={i + 1}
+              title={`Card ${i + 2}`}
+              content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
             />
           ))}
         </Carousel>
@@ -127,22 +125,6 @@
       <App/>,
       document.getElementById('root')
     );
-
-    // JavaScript to change the background color every few seconds
-    const gradients = [
-      'linear-gradient(135deg, #ff7e5f, #feb47b)',  // warm gradient
-      'linear-gradient(135deg, #00c6ff, #0072ff)',  // blue gradient
-      'linear-gradient(135deg, #f7971e, #ffd200)',  // orange gradient
-      'linear-gradient(135deg, #43cea2, #185a9d)',  // green/blue gradient
-      'linear-gradient(135deg, #f85032, #e73827)',  // red gradient
-    ];
-
-    let currentGradient = 0;
-
-    setInterval(() => {
-      document.body.style.background = gradients[currentGradient];
-      currentGradient = (currentGradient + 1) % gradients.length;
-    }, 3000);  // Change background every 3 seconds
   </script>
 </body>
 </html>
