@@ -18,25 +18,26 @@
             overflow-x: hidden;
         }
         .container {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 0 50px;
+            padding: 0;
             box-sizing: border-box;
             position: relative;
         }
         header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             padding: 20px 0;
             position: relative;
+            width: 100%;
         }
         h1 {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
             font-size: 48px;
             color: white;
-            margin: 0;
+            margin: 0 auto;
             text-align: center;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -211,6 +212,11 @@
             flex-direction: column;
             justify-content: space-between;
             cursor: pointer;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
         }
         .hamburger span {
             width: 100%;
@@ -288,10 +294,6 @@
             color: black;
         }
         @media (max-width: 1024px) {
-            .container {
-                max-width: 1024px;
-                padding: 0 20px;
-            }
             .changing-image {
                 width: 500px;
                 height: 500px;
@@ -341,22 +343,15 @@
             .info-description, .it-line-description {
                 display: none;
             }
-            .container {
-                padding: 0 20px;
-            }
             h1 {
                 font-size: 33.6px;
             }
             .hamburger {
-                position: absolute;
-                top: 20px;
-                right: 20px;
+                left: 20px;
+                left: auto;
             }
         }
         @media (max-width: 480px) {
-            .container {
-                padding: 0 10px;
-            }
             h1 {
                 font-size: 24px;
             }
@@ -373,20 +368,11 @@
             }
         }
         @media (min-width: 1024px) {
-            header {
-                padding-left: 28px;
-            }
             .hamburger {
-                position: absolute;
                 left: 28px;
-                top: 50%;
-                transform: translateY(-50%);
             }
         }
         @media (min-width: 1920px) {
-            header {
-                padding-left: 56px;
-            }
             .hamburger {
                 left: 56px;
             }
@@ -403,7 +389,6 @@
                 <span></span>
             </div>
             <h1>Deepdown Studio</h1>
-            <div style="width: 18px;"></div>
         </header>
         <div class="changing-image"></div>
         <div class="gallery">
@@ -427,6 +412,14 @@
             <p class="info-more"><a href="about.html">More ></a></p>
         </div>
     </div>
+    <div class="it-line-group">
+        <div class="it-line-image">
+            <img src="images/a_1253.png" alt="IT line Image">
+        </div>
+        <div class="it-line-title">IT line</div>
+        <div class="it-line-description">
+            <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. </p>
+            <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' </span>
 <div class="it-line-group">
         <div class="it-line-image">
             <img src="images/a_1253.png" alt="IT line Image">
