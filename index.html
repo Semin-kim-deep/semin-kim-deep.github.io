@@ -29,6 +29,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
+            position: relative;
         }
         h1 {
             font-family: 'Jost', sans-serif;
@@ -203,87 +204,6 @@
             opacity: 0;
             transition: opacity 0.5s ease;
         }
-        @media (max-width: 1024px) {
-            .container {
-                max-width: 1024px;
-                padding: 0 20px;
-            }
-            .changing-image {
-                width: 500px;
-                height: 500px;
-            }
-            .gallery {
-                margin-top: 200px;
-            }
-            .circular-image-container {
-                margin: 0 50px;
-            }
-            .video-container {
-                margin-right: 150px;
-            }
-            .info-section, .scroll-more {
-                left: 20px;
-            }
-            .it-line-group {
-                right: 20px;
-            }
-        }
-        @media (max-width: 768px) {
-            html, body {
-                overflow-x: hidden;
-                width: 100%;
-                position: relative;
-            }
-            body {
-                background-image: url('images/m_bg.jpg');
-                background-size: cover;
-            }
-            .changing-image {
-                width: 100%;
-                height: auto;
-                max-width: 500px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .circular-image-container {
-                width: 60%;
-                padding-bottom: 60%;
-                margin: 20px 0;
-            }
-            .it-line-image {
-                width: 200px;
-                height: 200px;
-            }
-            .info-description, .it-line-description {
-                display: none;
-            }
-            .container {
-                padding: 0 20px;
-            }
-            h1 {
-                font-size: 33.6px; /* 48px의 70% */
-            }
-        }
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 10px;
-            }
-            h1 {
-                font-size: 24px;
-            }
-            .changing-image {
-                width: 500px;  /* 모바일에서도 500px 유지 */
-                height: 500px;  /* 모바일에서도 500px 유지 */
-            }
-            .info-title, .it-line-title, .scroll-more {
-                font-size: 36px;
-            }
-            .it-line-image {
-                width: 150px;
-                height: 150px;
-            }
-        }
-        /* New hamburger menu styles */
         .hamburger {
             width: 18px;
             height: 16px;
@@ -366,6 +286,101 @@
             font-weight: 700;
             margin-bottom: 24px;
             color: black;
+        }
+        @media (max-width: 1024px) {
+            .container {
+                max-width: 1024px;
+                padding: 0 20px;
+            }
+            .changing-image {
+                width: 500px;
+                height: 500px;
+            }
+            .gallery {
+                margin-top: 200px;
+            }
+            .circular-image-container {
+                margin: 0 50px;
+            }
+            .video-container {
+                margin-right: 150px;
+            }
+            .info-section, .scroll-more {
+                left: 20px;
+            }
+            .it-line-group {
+                right: 20px;
+            }
+        }
+        @media (max-width: 768px) {
+            html, body {
+                overflow-x: hidden;
+                width: 100%;
+                position: relative;
+            }
+            body {
+                background-image: url('images/m_bg.jpg');
+                background-size: cover;
+            }
+            .changing-image {
+                width: 100%;
+                height: auto;
+                max-width: 500px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .circular-image-container {
+                width: 60%;
+                padding-bottom: 60%;
+                margin: 20px 0;
+            }
+            .it-line-image {
+                width: 200px;
+                height: 200px;
+            }
+            .info-description, .it-line-description {
+                display: none;
+            }
+            .container {
+                padding: 0 20px;
+            }
+            h1 {
+                font-size: 33.6px;
+            }
+            .hamburger {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .changing-image {
+                width: 500px;
+                height: 500px;
+            }
+            .info-title, .it-line-title, .scroll-more {
+                font-size: 36px;
+            }
+            .it-line-image {
+                width: 150px;
+                height: 150px;
+            }
+        }
+        @media (min-width: 1024px) {
+            header {
+                padding-left: 28px;
+            }
+        }
+        @media (min-width: 1920px) {
+            header {
+                padding-left: 56px;
+            }
         }
     </style>
 </head>
