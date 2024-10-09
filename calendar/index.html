@@ -22,7 +22,7 @@
       height: 100%;
       z-index: -1;
     }
-    .bg1, .bg2 {
+    .bg {
       position: absolute;
       top: 0;
       left: 0;
@@ -30,16 +30,14 @@
       height: 100%;
       background-size: 400% 400%;
       transition: opacity 2s ease-in-out;
-    }
-    .bg1 {
-      background-image: linear-gradient(135deg, #ff7e5f, #feb47b);
-      animation: gradientBG 10s ease infinite;
-    }
-    .bg2 {
-      background-image: linear-gradient(135deg, #6a11cb, #2575fc);
-      animation: gradientBG 10s ease infinite;
       opacity: 0;
     }
+    .bg1 { background-image: linear-gradient(135deg, #ff7e5f, #feb47b); }
+    .bg2 { background-image: linear-gradient(135deg, #6a11cb, #2575fc); }
+    .bg3 { background-image: linear-gradient(135deg, #11998e, #38ef7d); }
+    .bg4 { background-image: linear-gradient(135deg, #ff416c, #ff4b2b); }
+    .bg5 { background-image: linear-gradient(135deg, #56ccf2, #ffd700); }
+    .bg.active { opacity: 1; }
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -49,21 +47,27 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 50px 20px;
+      padding: 10px 20px 50px;
       box-sizing: border-box;
       min-height: 100vh;
     }
     h1 {
       font-family: 'Jost', sans-serif;
       font-weight: 700;
-      font-size: 40pt;
+      font-size: 32pt;
       margin-bottom: 10px;
     }
     .subtitle {
-      font-size: 14pt;
+      font-size: 12pt;
       text-align: center;
       max-width: 600px;
       margin-bottom: 30px;
+    }
+    .songs-scenes {
+      font-family: 'Jost', sans-serif;
+      font-weight: 700;
+      font-size: 16pt;
+      margin-bottom: 10px;
     }
     .english {
       font-family: 'Jost', sans-serif;
@@ -91,13 +95,16 @@
 </head>
 <body>
   <div class="background">
-    <div class="bg1"></div>
-    <div class="bg2"></div>
+    <div class="bg bg1 active"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+    <div class="bg bg4"></div>
+    <div class="bg bg5"></div>
   </div>
   <div class="content">
     <h1>2025 Calendar</h1>
+    <div class="songs-scenes">Songs & Scenes</div>
     <div class="subtitle">
-      Songs & Scenes<br>
       월별 어울리는 음악을 선정하고 장면을 그렸어요.<br>
       여러분의 월별 플레이 리스트도 만들어보세요.<br>
       <span class="english">
@@ -112,19 +119,20 @@
   </div>
 
   <script>
-    function toggleBackground() {
-      const bg1 = document.querySelector('.bg1');
-      const bg2 = document.querySelector('.bg2');
-      if (bg1.style.opacity === '0') {
-        bg1.style.opacity = '1';
-        bg2.style.opacity = '0';
-      } else {
-        bg1.style.opacity = '0';
-        bg2.style.opacity = '1';
-      }
+    const backgrounds = document.querySelectorAll('.bg');
+    let currentBg = 0;
+
+    function changeBackground() {
+      backgrounds[currentBg].classList.remove('active');
+      currentBg = (currentBg + 1) % backgrounds.length;
+      backgrounds[currentBg].classList.add('active');
     }
 
-    setInterval(toggleBackground, 10000); // Change background every 10 seconds
+    setInterval(changeBackground, 5000); // Change background every 5 seconds
+
+    backgrounds.forEach(bg => {
+      bg.style.animation = 'gradientBG 15s ease infinite';
+    });
   </script>
 </body>
 </html>
