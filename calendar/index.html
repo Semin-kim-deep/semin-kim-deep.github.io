@@ -20,17 +20,36 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 36px;
       box-sizing: border-box;
       min-height: 100vh;
     }
-    h1 {
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 28px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .hamburger {
+      width: 18px;
+      height: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+    .hamburger span {
+      width: 100%;
+      height: 2px;
+      background-color: #7f7f7f;
+    }
+    .header-title {
       font-family: 'Jost', sans-serif;
       font-weight: 700;
-      font-size: 36pt;
-      margin: 0 0 0px 0;
-      padding-bottom: 40px;
+      font-size: 24pt;
       color: black;
+      margin: 0;
     }
     .subtitle {
       font-size: 14pt;
@@ -120,27 +139,6 @@
       background-color: #f1f1f1;
       margin-top: 100px;
     }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      position: relative;
-      z-index: 1000;
-    }
-    .hamburger {
-      width: 18px;
-      height: 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      cursor: pointer;
-    }
-    .hamburger span {
-      width: 100%;
-      height: 2px;
-      background-color: #7f7f7f;
-    }
     .menu-items {
       position: fixed;
       top: 0;
@@ -211,42 +209,37 @@
       margin-bottom: 24px;
       color: black;
     }
-    @media (min-width: 1024px) {
-      .header {
-        padding-left: 28px;
-      }
-    }
     @media (min-width: 1920px) {
       .header {
         padding-left: 56px;
+        padding-right: 56px;
       }
     }
   </style>
 </head>
 <body>
   <div class="dimmed-background" id="dimmed-bg"></div>
-<header class="header">
-  <div class="hamburger" id="hamburger-menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <div style="flex-grow: 1;"></div>
-  <div style="width: 18px;"></div>
-</header>
-  
-  <div class="menu-items" id="menu-items">
-    <div class="close-btn" id="close-menu"></div>
-    <div class="menu-title">Deepdown Studio</div>
-    <a href="/">Home</a>
-    <a href="about.html">About</a>
-    <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
-    <a href="/card/index.html">Anti-Tarot Card</a>
-    <a href="/calendar/">Calendar 2025</a>
-  </div>
-
   <div class="content">
-    <h1>2025 Calendar - Songs & Scenes</h1>
+    <header class="header">
+      <div class="hamburger" id="hamburger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <h1 class="header-title">2025 Calendar - Songs & Scenes</h1>
+      <div style="width: 18px;"></div>
+    </header>
+    
+    <div class="menu-items" id="menu-items">
+      <div class="close-btn" id="close-menu"></div>
+      <div class="menu-title">Deepdown Studio</div>
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
+      <a href="/card/index.html">Anti-Tarot Card</a>
+      <a href="/calendar/">Calendar 2025</a>
+    </div>
+
     <div class="subtitle">
       월별 어울리는 음악을 선정하고 장면을 그렸어요.<br>
       여러분의 월별 플레이 리스트도 만들어보세요.
