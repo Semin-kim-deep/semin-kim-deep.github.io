@@ -251,6 +251,24 @@
     .autoplay-toggle.active {
       color: red;
     }
+    .autoplay-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.autoplay-toggle {
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #7f7f7f;
+}
+
+.autoplay-text {
+  font-size: 12pt;
+  color: #404040;
+}
     @media (min-width: 1920px) {
       .header {
         padding-left: 56px;
@@ -284,15 +302,15 @@
     <div class="subtitle">
       2025년의 시간을 팝니다.
     </div>
-    <div class="subsub">
-      월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분도 플레이리스트를 만들어보세요.<br>
-      음악 영상(유튜브)를 자동재생합니다.
-      <div class="autoplay-info">
-        <span class="autoplay-toggle" id="autoplay-toggle">
-          <i class="far fa-play-circle"></i>
-        </span>
-      </div>
-    </div>
+<div class="subsub">
+  월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분도 플레이리스트를 만들어보세요.<br>
+  <div class="autoplay-info">
+    <span class="autoplay-toggle" id="autoplay-toggle">
+      <i class="far fa-play-circle"></i>
+    </span>
+    <span class="autoplay-text">음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요</span>
+  </div>
+</div>
     <div class="calendar-container">
       <button class="nav-button prev"></button>
       <div class="calendar-content">
