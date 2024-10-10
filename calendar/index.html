@@ -81,44 +81,44 @@
       line-height: 1.5;
       color: #202020;
     }
-    .nav-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #404040;
-      font-size: 31.2px; /* Increased by 1.3 times from 24px */
-    }
-    .nav-button i {
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      border: 1px solid currentColor;
-      border-radius: 50%;
-      position: relative;
-    }
-    .nav-button i::before {
-      content: '';
-      width: 0.4em;
-      height: 0.4em;
-      border-top: 1px solid currentColor;
-      border-right: 1px solid currentColor;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-25%, -50%) rotate(45deg);
-    }
-    .nav-button.prev {
-      left: -60px;
-    }
-    .nav-button.next {
-      right: -60px;
-    }
-    .nav-button.prev i::before {
-      transform: translate(-75%, -50%) rotate(-135deg);
-    }
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #404040;
+  font-size: 31.2px;
+}
+
+.nav-button::before {
+  content: '';
+  display: inline-block;
+  width: 0.4em;
+  height: 0.4em;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.nav-button.prev {
+  left: -60px;
+}
+
+.nav-button.next {
+  right: -60px;
+}
+
+.nav-button.prev::before {
+  transform: translate(-25%, -50%) rotate(-135deg);
+}
+
+.nav-button.next::before {
+  transform: translate(-75%, -50%) rotate(45deg);
+}
     .bottom-section {
       width: 100%;
       height: 800px;
