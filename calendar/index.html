@@ -141,18 +141,6 @@
       height: 2px;
       background-color: #7f7f7f;
     }
-    .logo-container {
-      flex-grow: 1;
-      text-align: center;
-    }
-    .logo {
-      font-family: 'Jost', sans-serif;
-      font-weight: 700;
-      font-size: 26.4px;
-      text-decoration: none;
-      color: black;
-      display: inline-block;
-    }
     .menu-items {
       position: fixed;
       top: 0;
@@ -237,17 +225,15 @@
 </head>
 <body>
   <div class="dimmed-background" id="dimmed-bg"></div>
-  <header class="header">
-    <div class="hamburger" id="hamburger-menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <div class="logo-container">
-      <a href="/" class="logo">Deepdown Studio</a>
-    </div>
-    <div style="width: 18px;"></div>
-  </header>
+<header class="header">
+  <div class="hamburger" id="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div style="flex-grow: 1;"></div>
+  <div style="width: 18px;"></div>
+</header>
   
   <div class="menu-items" id="menu-items">
     <div class="close-btn" id="close-menu"></div>
