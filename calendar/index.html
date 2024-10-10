@@ -31,6 +31,11 @@
       width: 100%;
       box-sizing: border-box;
     }
+    .header-content {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+    }
     .hamburger {
       width: 18px;
       height: 16px;
@@ -38,6 +43,7 @@
       flex-direction: column;
       justify-content: space-between;
       cursor: pointer;
+      margin-right: 20px;
     }
     .hamburger span {
       width: 100%;
@@ -47,25 +53,17 @@
     .header-title {
       font-family: 'Jost', sans-serif;
       font-weight: 700;
-      font-size: 40pt;
+      font-size: 36pt;
       color: black;
       margin: 0;
     }
     .subtitle {
-      font-size: 13pt;
-      text-align: center;
-      max-width: 600px;
-      line-height: 1.8;
-      padding-bottom: 10px;
-      color: black;
-    }
-       .subsub {
-      font-size: 11pt;
+      font-size: 14pt;
       text-align: center;
       max-width: 600px;
       line-height: 1.8;
       padding-bottom: 20px;
-      color: #404040;
+      color: black;
     }
     .calendar-container {
       position: relative;
@@ -98,7 +96,7 @@
       border-top: 2px solid #000;
       border-bottom: 1px solid #000;
       padding: 20px 0;
-      font-size: 14pt;
+      font-size: 15pt;
       flex-grow: 1;
       overflow-y: auto;
       line-height: 1.6;
@@ -229,12 +227,14 @@
   <div class="dimmed-background" id="dimmed-bg"></div>
   <div class="content">
     <header class="header">
-      <div class="hamburger" id="hamburger-menu">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="header-content">
+        <div class="hamburger" id="hamburger-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <h1 class="header-title">2025 Calendar - Songs & Scenes</h1>
       </div>
-      <h1 class="header-title">2025 Calendar - Songs & Scenes</h1>
       <div style="width: 18px;"></div>
     </header>
     
@@ -242,7 +242,7 @@
       <div class="close-btn" id="close-menu"></div>
       <div class="menu-title">Deepdown Studio</div>
       <a href="/">Home</a>
-      <a href="/about.html">About</a>
+      <a href="about.html">About</a>
       <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
       <a href="/card/index.html">Anti-Tarot Card</a>
       <a href="/calendar/">Calendar 2025</a>
@@ -251,9 +251,6 @@
     <div class="subtitle">
       월별 어울리는 음악을 선정하고 장면을 그렸어요.<br>
       여러분의 월별 플레이 리스트도 만들어보세요.
-    </div>
-      <div class="subsub">
-     2025년의 시간을 팝니다. 
     </div>
     <div class="calendar-container">
       <button class="nav-button prev"></button>
