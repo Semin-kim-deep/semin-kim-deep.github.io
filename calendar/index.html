@@ -6,20 +6,21 @@
   <title>2025 Calendar</title>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
   <style>
     body, html {
       margin: 0;
       padding: 0;
       min-height: 100vh;
       font-family: 'Pretendard', sans-serif;
-      color: black;
+      color: #404040;
       background-color: white;
     }
     .content {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 36px; /* Changed to 60px as requested */
+      padding-top: 36px;
       box-sizing: border-box;
       min-height: 100vh;
     }
@@ -29,27 +30,29 @@
       font-size: 36pt;
       margin: 0 0 0px 0;
       padding-bottom: 30px;
+      color: #404040;
     }
     .subtitle {
-      font-size: 14pt; /* Increased by 1.2 times from 12pt */
+      font-size: 14pt;
       text-align: center;
       max-width: 600px;
-      line-height: 1.8; /* Increased by 1.5 times from 1.2 */
+      line-height: 1.8;
       padding-bottom: 20px;
+      color: #404040;
     }
     .calendar-container {
       position: relative;
-      width: 1000px; /* Adjusted to accommodate new widths */
+      width: 1050px;
       margin-top: 20px;
     }
     .calendar-content {
       display: flex;
       width: 100%;
-      height: 500px; /* Adjusted to match new text content height */
+      height: 500px;
     }
     .image-container {
-      width: 500px; /* Changed to 500px as requested */
-      height: 500px; /* Adjusted to maintain aspect ratio */
+      width: 500px;
+      height: 500px;
     }
     .image-container img {
       width: 100%;
@@ -57,16 +60,16 @@
       object-fit: cover;
     }
     .text-content {
-      width: 500px; /* Changed to 400px as requested */
-      height: 500px; /* Changed to 500px as requested */
-      padding: 20px;
+      width: 500px;
+      height: 500px;
+      padding: 20px 0 20px 50px;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
     }
     .text-content-inner {
-      border-top: 2px solid #000; /* Changed to 2px as requested */
-      border-bottom: 2px solid #000; /* Changed to 2px as requested */
+      border-top: 2px solid #000;
+      border-bottom: 1px solid #000;
       padding: 20px 0;
       flex-grow: 1;
       overflow-y: auto;
@@ -84,12 +87,19 @@
       border: none;
       font-size: 24px;
       cursor: pointer;
+      color: #404040;
     }
     .nav-button.prev {
       left: -40px;
     }
     .nav-button.next {
       right: -40px;
+    }
+    .bottom-section {
+      width: 100%;
+      height: 800px;
+      background-color: #f1f1f1;
+      margin-top: 100px;
     }
   </style>
 </head>
@@ -101,7 +111,7 @@
       여러분의 월별 플레이 리스트도 만들어보세요.
     </div>
     <div class="calendar-container">
-      <button class="nav-button prev">&lt;</button>
+      <button class="nav-button prev"><i class="fas fa-chevron-left"></i></button>
       <div class="calendar-content">
         <div class="image-container">
           <img src="images/2025_square1.jpg" alt="2025 Calendar Image">
@@ -116,9 +126,10 @@
           </div>
         </div>
       </div>
-      <button class="nav-button next">&gt;</button>
+      <button class="nav-button next"><i class="fas fa-chevron-right"></i></button>
     </div>
   </div>
+  <div class="bottom-section"></div>
   <script>
     // Here you can add JavaScript for handling the navigation buttons
     // For example:
