@@ -26,15 +26,10 @@
     .header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       padding: 20px 28px;
       width: 100%;
       box-sizing: border-box;
-    }
-    .header-content {
-      display: flex;
-      align-items: center;
-      flex-grow: 1;
     }
     .hamburger {
       width: 18px;
@@ -43,7 +38,7 @@
       flex-direction: column;
       justify-content: space-between;
       cursor: pointer;
-      margin-right: 20px;
+      margin-top: 10px;
     }
     .hamburger span {
       width: 100%;
@@ -56,6 +51,8 @@
       font-size: 36pt;
       color: black;
       margin: 0;
+      text-align: center;
+      flex-grow: 1;
     }
     .subtitle {
       font-size: 14pt;
@@ -227,14 +224,12 @@
   <div class="dimmed-background" id="dimmed-bg"></div>
   <div class="content">
     <header class="header">
-      <div class="header-content">
-        <div class="hamburger" id="hamburger-menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <h1 class="header-title">2025 Calendar - Songs & Scenes</h1>
+      <div class="hamburger" id="hamburger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
+      <h1 class="header-title">2025 Calendar - Songs & Scenes</h1>
       <div style="width: 18px;"></div>
     </header>
     
