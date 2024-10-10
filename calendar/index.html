@@ -242,15 +242,27 @@
       margin-bottom: 24px;
       color: black;
     }
-    .autoplay-toggle {
-      margin-left: 10px;
-      cursor: pointer;
-      font-size: 24px;
-      color: #7f7f7f;
-    }
-    .autoplay-toggle.active {
-      color: red;
-    }
+.autoplay-toggle {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #7f7f7f;
+}
+
+.autoplay-status {
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.autoplay-toggle.active {
+  color: red;
+}
+
+.autoplay-toggle.active .autoplay-status {
+  color: red;
+}
     .autoplay-info {
   display: flex;
   align-items: center;
@@ -258,12 +270,7 @@
   margin-top: 10px;
 }
 
-.autoplay-toggle {
-  margin-right: 10px;
-  cursor: pointer;
-  font-size: 24px;
-  color: #7f7f7f;
-}
+
 
 .autoplay-text {
   font-size: 12pt;
@@ -304,12 +311,14 @@
     </div>
 <div class="subsub">
   월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분도 플레이리스트를 만들어보세요.<br>
-  <div class="autoplay-info">
-    <span class="autoplay-toggle" id="autoplay-toggle">
-      <i class="far fa-play-circle"></i>
-    </span>
-    <span class="autoplay-text">음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요</span>
-  </div>
+
+<div class="autoplay-info">
+  <span class="autoplay-toggle" id="autoplay-toggle">
+    <i class="far fa-play-circle"></i>
+    <span class="autoplay-status">OFF</span>
+  </span>
+  <span class="autoplay-text">음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요</span>
+</div>
 </div>
     <div class="calendar-container">
       <button class="nav-button prev"></button>
@@ -365,20 +374,30 @@
       dimmedBg.style.display = 'none';
     }
 
-    function toggleAutoplay() {
-      isAutoplayOn = !isAutoplayOn;
-      autoplayToggle.classList.toggle('active');
-      autoplayToggle.innerHTML = isAutoplayOn ? '<i class="fas fa-play-circle"></i>' : '<i class="far fa-play-circle"></i>';
-      
-      // Update iframe src to enable/disable autoplay
-      let src = iframe.src;
-      src = src.replace(/(\?|&)autoplay=[01]/, '');
-      src = src.replace(/(\?|&)mute=[01]/, '');
-      if (isAutoplayOn) {
-        src += (src.includes('?') ? '&' : '?') + 'autoplay=1&mute=1';
-      }
-      iframe.src = src;
-    }
+ function toggleAutoplay() {
+  isAutoplayOn = !isAutoplayOn;
+  autoplayToggle.classList.toggle('active');
+  const statusElement = autoplayToggle.querySelector('.autoplay-status');
+  
+  if (isAutoplayOn) {
+    autoplayToggle.querySelector('i').className = 'fas fa-play-circle';
+    statusElement.textContent = 'ON';
+    statusElement.style.color = 'red';
+  } else {
+    autoplayToggle.querySelector('i').className = 'far fa-play-circle';
+    statusElement.textContent = 'OFF';
+    statusElement.style.color = '#7f7f7f';
+  }
+  
+  // Update iframe src to enable/disable autoplay
+  let src = iframe.src;
+  src = src.replace(/(\?|&)autoplay=[01]/, '');
+  src = src.replace(/(\?|&)mute=[01]/, '');
+  if (isAutoplayOn) {
+    src += (src.includes('?') ? '&' : '?') + 'autoplay=1';  // Removed 'mute=1'
+  }
+  iframe.src = src;
+}
 
     hamburger.addEventListener('click', openMenu);
     closeBtn.addEventListener('click', closeMenu);
