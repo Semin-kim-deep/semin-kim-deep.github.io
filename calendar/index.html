@@ -280,7 +280,7 @@
       font-size: 11pt;
       color: #404040;
     }
-   .white-section {
+    .white-section {
       width: 100%;
       background-color: white;
       display: flex;
@@ -306,27 +306,29 @@
       cursor: pointer;
       transition: background-color 0.3s, color 0.3s;
       position: relative;
-      padding-right: 60px; /* 오른쪽 화살표를 위한 공간 증가 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .custom-button::after {
-      content: '';
-      position: absolute;
-      right: 30px;
-      top: 50%;
-      width: 10px;
-      height: 10px;
+    .custom-button-content {
+      display: flex;
+      align-items: center;
+    }
+    .custom-button-arrow {
+      width: 8px;
+      height: 8px;
       border-top: 1px solid #000;
       border-right: 1px solid #000;
-      transform: translateY(-50%) rotate(45deg);
+      transform: rotate(45deg);
+      margin-left: 10px;
       transition: border-color 0.3s, transform 0.3s;
     }
     .custom-button:hover {
       background-color: #000;
       color: #fff;
     }
-    .custom-button:hover::after {
+    .custom-button:hover .custom-button-arrow {
       border-color: #fff;
-      transform: translateY(-50%) rotate(45deg) scale(1.2);
     }
 
     @media (min-width: 1920px) {
@@ -409,9 +411,13 @@
   <div class="white-section">
     <img src="images/1.jpg" alt="Calendar Image" class="image-1">
     <div class="button-container">
-      <button class="custom-button">신나게 사러 달려나가기</button>
+      <button class="custom-button">
+        <span class="custom-button-content">
+          신나게 사러 달려나가기
+          <span class="custom-button-arrow"></span>
+        </span>
+      </button>
     </div>
-  </div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const hamburger = document.getElementById('hamburger-menu');
