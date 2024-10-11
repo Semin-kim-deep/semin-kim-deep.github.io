@@ -280,7 +280,7 @@
       font-size: 11pt;
       color: #404040;
     }
-    .white-section {
+   .white-section {
       width: 100%;
       background-color: white;
       display: flex;
@@ -305,20 +305,30 @@
       font-weight: 700;
       cursor: pointer;
       transition: background-color 0.3s, color 0.3s;
-         position: relative;
-          padding-right: 30px; /* 오른쪽 화살표를 위한 공간 */
+      position: relative;
+      padding-right: 60px; /* 오른쪽 화살표를 위한 공간 증가 */
     }
-      .custom-button::after {
-      content: '>';
+    .custom-button::after {
+      content: '';
       position: absolute;
-      right: 20px;
+      right: 30px;
       top: 50%;
-      transform: translateY(-50%);
+      width: 10px;
+      height: 10px;
+      border-top: 1px solid #000;
+      border-right: 1px solid #000;
+      transform: translateY(-50%) rotate(45deg);
+      transition: border-color 0.3s, transform 0.3s;
     }
     .custom-button:hover {
       background-color: #000;
       color: #fff;
     }
+    .custom-button:hover::after {
+      border-color: #fff;
+      transform: translateY(-50%) rotate(45deg) scale(1.2);
+    }
+
     @media (min-width: 1920px) {
       .header {
         padding-left: 56px;
