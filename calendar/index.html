@@ -84,7 +84,7 @@
       position: relative;
       width: 1220px;
       margin-top: 20px;
-      margin-bottom: 100px; /* 150px의 빈 공간 추가 */
+      margin-bottom: 100px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -280,6 +280,36 @@
       font-size: 11pt;
       color: #404040;
     }
+    .white-section {
+      width: 100%;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 100px 0;
+    }
+    .image-1 {
+      max-width: 100%;
+      height: auto;
+    }
+    .button-container {
+      margin-top: 50px;
+    }
+    .custom-button {
+      width: 600px;
+      height: 60px;
+      background-color: transparent;
+      border: 2px solid #000;
+      font-family: 'Jost', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .custom-button:hover {
+      background-color: #000;
+      color: #fff;
+    }
     @media (min-width: 1920px) {
       .header {
         padding-left: 56px;
@@ -355,6 +385,12 @@
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay" 
         allowfullscreen>
       </iframe>
+    </div>
+  </div>
+  <div class="white-section">
+    <img src="images/1.jpg" alt="Calendar Image" class="image-1">
+    <div class="button-container">
+      <button class="custom-button">장바구니 담기</button>
     </div>
   </div>
 <script>
