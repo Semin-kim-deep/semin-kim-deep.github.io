@@ -293,18 +293,27 @@
       height: auto;
     }
     .button-container {
-      margin-top: 50px;
+      margin-top: 80px;
     }
     .custom-button {
       width: 600px;
       height: 60px;
       background-color: transparent;
-      border: 2px solid #000;
+      border: 1px solid #000;
       font-family: 'Jost', sans-serif;
       font-size: 18px;
       font-weight: 700;
       cursor: pointer;
       transition: background-color 0.3s, color 0.3s;
+         position: relative;
+          padding-right: 30px; /* 오른쪽 화살표를 위한 공간 */
+    }
+      .custom-button::after {
+      content: '>';
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
     }
     .custom-button:hover {
       background-color: #000;
@@ -390,7 +399,7 @@
   <div class="white-section">
     <img src="images/1.jpg" alt="Calendar Image" class="image-1">
     <div class="button-container">
-      <button class="custom-button">장바구니 담기</button>
+      <button class="custom-button">사러 달려가기</button>
     </div>
   </div>
 <script>
