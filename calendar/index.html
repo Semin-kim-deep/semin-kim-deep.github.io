@@ -354,59 +354,59 @@
     </div>
   </div>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.getElementById('hamburger-menu');
-    const menuItems = document.getElementById('menu-items');
-    const closeBtn = document.getElementById('close-menu');
-    const dimmedBg = document.getElementById('dimmed-bg');
-    const autoplayToggle = document.getElementById('autoplay-toggle');
-    const iframe = document.querySelector('.video-container iframe');
-    let isAutoplayOn = false;
+ document.addEventListener('DOMContentLoaded', function() {
+  const hamburger = document.getElementById('hamburger-menu');
+  const menuItems = document.getElementById('menu-items');
+  const closeBtn = document.getElementById('close-menu');
+  const dimmedBg = document.getElementById('dimmed-bg');
+  const autoplayToggle = document.getElementById('autoplay-toggle');
+  const iframe = document.querySelector('.video-container iframe');
+  let isAutoplayOn = false;
 
-    function openMenu() {
-      menuItems.classList.add('menu-open');
-      dimmedBg.style.display = 'block';
+  function openMenu() {
+    menuItems.classList.add('menu-open');
+    dimmedBg.style.display = 'block';
+  }
+
+  function closeMenu() {
+    menuItems.classList.remove('menu-open');
+    dimmedBg.style.display = 'none';
+  }
+
+  function toggleAutoplay() {
+    isAutoplayOn = !isAutoplayOn;
+    autoplayToggle.classList.toggle('active');
+    const statusElement = autoplayToggle.querySelector('.autoplay-status');
+    
+    if (isAutoplayOn) {
+      autoplayToggle.querySelector('i').className = 'fas fa-play-circle';
+      statusElement.textContent = 'ON';
+      statusElement.style.color = 'red';
+    } else {
+      autoplayToggle.querySelector('i').className = 'far fa-play-circle';
+      statusElement.textContent = 'OFF';
+      statusElement.style.color = '#7f7f7f';
     }
-
-    function closeMenu() {
-      menuItems.classList.remove('menu-open');
-      dimmedBg.style.display = 'none';
+    
+    // Update iframe src to enable/disable autoplay
+    let src = iframe.src;
+    src = src.replace(/(\?|&)autoplay=[01]/, '');
+    if (isAutoplayOn) {
+      src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
     }
+    iframe.src = src;
+  }
 
-    function toggleAutoplay() {
-      isAutoplayOn = !isAutoplayOn;
-      autoplayToggle.classList.toggle('active');
-      const statusElement = autoplayToggle.querySelector('.autoplay-status');
-      
-      if (isAutoplayOn) {
-        autoplayToggle.querySelector('i').className = 'fas fa-play-circle';
-        statusElement.textContent = 'ON';
-        statusElement.style.color = 'red';
-      } else {
-        autoplayToggle.querySelector('i').className = 'far fa-play-circle';
-        statusElement.textContent = 'OFF';
-        statusElement.style.color = '#7f7f7f';
-      }
-      
-      // Update iframe src to enable/disable autoplay
-      let src = iframe.src;
-      src = src.replace(/(\?|&)autoplay=[01]/, '');
-      if (isAutoplayOn) {
-        src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
-      }
-      iframe.src = src;
-    }
+  hamburger.addEventListener('click', openMenu);
+  closeBtn.addEventListener('click', closeMenu);
+  dimmedBg.addEventListener('click', closeMenu);
+  autoplayToggle.addEventListener('click', toggleAutoplay);
 
-    hamburger.addEventListener('click', openMenu);
-    closeBtn.addEventListener('click', closeMenu);
-    dimmedBg.addEventListener('click', closeMenu);
-    autoplayToggle.addEventListener('click', toggleAutoplay);
-
-    // Here you can add JavaScript for handling the navigation buttons
-    // For example:
-    // document.querySelector('.prev').addEventListener('click', showPreviousMonth);
-    // document.querySelector('.next').addEventListener('click', showNextMonth);
-  });
+  // Here you can add JavaScript for handling the navigation buttons
+  // For example:
+  // document.querySelector('.prev').addEventListener('click', showPreviousMonth);
+  // document.querySelector('.next').addEventListener('click', showNextMonth);
+});
 </script>
 </body>
 </html>
