@@ -338,6 +338,7 @@
       }
     }
   </style>
+
 </head>
 <body>
   <div class="dimmed-background" id="dimmed-bg"></div>
@@ -375,13 +376,13 @@
       </div>
     </div>
     <div class="calendar-container">
-      <button class="nav-button prev"></button>
+      <button class="nav-button prev" id="prevButton"></button>
       <div class="calendar-content">
         <div class="image-container">
-          <img src="images/2025_square1.jpg" alt="2025 Calendar Image">
+          <img id="calendarImage" src="images/2025_square1.jpg" alt="2025 Calendar Image">
         </div>
         <div class="text-content">
-          <div class="text-content-inner">
+          <div class="text-content-inner" id="calendarText">
             <b>01. John Lennon - Starting Over <br>
             1월, 새로운 시작을 다짐합니다. </b><br><br>
             John Lennon의 Starting over는 시작에 가장 어울리는 곡 중 하나죠. <br>마치 배철수의 음악캠프에 나올 법한 선곡. <br><br>
@@ -394,13 +395,13 @@
           </div>
         </div>
       </div>
-      <button class="nav-button next"></button>
+      <button class="nav-button next" id="nextButton"></button>
     </div>
   </div>
   <div class="bottom-section">
     <div class="play-this-song">Play This Song</div>
     <div class="video-container">
-      <iframe width="560" height="315" 
+      <iframe id="youtubeVideo" width="560" height="315" 
         src="https://www.youtube.com/embed/Ed1swjoTXqc" 
         frameborder="0" 
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay" 
@@ -409,7 +410,7 @@
     </div>
   </div>
   <div class="white-section">
-    <img src="images/1.jpg" alt="Calendar Image" class="image-1">
+    <img id="bottomImage" src="images/1.jpg" alt="Calendar Image" class="image-1">
     <div class="button-container">
       <button class="custom-button">
         <span class="custom-button-content">
@@ -418,6 +419,7 @@
         </span>
       </button>
     </div>
+  </div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const hamburger = document.getElementById('hamburger-menu');
@@ -426,7 +428,15 @@ document.addEventListener('DOMContentLoaded', function() {
   const dimmedBg = document.getElementById('dimmed-bg');
   const autoplayToggle = document.getElementById('autoplay-toggle');
   const iframe = document.querySelector('.video-container iframe');
+  const prevButton = document.getElementById('prevButton');
+  const nextButton = document.getElementById('nextButton');
+  const calendarImage = document.getElementById('calendarImage');
+  const calendarText = document.getElementById('calendarText');
+  const youtubeVideo = document.getElementById('youtubeVideo');
+  const bottomImage = document.getElementById('bottomImage');
+  
   let isAutoplayOn = false;
+  let currentMonth = 1;
 
   function openMenu() {
     menuItems.classList.add('menu-open');
@@ -453,25 +463,69 @@ document.addEventListener('DOMContentLoaded', function() {
       statusElement.style.color = '#7f7f7f';
     }
     
-    // Update iframe src to enable/disable autoplay
-    let src = iframe.src;
+    updateYoutubeAutoplay();
+  }
+
+  function updateYoutubeAutoplay() {
+    let src = youtubeVideo.src;
     src = src.replace(/(\?|&)autoplay=[01]/, '');
     if (isAutoplayOn) {
       src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
     }
-    iframe.src = src;
+    youtubeVideo.src = src;
+  }
+
+  function updateContent(month) {
+    calendarImage.src = `images/2025_square${month}.jpg`;
+    bottomImage.src = `images/${month}.jpg`;
+    
+    // 여기에 각 월별 텍스트 내용을 추가하세요.
+    const monthlyContent = [
+      // 1월 내용은 이미 HTML에 있으므로 생략
+      "2월 내용...",
+      "3월 내용...",
+      // ... 12월까지
+    ];
+    
+    if (month > 1) {
+      calendarText.innerHTML = monthlyContent[month - 2];
+    }
+    
+    // 여기에 각 월별 YouTube 비디오 ID를 추가하세요.
+    const youtubeIDs = [
+      "Ed1swjoTXqc", // 1월
+      "VIDEO_ID_2",  // 2월
+      "VIDEO_ID_3",  // 3월
+      // ... 12월까지
+    ];
+    
+    youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
+    updateYoutubeAutoplay();
+  }
+
+  function showNextMonth() {
+    if (currentMonth < 12) {
+      currentMonth++;
+      updateContent(currentMonth);
+    }
+  }
+
+  function showPreviousMonth() {
+    if (currentMonth > 1) {
+      currentMonth--;
+      updateContent(currentMonth);
+    }
   }
 
   hamburger.addEventListener('click', openMenu);
   closeBtn.addEventListener('click', closeMenu);
   dimmedBg.addEventListener('click', closeMenu);
   autoplayToggle.addEventListener('click', toggleAutoplay);
-
-  // Here you can add JavaScript for handling the navigation buttons
-  // For example:
-  // document.querySelector('.prev').addEventListener('click', showPreviousMonth);
-  // document.querySelector('.next').addEventListener('click', showNextMonth);
+  nextButton.addEventListener('click', showNextMonth);
+  prevButton.addEventListener('click', showPreviousMonth);
 });
 </script>
 </body>
 </html>
+
+
