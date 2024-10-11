@@ -1,415 +1,565 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>2025 Calendar</title>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      font-family: 'Pretendard', sans-serif;
-      color: #404040;
-      background-color: white;
-    }
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-    .content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-sizing: border-box;
-    }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 20px 28px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .hamburger {
-      width: 18px;
-      height: 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    .hamburger span {
-      width: 100%;
-      height: 2px;
-      background-color: #7f7f7f;
-    }
-    .header-title {
-      font-family: 'Jost', sans-serif;
-      font-weight: 700;
-      font-size: 36pt;
-      color: black;
-      margin: 0;
-      text-align: center;
-      flex-grow: 1;
-    }
-    .subtitle {
-      font-size: 14pt;
-      text-align: center;
-      max-width: 1000px;
-      line-height: 1.8;
-      padding-bottom: 20px;
-      color: black;
-    }
-    .subsub {
-      font-size: 12pt;
-      text-align: center;
-      max-width: 1000px;
-      line-height: 1.4;
-      padding-bottom: 20px;
-      color: #404040;
-    }
-    .autoplay-info {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 5px;
-    }
-    .calendar-container {
-      position: relative;
-      width: 1220px;
-      margin-top: 20px;
-      margin-bottom: 150px; /* 150px의 빈 공간 추가 */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .calendar-content {
-      display: flex;
-      width: 1120px;
-      height: 560px;
-    }
-    .image-container {
-      width: 560px;
-      height: 560px;
-    }
-    .image-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .text-content {
-      width: 560px;
-      height: 560px;
-      padding: 0 0 0 40px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-    }
-    .text-content-inner {
-      border-top: 2px solid #000;
-      border-bottom: 1px solid #000;
-      padding: 20px 0;
-      font-size: 11.5pt;
-      flex-grow: 1;
-      overflow-y: auto;
-      line-height: 1.6;
-    }
-    .text-content-inner b {
-      font-size: 15pt;
-      line-height: 1.8;
-      color: #202020;
-    }
-    .nav-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #404040;
-      font-size: 40.56px;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .nav-button::before {
-      content: '';
-      display: inline-block;
-      width: 0.52em;
-      height: 0.52em;
-      border-top: 1px solid currentColor;
-      border-right: 1px solid currentColor;
-      position: absolute;
-    }
-    .nav-button.prev {
-      left: 0;
-    }
-    .nav-button.next {
-      right: 0;
-    }
-    .nav-button.prev::before {
-      transform: rotate(-135deg);
-    }
-    .nav-button.next::before {
-      transform: rotate(45deg);
-    }
-    .bottom-section {
-      width: 100%;
-      background-color: #f1f1f1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 40px 0;
-    }
-    .video-container {
-      width: 560px;
-      height: 315px;
-      position: relative;
-      margin: 0 0 16px 0;
-    }
-    .video-container iframe {
-      width: 100%;
-      height: 100%;
-    }
-    .play-this-song {
-      font-family: 'Jost', sans-serif;
-      font-weight: 700;
-      font-size: 30px;
-      text-align: center;
-      margin-bottom: 60px;
-      padding: 10px 0 0 0;
-    }
-    .menu-items {
-      position: fixed;
-      top: 0;
-      left: -300px;
-      width: 300px;
-      height: 100vh;
-      background-color: #f5f3f2;
-      transition: left 0.3s ease-in-out;
-      padding: 40px;
-      box-sizing: border-box;
-      z-index: 1001;
-      text-align: center;
-    }
-    .menu-items a {
-      display: block;
-      padding: 10px 0;
-      text-decoration: none;
-      color: #414141;
-      font-family: 'Jost', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-    }
-    .menu-open {
-      left: 0;
-    }
-    .dimmed-background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: none;
-      z-index: 1000;
-    }
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 18px;
-      cursor: pointer;
-      width: 18px;
-      height: 18px;
-      line-height: 18px;
-      text-align: center;
-      color: #414141;
-    }
-    .close-btn::before,
-    .close-btn::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background-color: #414141;
-    }
-    .close-btn::before {
-      transform: rotate(45deg);
-    }
-    .close-btn::after {
-      transform: rotate(-45deg);
-    }
-    .menu-title {
-      font-family: 'Jost', sans-serif;
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 24px;
-      color: black;
-    }
-    .autoplay-toggle {
-      display: flex;
-      align-items: center;
-      margin-right: 10px;
-      cursor: pointer;
-      font-size: 24px;
-      color: #7f7f7f;
-    }
-    .autoplay-status {
-      font-size: 12px;
-      margin-left: 5px;
-    }
-    .autoplay-toggle.active {
-      color: red;
-    }
-    .autoplay-toggle.active .autoplay-status {
-      color: red;
-    }
-    .autoplay-text {
-      font-size: 11pt;
-      color: #404040;
-    }
-    @media (min-width: 1920px) {
-      .header {
-        padding-left: 56px;
-        padding-right: 56px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepdown Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('images/bg_hp.jpg');
+            background-size: contain;
+            background-position: center top;
+            background-repeat: no-repeat;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            box-sizing: border-box;
+            position: relative;
+        }
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+            width: 100%;
+        }
+        h1 {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            color: white;
+            margin: 0 auto;
+            text-align: center;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+        }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 300px;
+        }
+        .circular-image-container {
+            position: relative;
+            width: 30%;
+            padding-bottom: 30%;
+            overflow: hidden;
+            margin: 0 100px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
+        }
+        .circular-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            height: 70%;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .circular-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .higher-image {
+            margin-top: -100px;
+        }
+        .changing-image {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+        .description {
+            margin-top: 40px;
+            text-align: center;
+        }
+        .about-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .info-section {
+            position: fixed;
+            left: calc(50% - 550px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .info-title {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .info-description {
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 500px;
+        }
+        .info-description p:first-child {
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        .info-description p:nth-child(2) {
+            font-family: 'Jost', sans-serif;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .info-more {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        .info-more a {
+            color: white;
+            text-decoration: none;
+        }
+        .info-more-it {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        .info-more-it a {
+            color: #282828;
+            text-decoration: none;
+        }
+        .it-line-group {
+            position: fixed;
+            right: calc(50% - 560px);
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: left;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            color: #282828;
+        }
+        .it-line-image {
+            width: 300px;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+        .it-line-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .it-line-title {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .it-line-description {
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 400px;
+        }
+        .scroll-more {
+            position: fixed;
+            left: calc(50% - 550px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+        }
+        .anti-tarot-card {
+            position: absolute;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: black;
+            text-align: center;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .hamburger {
+            width: 18px;
+            height: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+        .hamburger span {
+            width: 100%;
+            height: 2px;
+            background-color: white;
+        }
+        .menu-items {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: #f5f3f2;
+            transition: left 0.3s ease-in-out;
+            padding: 40px;
+            box-sizing: border-box;
+            z-index: 1001;
+            text-align: center;
+        }
+        .menu-items a {
+            display: block;
+            padding: 10px 0;
+            text-decoration: none;
+            color: #414141;
+            font-family: 'Jost', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+        }
+        .menu-open {
+            left: 0;
+        }
+        .dimmed-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+            line-height: 18px;
+            text-align: center;
+            color: #414141;
+        }
+        .close-btn::before,
+        .close-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #414141;
+        }
+        .close-btn::before {
+            transform: rotate(45deg);
+        }
+        .close-btn::after {
+            transform: rotate(-45deg);
+        }
+        .menu-title {
+            font-family: 'Jost', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: black;
+        }
+        @media (max-width: 1024px) {
+            .changing-image {
+                width: 500px;
+                height: 500px;
+            }
+            .gallery {
+                margin-top: 200px;
+            }
+            .circular-image-container {
+                margin: 0 50px;
+            }
+            .video-container {
+                margin-right: 150px;
+            }
+            .info-section, .scroll-more {
+                left: 20px;
+            }
+            .it-line-group {
+                right: 20px;
+            }
+        }
+        @media (max-width: 768px) {
+            html, body {
+                overflow-x: hidden;
+                width: 100%;
+                position: relative;
+            }
+            body {
+                background-image: url('images/m_bg.jpg');
+                background-size: cover;
+            }
+            .changing-image {
+                width: 100%;
+                height: auto;
+                max-width: 500px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .circular-image-container {
+                width: 60%;
+                padding-bottom: 60%;
+                margin: 20px 0;
+            }
+            .it-line-image {
+                width: 200px;
+                height: 200px;
+            }
+            .info-description, .it-line-description {
+                display: none;
+            }
+            h1 {
+                font-size: 33.6px;
+            }
+            .hamburger {
+                left: 20px;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+            .changing-image {
+                width: 500px;
+                height: 500px;
+            }
+            .info-title, .it-line-title, .scroll-more {
+                font-size: 36px;
+            }
+            .it-line-image {
+                width: 150px;
+                height: 150px;
+            }
+        }
+        @media (min-width: 1024px) {
+            .hamburger {
+                left: 28px;
+            }
+        }
+        @media (min-width: 1920px) {
+            .hamburger {
+                left: 56px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="dimmed-background" id="dimmed-bg"></div>
-  <div class="content">
-    <header class="header">
-      <div class="hamburger" id="hamburger-menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <h1 class="header-title">2025 Calendar - Songs & Scenes</h1>
-      <div style="width: 18px;"></div>
-    </header>
-    
+    <div class="dimmed-background" id="dimmed-bg"></div>
+    <div class="container">
+        <header>
+            <div class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <h1>Deepdown Studio</h1>
+        </header>
+        <div class="changing-image"></div>
+        <div class="gallery">
+            <div class="circular-image-container higher-image">
+                <div class="circular-image">
+                    <img src="images/Thank-you3_web.png" alt="Image 2">
+                </div>
+            </div>
+        </div>
+        <div class="description">
+            <p></p>
+        </div>
+    </div>
+    <div class="info-section" id="about-section">
+        <div class="info-title">About</div>
+        <div class="info-description">
+            <p>딥다운 스튜디오는 일러스트를 중심으로 다양한 제품을 만들고 있어요.<br>
+            음악과 책 등에서 영감을 받고, 재미있는 것들을 만들고자 해요.</p>
+            <p>Deepdown Studio creates a variety of products with a focus on illustration.<br>
+            <span style="font-family: 'Jost', sans-serif; font-weight: 500;">I got inspiration from music and books, and my goal is to make fun and interesting things.</span></p>
+            <p class="info-more"><a href="about.html">More ></a></p>
+        </div>
+    </div>
+<div class="it-line-group">
+        <div class="it-line-image">
+            <img src="images/a_1253.png" alt="IT line Image">
+        </div>
+        <div class="it-line-title">IT line</div>
+        <div class="it-line-description">
+            <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. </p>
+            <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' </span></p>
+            <p class="info-more-it"><a href="https://www.figma.com/@itseodanggae" target="blank">More ></a></p>
+        </div>
+    </div>
+    <div class="scroll-more">Scroll More</div>
+    <div class="anti-tarot-card">Anti-Tarot Card</div>
     <div class="menu-items" id="menu-items">
-      <div class="close-btn" id="close-menu"></div>
-      <div class="menu-title">Deepdown Studio</div>
-      <a href="/">Home</a>
-      <a href="/about.html">About</a>
-      <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
-      <a href="/card/index.html">Anti-Tarot Card</a>
-      <a href="/calendar/">Calendar 2025</a>
+        <div class="close-btn" id="close-menu"></div>
+        <div class="menu-title">Deepdown Studio</div>
+        <a href="/">Home</a>
+        <a href="about.html">About</a>
+        <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
+        <a href="/card/index.html">Anti-Tarot Card</a>
+        <a href="/calendar/">Calendar 2025</a>
     </div>
-    <div class="subtitle">
-      2025년의 시간을 팝니다.
-    </div>
-    <div class="subsub">
-      월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분도 플레이리스트를 만들어보세요.<br>
-      <div class="autoplay-info">
-        <span class="autoplay-toggle" id="autoplay-toggle">
-          <i class="far fa-play-circle"></i>
-          <span class="autoplay-status">OFF</span>
-        </span>
-        <span class="autoplay-text">음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요</span>
-      </div>
-    </div>
-    <div class="calendar-container">
-      <button class="nav-button prev"></button>
-      <div class="calendar-content">
-        <div class="image-container">
-          <img src="images/2025_square1.jpg" alt="2025 Calendar Image">
-        </div>
-        <div class="text-content">
-          <div class="text-content-inner">
-            <b>01. John Lennon - Starting Over <br>
-            1월, 새로운 시작을 다짐합니다. </b><br><br>
-            John Lennon의 Starting over는 시작에 가장 어울리는 곡 중 하나죠. <br>마치 배철수의 음악캠프에 나올 법한 선곡. <br><br>
-
-            2024년 (구)칸예 웨스트가 한국에서 진행한 리스닝 파티가 화제였죠. <br> 그전까지는 그저 샘플링을 잘하고, 트로피 와이프처럼 여성을 대상화하는 셀럽이라고 생각했어요. 내한해서 공연한 Runaway의 음악과 퍼포먼스가 너무 멋있어서, 넷플릭스의 칸예웨스트 다큐를 찾아 보게 되었어요. <br>
-            유명해지기 전, 칸예는 이미 jay-z 등 아티스트의 곡을 만들고 프로듀싱하는 프로듀서로서 알려져 있었어요. 그는 본인의 이름을 건 앨범을 내는 뮤지션 랩퍼가 되고 싶어 했지만 번번이 레코드사로부터 거절당합니다.<br> 너는 프로듀싱을 잘하니, 계속 다른 뮤지션들을 위한 곡이나 만들어달라고요.
-            <br> <br>제가 인상 깊었던 점은 그런 좌절의 순간에도 풀이 죽거나  불평하지 않고 묵묵히 자신의 때를 기다리는 모습이었어요. 왜냐하면 자기 자신을 믿었으니까.<br>
-            힘들고 어렵고 부끄러운 상황에도 자신을 믿고 참고 의연하게 때를 기다리는 것. <br> 그게 저한테도 필요한 것 같아요. <br>
-            그런 사람이 되고 싶고, 그런 사람들을 더 알고 싶네요. <br>
-          </div>
-        </div>
-      </div>
-      <button class="nav-button next"></button>
-    </div>
-  </div>
-  <div class="bottom-section">
-    <div class="play-this-song">Play This Song</div>
-    <div class="video-container">
-      <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/Ed1swjoTXqc" 
-        frameborder="0" 
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay" 
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const hamburger = document.getElementById('hamburger-menu');
-  const menuItems = document.getElementById('menu-items');
-  const closeBtn = document.getElementById('close-menu');
-  const dimmedBg = document.getElementById('dimmed-bg');
-  const autoplayToggle = document.getElementById('autoplay-toggle');
-  const iframe = document.querySelector('.video-container iframe');
-  let isAutoplayOn = false;
+    const changingImage = document.querySelector('.changing-image');
+    const aboutSection = document.querySelector('#about-section');
+    const itlineGroup = document.querySelector('.it-line-group');
+    const scrollMore = document.querySelector('.scroll-more');
+    const antiTarotCard = document.querySelector('.anti-tarot-card');
+    const hamburger = document.getElementById('hamburger-menu');
+    const menuItems = document.getElementById('menu-items');
+    const closeBtn = document.getElementById('close-menu');
+    const dimmedBg = document.getElementById('dimmed-bg');
 
-  function openMenu() {
-    menuItems.classList.add('menu-open');
+    let isFirstImage = true;
+    function changeImage() {
+        const imageUrl = isFirstImage ? 'images/a_1.png' : 'images/a_2.png';
+        changingImage.style.backgroundImage = `url('${imageUrl}')`;
+        isFirstImage = !isFirstImage;
+    }
+    changeImage();
+    setInterval(changeImage, 1000);
+
+    function setPageSize() {
+        const bgImage = new Image();
+        bgImage.onload = function() {
+            const aspectRatio = bgImage.width / bgImage.height;
+            const pageWidth = Math.min(window.innerWidth, bgImage.width);
+            const pageHeight = pageWidth / aspectRatio;
+            document.body.style.height = `${pageHeight}px`;
+            document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
+        }
+        bgImage.src = window.innerWidth <= 768 ? 'images/m_bg.jpg' : 'images/bg_hp.jpg';
+    }
+
+    setPageSize();
+    window.addEventListener('resize', setPageSize);
+
+    let bounce = 0;
+    function animate() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        const documentHeight = Math.max(
+            document.body.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.clientHeight,
+            document.documentElement.scrollHeight,
+            document.documentElement.offsetHeight
+        );
+
+        bounce += 0.05;
+        const bounceOffset = Math.sin(bounce) * 10;
+        changingImage.style.transform = `translateX(-50%) translateY(${scrollTop + bounceOffset}px)`;
+       
+        const isMobile = window.innerWidth <= 768;
+       
+        // About 섹션 애니메이션
+        if (scrollTop > 0 && scrollTop <= (isMobile ? 200 : 430)) {
+            const opacity = Math.min(scrollTop / 100, 1);
+            aboutSection.style.opacity = opacity;
+            aboutSection.style.transform = `translateY(calc(-50% + ${Math.max(50 - scrollTop / 2, 0)}px))`;
+        } else if (scrollTop > (isMobile ? 200 : 430) && scrollTop <= (isMobile ? 300 : 530)) {
+            const opacity = Math.max(1 - (scrollTop - (isMobile ? 200 : 430)) / 100, 0);
+            aboutSection.style.opacity = opacity;
+            aboutSection.style.transform = 'translateY(-50%)';
+        } else {
+            aboutSection.style.opacity = '0';
+            aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
+        }
+
+        // IT line 섹션 애니메이션
+        if (scrollTop > (isMobile ? 300 : 530) && scrollTop <= (isMobile ? 500 : 730)) {
+            const opacity = Math.min((scrollTop - (isMobile ? 300 : 530)) / 200, 1);
+            const translateY = Math.max(50 - (scrollTop - (isMobile ? 300 : 530)) / 4, 0);
+            itlineGroup.style.opacity = opacity;
+            itlineGroup.style.transform = `translateY(calc(-50% + ${translateY}px))`;
+        } else if (scrollTop > (isMobile ? 500 : 730) && scrollTop <= (isMobile ? 700 : 1230)) {
+            itlineGroup.style.opacity = '1';
+            itlineGroup.style.transform = 'translateY(-50%)';
+        } else if (scrollTop > (isMobile ? 700 : 1230) && scrollTop <= (isMobile ? 800 : 1330)) {
+            const opacity = Math.max(1 - (scrollTop - (isMobile ? 700 : 1230)) / 100, 0);
+            const translateY = Math.min((scrollTop - (isMobile ? 700 : 1230)) / 2, 50);
+            itlineGroup.style.opacity = opacity;
+            itlineGroup.style.transform = `translateY(calc(-50% - ${translateY}px))`;
+            scrollMore.style.opacity = 1 - opacity;
+            scrollMore.style.transform = `translateY(calc(-50% + ${50 - translateY}px))`;
+        } else {
+            itlineGroup.style.opacity = '0';
+            itlineGroup.style.transform = 'translateY(calc(-50% + 50px))';
+        }
+
+        // Scroll More 텍스트 애니메이션
+        if (scrollTop > (isMobile ? 800 : 1330) && scrollTop <= (isMobile ? 1000 : 1830)) {
+            scrollMore.style.opacity = '1';
+            scrollMore.style.transform = 'translateY(-50%)';
+        } else if (scrollTop > (isMobile ? 1000 : 1830) && scrollTop <= (isMobile ? 1100 : 1930)) {
+            const opacity = Math.max(1 - (scrollTop - (isMobile ? 1000 : 1830)) / 100, 0);
+            scrollMore.style.opacity = opacity;
+            scrollMore.style.transform = 'translateY(-50%)';
+        } else {
+            scrollMore.style.opacity = '0';
+            scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
+        }
+
+        // Anti-Tarot Card 애니메이션 (스크롤 끝에서 나타남)
+        if (scrollTop + windowHeight >= documentHeight - 1) {
+            antiTarotCard.style.opacity = '1';
+        } else {
+            antiTarotCard.style.opacity = '0';
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+function openMenu() {
+    menuItems.style.left = '0';
     dimmedBg.style.display = 'block';
-  }
+}
 
-  function closeMenu() {
-    menuItems.classList.remove('menu-open');
+function closeMenu() {
+    menuItems.style.left = '-300px';
     dimmedBg.style.display = 'none';
-  }
+}
 
-  function toggleAutoplay() {
-    isAutoplayOn = !isAutoplayOn;
-    autoplayToggle.classList.toggle('active');
-    const statusElement = autoplayToggle.querySelector('.autoplay-status');
-    
-    if (isAutoplayOn) {
-      autoplayToggle.querySelector('i').className = 'fas fa-play-circle';
-      statusElement.textContent = 'ON';
-      statusElement.style.color = 'red';
-    } else {
-      autoplayToggle.querySelector('i').className = 'far fa-play-circle';
-      statusElement.textContent = 'OFF';
-      statusElement.style.color = '#7f7f7f';
-    }
-    
-    // Update iframe src to enable/disable autoplay
-    let src = iframe.src;
-    src = src.replace(/(\?|&)autoplay=[01]/, '');
-    if (isAutoplayOn) {
-      src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
-    }
-    iframe.src = src;
-  }
-
-  hamburger.addEventListener('click', openMenu);
-  closeBtn.addEventListener('click', closeMenu);
-  dimmedBg.addEventListener('click', closeMenu);
-  autoplayToggle.addEventListener('click', toggleAutoplay);
-
-  // Here you can add JavaScript for handling the navigation buttons
-  // For example:
-  // document.querySelector('.prev').addEventListener('click', showPreviousMonth);
-  // document.querySelector('.next').addEventListener('click', showNextMonth);
+hamburger.addEventListener('click', openMenu);
+closeBtn.addEventListener('click', closeMenu);
+dimmedBg.addEventListener('click', closeMenu);
 });
 </script>
 </body>
