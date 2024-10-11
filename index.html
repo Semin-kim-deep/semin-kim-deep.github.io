@@ -80,6 +80,7 @@
       position: relative;
       width: 1220px;
       margin-top: 20px;
+      margin-bottom: 150px; /* 고정된 150px 마진 추가 */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -158,13 +159,13 @@
     }
     .bottom-section {
       width: 100%;
-      margin: 50px 0 50px;
+      margin: 0;
       background-color: #f1f1f1;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding : 40px 0 40px 0;
+      padding: 40px 0;
     }
     .video-container {
       width: 560px;
@@ -182,7 +183,7 @@
       font-size: 30px;
       text-align: center;
       margin-bottom: 60px;
-      padding : 10 0 0 0;
+      padding: 10px 0 0 0;
     }
     .menu-items {
       position: fixed;
@@ -354,7 +355,7 @@
     </div>
   </div>
 <script>
- document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
   const hamburger = document.getElementById('hamburger-menu');
   const menuItems = document.getElementById('menu-items');
   const closeBtn = document.getElementById('close-menu');
