@@ -358,12 +358,14 @@
             .header {
                 padding: 20px;
                 justify-content: center;
+                position: relative;
             }
             .hamburger {
                 position: absolute;
                 left: 20px;
                 top: 50%;
                 transform: translateY(-50%);
+                margin-top: 0;
             }
             .header-title {
                 font-size: 26.4px;
@@ -383,6 +385,11 @@
                 height: auto;
             }
             .image-container, .text-content {
+                width: 100%;
+                height: auto;
+            }
+            .image-container img {
+                display: block;
                 width: 100%;
                 height: auto;
             }
@@ -446,7 +453,8 @@
         <div class="subtitle">
             2025년의 시간을 팝니다.
         </div>
-        <div class="subsub">
+
+                    <div class="subsub">
             월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분도 플레이리스트를 만들어보세요.<br>
             <div class="autoplay-info">
                 <span class="autoplay-toggle" id="autoplay-toggle">
@@ -457,7 +465,7 @@
             </div>
         </div>
 
-                <div class="calendar-container">
+        <div class="calendar-container">
             <button class="nav-button prev" id="prevButton"></button>
             <div class="calendar-content">
                 <div class="image-container">
