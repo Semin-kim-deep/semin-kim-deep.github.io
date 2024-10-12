@@ -445,43 +445,39 @@
                 max-height: 200px;
             }
             .nav-button {
-                .nav-button {
-                position: absolute !important;
-                top: 50% !important;
-                transform: translateY(-50%) !important;
-                width: 40px !important;
-                height: 40px !important;
-                background-color: rgba(255, 255, 255, 0.7) !important;
-                border: none !important;
-                cursor: pointer !important;
-                z-index: 10 !important;
-                display: flex !important;
-                justify-content: center !important;
-                align-items: center !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                box-sizing: border-box !important;
-            }
+                   position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.7);
+        border: none;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
                 .nav-button::before {
-                content: '' !important;
-                display: inline-block !important;
-                width: 10px !important;
-                height: 10px !important;
-                border-top: 2px solid currentColor !important;
-                border-right: 2px solid currentColor !important;
-                position: absolute !important;
-            }
+                   content: '';
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-top: 2px solid #404040;
+        border-right: 2px solid #404040;
+        position: absolute;
+    }
             .nav-button.prev {
-        left: 10px !important;
+                left: 0px;
             }
             .nav-button.next {
-        right: 10px !important;
+                right: 0px;
             }
                 .nav-button.prev::before {
-                  transform: rotate(-135deg) !important;
+        transform: rotate(-135deg);
     }
     .nav-button.next::before {
-    transform: rotate(45deg) !important;
+        transform: rotate(45deg);
     }
             .video-container {
                 width: 90%;
