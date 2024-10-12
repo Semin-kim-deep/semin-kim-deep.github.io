@@ -648,38 +648,26 @@ document.addEventListener('DOMContentLoaded', function() {
         updateYoutubeAutoplay();
     }
 
-   function updateContent(month, direction) {
-    const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
-    const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
-    
-    nextImage.src = `images/2025_square${month}.jpg`;
-    nextImage.style.transition = 'none';
-    currentImage.style.transition = 'none';
-    
-    nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
-    
-    // Force reflow
-    nextImage.offsetHeight;
-    
-    nextImage.style.transition = 'transform 0.3s ease-in-out';
-    currentImage.style.transition = 'transform 0.3s ease-in-out';
-    
-    requestAnimationFrame(() => {
-        nextImage.style.transform = 'translateX(0)';
-        currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
-        
-        currentImage.classList.remove('active');
-        nextImage.classList.add('active');
-        
-        activeImage = activeImage === 1 ? 2 : 1;
-    });
-   
-    bottomImage.src = `images/${month}.jpg`;
-    calendarText.innerHTML = monthlyContent[month - 1];
-    youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
-    updateYoutubeAutoplay();
-}
+    function updateYoutubeAutoplay() {
+        let src = youtubeVideo.src;
+        src = src.replace(/(\?|&)autoplay=[01]/, '');
+        if (isAutoplayOn) {
+            src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
+        }
+        youtubeVideo.src = src;
+    }
 
+    function updateContent(month, direction) {
+        const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
+        const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
+        
+        nextImage.src = `images/2025_square${month}.jpg`;
+        nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
+        
+        requestAnimationFrame(() => {
+            nextImage.style.transform = 'translateX(0)';
+            currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
+            
             currentImage.classList.remove('active');
             nextImage.classList.add('active');
             
@@ -746,5 +734,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
-
-
