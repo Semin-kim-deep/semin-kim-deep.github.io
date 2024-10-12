@@ -369,12 +369,6 @@
         }
 
         @media (max-width: 768px) {
-            .calendar-container {
-                position: relative;
-                width: 100%;
-                margin-top: 10px;
-                margin-bottom: 20px;
-            }
             .header {
                 padding: 20px;
                 justify-content: center;
@@ -391,13 +385,13 @@
                 line-height: 1.2;
             }
             .subpc {
-                display: none;
+            display: none;
             }
-            .subm {
-                display: flex;
-                flex-direction: column;
-                font-size: 14pt;
-            }
+         .subm {
+            display: flex;
+             flex-direction: column;
+             font-size : 14pt
+        }
             .title-year {
                 margin-bottom: 5px;
             }
@@ -420,23 +414,22 @@
                 font-size: 14px;
                 padding: 10px 20px;
             }
+            .calendar-container {
+                width: 100%;
+                margin-top: 10px;
+                margin-bottom: 20px;
+            }
             .calendar-content {
                 flex-direction: column;
                 width: 100%;
                 height: auto;
             }
             .image-container {
-                position: relative;
                 width: 100%;
                 padding-bottom: 100%;
                 height: 0;
             }
             .swipe-image {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
                 object-fit: cover;
                 object-position: center;
             }
@@ -449,13 +442,12 @@
                 max-height: 200px;
             }
             .nav-button {
-                position: absolute;
                 top: 50%;
+                position: absolute;
                 transform: translateY(-50%);
                 font-size: 24px;
                 width: 40px;
                 height: 40px;
-                z-index: 10;
             }
             .nav-button.prev {
                 left: 10px;
@@ -498,7 +490,24 @@
     </style>
 </head>
 <body>
-<div class="menu-items" id="menu-items">
+    <div class="dimmed-background" id="dimmed-bg"></div>
+    <div class="content">
+        <header class="header">
+            <div class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <h1 class="header-title">
+                <span class="pc-title">2025 Calendar - Songs & Scenes</span>
+                <span class="mobile-title">
+                    <span class="title-year">2025 Calendar</span>
+                </span>
+            </h1>
+<div style="width: 18px;"></div>
+    </header>
+   
+    <div class="menu-items" id="menu-items">
         <div class="close-btn" id="close-menu"></div>
         <div class="menu-title">Deepdown Studio</div>
         <a href="/">Home</a>
@@ -544,7 +553,7 @@
 <div class="bottom-section">
     <div class="play-this-song">Play This Song</div>
     <div class="video-container">
-        <iframe id="youtubeVideo" 
+        <iframe id="youtubeVideo"
             src="https://www.youtube.com/embed/Ed1swjoTXqc"
             frameborder="0"
             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
@@ -651,17 +660,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateContent(month, direction) {
         const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
         const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
-        
+       
         nextImage.src = `images/2025_square${month}.jpg`;
         nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
-        
+       
         requestAnimationFrame(() => {
             nextImage.style.transform = 'translateX(0)';
             currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
-            
+           
             currentImage.classList.remove('active');
             nextImage.classList.add('active');
-            
+           
             activeImage = activeImage === 1 ? 2 : 1;
         });
        
@@ -725,3 +734,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
+
