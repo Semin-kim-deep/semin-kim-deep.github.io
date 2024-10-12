@@ -445,41 +445,43 @@
                 max-height: 200px;
             }
             .nav-button {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 40px;
-                height: 40px;
-                background-color: rgba(255, 255, 255, 0.7);
-                border: none;
-                cursor: pointer;
-                z-index: 10;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                .nav-button {
+                position: absolute !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
+                width: 40px !important;
+                height: 40px !important;
+                background-color: rgba(255, 255, 255, 0.7) !important;
+                border: none !important;
+                cursor: pointer !important;
+                z-index: 10 !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                box-sizing: border-box !important;
             }
                 .nav-button::before {
-                content: '';
-                display: inline-block;
-                width: 0.52em;
-                height: 0.52em;
-                border-top: 1px solid currentColor;
-                border-right: 1px solid currentColor;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                }
+                content: '' !important;
+                display: inline-block !important;
+                width: 10px !important;
+                height: 10px !important;
+                border-top: 2px solid currentColor !important;
+                border-right: 2px solid currentColor !important;
+                position: absolute !important;
+            }
             .nav-button.prev {
-                left: 0px;
+        left: 10px !important;
             }
             .nav-button.next {
-                right: 0px;
+        right: 10px !important;
             }
                 .nav-button.prev::before {
-               transform: translate(-25%, -50%) rotate(-135deg);
+                  transform: rotate(-135deg) !important;
     }
     .nav-button.next::before {
-      transform: translate(-75%, -50%) rotate(45deg);
+    transform: rotate(45deg) !important;
     }
             .video-container {
                 width: 90%;
