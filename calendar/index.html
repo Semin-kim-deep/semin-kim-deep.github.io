@@ -553,7 +553,7 @@
 <div class="bottom-section">
     <div class="play-this-song">Play This Song</div>
     <div class="video-container">
-        <iframe id="youtubeVideo"
+        <iframe id="youtubeVideo" 
             src="https://www.youtube.com/embed/Ed1swjoTXqc"
             frameborder="0"
             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
@@ -660,17 +660,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateContent(month, direction) {
         const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
         const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
-       
+        
         nextImage.src = `images/2025_square${month}.jpg`;
         nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
-       
+        
         requestAnimationFrame(() => {
             nextImage.style.transform = 'translateX(0)';
             currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
-           
+            
             currentImage.classList.remove('active');
             nextImage.classList.add('active');
-           
+            
             activeImage = activeImage === 1 ? 2 : 1;
         });
        
@@ -734,4 +734,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
-
