@@ -3,28 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025 Calendar - Songs & Scenes</title>
+    <title>Deepdown Studio</title>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
         body, html {
+            font-family: 'Pretendard', sans-serif;
             margin: 0;
             padding: 0;
-            font-family: 'Pretendard', sans-serif;
-            color: #404040;
             background-color: white;
-        }
-        .content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            overflow-x: hidden;  /* Prevent horizontal scroll */
         }
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 20px;
+            position: relative;
+            z-index: 1000;
         }
         .hamburger {
             width: 18px;
@@ -39,142 +35,75 @@
             height: 2px;
             background-color: #7f7f7f;
         }
-        .header-title {
+        .logo-container {
+            flex-grow: 1;
+            text-align: center;
+        }
+        .logo {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
-            font-size: 36pt;
+            font-size: 26.4px;
+            text-decoration: none;
             color: black;
-            margin: 0;
-            text-align: center;
+            display: inline-block;
         }
-        .subtitle, .subsub {
-            text-align: center;
-            max-width: 1000px;
+        .container {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 10px 0;
+            padding: 0 40px 40px;
         }
-        .subtitle {
-            font-size: 14pt;
-            line-height: 1.8;
-        }
-        .subsub {
-            font-size: 12pt;
-            line-height: 1.4;
-        }
-        .autoplay-info {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 5px;
-        }
-        .calendar-container {
-            position: relative;
-            width: 100%;
-            margin: 20px 0;
-        }
-        .calendar-content {
-            display: flex;
-            justify-content: space-between;
-        }
-        .image-container {
-            width: 48%;
-        }
-        .calendar-image {
-            width: 100%;
-            height: auto;
-        }
-        .text-content {
-            width: 48%;
-        }
-        .text-content-inner {
-            border-top: 2px solid #000;
-            border-bottom: 1px solid #000;
-            padding: 20px 0;
-            font-size: 11.5pt;
-            line-height: 1.6;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        .text-content-inner b {
-            font-size: 15pt;
-            line-height: 1.8;
-            color: #202020;
-        }
-        .nav-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #404040;
-            font-size: 40px;
-            width: 50px;
-            height: 50px;
-        }
-        .nav-button.prev {
-            left: -60px;
-        }
-        .nav-button.next {
-            right: -60px;
-        }
-        .bottom-section {
-            background-color: #f1f1f1;
-            padding: 40px 0;
-            text-align: center;
-        }
-        .play-this-song {
+        h1 {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
-            font-size: 30px;
-            margin-bottom: 20px;
-        }
-        .video-container {
-            max-width: 560px;
-            margin: 0 auto;
-        }
-        .video-container iframe {
-            width: 100%;
-            height: 315px;
-        }
-        .white-section {
-            padding: 100px 0;
+            font-size: 40px;
             text-align: center;
+            margin-bottom: 30px;
         }
-        .image-1 {
+        .center-image {
+            display: block;
+            margin: 0 auto 30px;
             max-width: 100%;
             height: auto;
         }
-        .custom-button {
-            width: 600px;
-            height: 60px;
-            background-color: transparent;
-            border: 1px solid #000;
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .en {
             font-family: 'Jost', sans-serif;
-            font-size: 18px;
             font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 80px;
+            margin-top: 0;
         }
-        .custom-button-arrow {
-            width: 8px;
-            height: 8px;
-            border-top: 1px solid #000;
-            border-right: 1px solid #000;
-            transform: rotate(45deg);
-            margin-left: 10px;
-            transition: border-color 0.3s;
+        .text-group {
+            margin-bottom: 20px;
         }
-        .custom-button:hover {
-            background-color: #000;
-            color: #fff;
+        .activities {
+            margin-top: 40px;
         }
-        .custom-button:hover .custom-button-arrow {
-            border-color: #fff;
+        .activities h2 {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 16.8px;
+            margin-bottom: 20px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px 20px;
+            }
+            .center-image {
+                width: 100%;
+                max-width: none;
+                margin-left: -20px;
+                margin-right: -20px;
+                width: calc(100% + 40px);
+            }
         }
         .menu-items {
             position: fixed;
@@ -246,275 +175,99 @@
             margin-bottom: 24px;
             color: black;
         }
-
-        @media (max-width: 768px) {
+        @media (min-width: 1024px) {
             .header {
-                justify-content: center;
-                position: relative;
+                padding-left: 28px;
             }
-            .hamburger {
-                position: absolute;
-                left: 0;
-                top: 50%;
-                transform: translateY(-50%);
-            }
-            .header-title {
-                font-size: 26.4px;
-            }
-            .calendar-content {
-                flex-direction: column;
-            }
-            .image-container, .text-content {
-                width: 100%;
-            }
-            .text-content {
-                margin-top: 20px;
-            }
-            .nav-button {
-                top: 25%;
-                font-size: 24px;
-            }
-            .nav-button.prev {
-                left: 10px;
-            }
-            .nav-button.next {
-                right: 10px;
-            }
-            .custom-button {
-                width: 100%;
-                max-width: 400px;
-                height: 50px;
-                font-size: 16px;
-                margin-top: 40px;
-            }
-            .autoplay-info {
-                display: none;
-            }
-            .image-1 {
-                height: 200px;
-                object-fit: cover;
-                object-position: center;
+        }
+        @media (min-width: 1920px) {
+            .header {
+                padding-left: 56px;
             }
         }
     </style>
 </head>
 <body>
     <div class="dimmed-background" id="dimmed-bg"></div>
-    <div class="content">
-        <header class="header">
-            <div class="hamburger" id="hamburger-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <h1 class="header-title">2025 Calendar - Songs & Scenes</h1>
-            <div style="width: 18px;"></div>
-        </header>
-        
-        <div class="menu-items" id="menu-items">
-            <div class="close-btn" id="close-menu"></div>
-            <div class="menu-title">Deepdown Studio</div>
-            <a href="/">Home</a>
-            <a href="/about.html">About</a>
-            <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
-            <a href="/card/index.html">Anti-Tarot Card</a>
-            <a href="/calendar/">Calendar 2025</a>
+    <header class="header">
+        <div class="hamburger" id="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
+        <div class="logo-container">
+            <a href="/" class="logo">Deepdown Studio</a>
+        </div>
+        <div style="width: 18px;"></div>
+    </header>
+   
+    <div class="menu-items" id="menu-items">
+        <div class="close-btn" id="close-menu"></div>
+        <div class="menu-title">Deepdown Studio</div>
+        <a href="/">Home</a>
+        <a href="about.html">About</a>
+        <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
+        <a href="/card/index.html">Anti-Tarot Card</a>
+        <a href="/calendar/">Calendar 2025</a>
+    </div>
 
-        <div class="subtitle">
-            2025년의 시간을 팝니다.
+    <div class="container">
+        <img src="images/Thank-you3_2_web.png" alt="Deepdown Studio" class="center-image">
+       
+        <div class="text-group">
+            <p>일러스트레이션/디자인 상품을 제작하는 딥다운 스튜디오에 오신 것을 환영합니다.</p>
+            <p class="en">Welcome to Deepdown Studio, where we create illustration and design products.</p>
         </div>
-        <div class="subsub">
-            월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분도 플레이리스트를 만들어보세요.
-            <div class="autoplay-info">
-                <span class="autoplay-toggle" id="autoplay-toggle">
-                    <i class="far fa-play-circle"></i>
-                    <span class="autoplay-status">OFF</span>
-                </span>
-                <span class="autoplay-text">음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요</span>
-            </div>
+       
+        <div class="text-group">
+            <p>딥다운 스튜디오는 음악과 책 그리고 다른 예술에서 영감을 받습니다.<br>
+            이곳의 상품이 마음에 드셔서, 저와 제품들만 등그러니 남아있지 않기를 바랍니다.</p>
+           
+            <p class="en">Deepdown Studio draws inspiration from music, books, and other art forms. I hope you enjoy our products, and that it won't be just me and the products left all alone (please).</p>
         </div>
-
-        <div class="calendar-container">
-            <button class="nav-button prev" id="prevButton">&#10094;</button>
-            <div class="calendar-content">
-                <div class="image-container">
-                    <img id="calendarImage" src="images/2025_square1.jpg" alt="2025 Calendar Image" class="calendar-image">
-                </div>
-                <div class="text-content">
-                    <div class="text-content-inner" id="calendarText">
-                        <!-- 텍스트 내용은 JavaScript에서 동적으로 변경됩니다 -->
-                    </div>
-                </div>
-            </div>
-            <button class="nav-button next" id="nextButton">&#10095;</button>
+       
+        <div class="activities">
+            <h2>대외활동</h2>
+            <ul>
+                <li>2023.11~2024.02 디자인이음 캘린더전</li>
+                <li>2024.05 서울일러스트코리아 참가</li>
+                <li>2024.05 도쿄 디자인페스타 참가</li>
+                <li>2024.07 부산 K-일러스트레이션페어 참가</li>
+                <li>2025.02 서울 K-일러스트레이션페어 예정</li>
+            </ul>
+           
+            <h2>Activities</h2>
+            <ul>
+                <li>Nov 2023 ~ Feb 2024: Design Eum Calendar Exhibition</li>
+                <li>May 2024 : Seoul Illustration Korea</li>
+                <li>May 2024 : Tokyo Design Festa</li>
+                <li>July 2024 : Busan K-Illustration Fair</li>
+                <li>Feb 2025 : Scheduled for Seoul K-Illustration Fair</li>
+            </ul>
         </div>
     </div>
 
-    <div class="bottom-section">
-        <div class="play-this-song">Play This Song</div>
-        <div class="video-container">
-            <iframe id="youtubeVideo" src="https://www.youtube.com/embed/Ed1swjoTXqc" 
-                frameborder="0" 
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        </div>
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger-menu');
+            const menuItems = document.getElementById('menu-items');
+            const closeBtn = document.getElementById('close-menu');
+            const dimmedBg = document.getElementById('dimmed-bg');
 
-    <div class="white-section">
-        <img id="bottomImage" src="images/1.jpg" alt="Calendar Image" class="image-1">
-        <button class="custom-button">
-            <span class="custom-button-content">
-                신나게 사러 달려나가기
-                <span class="custom-button-arrow"></span>
-            </span>
-        </button>
-    </div>
+            function openMenu() {
+                menuItems.classList.add('menu-open');
+                dimmedBg.style.display = 'block';
+            }
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.getElementById('hamburger-menu');
-    const menuItems = document.getElementById('menu-items');
-    const closeBtn = document.getElementById('close-menu');
-    const dimmedBg = document.getElementById('dimmed-bg');
-    const autoplayToggle = document.getElementById('autoplay-toggle');
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
-    const calendarImage = document.getElementById('calendarImage');
-    const calendarText = document.getElementById('calendarText');
-    const youtubeVideo = document.getElementById('youtubeVideo');
-    const bottomImage = document.getElementById('bottomImage');
-    
-    let isAutoplayOn = false;
-    let currentMonth = 1;
+            function closeMenu() {
+                menuItems.classList.remove('menu-open');
+                dimmedBg.style.display = 'none';
+            }
 
-    const monthlyContent = [
-        `<b>01. John Lennon - Starting Over <br>
-                1월, 새로운 시작을 다짐합니다. </b><br><br>
-                John Lennon의 Starting over는 시작에 가장 어울리는 곡 중 하나죠. <br>마치 배철수의 음악캠프에 나올 법한 선곡. <br><br>
-
-                2024년 (구)칸예 웨스트가 한국에서 진행한 리스닝 파티가 화제였죠. <br> 그전까지는 그저 샘플링을 잘하고, 트로피 와이프처럼 여성을 대상화하는 셀럽이라고 생각했어요. 내한해서 공연한 Runaway의 음악과 퍼포먼스가 너무 멋있어서, 넷플릭스의 칸예웨스트 다큐를 찾아 보게 되었어요. <br>
-                유명해지기 전, 칸예는 이미 jay-z 등 아티스트의 곡을 만들고 프로듀싱하는 프로듀서로서 알려져 있었어요. 그는 본인의 이름을 건 앨범을 내는 뮤지션 랩퍼가 되고 싶어 했지만 번번이 레코드사로부터 거절당합니다.<br> 너는 프로듀싱을 잘하니, 계속 다른 뮤지션들을 위한 곡이나 만들어달라고요.
-                <br> <br>제가 인상 깊었던 점은 그런 좌절의 순간에도 풀이 죽거나  불평하지 않고 묵묵히 자신의 때를 기다리는 모습이었어요. 왜냐하면 자기 자신을 믿었으니까.<br>
-                힘들고 어렵고 부끄러운 상황에도 자신을 믿고 참고 의연하게 때를 기다리는 것. <br> 그게 저한테도 필요한 것 같아요. <br>
-                그런 사람이 되고 싶고, 그런 사람들을 더 알고 싶네요. <br>`,
-        // ... (다른 월의 내용도 여기에 추가)
-    ];
-
-    const youtubeIDs = [
-        "Ed1swjoTXqc", // 1월
-        "0GeeWwgdRoM",  // 2월
-        "n50Z3HGj4QE",  // 3월
-        "ir4GpOqRkQg",  // 4월
-        "roPQ_M3yJTA",  // 5월
-        "mzJj5-lubeM",  // 6월
-        "GxTqqjJWGpc",  // 7월
-        "_pmZKkb_UAg",  // 8월
-        "tNDWJ_KDkAc",  // 9월
-        "fV4DiAyExN0",  // 10월
-        "a4g5MeonGYM",  // 11월
-        "qBgbiZnhly4",  // 12월
-    ];
-
-    function openMenu() {
-        menuItems.classList.add('menu-open');
-        dimmedBg.style.display = 'block';
-    }
-
-    function closeMenu() {
-        menuItems.classList.remove('menu-open');
-        dimmedBg.style.display = 'none';
-    }
-
-    function toggleAutoplay() {
-        isAutoplayOn = !isAutoplayOn;
-        autoplayToggle.classList.toggle('active');
-        const statusElement = autoplayToggle.querySelector('.autoplay-status');
-        
-        if (isAutoplayOn) {
-            autoplayToggle.querySelector('i').className = 'fas fa-play-circle';
-            statusElement.textContent = 'ON';
-            statusElement.style.color = 'red';
-        } else {
-            autoplayToggle.querySelector('i').className = 'far fa-play-circle';
-            statusElement.textContent = 'OFF';
-            statusElement.style.color = '#7f7f7f';
-        }
-        
-        updateYoutubeAutoplay();
-    }
-
-    function updateYoutubeAutoplay() {
-        let src = youtubeVideo.src;
-        src = src.replace(/(\?|&)autoplay=[01]/, '');
-        if (isAutoplayOn && !isMobile()) {
-            src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
-        }
-        youtubeVideo.src = src;
-    }
-
-    function updateContent(month) {
-        calendarImage.src = `images/2025_square${month}.jpg`;
-        calendarText.innerHTML = monthlyContent[month - 1];
-        youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
-        bottomImage.src = `images/${month}.jpg`;
-        updateYoutubeAutoplay();
-    }
-
-    function showNextMonth() {
-        if (currentMonth < 12) {
-            currentMonth++;
-            updateContent(currentMonth);
-        }
-    }
-
-    function showPreviousMonth() {
-        if (currentMonth > 1) {
-            currentMonth--;
-            updateContent(currentMonth);
-        }
-    }
-
-    function isMobile() {
-        return window.innerWidth <= 768;
-    }
-
-    // 터치 이벤트 처리 (모바일용)
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    calendarImage.addEventListener('touchstart', function(e) {
-        touchStartX = e.changedTouches[0].screenX;
-    }, false);
-
-    calendarImage.addEventListener('touchend', function(e) {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, false);
-
-    function handleSwipe() {
-        if (touchStartX - touchEndX > 50) {
-            showNextMonth();
-        } else if (touchEndX - touchStartX > 50) {
-            showPreviousMonth();
-        }
-    }
-
-    // 이벤트 리스너 설정
-    hamburger.addEventListener('click', openMenu);
-    closeBtn.addEventListener('click', closeMenu);
-    dimmedBg.addEventListener('click', closeMenu);
-    autoplayToggle.addEventListener('click', toggleAutoplay);
-    nextButton.addEventListener('click', showNextMonth);
-    prevButton.addEventListener('click', showPreviousMonth);
-
-    // 초기 콘텐츠 설정
-    updateContent(1);
-
-    // 화면 크기 변경 시 자동재생 상태 업데이트
-    window.addEventListener('resize', updateYoutubeAutoplay);
-});
-</script>
+            hamburger.addEventListener('click', openMenu);
+            closeBtn.addEventListener('click', closeMenu);
+            dimmedBg.addEventListener('click', closeMenu);
+        });
+    </script>
 </body>
 </html>
