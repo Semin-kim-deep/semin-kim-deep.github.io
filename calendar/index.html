@@ -576,7 +576,8 @@
         </button>
     </div>
 </div>
-<script>
+
+    <script>
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.getElementById('hamburger-menu');
     const menuItems = document.getElementById('menu-items');
@@ -595,6 +596,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let isAutoplayOn = false;
     let currentMonth = 1;
     let activeImage = 1;
+    let isTransitioning = false;
+    const imageCache = {};
 
     const monthlyContent = [
         `<b>01. John Lennon - Starting Over <br>
@@ -661,38 +664,73 @@ document.addEventListener('DOMContentLoaded', function() {
         youtubeVideo.src = src;
     }
 
-    function updateContent(month, direction) {
+    function preloadImage(src) {
+        return new Promise((resolve, reject) => {
+            if (imageCache[src]) {
+                resolve(imageCache[src]);
+            } else {
+                const img = new Image();
+                img.onload = () => {
+                    imageCache[src] = img;
+                    resolve(img);
+                };
+                img.onerror = reject;
+                img.src = src;
+            }
+        });
+    }
+
+    async function updateContent(month, direction) {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
         const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
         const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
         
-        nextImage.src = `images/2025_square${month}.jpg`;
-        nextImage.style.display = 'block';
-        currentImage.style.display = 'block';
-
-        nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
+        const nextImageSrc = `images/2025_square${month}.jpg`;
         
-        setTimeout(() => {
+        try {
+            await preloadImage(nextImageSrc);
+            
+            nextImage.src = nextImageSrc;
+            nextImage.style.display = 'block';
+            currentImage.style.display = 'block';
+
+            nextImage.style.transition = 'none';
+            currentImage.style.transition = 'none';
+            
+            nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
+            currentImage.style.transform = 'translateX(0)';
+            
+            // Force reflow
+            nextImage.offsetHeight;
+            
             nextImage.style.transition = 'transform 0.3s ease-in-out';
             currentImage.style.transition = 'transform 0.3s ease-in-out';
-            nextImage.style.transform = 'translateX(0)';
-            currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
+            
+            requestAnimationFrame(() => {
+                nextImage.style.transform = 'translateX(0)';
+                currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
+            });
             
             setTimeout(() => {
                 currentImage.style.display = 'none';
-                nextImage.style.transition = 'none';
-                currentImage.style.transition = 'none';
                 
                 currentImage.classList.remove('active');
                 nextImage.classList.add('active');
                 
                 activeImage = activeImage === 1 ? 2 : 1;
+                isTransitioning = false;
             }, 300);
-        }, 50);
-       
-        bottomImage.src = `images/${month}.jpg`;
-        calendarText.innerHTML = monthlyContent[month - 1];
-        youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
-        updateYoutubeAutoplay();
+
+            bottomImage.src = `images/${month}.jpg`;
+            calendarText.innerHTML = monthlyContent[month - 1];
+            youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
+            updateYoutubeAutoplay();
+        } catch (error) {
+            console.error('Failed to load image:', error);
+            isTransitioning = false;
+        }
     }
 
     function showNextMonth() {
