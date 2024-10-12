@@ -670,6 +670,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentImage.style.transition = 'none';
         
         nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
+        currentImage.style.transform = 'translateX(0)';
         
         // Force reflow
         nextImage.offsetHeight;
@@ -681,10 +682,13 @@ document.addEventListener('DOMContentLoaded', function() {
             nextImage.style.transform = 'translateX(0)';
             currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
             
-            currentImage.classList.remove('active');
-            nextImage.classList.add('active');
-            
-            activeImage = activeImage === 1 ? 2 : 1;
+            nextImage.addEventListener('transitionend', function onTransitionEnd() {
+                currentImage.classList.remove('active');
+                nextImage.classList.add('active');
+                nextImage.removeEventListener('transitionend', onTransitionEnd);
+                
+                activeImage = activeImage === 1 ? 2 : 1;
+            }, { once: true });
         });
        
         bottomImage.src = `images/${month}.jpg`;
@@ -765,5 +769,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+
+
 </body>
 </html>
