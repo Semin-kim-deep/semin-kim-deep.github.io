@@ -577,7 +577,7 @@
     </div>
 </div>
 
-    <script>
+<script>
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.getElementById('hamburger-menu');
     const menuItems = document.getElementById('menu-items');
@@ -626,6 +626,10 @@ document.addEventListener('DOMContentLoaded', function() {
         "a4g5MeonGYM",  // 11월
         "qBgbiZnhly4",  // 12월
     ];
+
+    function isMobile() {
+        return window.innerWidth <= 768;
+    }
 
     function openMenu() {
         menuItems.classList.add('menu-open');
@@ -687,10 +691,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
         const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
         
-        const nextImageSrc = `images/2025_square${month}.jpg`;
+        const nextImageSrc = isMobile() ? `images/2025_square${month}m.jpg` : `images/2025_square${month}.jpg`;
+        const nextBottomImageSrc = isMobile() ? `images/${month}m.jpg` : `images/${month}.jpg`;
         
         try {
-            await preloadImage(nextImageSrc);
+            await Promise.all([preloadImage(nextImageSrc), preloadImage(nextBottomImageSrc)]);
             
             nextImage.src = nextImageSrc;
             nextImage.style.display = 'block';
@@ -723,7 +728,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 isTransitioning = false;
             }, 300);
 
-            bottomImage.src = `images/${month}.jpg`;
+            bottomImage.src = nextBottomImageSrc;
             calendarText.innerHTML = monthlyContent[month - 1];
             youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
             updateYoutubeAutoplay();
@@ -748,7 +753,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function adjustButtonsPosition() {
-        if (window.innerWidth <= 768) {
+        if (isMobile()) {
             const imageContainer = document.querySelector('.image-container');
             const prevButton = document.getElementById('prevButton');
             const nextButton = document.getElementById('nextButton');
@@ -795,7 +800,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    if (window.innerWidth <= 768) {
+    if (isMobile()) {
         calendarImage1.addEventListener('touchstart', handleTouchStart);
         calendarImage1.addEventListener('touchmove', handleTouchMove);
         calendarImage1.addEventListener('touchend', handleTouchEnd);
