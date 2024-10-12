@@ -42,7 +42,17 @@
             text-align: center;
             flex-grow: 1;
         }
-        .pc-title {
+        .subpc {
+            display: block;
+            font-size: 14pt;
+        }
+         .subm {
+            display: none;
+        }
+        .mobile-title {
+            display: none;
+        }
+         .pc-title {
             display: block;
             font-size: 36pt;
         }
@@ -374,6 +384,14 @@
                 font-size: 26.4px;
                 line-height: 1.2;
             }
+            .subpc {
+            display: none;
+            }
+         .subm {
+            display: flex;
+             flex-direction: column;
+             font-size : 14pt
+        }
             .title-year {
                 margin-bottom: 5px;
             }
@@ -499,8 +517,10 @@
         <a href="/calendar/">Calendar 2025</a>
     </div>
     <div class="subtitle">
+        <span class="subpc">2025년의 시간을 팝니다.</span>
+        <span class="subm">
         Songs & Scenes<br>
-        2025년의 시간을 팝니다.
+        2025년의 시간을 팝니다.</span>
     </div>
 
     <div class="subsub">
