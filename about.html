@@ -15,18 +15,20 @@
             color: #404040;
             background-color: white;
         }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         .header {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            position: relative;
+            padding: 20px 28px;
+            width: 100%;
+            box-sizing: border-box;
         }
         .hamburger {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
             width: 18px;
             height: 16px;
             display: flex;
@@ -42,24 +44,73 @@
         .header-title {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
-            font-size: 26.4px;
+            font-size: 36pt;
             color: black;
             margin: 0;
             text-align: center;
         }
         .subtitle {
-            font-size: 14px;
+            font-size: 14pt;
             text-align: center;
-            padding: 0 20px 20px;
+            max-width: 1000px;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        .subsub {
+            font-size: 12pt;
+            text-align: center;
+            max-width: 1000px;
+            line-height: 1.4;
+            padding-bottom: 20px;
+        }
+        .autoplay-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 5px;
         }
         .calendar-container {
             position: relative;
             width: 100%;
-            margin-bottom: 20px;
+            max-width: 1220px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .calendar-image {
+        .calendar-content {
+            display: flex;
+            width: 100%;
+            max-width: 1120px;
+        }
+        .image-container {
+            width: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+        .image-container img {
             width: 100%;
             height: auto;
+            object-fit: cover;
+        }
+        .text-content {
+            width: 50%;
+            padding: 0 0 0 40px;
+            box-sizing: border-box;
+        }
+        .text-content-inner {
+            border-top: 2px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 20px 0;
+            font-size: 11.5pt;
+            height: 100%;
+            overflow-y: auto;
+            line-height: 1.6;
+        }
+        .text-content-inner b {
+            font-size: 15pt;
+            line-height: 1.8;
+            color: #202020;
         }
         .nav-button {
             position: absolute;
@@ -68,83 +119,95 @@
             background: none;
             border: none;
             cursor: pointer;
-            color: white;
-            font-size: 24px;
-            width: 40px;
-            height: 40px;
+            color: #404040;
+            font-size: 40.56px;
+            width: 50px;
+            height: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+        .nav-button::before {
+            content: '';
+            display: inline-block;
+            width: 0.52em;
+            height: 0.52em;
+            border-top: 1px solid currentColor;
+            border-right: 1px solid currentColor;
+            position: absolute;
+        }
         .nav-button.prev {
-            left: 10px;
+            left: 0;
         }
         .nav-button.next {
-            right: 10px;
+            right: 0;
         }
-        .text-content {
-            padding: 0 20px;
+        .nav-button.prev::before {
+            transform: rotate(-135deg);
         }
-        .text-content-inner {
-            border-top: 2px solid #000;
-            border-bottom: 1px solid #000;
-            padding: 20px 0;
-            font-size: 14px;
-            line-height: 1.6;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        .text-content-inner b {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #202020;
+        .nav-button.next::before {
+            transform: rotate(45deg);
         }
         .bottom-section {
+            width: 100%;
             background-color: #f1f1f1;
-            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 0;
+        }
+        .video-container {
+            width: 560px;
+            height: 315px;
+            position: relative;
+            margin: 0 0 16px 0;
+        }
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
         }
         .play-this-song {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
-            font-size: 24px;
+            font-size: 30px;
             text-align: center;
-            margin-bottom: 20px;
-        }
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-        }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            margin-bottom: 60px;
+            padding: 10px 0 0 0;
         }
         .white-section {
-            padding: 40px 20px;
+            width: 100%;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 100px 0;
         }
         .image-1 {
-            width: 100%;
+            max-width: 100%;
             height: auto;
-            object-fit: cover;
-            object-position: center;
+        }
+        .button-container {
+            margin-top: 80px;
         }
         .custom-button {
-            width: 100%;
-            height: 50px;
+            width: 600px;
+            height: 60px;
             background-color: transparent;
             border: 1px solid #000;
             font-family: 'Jost', sans-serif;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 40px;
+        }
+        .custom-button-content {
+            display: flex;
+            align-items: center;
         }
         .custom-button-arrow {
             width: 8px;
@@ -153,7 +216,7 @@
             border-right: 1px solid #000;
             transform: rotate(45deg);
             margin-left: 10px;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, transform 0.3s;
         }
         .custom-button:hover {
             background-color: #000;
@@ -232,150 +295,129 @@
             margin-bottom: 24px;
             color: black;
         }
+        .autoplay-toggle {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #7f7f7f;
+        }
+        .autoplay-status {
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        .autoplay-toggle.active {
+            color: red;
+        }
+        .autoplay-toggle.active .autoplay-status {
+            color: red;
+        }
+        .autoplay-text {
+            font-size: 11pt;
+            color: #404040;
+        }
+        .swipe-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .swipe-image.active {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 26.4px;
+            }
+            .subtitle, .subsub {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+            .calendar-content {
+                flex-direction: column;
+            }
+            .image-container, .text-content {
+                width: 100%;
+            }
+            .text-content {
+                padding: 20px;
+            }
+            .video-container {
+                width: 100%;
+                height: 0;
+                padding-bottom: 56.25%;
+            }
+            .custom-button {
+                width: 90%;
+                max-width: 400px;
+            }
+            .autoplay-info {
+                display: none;
+            }
+        }
+
+        @media (min-width: 1920px) {
+            .header {
+                padding-left: 56px;
+                padding-right: 56px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="dimmed-background" id="dimmed-bg"></div>
-    <header class="header">
-        <div class="hamburger" id="hamburger-menu">
-            <span></span>
-            <span></span>
-            <span></span>
+    <div class="content">
+        <header class="header">
+            <div class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <h1 class="header-title">2025 Calendar - Songs & Scenes</h1>
+            <div style="width: 18px;"></div>
+        </header>
+        
+        <div class="menu-items" id="menu-items">
+            <div class="close-btn" id="close-menu"></div>
+            <div class="menu-title">Deepdown Studio</div>
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+            <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
+            <a href="/card/index.html">Anti-Tarot Card</a>
+            <a href="/calendar/">Calendar 2025</a>
         </div>
-        <h1 class="header-title">2025 Calendar - Songs & Scenes</h1>
-    </header>
-    
-    <div class="menu-items" id="menu-items">
-        <div class="close-btn" id="close-menu"></div>
-        <div class="menu-title">Deepdown Studio</div>
-        <a href="/">Home</a>
-        <a href="/about.html">About</a>
-        <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
-        <a href="/card/index.html">Anti-Tarot Card</a>
-        <a href="/calendar/">Calendar 2025</a>
-    </div>
-
-    <div class="subtitle">
-        2025년의 시간을 팝니다.<br>
-        월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분도 플레이리스트를 만들어보세요.
-    </div>
-
-    <div class="calendar-container">
-        <img id="calendarImage" src="images/2025_square1.jpg" alt="2025 Calendar Image" class="calendar-image">
-        <button class="nav-button prev" id="prevButton">&#10094;</button>
-        <button class="nav-button next" id="nextButton">&#10095;</button>
-    </div>
-
-    <div class="text-content">
-        <div class="text-content-inner" id="calendarText">
-            <!-- 텍스트 내용은 JavaScript에서 동적으로 변경됩니다 -->
+        <div class="subtitle">
+            2025년의 시간을 팝니다.
+        </div>
+        <div class="subsub">
+            월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분도 플레이리스트를 만들어보세요.<br>
+            <div class="autoplay-info">
+                <span class="autoplay-toggle" id="autoplay-toggle">
+                    <i class="far fa-play-circle"></i>
+                    <span class="autoplay-status">OFF</span>
+                </span>
+                <span class="autoplay-text">음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요</span>
+            </div>
+        </div>
+        <div class="calendar-container">
+            <button class="nav-button prev" id="prevButton"></button>
+            <div class="calendar-content">
+                <div class="image-container">
+                    <img id="calendarImage1" class="swipe-image active" src="images/2025_square1.jpg" alt="2025 Calendar Image">
+                    <img id="calendarImage2" class="swipe-image" src="" alt="2025 Calendar Image">
+                </div>
+                <div class="text-content">
+                    <div class="text-content-inner" id="calendarText">
+                        <!-- 텍스트 내용은 JavaScript에서 동적으로 변경됩니다 -->
+                    </div>
+                </div>
+            </div>
+            <button class="nav-button next" id="nextButton"></button>
         </div>
     </div>
-
-    <div class="bottom-section">
-        <div class="play-this-song">Play This Song</div>
-        <div class="video-container">
-            <iframe id="youtubeVideo" src="https://www.youtube.com/embed/Ed1swjoTXqc" 
-                frameborder="0" 
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        </div>
-    </div>
-
-    <div class="white-section">
-        <img id="bottomImage" src="images/1.jpg" alt="Calendar Image" class="image-1">
-        <button class="custom-button">
-            <span class="custom-button-content">
-                신나게 사러 달려나가기
-                <span class="custom-button-arrow"></span>
-            </span>
-        </button>
-    </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.getElementById('hamburger-menu');
-    const menuItems = document.getElementById('menu-items');
-    const closeBtn = document.getElementById('close-menu');
-    const dimmedBg = document.getElementById('dimmed-bg');
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
-    const calendarImage = document.getElementById('calendarImage');
-    const calendarText = document.getElementById('calendarText');
-    const youtubeVideo = document.getElementById('youtubeVideo');
-    const bottomImage = document.getElementById('bottomImage');
-    
-    let currentMonth = 1;
-
-    const monthlyContent = [
-        `<b>01. John Lennon - Starting Over <br>
-                1월, 새로운 시작을 다짐합니다. </b><br><br>
-                John Lennon의 Starting over는 시작에 가장 어울리는 곡 중 하나죠. <br>마치 배철수의 음악캠프에 나올 법한 선곡. <br><br>
-
-                2024년 (구)칸예 웨스트가 한국에서 진행한 리스닝 파티가 화제였죠. <br> 그전까지는 그저 샘플링을 잘하고, 트로피 와이프처럼 여성을 대상화하는 셀럽이라고 생각했어요. 내한해서 공연한 Runaway의 음악과 퍼포먼스가 너무 멋있어서, 넷플릭스의 칸예웨스트 다큐를 찾아 보게 되었어요. <br>
-                유명해지기 전, 칸예는 이미 jay-z 등 아티스트의 곡을 만들고 프로듀싱하는 프로듀서로서 알려져 있었어요. 그는 본인의 이름을 건 앨범을 내는 뮤지션 랩퍼가 되고 싶어 했지만 번번이 레코드사로부터 거절당합니다.<br> 너는 프로듀싱을 잘하니, 계속 다른 뮤지션들을 위한 곡이나 만들어달라고요.
-                <br> <br>제가 인상 깊었던 점은 그런 좌절의 순간에도 풀이 죽거나  불평하지 않고 묵묵히 자신의 때를 기다리는 모습이었어요. 왜냐하면 자기 자신을 믿었으니까.<br>
-                힘들고 어렵고 부끄러운 상황에도 자신을 믿고 참고 의연하게 때를 기다리는 것. <br> 그게 저한테도 필요한 것 같아요. <br>
-                그런 사람이 되고 싶고, 그런 사람들을 더 알고 싶네요. <br>`,
-        // ... (다른 월의 내용도 여기에 추가)
-    ];
-
-    const youtubeIDs = [
-        "Ed1swjoTXqc", // 1월
-        "0GeeWwgdRoM",  // 2월
-        "n50Z3HGj4QE",  // 3월
-        "ir4GpOqRkQg",  // 4월
-        "roPQ_M3yJTA",  // 5월
-        "mzJj5-lubeM",  // 6월
-        "GxTqqjJWGpc",  // 7월
-        "_pmZKkb_UAg",  // 8월
-        "tNDWJ_KDkAc",  // 9월
-        "fV4DiAyExN0",  // 10월
-        "a4g5MeonGYM",  // 11월
-        "qBgbiZnhly4",  // 12월
-    ];
-
-    function openMenu() {
-        menuItems.classList.add('menu-open');
-        dimmedBg.style.display = 'block';
-    }
-
-    function closeMenu() {
-        menuItems.classList.remove('menu-open');
-        dimmedBg.style.display = 'none';
-    }
-
-    function updateContent(month) {
-        calendarImage.src = `images/2025_square${month}.jpg`;
-        calendarText.innerHTML = monthlyContent[month - 1];
-        youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
-        bottomImage.src = `images/${month}.jpg`;
-    }
-
-    function showNextMonth() {
-        if (currentMonth < 12) {
-            currentMonth++;
-            updateContent(currentMonth);
-        }
-    }
-
-    function showPreviousMonth() {
-        if (currentMonth > 1) {
-            currentMonth--;
-            updateContent(currentMonth);
-        }
-    }
-
-    // 초기 콘텐츠 설정
-    updateContent(1);
-
-    hamburger.addEventListener('click', openMenu);
-    closeBtn.addEventListener('click', closeMenu);
-    dimmedBg.addEventListener('click', closeMenu);
-    nextButton.addEventListener('click', showNextMonth);
-    prevButton.addEventListener('click', showPreviousMonth);
-});
-</script>
-</body>
-</html>
+<div class="bottom-section">
