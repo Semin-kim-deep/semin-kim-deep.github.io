@@ -666,30 +666,28 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
         
         nextImage.src = `images/2025_square${month}.jpg`;
-        nextImage.style.transition = 'none';
-        currentImage.style.transition = 'none';
-        
+        nextImage.style.display = 'block';
+        currentImage.style.display = 'block';
+
         nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
-        currentImage.style.transform = 'translateX(0)';
         
-        // Force reflow
-        nextImage.offsetHeight;
-        
-        nextImage.style.transition = 'transform 0.3s ease-in-out';
-        currentImage.style.transition = 'transform 0.3s ease-in-out';
-        
-        requestAnimationFrame(() => {
+        setTimeout(() => {
+            nextImage.style.transition = 'transform 0.3s ease-in-out';
+            currentImage.style.transition = 'transform 0.3s ease-in-out';
             nextImage.style.transform = 'translateX(0)';
             currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
             
-            nextImage.addEventListener('transitionend', function onTransitionEnd() {
+            setTimeout(() => {
+                currentImage.style.display = 'none';
+                nextImage.style.transition = 'none';
+                currentImage.style.transition = 'none';
+                
                 currentImage.classList.remove('active');
                 nextImage.classList.add('active');
-                nextImage.removeEventListener('transitionend', onTransitionEnd);
                 
                 activeImage = activeImage === 1 ? 2 : 1;
-            }, { once: true });
-        });
+            }, 300);
+        }, 50);
        
         bottomImage.src = `images/${month}.jpg`;
         calendarText.innerHTML = monthlyContent[month - 1];
@@ -769,7 +767,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-
-
 </body>
 </html>
