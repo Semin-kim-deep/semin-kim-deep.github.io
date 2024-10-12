@@ -374,7 +374,7 @@
                 justify-content: center;
                 position: relative;
             }
-            
+           
             .pc-title {
                 display: none;
             }
@@ -557,7 +557,7 @@
 <div class="bottom-section">
     <div class="play-this-song">Play This Song</div>
     <div class="video-container">
-        <iframe id="youtubeVideo" 
+        <iframe id="youtubeVideo"
             src="https://www.youtube.com/embed/Ed1swjoTXqc"
             frameborder="0"
             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
@@ -577,7 +577,7 @@
     </div>
 </div>
 
-<script>
+    <script>
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.getElementById('hamburger-menu');
     const menuItems = document.getElementById('menu-items');
@@ -626,10 +626,6 @@ document.addEventListener('DOMContentLoaded', function() {
         "a4g5MeonGYM",  // 11월
         "qBgbiZnhly4",  // 12월
     ];
-
-    function isMobile() {
-        return window.innerWidth <= 768;
-    }
 
     function openMenu() {
         menuItems.classList.add('menu-open');
@@ -690,45 +686,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
         const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
-        
-        const nextImageSrc = isMobile() ? `images/2025_square${month}m.jpg` : `images/2025_square${month}.jpg`;
-        const nextBottomImageSrc = isMobile() ? `images/${month}m.jpg` : `images/${month}.jpg`;
-        
+       
+        const nextImageSrc = `images/2025_square${month}.jpg`;
+       
         try {
-            await Promise.all([preloadImage(nextImageSrc), preloadImage(nextBottomImageSrc)]);
-            
+            await preloadImage(nextImageSrc);
+           
             nextImage.src = nextImageSrc;
             nextImage.style.display = 'block';
             currentImage.style.display = 'block';
 
             nextImage.style.transition = 'none';
             currentImage.style.transition = 'none';
-            
+           
             nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
             currentImage.style.transform = 'translateX(0)';
-            
+           
             // Force reflow
             nextImage.offsetHeight;
-            
+           
             nextImage.style.transition = 'transform 0.3s ease-in-out';
             currentImage.style.transition = 'transform 0.3s ease-in-out';
-            
+           
             requestAnimationFrame(() => {
                 nextImage.style.transform = 'translateX(0)';
                 currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
             });
-            
+           
             setTimeout(() => {
                 currentImage.style.display = 'none';
-                
+               
                 currentImage.classList.remove('active');
                 nextImage.classList.add('active');
-                
+               
                 activeImage = activeImage === 1 ? 2 : 1;
                 isTransitioning = false;
             }, 300);
 
-            bottomImage.src = nextBottomImageSrc;
+            bottomImage.src = `images/${month}.jpg`;
             calendarText.innerHTML = monthlyContent[month - 1];
             youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
             updateYoutubeAutoplay();
@@ -753,7 +748,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function adjustButtonsPosition() {
-        if (isMobile()) {
+        if (window.innerWidth <= 768) {
             const imageContainer = document.querySelector('.image-container');
             const prevButton = document.getElementById('prevButton');
             const nextButton = document.getElementById('nextButton');
@@ -800,7 +795,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    if (isMobile()) {
+    if (window.innerWidth <= 768) {
         calendarImage1.addEventListener('touchstart', handleTouchStart);
         calendarImage1.addEventListener('touchmove', handleTouchMove);
         calendarImage1.addEventListener('touchend', handleTouchEnd);
@@ -812,3 +807,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
+
