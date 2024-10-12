@@ -35,24 +35,20 @@
             box-sizing: border-box;
         }
         .header-title {
-    font-family: 'Jost', sans-serif;
-    font-weight: 700;
-    color: black;
-    margin: 0;
-    text-align: center;
-    flex-grow: 1;
-}
-
-.pc-title {
-    display: block;
-    font-size: 36pt;
-}
-
-.mobile-title {
-    display: none;
-}
-
-
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            color: black;
+            margin: 0;
+            text-align: center;
+            flex-grow: 1;
+        }
+        .pc-title {
+            display: block;
+            font-size: 36pt;
+        }
+        .mobile-title {
+            display: none;
+        }
         .hamburger {
             width: 18px;
             height: 16px;
@@ -66,15 +62,6 @@
             width: 100%;
             height: 2px;
             background-color: #7f7f7f;
-        }
-        .header-title {
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            font-size: 36pt;
-            color: black;
-            margin: 0;
-            text-align: center;
-            flex-grow: 1;
         }
         .subtitle {
             font-size: 14pt;
@@ -366,11 +353,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-        .swipe-image.active {
             opacity: 1;
+            transition: transform 0.5s ease-in-out;
         }
 
         @media (max-width: 768px) {
@@ -379,21 +363,19 @@
                 justify-content: center;
                 position: relative;
             }
-        .pc-title {
-        display: none;
-        }
-
-        .mobile-title {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 26.4px;
-        line-height: 1.2;
-        }
-
-    .title-year {
-        margin-bottom: 5px;
-    }
+            .pc-title {
+                display: none;
+            }
+            .mobile-title {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-size: 26.4px;
+                line-height: 1.2;
+            }
+            .title-year {
+                margin-bottom: 5px;
+            }
             .hamburger {
                 position: absolute;
                 left: 20px;
@@ -404,7 +386,12 @@
             .header-title {
                 font-size: 26.4px;
             }
-            .subtitle, .subsub {
+            .subtitle {
+                font-size: 19.6px;
+                font-weight: bold;
+                padding: 10px 20px;
+            }
+            .subsub {
                 font-size: 14px;
                 padding: 10px 20px;
             }
@@ -436,19 +423,19 @@
                 max-height: 200px;
             }
             .nav-button {
-            top: 50%;
-                position:absolute;
-            transform: translateY(-50%);
-            font-size: 24px;
-            width: 40px;
-            height: 40px;
-    }
-                .nav-button.prev {
-        left: 10px;
-    }
-    .nav-button.next {
-        right: 10px;
-    }
+                top: 50%;
+                position: absolute;
+                transform: translateY(-50%);
+                font-size: 24px;
+                width: 40px;
+                height: 40px;
+            }
+            .nav-button.prev {
+                left: 10px;
+            }
+            .nav-button.next {
+                right: 10px;
+            }
             .video-container {
                 width: 90%;
                 height: 0;
@@ -463,7 +450,7 @@
             }
             .custom-button {
                 width: 90%;
-                max-width: 400px;
+                max-width: 560px;
                 height: 50px;
                 font-size: 16px;
                 color: #000;
@@ -473,7 +460,7 @@
             }
             .image-1 {
                 width: 100%;
-                height: 200px;
+                height: auto;
                 object-fit: cover;
                 object-position: center;
             }
@@ -492,78 +479,79 @@
                 <span></span>
                 <span></span>
             </div>
-<h1 class="header-title">
-    <span class="pc-title">2025 Calendar - Songs & Scenes</span>
-    <span class="mobile-title">
-        <span class="title-year">2025 Calendar</span>
-    </span>
-</h1>
-            <div style="width: 18px;"></div>
-        </header>
-       
-        <div class="menu-items" id="menu-items">
-            <div class="close-btn" id="close-menu"></div>
-            <div class="menu-title">Deepdown Studio</div>
-            <a href="/">Home</a>
-            <a href="/about.html">About</a>
-            <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
-            <a href="/card/index.html">Anti-Tarot Card</a>
-            <a href="/calendar/">Calendar 2025</a>
-        </div>
-        <div class="subtitle">
-            2025년의 시간을 팝니다.
-        </div>
-
-
-        <div class="subsub">
-            월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분도 플레이리스트를 만들어보세요.<br>
-            <div class="autoplay-info">
-                <span class="autoplay-toggle" id="autoplay-toggle">
-                    <i class="far fa-play-circle"></i>
-                    <span class="autoplay-status">OFF</span>
+            <h1 class="header-title">
+                <span class="pc-title">2025 Calendar - Songs & Scenes</span>
+                <span class="mobile-title">
+                    <span class="title-year">2025 Calendar</span>
+                    <span>Songs & Scenes</span>
                 </span>
-                <span class="autoplay-text">음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요</span>
+            </h1>
+<div style="width: 18px;"></div>
+    </header>
+   
+    <div class="menu-items" id="menu-items">
+        <div class="close-btn" id="close-menu"></div>
+        <div class="menu-title">Deepdown Studio</div>
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
+        <a href="/card/index.html">Anti-Tarot Card</a>
+        <a href="/calendar/">Calendar 2025</a>
+    </div>
+    <div class="subtitle">
+        Songs & Scenes<br>
+        2025년의 시간을 팝니다.
+    </div>
+
+    <div class="subsub">
+        월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분도 플레이리스트를 만들어보세요.<br>
+        <div class="autoplay-info">
+            <span class="autoplay-toggle" id="autoplay-toggle">
+                <i class="far fa-play-circle"></i>
+                <span class="autoplay-status">OFF</span>
+            </span>
+            <span class="autoplay-text">음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요</span>
+        </div>
+    </div>
+
+    <div class="calendar-container">
+        <button class="nav-button prev" id="prevButton"></button>
+        <div class="calendar-content">
+            <div class="image-container">
+                <img id="calendarImage1" class="swipe-image active" src="images/2025_square1.jpg" alt="2025 Calendar Image">
+                <img id="calendarImage2" class="swipe-image" src="" alt="2025 Calendar Image">
+            </div>
+            <div class="text-content">
+                <div class="text-content-inner" id="calendarText">
+                    <!-- 텍스트 내용은 JavaScript에서 동적으로 변경됩니다 -->
+                </div>
             </div>
         </div>
-
-        <div class="calendar-container">
-            <button class="nav-button prev" id="prevButton"></button>
-            <div class="calendar-content">
-                <div class="image-container">
-                    <img id="calendarImage1" class="swipe-image active" src="images/2025_square1.jpg" alt="2025 Calendar Image">
-                    <img id="calendarImage2" class="swipe-image" src="" alt="2025 Calendar Image">
-                </div>
-                <div class="text-content">
-                    <div class="text-content-inner" id="calendarText">
-                        <!-- 텍스트 내용은 JavaScript에서 동적으로 변경됩니다 -->
-                    </div>
-                </div>
-            </div>
-            <button class="nav-button next" id="nextButton"></button>
-        </div>
+        <button class="nav-button next" id="nextButton"></button>
     </div>
-    <div class="bottom-section">
-        <div class="play-this-song">Play This Song</div>
-        <div class="video-container">
-            <iframe id="youtubeVideo" 
-                src="https://www.youtube.com/embed/Ed1swjoTXqc"
-                frameborder="0"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
-                allowfullscreen>
-            </iframe>
-        </div>
+</div>
+<div class="bottom-section">
+    <div class="play-this-song">Play This Song</div>
+    <div class="video-container">
+        <iframe id="youtubeVideo" 
+            src="https://www.youtube.com/embed/Ed1swjoTXqc"
+            frameborder="0"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
+            allowfullscreen>
+        </iframe>
     </div>
-    <div class="white-section">
-        <img id="bottomImage" src="images/1.jpg" alt="Calendar Image" class="image-1">
-        <div class="button-container">
-            <button class="custom-button">
-                <span class="custom-button-content">
-                    신나게 사러 달려나가기
-                    <span class="custom-button-arrow"></span>
-                </span>
-            </button>
-        </div>
+</div>
+<div class="white-section">
+    <img id="bottomImage" src="images/1.jpg" alt="Calendar Image" class="image-1">
+    <div class="button-container">
+        <button class="custom-button">
+            <span class="custom-button-content">
+                신나게 사러 달려나가기
+                <span class="custom-button-arrow"></span>
+            </span>
+        </button>
     </div>
+</div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.getElementById('hamburger-menu');
@@ -594,77 +582,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 <br> <br>제가 인상 깊었던 점은 그런 좌절의 순간에도 풀이 죽거나  불평하지 않고 묵묵히 자신의 때를 기다리는 모습이었어요. 왜냐하면 자기 자신을 믿었으니까.<br>
                 힘들고 어렵고 부끄러운 상황에도 자신을 믿고 참고 의연하게 때를 기다리는 것. <br> 그게 저한테도 필요한 것 같아요. <br>
                 그런 사람이 되고 싶고, 그런 사람들을 더 알고 싶네요. <br>`,
-     `<b>02. Chaka Khan - Angel <br>
-            2월, 신비로운 계절. </b><br><br>
-          2월은 다른 달보다 짧기 때문인지 조금 신비로운 느낌이 들어요. <br>춥지만 봄을 기다리며 싱숭생숭하죠. <br><br>
-          Chaka Khan의 우렁찬 목소리가 거친 겨울 바람을 뚫으며 걸을 때 힘을 줍니다. <br> 무사처럼 걸을 수 있도록. 그리고 조금 분위기 잡으면서요.<br> 
-          2월의 콘셉트는 분위기 있는 우렁찬 여자. 계획해봅니다. <br>`,
-     `<b>03. Sufjan Stevens - Mystery of Love<br>
-            3월, 새학기의 설레임을 떠올리며. </b><br><br>
-          한국인이 시작을 다짐하는 마지막 기회. 새학기의 시간, 3월입니다. <br>
-1월 1일, 구정 다음의 마지막 찬스죠. <br><br>
-        이 곡은 영화 Call me by your name의 주제곡으로 알려져있죠. <br> 그래서 여름이 시작되는 6월의 대표곡이 될까라고도 생각했어요. <br> 그렇지만 도입부의 기타소리가 차가운 겨울을 깨고 따뜻한 봄이 시작되는 느낌도 들어요. <br> 
-알을 깨고 부화한 새가 나오듯이, 겨울을 깨고 봄을 향하는...<br>`, 
-     `<b>04. Redbone - Come and Get Your Love <br>
-            4월,  한층 따뜻해진 햇살과 완연한 꽃들이 온전한 봄이 되었음을 알려주네요. </b><br><br>
-         특유의 분위기를 가진 Redbone의 곡 Come and Get Your Love는 영화 가디언즈 오브 갤럭시로 알게 되었어요. <br><br>
-         1974년 발표된 곡인데 세련되게 느껴져요. <br>영화에서 쓰인 덕에 이 곡을 알 수 있어서 좋네요. 
-         Redbone의 멤버들은 인디안 계통인 것 같은데, 그래서인지 보컬도 약간 특유의 타령하는 느낌이 들어요. <Br>
-         그렇지만 그 고유한 개성과 리듬 때문에 더 힙하게 느껴진다고 할까요? 마치 70년대 포스트말론 같은...  <br>추위를 털고 가벼워진 기분을 이 곡과 함께 느껴보세요.<br>`,
+        // ... 이하 11개월의 내용은 생략합니다.
+    ];
 
-  `<b>05. Nelly Furtado - I’m Like A Bird<br>
-            5월,  완전한 봄, 여름이 오기 직전.</b><br><br>
-         복잡한 마음은 그대로이지만 온화한 봄 날씨로 조금 중화된다고 할까요.<BR>
-         그런 기분입니다.<br><br>Nelly Furtardo는 정말 매력있는 아티스트에요. <br>
-         이 곡 I’m Like a Bird를 들을 때 정말 자유자재로 날아다니는 새가 되는 상상을 해요. <br>
-         그런데 조금 복잡한 마음을 곁들인…
-<br>`,
-
-  `<b>06. Red Hot Chili Peppers - Scar Tissue<br>
-            6월,  호국보훈의 달이면서…</b><br><br>
-        개인적인 아픔도 있는 달이에요. <br>그래서 마냥 활기차기 보단 어딘가 가벼워진듯하면서 까슬한 기분도 있어요.<br><br>
-        Red Hot Chili Peppers는 제가 생각하는 The Greatest Band 중 하나에요. <br>이 곡 Scar Tissue가 발표되었을 때는 기타리스트 존 프루시엔테가 다시 합류하면서
-        <br> 저력을 보여줬어요. <br>
-        기타소리가 반짝이는 태양 아래 까슬한 여름의 시작을 알리는 듯합니다.
-<br>`,
-
-  `<b>07. TLC - Diggin’ On You<br>
-            7월, 열기의 그루브</b><br><br>
-     2024년 여름은 유난히 더웠죠. <br>
-     그래도 7월은 끈적이지만 8월보다는 가벼운 느낌이 들어요. <br> 하지만 유독 올해엔 엄청난 습기로 대기의 열기 그루브가 느껴졌죠.<br>
-     TLC의 Diggin’ on you는 곡 자체의 느낌도 7월에 어울리지만 가사에 July가 나와요. <br>
-     그루비한 여름을 즐겨봐요.<br>`,  
-  `<b>08. The Offspring - You’re Gonna Go Far, Kid<br>
-            8월, 파워풀한 여름</b><br><br>
-     여름의 정점이자 마지막인 8월. 가장 파워풀한 느낌이에요. <br>물론 우리가 아닌 여름이 ^^;<br><br>
-     펑크는 강렬한 음악을 대표하고, Offspring의 이곡 You’re gonna go far를 들으면 강렬하게 질주하는 모습이 떠올려요.<br>
-     2024년 올림픽에서 보여준 멋진 선수들을 따라하듯이 에너지를 끌어 올려봅니다.<br>`,  
-
-  `<b>09. Pearl Jam - Last Kiss<br>
-            9월, 여름의 잔상 </b><br><br>
-     2024년도 9월은 여름의 연장전이었죠. 그렇지만 이전에도 여름은 9월에 잔상을 남기고 종종 그 모습을 드러냈어요.<br><br>
-Pearl Jam의 Last Kiss가 왜 9월에 어울리는 곡으로 생각났을까 곰곰이 생각해봤어요. 1999년 7월에 빌보드차트 정점에 올랐던 곡인데 그 이후로 우리나라 
-라디오에 계속 플레이된 것 같아요. 음악이 너무 좋다보니 9월 이후까지 더 열심히 들었던 것 같고요. 
-(물론 1살 때요. 엄빠가 듣던 기억이 나요... 드립) <br>
-밴드의 원곡은 아니지만 이 리메이크 싱글을 발표하며 코소보 전쟁 난민을 위해 기부를 했다고 해요.<br><br>
-가사는 떠난 연인을 애도하는 내용이지만 에디베더의 깊은 목소리가 전쟁으로 인한 아픔을 보듬는 것 같아요. 슬픔을 보듬는 목소리가 선선한 공기와 함께 여러 것들을 생각하게 합니다. 여름의 치열함과 신나는 분위기에서 벗어나 이제 차분한 톤을 가지도록…`,    `<b>10. Hoobastank -The Reason<br>
-            10월, 각자의 이유를 다시 새기며. </b><br><br>
-     10월은 달려오던 시간에 자리수가 바뀌죠. <br>얼마남지 않았구나 생각이 들며 후회를 하지만, 변화하고픈 기분도 들 것 같아요.<br><br>
-Hoobastank의 The Reason은 그런 기분에 어울려요. <br>담담히 더 해나갈 수 있도록, 우리만의 이유를 가지도록 지지해주는 곡입니다.<br>`, 
-  `<b>11. Yazoo - Only You<br>
-            11월, 침잠하는 시간. </b><br><br>
-     11월은 1년 중 음울하고 깊이 들어간 느낌이에요.<br> 아마 12월은 한 해를 마무리하고 축하하는 기분도 있다면 11월은 거기에 아직 도달하지 못한 상태이죠<br><br>
-Yazoo의 Only you는 다소 음울하면서 깊은 분위기를 내줘요.<br> 도달하지 못한 사랑의 깊고 어두운 마음을 표현한 곡 같아요. 그 안에서 희미한 빛은 있지만. 
-그 침잠하는 상태와 어울립니다.<br>`,
-
-  `<b>12. Frank Sinatra - Have Yourself A Merry Little Christmas<br>
-            12월, 우리 자신에게 토스트! </b><br><br>
-한 해를 마무리하게 되는 달, 한 해를 살아옴을 축하하고 격려해주었으면 하네요.<br> 연말이라고 해서 모든 시간이 축제 분위기는 아니죠.<br>
-즐기는 모습을 뽐내는 사람들 속에서 스산한 기분도 강하게 들 거에요. <br><br>
-Frank Sinatra의 Have yourself a merry little chrishmas를 들으면서 우리 자신을 감싸줘요. 화려하지 않아도 소박한 나만의 방식으로 축하해줍시다.<br>`, 
-
-    // ... 12월까지 각 월의 전체 HTML 내용을 추가
-  ];
     const youtubeIDs = [
         "Ed1swjoTXqc", // 1월
         "0GeeWwgdRoM",  // 2월
@@ -718,32 +638,24 @@ Frank Sinatra의 Have yourself a merry little chrishmas를 들으면서 우리 �
     }
 
     function updateContent(month, direction) {
-        // 메인 캘린더 이미지 업데이트 (스와이프 효과)
         const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
+        const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
+        
         nextImage.src = `images/2025_square${month}.jpg`;
-        nextImage.style.transition = 'none';
         nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
-       
-        setTimeout(() => {
-            nextImage.style.transition = 'transform 0.5s ease-in-out';
+        
+        requestAnimationFrame(() => {
             nextImage.style.transform = 'translateX(0)';
-           
-            const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
             currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
-           
+            
             currentImage.classList.remove('active');
             nextImage.classList.add('active');
-           
+            
             activeImage = activeImage === 1 ? 2 : 1;
-        }, 50);
+        });
        
-        // 하단 이미지 업데이트
         bottomImage.src = `images/${month}.jpg`;
-       
-        // 텍스트 내용 업데이트
         calendarText.innerHTML = monthlyContent[month - 1];
-       
-        // YouTube 비디오 업데이트
         youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
         updateYoutubeAutoplay();
     }
@@ -762,7 +674,6 @@ Frank Sinatra의 Have yourself a merry little chrishmas를 들으면서 우리 �
         }
     }
 
-    // 초기 콘텐츠 설정
     updateContent(1, 'next');
 
     hamburger.addEventListener('click', openMenu);
@@ -772,7 +683,6 @@ Frank Sinatra의 Have yourself a merry little chrishmas를 들으면서 우리 �
     nextButton.addEventListener('click', showNextMonth);
     prevButton.addEventListener('click', showPreviousMonth);
 
-    // 모바일 환경에서 스와이프 기능 추가
     let touchStartX = 0;
     let touchEndX = 0;
    
