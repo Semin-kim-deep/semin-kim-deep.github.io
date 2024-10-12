@@ -662,7 +662,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
         
         nextImage.src = `images/2025_square${month}.jpg`;
+        nextImage.style.transition = 'none';
+        currentImage.style.transition = 'none';
+        
         nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
+        
+        // Force reflow
+        nextImage.offsetHeight;
+        
+        nextImage.style.transition = 'transform 0.3s ease-in-out';
+        currentImage.style.transition = 'transform 0.3s ease-in-out';
         
         requestAnimationFrame(() => {
             nextImage.style.transform = 'translateX(0)';
