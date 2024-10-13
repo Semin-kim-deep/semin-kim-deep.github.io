@@ -486,10 +486,21 @@
                 padding: 20px;
                 font-size: 14pt; 
             }
-            .text-content-inner {
-                max-height: none; /* 스크롤 제거 */
-                overflow-y: visible; /* 스크롤 제거 */
-            }
+ 
+               .text-content-inner {
+            padding: 20px 0;
+            font-size: 14pt;
+            max-height: none; /* 스크롤 제거 */
+            overflow-y: visible; /* 스크롤 제거 */
+            flex-grow: 1;
+            overflow-y: auto;
+            line-height: 1.6;
+        }
+        .text-content-inner b {
+            font-size: 15pt;
+            line-height: 1.8;
+            color: #202020;
+        }
             .nav-button {
                 top: 50%;
                 position: absolute;
