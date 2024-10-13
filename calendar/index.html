@@ -706,63 +706,65 @@
             });
         }
 
-        async function updateContent(month, direction) {
-            if (isTransitioning) return;
-            isTransitioning = true;
+async function updateContent(month, direction) {
+    if (isTransitioning) return;
+    isTransitioning = true;
 
-            const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
-            const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
+    const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
+    const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
+   
+    const nextImageSrc = `images/2025_square${month}.jpg`;
+   
+    try {
+        await preloadImage(nextImageSrc);
+       
+        nextImage.src = nextImageSrc;
+        nextImage.style.display = 'block';
+        currentImage.style.display = 'block';
+
+        if (direction) { // 월 변경 시에만 transition 적용
+            nextImage.style.transition = 'transform 0.3s ease-in-out';
+            currentImage.style.transition = 'transform 0.3s ease-in-out';
+            
+            nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
+            currentImage.style.transform = 'translateX(0)';
            
-            const nextImageSrc = `images/2025_square${month}.jpg`;
-           
-            try {
-                await preloadImage(nextImageSrc);
-               
-                nextImage.src = nextImageSrc;
-                nextImage.style.display = 'block';
-                currentImage.style.display = 'block';
-
-                if (direction) { // 버튼 클릭으로 인한 업데이트일 때만 transition 적용
-                    nextImage.classList.add('transition');
-                    currentImage.classList.add('transition');
-                    
-                    nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
-                    currentImage.style.transform = 'translateX(0)';
-                   
-                    requestAnimationFrame(() => {
-                        nextImage.style.transform = 'translateX(0)';
-                        currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
-                    });
-                } else {
-                    nextImage.style.transform = 'translateX(0)';
-                }
-               
-                setTimeout(() => {
-                    if (direction) {
-                        currentImage.style.display = 'none';
-                        currentImage.classList.remove('transition');
-                        nextImage.classList.remove('transition');
-                    }
-                   
-                    currentImage.classList.remove('active');
-                    nextImage.classList.add('active');
-                   
-                    activeImage = activeImage === 1 ? 2 : 1;
-                    isTransitioning = false;
-
-                    // 이미지 로딩 완료 후 이미지 컨테이너 표시
-                    document.querySelector('.image-container').style.opacity = '1';
-                }, direction ? 300 : 0);
-
-                bottomImage.src = `images/${month}.jpg`;
-                calendarText.innerHTML = monthlyContent[month - 1];
-                youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
-                updateYoutubeAutoplay();
-            } catch (error) {
-                console.error('Failed to load image:', error);
-                isTransitioning = false;
-            }
+            requestAnimationFrame(() => {
+                nextImage.style.transform = 'translateX(0)';
+                currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
+            });
+        } else {
+            // 초기 로딩 시에는 transition 없이 바로 표시
+            nextImage.style.transition = 'none';
+            nextImage.style.transform = 'translateX(0)';
         }
+       
+        setTimeout(() => {
+            if (direction) {
+                currentImage.style.display = 'none';
+                nextImage.style.transition = 'none';
+                currentImage.style.transition = 'none';
+            }
+           
+            currentImage.classList.remove('active');
+            nextImage.classList.add('active');
+           
+            activeImage = activeImage === 1 ? 2 : 1;
+            isTransitioning = false;
+
+            // 이미지 로딩 완료 후 이미지 컨테이너 표시
+            document.querySelector('.image-container').style.opacity = '1';
+        }, direction ? 300 : 0);
+
+        bottomImage.src = `images/${month}.jpg`;
+        calendarText.innerHTML = monthlyContent[month - 1];
+        youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
+        updateYoutubeAutoplay();
+    } catch (error) {
+        console.error('Failed to load image:', error);
+        isTransitioning = false;
+    }
+}
 
         function showNextMonth() {
             if (currentMonth < 12) {
