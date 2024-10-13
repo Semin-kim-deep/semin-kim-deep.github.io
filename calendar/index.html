@@ -115,6 +115,8 @@
             height: 560px;
             position: relative;
             overflow: hidden;
+            opacity: 0; /* 초기에 투명하게 설정 */
+            transition: opacity 0.3s ease-in-out;
         }
         .image-container img {
             width: 100%;
@@ -460,7 +462,8 @@
                 padding: 20px;
             }
             .text-content-inner {
-                max-height: 200px;
+                max-height: none; /* 스크롤 제거 */
+                overflow-y: visible; /* 스크롤 제거 */
             }
             .nav-button {
                 top: 50%;
@@ -477,39 +480,39 @@
             .nav-button.next {
                 right: 10px;
             }
-            .video-container {
-                width: 90%;
-                height: 0;
-                padding-bottom: 56.25%;
-            }
-            .video-container iframe {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-            }
-            .custom-button {
-                width: 90%;
-                max-width: 560px;
-                height: 50px;
-                font-size: 16px;
-                color: #000;
-            }
-            .autoplay-info {
-                display: none;
-            }
-            .image-1 {
-                width: 100%;
-                height: auto;
-                object-fit: cover;
-                object-position: center;
-            }
-            .button-container {
-                margin-top: 40px;
-            }
-            
-        }
+     
+    .video-container {
+        width: 90%;
+        height: 0;
+        padding-bottom: 56.25%;
+    }
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .custom-button {
+        width: 135%; /* 1.5배로 증가 */
+        max-width: 840px; /* 560px의 1.5배 */
+        height: 50px;
+        font-size: 16px;
+        color: #000;
+    }
+    .autoplay-info {
+        display: none;
+    }
+    .image-1 {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+    }
+    .button-container {
+        margin-top: 40px;
+    }
+}
     </style>
 </head>
 <body>
@@ -527,307 +530,311 @@
                     <span class="title-year">2025 Calendar</span>
                 </span>
             </h1>
-<div style="width: 18px;"></div>
-    </header>
-   
-    <div class="menu-items" id="menu-items">
-        <div class="close-btn" id="close-menu"></div>
-        <div class="menu-title">Deepdown Studio</div>
-        <a href="/">Home</a>
-        <a href="/about.html">About</a>
-        <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
-        <a href="/card/index.html">Anti-Tarot Card</a>
-        <a href="/calendar/">Calendar 2025</a>
-    </div>
-    <div class="subtitle">
-        <span class="subpc">2025년의 시간을 팝니다.</span>
-        <span class="subm">
-        Songs & Scenes<br>
-        2025년의 시간을 팝니다.</span>
-    </div>
-
-    <div class="subsub">
-        월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분도 플레이리스트를 만들어보세요.<br>
-        <div class="autoplay-info">
-            <span class="autoplay-toggle" id="autoplay-toggle">
-                <i class="far fa-play-circle"></i>
-                <span class="autoplay-status">OFF</span>
-            </span>
-            <span class="autoplay-text">음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요</span>
+            <div style="width: 18px;"></div>
+        </header>
+       
+        <div class="menu-items" id="menu-items">
+            <div class="close-btn" id="close-menu"></div>
+            <div class="menu-title">Deepdown Studio</div>
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+            <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
+            <a href="/card/index.html">Anti-Tarot Card</a>
+            <a href="/calendar/">Calendar 2025</a>
         </div>
-    </div>
+        <div class="subtitle">
+            <span class="subpc">2025년의 시간을 팝니다.</span>
+            <span class="subm">
+            Songs & Scenes<br>
+            2025년의 시간을 팝니다.</span>
+        </div>
 
-    <div class="calendar-container">
-        <button class="nav-button prev" id="prevButton"></button>
-        <div class="calendar-content">
-            <div class="image-container">
-                <img id="calendarImage1" class="swipe-image active" src="images/2025_square1.jpg" alt="2025 Calendar Image">
-                <img id="calendarImage2" class="swipe-image" src="" alt="2025 Calendar Image">
+        <div class="subsub">
+            월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분도 플레이리스트를 만들어보세요.<br>
+            <div class="autoplay-info">
+                <span class="autoplay-toggle" id="autoplay-toggle">
+                    <i class="far fa-play-circle"></i>
+                    <span class="autoplay-status">OFF</span>
+                </span>
+                <span class="autoplay-text">음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요</span>
             </div>
-            <div class="text-content">
-                <div class="text-content-inner" id="calendarText">
-                    <!-- 텍스트 내용은 JavaScript에서 동적으로 변경됩니다 -->
+        </div>
+
+        <div class="calendar-container">
+            <button class="nav-button prev" id="prevButton"></button>
+            <div class="calendar-content">
+                <div class="image-container">
+                    <img id="calendarImage1" class="swipe-image active" src="images/2025_square1.jpg" alt="2025 Calendar Image">
+                    <img id="calendarImage2" class="swipe-image" src="" alt="2025 Calendar Image">
+                </div>
+                <div class="text-content">
+                    <div class="text-content-inner" id="calendarText">
+                        <!-- 텍스트 내용은 JavaScript에서 동적으로 변경됩니다 -->
+                    </div>
                 </div>
             </div>
+            <button class="nav-button next" id="nextButton"></button>
         </div>
-        <button class="nav-button next" id="nextButton"></button>
     </div>
-</div>
-<div class="bottom-section">
-    <div class="play-this-song">Play This Song</div>
-    <div class="video-container">
-        <iframe id="youtubeVideo"
-            src="https://www.youtube.com/embed/Ed1swjoTXqc"
-            frameborder="0"
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
-            allowfullscreen>
-        </iframe>
+    <div class="bottom-section">
+        <div class="play-this-song">Play This Song</div>
+        <div class="video-container">
+            <iframe id="youtubeVideo"
+                src="https://www.youtube.com/embed/Ed1swjoTXqc"
+                frameborder="0"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
+                allowfullscreen>
+            </iframe>
+        </div>
     </div>
-</div>
-<div class="white-section">
-    <img id="bottomImage" src="images/1.jpg" alt="Calendar Image" class="image-1">
-<div class="normalt"> <br>9X13cm 탁상용 달력(나무홀더 포함) <br>
-잠시 시야에 그림을 투입하여 머리 속 휴식을 주세요.<br> 
-그림이 잘보이도록 스프링 대신 나무홀더를 사용하였습니다. <br>
-</div>
-    <div class="button-container">
-        <button class="custom-button">
-            <span class="custom-button-content">
-                신나게 사러 달려나가기
-                <span class="custom-button-arrow"></span>
-            </span>
-        </button>
+    <div class="white-section">
+        <img id="bottomImage" src="images/1.jpg" alt="Calendar Image" class="image-1">
+        <div class="normalt"> <br>9X13cm 탁상용 달력(나무홀더 포함) <br>
+        잠시 시야에 그림을 투입하여 머리 속 휴식을 주세요.<br> 
+        그림이 잘보이도록 스프링 대신 나무홀더를 사용하였습니다. <br>
+        </div>
+        <div class="button-container">
+            <button class="custom-button">
+                <span class="custom-button-content">
+                    신나게 사러 달려나가기
+                    <span class="custom-button-arrow"></span>
+                </span>
+            </button>
+        </div>
     </div>
-</div>
 
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.getElementById('hamburger-menu');
-    const menuItems = document.getElementById('menu-items');
-    const closeBtn = document.getElementById('close-menu');
-    const dimmedBg = document.getElementById('dimmed-bg');
-    const autoplayToggle = document.getElementById('autoplay-toggle');
-    const iframe = document.querySelector('.video-container iframe');
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
-    const calendarImage1 = document.getElementById('calendarImage1');
-    const calendarImage2 = document.getElementById('calendarImage2');
-    const calendarText = document.getElementById('calendarText');
-    const youtubeVideo = document.getElementById('youtubeVideo');
-    const bottomImage = document.getElementById('bottomImage');
-   
-    let isAutoplayOn = false;
-    let currentMonth = 1;
-    let activeImage = 1;
-    let isTransitioning = false;
-    const imageCache = {};
-
-    const monthlyContent = [
-        `<b>01. John Lennon - Starting Over <br>
-                1월, 새로운 시작을 다짐합니다. </b><br><br>
-                John Lennon의 Starting over는 시작에 가장 어울리는 곡 중 하나죠. <br>마치 배철수의 음악캠프에 나올 법한 선곡. <br><br>
-
-                2024년 (구)칸예 웨스트가 한국에서 진행한 리스닝 파티가 화제였죠. <br> 그전까지는 그저 샘플링을 잘하고, 트로피 와이프처럼 여성을 대상화하는 셀럽이라고 생각했어요. 내한해서 공연한 Runaway의 음악과 퍼포먼스가 너무 멋있어서, 넷플릭스의 칸예웨스트 다큐를 찾아 보게 되었어요. <br>
-                유명해지기 전, 칸예는 이미 jay-z 등 아티스트의 곡을 만들고 프로듀싱하는 프로듀서로서 알려져 있었어요. 그는 본인의 이름을 건 앨범을 내는 뮤지션 랩퍼가 되고 싶어 했지만 번번이 레코드사로부터 거절당합니다.<br> 너는 프로듀싱을 잘하니, 계속 다른 뮤지션들을 위한 곡이나 만들어달라고요.
-                <br> <br>제가 인상 깊었던 점은 그런 좌절의 순간에도 풀이 죽거나  불평하지 않고 묵묵히 자신의 때를 기다리는 모습이었어요. 왜냐하면 자기 자신을 믿었으니까.<br>
-                힘들고 어렵고 부끄러운 상황에도 자신을 믿고 참고 의연하게 때를 기다리는 것. <br> 그게 저한테도 필요한 것 같아요. <br>
-                그런 사람이 되고 싶고, 그런 사람들을 더 알고 싶네요. <br>`,
-        // ... 이하 11개월의 내용은 생략합니다.
-    ];
-
-    const youtubeIDs = [
-        "Ed1swjoTXqc", // 1월
-        "0GeeWwgdRoM",  // 2월
-        "n50Z3HGj4QE",  // 3월
-        "ir4GpOqRkQg",  // 4월
-        "roPQ_M3yJTA",  // 5월
-        "mzJj5-lubeM",  // 6월
-        "GxTqqjJWGpc",  // 7월
-        "_pmZKkb_UAg",  // 8월
-        "tNDWJ_KDkAc",  // 9월
-        "fV4DiAyExN0",  // 10월
-        "a4g5MeonGYM",  // 11월
-        "qBgbiZnhly4",  // 12월
-    ];
-
-    function openMenu() {
-        menuItems.classList.add('menu-open');
-        dimmedBg.style.display = 'block';
-    }
-
-    function closeMenu() {
-        menuItems.classList.remove('menu-open');
-        dimmedBg.style.display = 'none';
-    }
-
-    function toggleAutoplay() {
-        isAutoplayOn = !isAutoplayOn;
-        autoplayToggle.classList.toggle('active');
-        const statusElement = autoplayToggle.querySelector('.autoplay-status');
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger-menu');
+        const menuItems = document.getElementById('menu-items');
+        const closeBtn = document.getElementById('close-menu');
+        const dimmedBg = document.getElementById('dimmed-bg');
+        const autoplayToggle = document.getElementById('autoplay-toggle');
+        const iframe = document.querySelector('.video-container iframe');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const calendarImage1 = document.getElementById('calendarImage1');
+        const calendarImage2 = document.getElementById('calendarImage2');
+        const calendarText = document.getElementById('calendarText');
+        const youtubeVideo = document.getElementById('youtubeVideo');
+        const bottomImage = document.getElementById('bottomImage');
        
-        if (isAutoplayOn) {
-            autoplayToggle.querySelector('i').className = 'fas fa-play-circle';
-            statusElement.textContent = 'ON';
-            statusElement.style.color = 'red';
-        } else {
-            autoplayToggle.querySelector('i').className = 'far fa-play-circle';
-            statusElement.textContent = 'OFF';
-            statusElement.style.color = '#7f7f7f';
-        }
-       
-        updateYoutubeAutoplay();
-    }
+        let isAutoplayOn = false;
+        let currentMonth = 1;
+        let activeImage = 1;
+        let isTransitioning = false;
+        const imageCache = {};
 
-    function updateYoutubeAutoplay() {
-        let src = youtubeVideo.src;
-        src = src.replace(/(\?|&)autoplay=[01]/, '');
-        if (isAutoplayOn) {
-            src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
-        }
-        youtubeVideo.src = src;
-    }
+        const monthlyContent = [
+            `<b>01. John Lennon - Starting Over <br>
+                    1월, 새로운 시작을 다짐합니다. </b><br><br>
+                    John Lennon의 Starting over는 시작에 가장 어울리는 곡 중 하나죠. <br>마치 배철수의 음악캠프에 나올 법한 선곡. <br><br>
 
-    function preloadImage(src) {
-        return new Promise((resolve, reject) => {
-            if (imageCache[src]) {
-                resolve(imageCache[src]);
+                    2024년 (구)칸예 웨스트가 한국에서 진행한 리스닝 파티가 화제였죠. <br> 그전까지는 그저 샘플링을 잘하고, 트로피 와이프처럼 여성을 대상화하는 셀럽이라고 생각했어요. 내한해서 공연한 Runaway의 음악과 퍼포먼스가 너무 멋있어서, 넷플릭스의 칸예웨스트 다큐를 찾아 보게 되었어요. <br>
+                    유명해지기 전, 칸예는 이미 jay-z 등 아티스트의 곡을 만들고 프로듀싱하는 프로듀서로서 알려져 있었어요. 그는 본인의 이름을 건 앨범을 내는 뮤지션 랩퍼가 되고 싶어 했지만 번번이 레코드사로부터 거절당합니다.<br> 너는 프로듀싱을 잘하니, 계속 다른 뮤지션들을 위한 곡이나 만들어달라고요.
+                    <br> <br>제가 인상 깊었던 점은 그런 좌절의 순간에도 풀이 죽거나  불평하지 않고 묵묵히 자신의 때를 기다리는 모습이었어요. 왜냐하면 자기 자신을 믿었으니까.<br>
+                    힘들고 어렵고 부끄러운 상황에도 자신을 믿고 참고 의연하게 때를 기다리는 것. <br> 그게 저한테도 필요한 것 같아요. <br>
+                    그런 사람이 되고 싶고, 그런 사람들을 더 알고 싶네요. <br>`,
+            // ... 이하 11개월의 내용은 생략합니다.
+        ];
+
+        const youtubeIDs = [
+            "Ed1swjoTXqc", // 1월
+            "0GeeWwgdRoM",  // 2월
+            "n50Z3HGj4QE",  // 3월
+            "ir4GpOqRkQg",  // 4월
+            "roPQ_M3yJTA",  // 5월
+            "mzJj5-lubeM",  // 6월
+            "GxTqqjJWGpc",  // 7월
+            "_pmZKkb_UAg",  // 8월
+            "tNDWJ_KDkAc",  // 9월
+            "fV4DiAyExN0",  // 10월
+            "a4g5MeonGYM",  // 11월
+            "qBgbiZnhly4",  // 12월
+        ];
+
+        function openMenu() {
+            menuItems.classList.add('menu-open');
+            dimmedBg.style.display = 'block';
+        }
+
+        function closeMenu() {
+            menuItems.classList.remove('menu-open');
+            dimmedBg.style.display = 'none';
+        }
+
+        function toggleAutoplay() {
+            isAutoplayOn = !isAutoplayOn;
+            autoplayToggle.classList.toggle('active');
+            const statusElement = autoplayToggle.querySelector('.autoplay-status');
+           
+            if (isAutoplayOn) {
+                autoplayToggle.querySelector('i').className = 'fas fa-play-circle';
+                statusElement.textContent = 'ON';
+                statusElement.style.color = 'red';
             } else {
-                const img = new Image();
-                img.onload = () => {
-                    imageCache[src] = img;
-                    resolve(img);
-                };
-                img.onerror = reject;
-                img.src = src;
+                autoplayToggle.querySelector('i').className = 'far fa-play-circle';
+                statusElement.textContent = 'OFF';
+                statusElement.style.color = '#7f7f7f';
             }
-        });
-    }
-
-    async function updateContent(month, direction) {
-        if (isTransitioning) return;
-        isTransitioning = true;
-
-        const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
-        const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
-       
-        const nextImageSrc = `images/2025_square${month}.jpg`;
-       
-        try {
-            await preloadImage(nextImageSrc);
            
-            nextImage.src = nextImageSrc;
-            nextImage.style.display = 'block';
-            currentImage.style.display = 'block';
-
-            nextImage.style.transition = 'none';
-            currentImage.style.transition = 'none';
-           
-            nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
-            currentImage.style.transform = 'translateX(0)';
-           
-            // Force reflow
-            nextImage.offsetHeight;
-           
-            nextImage.style.transition = 'transform 0.3s ease-in-out';
-            currentImage.style.transition = 'transform 0.3s ease-in-out';
-           
-            requestAnimationFrame(() => {
-                nextImage.style.transform = 'translateX(0)';
-                currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
-            });
-           
-            setTimeout(() => {
-                currentImage.style.display = 'none';
-               
-                currentImage.classList.remove('active');
-                nextImage.classList.add('active');
-               
-                activeImage = activeImage === 1 ? 2 : 1;
-                isTransitioning = false;
-            }, 300);
-
-            bottomImage.src = `images/${month}.jpg`;
-            calendarText.innerHTML = monthlyContent[month - 1];
-            youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
             updateYoutubeAutoplay();
-        } catch (error) {
-            console.error('Failed to load image:', error);
-            isTransitioning = false;
         }
-    }
 
-    function showNextMonth() {
-        if (currentMonth < 12) {
-            currentMonth++;
-            updateContent(currentMonth, 'next');
+        function updateYoutubeAutoplay() {
+            let src = youtubeVideo.src;
+            src = src.replace(/(\?|&)autoplay=[01]/, '');
+            if (isAutoplayOn) {
+                src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
+            }
+            youtubeVideo.src = src;
         }
-    }
 
-    function showPreviousMonth() {
-        if (currentMonth > 1) {
-            currentMonth--;
-            updateContent(currentMonth, 'prev');
+        function preloadImage(src) {
+            return new Promise((resolve, reject) => {
+                if (imageCache[src]) {
+                    resolve(imageCache[src]);
+                } else {
+                    const img = new Image();
+                    img.onload = () => {
+                        imageCache[src] = img;
+                        resolve(img);
+                    };
+                    img.onerror = reject;
+                    img.src = src;
+                }
+            });
         }
-    }
 
-    function adjustButtonsPosition() {
+        async function updateContent(month, direction) {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
+            const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
+           
+            const nextImageSrc = `images/2025_square${month}.jpg`;
+           
+            try {
+                await preloadImage(nextImageSrc);
+               
+                nextImage.src = nextImageSrc;
+                nextImage.style.display = 'block';
+                currentImage.style.display = 'block';
+
+                if (direction) { // 버튼 클릭으로 인한 업데이트일 때만 transition 적용
+                    nextImage.classList.add('transition');
+                    currentImage.classList.add('transition');
+                    
+                    nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
+                    currentImage.style.transform = 'translateX(0)';
+                   
+                    requestAnimationFrame(() => {
+                        nextImage.style.transform = 'translateX(0)';
+                        currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
+                    });
+                } else {
+                    nextImage.style.transform = 'translateX(0)';
+                }
+               
+                setTimeout(() => {
+                    if (direction) {
+                        currentImage.style.display = 'none';
+                        currentImage.classList.remove('transition');
+                        nextImage.classList.remove('transition');
+                    }
+                   
+                    currentImage.classList.remove('active');
+                    nextImage.classList.add('active');
+                   
+                    activeImage = activeImage === 1 ? 2 : 1;
+                    isTransitioning = false;
+
+                    // 이미지 로딩 완료 후 이미지 컨테이너 표시
+                    document.querySelector('.image-container').style.opacity = '1';
+                }, direction ? 300 : 0);
+
+                bottomImage.src = `images/${month}.jpg`;
+                calendarText.innerHTML = monthlyContent[month - 1];
+                youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
+                updateYoutubeAutoplay();
+            } catch (error) {
+                console.error('Failed to load image:', error);
+                isTransitioning = false;
+            }
+        }
+
+        function showNextMonth() {
+            if (currentMonth < 12) {
+                currentMonth++;
+                updateContent(currentMonth, 'next');
+            }
+        }
+
+        function showPreviousMonth() {
+            if (currentMonth > 1) {
+                currentMonth--;
+                updateContent(currentMonth, 'prev');
+            }
+        }
+
+function adjustButtonsPosition() {
+            if (window.innerWidth <= 768) {
+                const imageContainer = document.querySelector('.image-container');
+                const prevButton = document.getElementById('prevButton');
+                const nextButton = document.getElementById('nextButton');
+
+                imageContainer.appendChild(prevButton);
+                imageContainer.appendChild(nextButton);
+            } else {
+                const calendarContainer = document.querySelector('.calendar-container');
+                const prevButton = document.getElementById('prevButton');
+                const nextButton = document.getElementById('nextButton');
+
+                calendarContainer.insertBefore(prevButton, calendarContainer.firstChild);
+                calendarContainer.appendChild(nextButton);
+            }
+        }
+
+        updateContent(1); // 초기 컨텐츠 업데이트 시 direction을 지정하지 않음
+        adjustButtonsPosition();
+
+        hamburger.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        dimmedBg.addEventListener('click', closeMenu);
+        autoplayToggle.addEventListener('click', toggleAutoplay);
+        nextButton.addEventListener('click', showNextMonth);
+        prevButton.addEventListener('click', showPreviousMonth);
+        window.addEventListener('resize', adjustButtonsPosition);
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+       
+        const handleTouchStart = (e) => {
+            touchStartX = e.touches[0].clientX;
+        };
+       
+        const handleTouchMove = (e) => {
+            touchEndX = e.touches[0].clientX;
+        };
+       
+        const handleTouchEnd = () => {
+            if (touchStartX - touchEndX > 50) {
+                showNextMonth();
+            } else if (touchEndX - touchStartX > 50) {
+                showPreviousMonth();
+            }
+        };
+
         if (window.innerWidth <= 768) {
-            const imageContainer = document.querySelector('.image-container');
-            const prevButton = document.getElementById('prevButton');
-            const nextButton = document.getElementById('nextButton');
-
-            imageContainer.appendChild(prevButton);
-            imageContainer.appendChild(nextButton);
-        } else {
-            const calendarContainer = document.querySelector('.calendar-container');
-            const prevButton = document.getElementById('prevButton');
-            const nextButton = document.getElementById('nextButton');
-
-            calendarContainer.insertBefore(prevButton, calendarContainer.firstChild);
-            calendarContainer.appendChild(nextButton);
+            calendarImage1.addEventListener('touchstart', handleTouchStart);
+            calendarImage1.addEventListener('touchmove', handleTouchMove);
+            calendarImage1.addEventListener('touchend', handleTouchEnd);
+            calendarImage2.addEventListener('touchstart', handleTouchStart);
+            calendarImage2.addEventListener('touchmove', handleTouchMove);
+            calendarImage2.addEventListener('touchend', handleTouchEnd);
         }
-    }
-
-    updateContent(1, 'next');
-    adjustButtonsPosition();
-
-    hamburger.addEventListener('click', openMenu);
-    closeBtn.addEventListener('click', closeMenu);
-    dimmedBg.addEventListener('click', closeMenu);
-    autoplayToggle.addEventListener('click', toggleAutoplay);
-    nextButton.addEventListener('click', showNextMonth);
-    prevButton.addEventListener('click', showPreviousMonth);
-    window.addEventListener('resize', adjustButtonsPosition);
-
-    let touchStartX = 0;
-    let touchEndX = 0;
-   
-    const handleTouchStart = (e) => {
-        touchStartX = e.touches[0].clientX;
-    };
-   
-    const handleTouchMove = (e) => {
-        touchEndX = e.touches[0].clientX;
-    };
-   
-    const handleTouchEnd = () => {
-        if (touchStartX - touchEndX > 50) {
-            showNextMonth();
-        } else if (touchEndX - touchStartX > 50) {
-            showPreviousMonth();
-        }
-    };
-
-    if (window.innerWidth <= 768) {
-        calendarImage1.addEventListener('touchstart', handleTouchStart);
-        calendarImage1.addEventListener('touchmove', handleTouchMove);
-        calendarImage1.addEventListener('touchend', handleTouchEnd);
-        calendarImage2.addEventListener('touchstart', handleTouchStart);
-        calendarImage2.addEventListener('touchmove', handleTouchMove);
-        calendarImage2.addEventListener('touchend', handleTouchEnd);
-    }
-});
-</script>
+    });
+    </script>
 </body>
 </html>
-
