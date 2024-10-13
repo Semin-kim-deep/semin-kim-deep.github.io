@@ -361,6 +361,31 @@
             font-size: 11pt;
             color: #404040;
         }
+                .top-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #f1f1f1;
+            border: 1px solid #000;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .top-button::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid #000;
+            border-right: 2px solid #000;
+            transform: rotate(-45deg);
+            margin-top: 4px;
+        }
 
         @media (min-width: 1920px) {
             .header {
@@ -460,6 +485,7 @@
                 width: 100%;
                 height: auto;
                 padding: 20px;
+                font-size: 12pt; 
             }
             .text-content-inner {
                 max-height: none; /* 스크롤 제거 */
@@ -512,6 +538,31 @@
     .button-container {
         margin-top: 40px;
     }
+                    .top-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #f1f1f1;
+            border: 1px solid #000;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .top-button::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid #000;
+            border-right: 2px solid #000;
+            transform: rotate(-45deg);
+            margin-top: 4px;
+        }
 }
     </style>
 </head>
