@@ -653,7 +653,7 @@
             </button>
         </div>
     </div>
-
+    <div class="top-button" id="topButton"></div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.getElementById('hamburger-menu');
@@ -895,7 +895,26 @@ document.addEventListener('DOMContentLoaded', function() {
         calendarImage2.addEventListener('touchmove', handleTouchMove);
         calendarImage2.addEventListener('touchend', handleTouchEnd);
     }
-});
+    });
+            // Top 버튼 기능 추가
+        const topButton = document.getElementById('topButton');
+
+        topButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Top 버튼 표시/숨김 처리
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                topButton.style.display = 'flex';
+            } else {
+                topButton.style.display = 'none';
+            }
+        });
+
 </script>
 </body>
 </html>
