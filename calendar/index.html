@@ -1129,10 +1129,6 @@ function showNextMonth() {
         document.querySelector('.normalt').innerHTML = translations[currentLanguage].bottomText;
         document.querySelector('.custom-button .custom-button-content').firstChild.textContent = translations[currentLanguage].buttonText;
 
-        // 메뉴 항목 업데이트
-        document.querySelectorAll('.menu-items a').forEach((item, index) => {
-            item.textContent = translations[currentLanguage][`menu${Object.keys(translations.ko)[index + 5]}`];
-        });
 
         // 현재 월 내용 업데이트
         calendarText.innerHTML = monthlyContent[currentLanguage][currentMonth - 1];
