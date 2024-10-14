@@ -391,6 +391,18 @@
             transform: rotate(-45deg);
             margin-top: 4px;
         }
+	.language-toggle {
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 400;
+            font-size: 12pt;
+            color: #404040;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-top: 10px;
+        }
+
 
         @media (min-width: 1920px) {
             .header {
@@ -620,6 +632,13 @@
             transform: rotate(-45deg);
             margin-top: 4px;
         }
+	.language-toggle {
+        position: absolute;
+        right: 20px;
+        top: 40px;
+        transform: translateY(-50%);
+        margin-top: 0;
+        }
 }
     </style>
 </head>
@@ -637,6 +656,8 @@
                 <span class="mobile-title">
                     <span class="title-year">2025 Calendar</span>
                 </span>
+	 <button class="language-toggle" id="language-toggle">EN</button>
+
             </h1>
             <div style="width: 18px;"></div>
         </header>
