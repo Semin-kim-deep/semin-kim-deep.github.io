@@ -27,12 +27,12 @@
             box-sizing: border-box;
         }
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 20px 28px;
-            width: 100%;
-            box-sizing: border-box;
+	display: flex;
+    	justify-content: space-between;
+    	align-items: center;
+    	padding: 20px 28px;
+    	width: 100%;
+    	box-sizing: border-box;
         }
         .header-title {
             font-family: 'Jost', sans-serif;
@@ -41,7 +41,16 @@
             margin: 0;
             text-align: center;
             flex-grow: 1;
+	flex: 1 1 auto;
+    	text-align: center;
         }
+.header-left, .header-right {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+    
         .subpc {
             display: block;
             font-size: 14pt;
@@ -422,12 +431,12 @@
         }
 
         @media (max-width: 768px) {
-            .header {
-                padding: 20px 20px 0 20px;
-                justify-content: center;
-                position: relative;
-            }
-           
+         
+    .header {
+        padding: 20px 20px 0 20px;
+        position: relative;
+    }
+
             .pc-title {
                 display: none;
             }
@@ -473,6 +482,10 @@
                 transform: translateY(-50%);
                 margin-top: 0;
             }
+		
+
+
+
             .header-title {
                 font-size: 26.4px;
             }
@@ -645,23 +658,27 @@
 <body>
     <div class="dimmed-background" id="dimmed-bg"></div>
     <div class="content">
-        <header class="header">
-            <div class="hamburger" id="hamburger-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <h1 class="header-title">
-                <span class="pc-title">2025 Calendar - Songs & Scenes</span>
-                <span class="mobile-title">
-                    <span class="title-year">2025 Calendar</span>
-                </span>
-	 <button class="language-toggle" id="language-toggle">EN</button>
 
-            </h1>
-            <div style="width: 18px;"></div>
-        </header>
-       
+<header class="header">
+    <div class="header-left">
+        <div class="hamburger" id="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <h1 class="header-title">
+        <span class="pc-title">2025 Calendar - Songs & Scenes</span>
+        <span class="mobile-title">
+            <span class="title-year">2025 Calendar</span>
+        </span>
+    </h1>
+    <div class="header-right">
+        <button class="language-toggle" id="language-toggle">EN</button>
+    </div>
+</header>
+
+	    
         <div class="menu-items" id="menu-items">
             <div class="close-btn" id="close-menu"></div>
             <div class="menu-title">Deepdown Studio</div>
