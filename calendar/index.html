@@ -750,6 +750,7 @@
         </div>
     </div>
     <div class="top-button" id="topButton"></div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.getElementById('hamburger-menu');
@@ -765,15 +766,49 @@ document.addEventListener('DOMContentLoaded', function() {
     const calendarText = document.getElementById('calendarText');
     const youtubeVideo = document.getElementById('youtubeVideo');
     const bottomImage = document.getElementById('bottomImage');
+    const languageToggle = document.getElementById('language-toggle');
    
     let isAutoplayOn = false;
     let currentMonth = 1;
     let activeImage = 1;
     let isTransitioning = false;
     const imageCache = {};
+    let currentLanguage = 'ko';
 
-    const monthlyContent = [
-       `<b>01. John Lennon - Starting Over <br>
+    const translations = {
+        ko: {
+            title: '2025 Calendar - Songs & Scenes',
+            subtitle: '2025년의 시간을 팝니다.',
+            subsubtitle: '월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분의 월별 플레이리스트는 어떤가요?',
+            autoplayText: '음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요',
+            playThisSong: '이 노래 들어보세요',
+            bottomText: '9X13cm 탁상용 달력(나무홀더 포함)<br>그림이 잘보이도록 스프링을 사용하지 않았어요.<br>잠시 시야에 그림을 투입하여 머리 속 휴식을 주세요.',
+            buttonText: '신나게 사러 달려나가기',
+            menuHome: 'Home',
+            menuAbout: 'About',
+            menuShop: 'Shop',
+            menuCard: 'Anti-Tarot Card',
+            menuCalendar: 'Calendar 2025'
+        },
+        en: {
+            title: '2025 Calendar - Songs & Scenes',
+            subtitle: "Selling the time of 2025.",
+            subsubtitle: "We've selected music that fits each month and drawn scenes. What's your monthly playlist like?",
+            autoplayText: 'Select the button to autoplay music videos (YouTube)',
+            playThisSong: 'Play This Song',
+            bottomText: '9X13cm desk calendar (wooden holder included)<br>We didn\'t use springs so that the pictures are clearly visible.<br>Take a mental break by inserting these images into your field of vision for a moment.',
+            buttonText: 'Run excitedly to buy',
+            menuHome: 'Home',
+            menuAbout: 'About',
+            menuShop: 'Shop',
+            menuCard: 'Anti-Tarot Card',
+            menuCalendar: 'Calendar 2025'
+        }
+    };
+
+    const monthlyContent = {
+        ko: [
+            `<b>01. John Lennon - Starting Over <br>
                 1월, 새로운 시작을 다짐합니다. </b><br><br>
 
                 2024년 (구)칸예 웨스트가 내한한 리스닝파티의 Runaway의 음악과 퍼포먼스가 너무 멋있어서, 넷플릭스의 칸예 다큐를 찾아 보았어요. 그전까지는 그저 관종 셀럽으로만 알고 있었어요.<br>
@@ -781,74 +816,142 @@ document.addEventListener('DOMContentLoaded', function() {
                 <br> <br>인상 깊었던 점은 그런 좌절의 순간에도 풀이 죽거나 불평하지 않고 묵묵히 자신의 때를 기다리는 모습이었어요. <br> 왜냐하면 자기 자신을 믿었으니까.<br>
                 힘들고 어렵고 부끄러운 상황에도 자신을 믿고 의연하게 때를 기다리는 것. 그게 저한테도 필요한 것 같아요.
                 그런 사람이 되고 싶고, 그런 사람들을 더 알고 싶네요. <br>`,
- `<b>02. Chaka Khan - Angel <br>
-            2월, 신비로운 계절. </b><br><br>
-          2월은 다른 달보다 짧기 때문인지 조금 신비로운 느낌이 들어요. <br>춥지만 봄을 기다리며 싱숭생숭하죠. <br><br>
-          Chaka Khan의 우렁찬 목소리가 거친 겨울 바람을 뚫으며 걸을 때 힘을 줍니다. <br> 무사처럼 걸을 수 있도록. 그리고 조금 분위기 잡으면서요.<br> 
-          2월의 콘셉트는 분위기 있는 우렁찬 여자. 계획해봅니다. <br>`,
-     `<b>03. Sufjan Stevens - Mystery of Love<br>
-            3월, 새학기의 설레임을 떠올리며. </b><br><br>
-          한국인이 시작을 다짐하는 마지막 기회. 새학기의 시간, 3월입니다. <br>
-1월 1일, 구정 다음의 마지막 찬스죠. <br><br>
-        이 곡은 영화 Call me by your name의 주제곡으로 알려져있죠. <br> 그래서 여름이 시작되는 6월의 대표곡이 될까라고도 생각했어요. <br> 그렇지만 도입부의 기타소리가 차가운 겨울을 깨고 따뜻한 봄이 시작되는 느낌도 들어요. <br> 
-알을 깨고 부화한 새가 나오듯이, 겨울을 깨고 봄을 향하는...<br>`, 
-     `<b>04. Redbone - Come and Get Your Love <br>
-            4월,  한층 따뜻해진 햇살과 완연한 꽃들이 온전한 봄이 되었음을 알려주네요. </b><br><br>
-         특유의 분위기를 가진 Redbone의 곡 Come and Get Your Love는 영화 가디언즈 오브 갤럭시로 알게 되었어요. <br><br>
-         1974년 발표된 곡인데 세련되게 느껴져요. <br>영화에서 쓰인 덕에 이 곡을 알 수 있어서 좋네요. 
-         Redbone의 멤버들은 인디안 계통인 것 같은데, 그래서인지 보컬도 약간 특유의 타령하는 느낌이 들어요. <Br>
-         그렇지만 그 고유한 개성과 리듬 때문에 더 힙하게 느껴진다고 할까요? 마치 70년대 포스트말론 같은...  <br>추위를 털고 가벼워진 기분을 이 곡과 함께 느껴보세요.<br>`,
+            `<b>02. Chaka Khan - Angel <br>
+                2월, 신비로운 계절. </b><br><br>
+              2월은 다른 달보다 짧기 때문인지 조금 신비로운 느낌이 들어요. <br>춥지만 봄을 기다리며 싱숭생숭하죠. <br><br>
+              Chaka Khan의 우렁찬 목소리가 거친 겨울 바람을 뚫으며 걸을 때 힘을 줍니다. <br> 무사처럼 걸을 수 있도록. 그리고 조금 분위기 잡으면서요.<br> 
+              2월의 콘셉트는 분위기 있는 우렁찬 여자. 계획해봅니다. <br>`,
+            `<b>03. Sufjan Stevens - Mystery of Love<br>
+                3월, 새학기의 설레임을 떠올리며. </b><br><br>
+              한국인이 시작을 다짐하는 마지막 기회. 새학기의 시간, 3월입니다. <br>
+    1월 1일, 구정 다음의 마지막 찬스죠. <br><br>
+            이 곡은 영화 Call me by your name의 주제곡으로 알려져있죠. <br> 그래서 여름이 시작되는 6월의 대표곡이 될까라고도 생각했어요. <br> 그렇지만 도입부의 기타소리가 차가운 겨울을 깨고 따뜻한 봄이 시작되는 느낌도 들어요. <br> 
+    알을 깨고 부화한 새가 나오듯이, 겨울을 깨고 봄을 향하는...<br>`,
+            `<b>04. Redbone - Come and Get Your Love <br>
+                4월,  한층 따뜻해진 햇살과 완연한 꽃들이 온전한 봄이 되었음을 알려주네요. </b><br><br>
+             특유의 분위기를 가진 Redbone의 곡 Come and Get Your Love는 영화 가디언즈 오브 갤럭시로 알게 되었어요. <br><br>
+             1974년 발표된 곡인데 세련되게 느껴져요. <br>영화에서 쓰인 덕에 이 곡을 알 수 있어서 좋네요. 
+             Redbone의 멤버들은 인디안 계통인 것 같은데, 그래서인지 보컬도 약간 특유의 타령하는 느낌이 들어요. <Br>
+             그렇지만 그 고유한 개성과 리듬 때문에 더 힙하게 느껴진다고 할까요? 마치 70년대 포스트말론 같은...  <br>추위를 털고 가벼워진 기분을 이 곡과 함께 느껴보세요.<br>`,
+            `<b>05. Nelly Furtado - I'm Like A Bird<br>
+                5월,  완전한 봄, 여름이 오기 직전.</b><br><br>
+             복잡한 마음은 그대로이지만 온화한 봄 날씨로 조금 중화된다고 할까요.<BR>
+             그런 기분입니다.<br><br>Nelly Furtardo는 정말 매력있는 아티스트에요. <br>
+             이 곡 I'm Like a Bird를 들을 때 정말 자유자재로 날아다니는 새가 되는 상상을 해요. <br>
+             그런데 조금 복잡한 마음을 곁들인…
+    <br>`,
+            `<b>06. Red Hot Chili Peppers - Scar Tissue<br>
+                6월,  호국보훈의 달이면서…</b><br><br>
+            개인적인 아픔도 있는 달이에요. <br>그래서 마냥 활기차기 보단 어딘가 가벼워진듯하면서 까슬한 기분도 있어요.<br><br>
+            Red Hot Chili Peppers는 제가 생각하는 The Greatest Band 중 하나에요. <br>이 곡 Scar Tissue가 발표되었을 때는 기타리스트 존 프루시엔테가 다시 합류하면서
+            저력을 보여줬어요. 
+            기타소리가 반짝이는 태양 아래 까슬한 여름의 시작을 알리는 듯합니다.
+    <br>`,
+            `<b>07. TLC - Diggin' On You<br>
+                7월, 열기의 그루브</b><br><br>
+         2024년 여름은 유난히 더웠죠. <br>
+         그래도 7월은 끈적이지만 8월보다는 가벼운 느낌이 들어요. <br> 하지만 유독 올해엔 엄청난 습기로 대기의 열기 그루브가 느껴졌죠.<br>
+         TLC의 Diggin' on you는 곡 자체의 느낌도 7월에 어울리지만 가사에 July가 나와요. <br>
+         그루비한 여름을 즐겨봐요.<br>`,
+            `<b>08. The Offspring - You're Gonna Go Far, Kid<br>
+                8월, 파워풀한 여름</b><br><br>
+         여름의 정점이자 마지막인 8월. 가장 파워풀한 느낌이에요. <br>물론 우리가 아닌 여름이 ^^;<br><br>
+         펑크는 강렬한 음악을 대표하고, Offspring의 이곡 You're gonna go far를 들으면 강렬하게 질주하는 모습이 떠올려요.<br>
+         2024년 올림픽에서 보여준 멋진 선수들을 따라하듯이 에너지를 끌어 올려봅니다.<br>`,
+            `<b>09. Pearl Jam - Last Kiss<br>
+                9월, 여름의 잔상 </b><br><br>
+         2024년도 9월은 여름의 연장전이었죠. 그렇지만 이전에도 여름은 9월에 잔상을 남기고 종종 그 모습을 드러냈어요.<br>
+    1999년 7월에 빌보드차트 정점에 올랐던 곡인데 그 이후로 우리나라 라디오에 9월까지 계속 플레이된 것 같아요.(물론 1살 때요. 엄빠가 듣던 기억이 나요... 드립) <br>
+    밴드는 이 리메이크 싱글을 발표하며 코소보 전쟁 난민을 위해 기부를 했다고 해요.<br><br>
+    가사는 떠난 연인을 애도하는 내용이지만 에디 베더의 깊은 목소리가 전쟁으로 인한 아픔을 보듬는 것 같아요. 슬픔을 보듬는 그의 목소리가 선선한 공기와 함께 여러 것들을 생각하게 합니다. 여름의 치열함과 신나는 분위기에서 벗어나 이제 차분한 톤을 가지도록…`,
+            `<b>10. Hoobastank -The Reason<br>
+                10월, 각자의 이유를 다시 새기며. </b><br><br>
+         10월은 달려오던 시간에 자리수가 바뀌죠. <br>얼마남지 않았구나 생각이 들며 후회를 하지만, 변화하고픈 기분도 들 것 같아요.<br><br>
+    Hoobastank의 The Reason은 그런 기분에 어울려요. <br>담담히 더 해나갈 수 있도록, 우리만의 이유를 가지도록 지지해주는 곡입니다.<br>`,
 
-  `<b>05. Nelly Furtado - I’m Like A Bird<br>
-            5월,  완전한 봄, 여름이 오기 직전.</b><br><br>
-         복잡한 마음은 그대로이지만 온화한 봄 날씨로 조금 중화된다고 할까요.<BR>
-         그런 기분입니다.<br><br>Nelly Furtardo는 정말 매력있는 아티스트에요. <br>
-         이 곡 I’m Like a Bird를 들을 때 정말 자유자재로 날아다니는 새가 되는 상상을 해요. <br>
-         그런데 조금 복잡한 마음을 곁들인…
-<br>`,
+            `<b>11. Yazoo - Only You<br>
+                11월, 침잠하는 시간. </b><br><br>
+         11월은 1년 중 음울하고 깊이 들어간 느낌이에요.<br> 아마 12월은 한 해를 마무리하고 축하하는 기분도 있다면 11월은 거기에 아직 도달하지 못한 상태이죠<br><br>
+    Yazoo의 Only you는 다소 음울하면서 깊은 분위기를 내줘요.<br> 도달하지 못한 사랑의 깊고 어두운 마음을 표현한 곡 같아요. 그 안에서 희미한 빛은 있지만. 
+    그 침잠하는 상태와 어울립니다.<br>`,
+            `<b>12. Frank Sinatra - Have Yourself A Merry Little Christmas<br>
+                12월, 우리 자신에게 토스트! </b><br><br>
+    한 해를 마무리하게 되는 달, 한 해를 살아옴을 축하하고 격려해주었으면 하네요.<br> 연말이라고 해서 모든 시간이 축제 분위기는 아니죠.<br>
+    즐기는 모습을 뽐내는 사람들 속에서 스산한 기분도 강하게 들 거에요. <br><br>
+    Frank Sinatra의 Have yourself a merry little chrishmas를 들으면서 우리 자신을 감싸줘요. 화려하지 않아도 소박한 나만의 방식으로 축하해줍시다.<br>`
+        ],
+        en: [
+            `<b>01. John Lennon - Starting Over <br>
+                January, resolving for a new beginning. </b><br><br>
 
-  `<b>06. Red Hot Chili Peppers - Scar Tissue<br>
-            6월,  호국보훈의 달이면서…</b><br><br>
-        개인적인 아픔도 있는 달이에요. <br>그래서 마냥 활기차기 보단 어딘가 가벼워진듯하면서 까슬한 기분도 있어요.<br><br>
-        Red Hot Chili Peppers는 제가 생각하는 The Greatest Band 중 하나에요. <br>이 곡 Scar Tissue가 발표되었을 때는 기타리스트 존 프루시엔테가 다시 합류하면서
-        저력을 보여줬어요. 
-        기타소리가 반짝이는 태양 아래 까슬한 여름의 시작을 알리는 듯합니다.
-<br>`,
-
-  `<b>07. TLC - Diggin’ On You<br>
-            7월, 열기의 그루브</b><br><br>
-     2024년 여름은 유난히 더웠죠. <br>
-     그래도 7월은 끈적이지만 8월보다는 가벼운 느낌이 들어요. <br> 하지만 유독 올해엔 엄청난 습기로 대기의 열기 그루브가 느껴졌죠.<br>
-     TLC의 Diggin’ on you는 곡 자체의 느낌도 7월에 어울리지만 가사에 July가 나와요. <br>
-     그루비한 여름을 즐겨봐요.<br>`,  
-  `<b>08. The Offspring - You’re Gonna Go Far, Kid<br>
-            8월, 파워풀한 여름</b><br><br>
-     여름의 정점이자 마지막인 8월. 가장 파워풀한 느낌이에요. <br>물론 우리가 아닌 여름이 ^^;<br><br>
-     펑크는 강렬한 음악을 대표하고, Offspring의 이곡 You’re gonna go far를 들으면 강렬하게 질주하는 모습이 떠올려요.<br>
-     2024년 올림픽에서 보여준 멋진 선수들을 따라하듯이 에너지를 끌어 올려봅니다.<br>`,  
-
-  `<b>09. Pearl Jam - Last Kiss<br>
-            9월, 여름의 잔상 </b><br><br>
-     2024년도 9월은 여름의 연장전이었죠. 그렇지만 이전에도 여름은 9월에 잔상을 남기고 종종 그 모습을 드러냈어요.<br>
-1999년 7월에 빌보드차트 정점에 올랐던 곡인데 그 이후로 우리나라 라디오에 9월까지 계속 플레이된 것 같아요.(물론 1살 때요. 엄빠가 듣던 기억이 나요... 드립) <br>
-밴드는 이 리메이크 싱글을 발표하며 코소보 전쟁 난민을 위해 기부를 했다고 해요.<br><br>
-가사는 떠난 연인을 애도하는 내용이지만 에디 베더의 깊은 목소리가 전쟁으로 인한 아픔을 보듬는 것 같아요. 슬픔을 보듬는 그의 목소리가 선선한 공기와 함께 여러 것들을 생각하게 합니다. 여름의 치열함과 신나는 분위기에서 벗어나 이제 차분한 톤을 가지도록…`,    `<b>10. Hoobastank -The Reason<br>
-            10월, 각자의 이유를 다시 새기며. </b><br><br>
-     10월은 달려오던 시간에 자리수가 바뀌죠. <br>얼마남지 않았구나 생각이 들며 후회를 하지만, 변화하고픈 기분도 들 것 같아요.<br><br>
-Hoobastank의 The Reason은 그런 기분에 어울려요. <br>담담히 더 해나갈 수 있도록, 우리만의 이유를 가지도록 지지해주는 곡입니다.<br>`, 
-  `<b>11. Yazoo - Only You<br>
-            11월, 침잠하는 시간. </b><br><br>
-     11월은 1년 중 음울하고 깊이 들어간 느낌이에요.<br> 아마 12월은 한 해를 마무리하고 축하하는 기분도 있다면 11월은 거기에 아직 도달하지 못한 상태이죠<br><br>
-Yazoo의 Only you는 다소 음울하면서 깊은 분위기를 내줘요.<br> 도달하지 못한 사랑의 깊고 어두운 마음을 표현한 곡 같아요. 그 안에서 희미한 빛은 있지만. 
-그 침잠하는 상태와 어울립니다.<br>`,
-
-  `<b>12. Frank Sinatra - Have Yourself A Merry Little Christmas<br>
-            12월, 우리 자신에게 토스트! </b><br><br>
-한 해를 마무리하게 되는 달, 한 해를 살아옴을 축하하고 격려해주었으면 하네요.<br> 연말이라고 해서 모든 시간이 축제 분위기는 아니죠.<br>
-즐기는 모습을 뽐내는 사람들 속에서 스산한 기분도 강하게 들 거에요. <br><br>
-Frank Sinatra의 Have yourself a merry little chrishmas를 들으면서 우리 자신을 감싸줘요. 화려하지 않아도 소박한 나만의 방식으로 축하해줍시다.<br>`, 
-
-    ];
+                In 2024, (former) Kanye West's listening party in Korea was so impressive with the music and performance of "Runaway" that I watched Kanye's documentary on Netflix. Until then, I only knew him as an attention-seeking celebrity.<br>
+                Before his debut, he produced songs for artists like Jay-Z and wanted to release his own album, but even after barely signing with a record label, his debut was repeatedly postponed.
+                <br> <br>What was impressive was that even in those moments of frustration, he didn't get discouraged or complain, but quietly waited for his time. <br> Because he believed in himself.<br>
+                Believing in yourself and calmly waiting for your time even in difficult, challenging, and embarrassing situations. I think I need that too.
+                I want to be that kind of person and get to know more people like that. <br>`,
+            `<b>02. Chaka Khan - Angel <br>
+                February, a mysterious season. </b><br><br>
+              February feels a bit mysterious, perhaps because it's shorter than other months. <br>It's cold, but we're restless waiting for spring. <br><br>
+              Chaka Khan's powerful voice gives strength when walking through the harsh winter wind. <br> Like walking as a warrior. And setting the mood a little.<br> 
+              The concept for February is a charismatic, powerful woman. Let's plan for it. <br>`,
+            `<b>03. Sufjan Stevens - Mystery of Love<br>
+                March, reminiscing about the excitement of a new semester. </b><br><br>
+              The last chance for Koreans to make a fresh start. March, the time of new semesters. <br>
+    The final chance after January 1st and Lunar New Year. <br><br>
+            This song is known as the theme song for the movie "Call Me by Your Name". <br> So I thought it might be the representative song for June when summer begins. <br> But the guitar sound at the beginning also feels like it's breaking the cold winter and starting a warm spring. <br> 
+    Like a bird hatching from its egg, breaking winter and heading towards spring...<br>`,
+            `<b>04. Redbone - Come and Get Your Love <br>
+                April, the warmer sunshine and full-blown flowers tell us that spring has truly arrived. </b><br><br>
+             I got to know Redbone's "Come and Get Your Love" with its unique atmosphere through the movie Guardians of the Galaxy. <br><br>
+             The song was released in 1974 but feels sophisticated. <br>I'm glad I got to know this song thanks to its use in the movie. 
+             The members of Redbone seem to have Native American roots, which might be why the vocals have a unique chanting feel. <br>
+             But doesn't that unique personality and rhythm make it feel even more hip? Like a '70s Post Malone...  <br>Feel the lightness of shaking off the cold with this song.<br>`,
+            `<b>05. Nelly Furtado - I'm Like A Bird<br>
+                May, full spring, just before summer arrives.</b><br><br>
+             The complicated feelings remain, but they're somewhat neutralized by the mild spring weather.<BR>
+             That's the mood.<br><br>Nelly Furtado is a really charming artist. <br>
+             When I listen to "I'm Like a Bird", I imagine becoming a bird flying freely. <br>
+             But with a bit of a complex heart...
+    <br>`,
+            `<b>06. Red Hot Chili Peppers - Scar Tissue<br>
+                June, the month of patriotism and...</b><br><br>
+            It's also a month of personal pain. <br>So rather than being purely energetic, there's a feeling of lightness mixed with a bit of roughness.<br><br>
+            Red Hot Chili Peppers is one of The Greatest Bands in my opinion. <br>When this song "Scar Tissue" was released, it showed their strength as guitarist John Frusciante rejoined the band.
+            The guitar sound seems to announce the start of a slightly rough summer under the shining sun.
+    <br>`,
+            `<b>07. TLC - Diggin' On You<br>
+                July, the groove of heat</b><br><br>
+         The summer of 2024 was exceptionally hot. <br>
+         Still, July feels sticky but lighter than August. <br> But this year especially, the heat groove in the air was felt due to the extreme humidity.<br>
+         TLC's "Diggin' on You" not only fits July in its feel but also mentions July in the lyrics. <br>
+         Let's enjoy this groovy summer.<br>`,
+            `<b>08. The Offspring - You're Gonna Go Far, Kid<br>
+                August, powerful summer</b><br><br>
+         August, the peak and end of summer. It feels the most powerful. <br>Of course, it's the summer, not us ^^;<br><br>
+         Punk represents intense music, and when I listen to The Offspring's "You're Gonna Go Far, Kid", I imagine intensely racing forward.<br>
+         Let's raise our energy as if imitating the amazing athletes we saw in the 2024 Olympics.<br>`,
+            `<b>09. Pearl Jam - Last Kiss<br>
+                September, the afterimage of summer </b><br><br>
+         September 2024 was an extension of summer. But even before, summer often left its traces in September, revealing itself occasionally.<br>
+    This song topped the Billboard chart in July 1999, and it seems it was played on Korean radio until September. (Of course, I was 1 year old then. I remember my parents listening to it... just kidding) <br>
+    The band released this remake single and donated for the Kosovo War refugees.<br><br>
+    Although the lyrics are about mourning a lost love, Eddie Vedder's deep voice seems to comfort the pain caused by war. His voice, embracing sadness, makes us think about various things along with the cool air. Moving away from the intensity and excitement of summer to a calmer tone now...<br>`,
+            `<b>10. Hoobastank - The Reason<br>
+                October, revisiting our individual reasons. </b><br><br>
+         October is when the digit of the time we've been running through changes. <br>We think there's not much left and feel regret, but also a desire for change.<br><br>
+    Hoobastank's "The Reason" fits this mood. <br>It's a song that supports us to calmly carry on, to have our own reasons.<br>`,
+            `<b>11. Yazoo - Only You<br>
+                November, a time of introspection. </b><br><br>
+         November feels gloomy and deep among the months of the year.<br> While December might bring a sense of wrapping up the year and celebration, November feels like we haven't quite reached that point yet<br><br>
+    Yazoo's "Only You" creates a somewhat melancholic yet profound atmosphere.<br> It seems to express the deep, dark feelings of an unrequited love. There's a faint light within, though. 
+    It matches well with this state of introspection.<br>`,
+            `<b>12. Frank Sinatra - Have Yourself A Merry Little Christmas<br>
+                December, a toast to ourselves! </b><br><br>
+    The month when we wrap up the year, I hope we can celebrate and encourage ourselves for living through it.<br> Not all moments during the year-end are festive, though.<br>
+    Amidst people showing off their enjoyment, you might feel a strong sense of bleakness. <br><br>
+    Let's embrace ourselves while listening to Frank Sinatra's "Have Yourself A Merry Little Christmas". Let's celebrate in our own modest way, even if it's not extravagant.<br>`
+        ]
+    };
 
     const youtubeIDs = [
         "Ed1swjoTXqc", // 1월
@@ -972,7 +1075,7 @@ Frank Sinatra의 Have yourself a merry little chrishmas를 들으면서 우리 �
 
             // 모바일 환경에 따라 다른 이미지 사용
             bottomImage.src = isMobile() ? `images/${month}m.jpg` : `images/${month}.jpg`;
-            calendarText.innerHTML = monthlyContent[month - 1];
+            calendarText.innerHTML = monthlyContent[currentLanguage][month - 1];
             youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
             updateYoutubeAutoplay();
         } catch (error) {
@@ -981,7 +1084,9 @@ Frank Sinatra의 Have yourself a merry little chrishmas를 들으면서 우리 �
         }
     }
 
-    function showNextMonth() {
+
+
+function showNextMonth() {
         if (currentMonth < 12) {
             currentMonth++;
             updateContent(currentMonth, 'next');
@@ -1013,6 +1118,28 @@ Frank Sinatra의 Have yourself a merry little chrishmas를 들으면서 우리 �
         }
     }
 
+    function changeLanguage() {
+        currentLanguage = currentLanguage === 'ko' ? 'en' : 'ko';
+        languageToggle.textContent = currentLanguage === 'ko' ? 'EN' : 'KO';
+        
+        // 페이지 요소 업데이트
+        document.querySelector('.pc-title').textContent = translations[currentLanguage].title;
+        document.querySelector('.subpc').textContent = translations[currentLanguage].subtitle;
+        document.querySelector('.subsub-pc').textContent = translations[currentLanguage].subsubtitle;
+        document.querySelector('.autoplay-text').textContent = translations[currentLanguage].autoplayText;
+        document.querySelector('.play-this-song').textContent = translations[currentLanguage].playThisSong;
+        document.querySelector('.normalt').innerHTML = translations[currentLanguage].bottomText;
+        document.querySelector('.custom-button .custom-button-content').firstChild.textContent = translations[currentLanguage].buttonText;
+
+        // 메뉴 항목 업데이트
+        document.querySelectorAll('.menu-items a').forEach((item, index) => {
+            item.textContent = translations[currentLanguage][`menu${Object.keys(translations.ko)[index + 5]}`];
+        });
+
+        // 현재 월 내용 업데이트
+        calendarText.innerHTML = monthlyContent[currentLanguage][currentMonth - 1];
+    }
+
     updateContent(1); // 초기 컨텐츠 업데이트 시 direction을 지정하지 않음
     adjustButtonsPosition();
 
@@ -1022,6 +1149,7 @@ Frank Sinatra의 Have yourself a merry little chrishmas를 들으면서 우리 �
     autoplayToggle.addEventListener('click', toggleAutoplay);
     nextButton.addEventListener('click', showNextMonth);
     prevButton.addEventListener('click', showPreviousMonth);
+    languageToggle.addEventListener('click', changeLanguage);
     window.addEventListener('resize', adjustButtonsPosition);
 
     // 윈도우 크기 변경 시 이미지 업데이트
@@ -1056,26 +1184,28 @@ Frank Sinatra의 Have yourself a merry little chrishmas를 들으면서 우리 �
         calendarImage2.addEventListener('touchmove', handleTouchMove);
         calendarImage2.addEventListener('touchend', handleTouchEnd);
     }
+});
+
+// Top 버튼 기능 추가
+const topButton = document.getElementById('topButton');
+
+topButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
-            // Top 버튼 기능 추가
-        const topButton = document.getElementById('topButton');
+});
 
-        topButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Top 버튼 표시/숨김 처리
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 100) {
-                topButton.style.display = 'flex';
-            } else {
-                topButton.style.display = 'none';
-            }
-        });
-
+// Top 버튼 표시/숨김 처리
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 100) {
+        topButton.style.display = 'flex';
+    } else {
+        topButton.style.display = 'none';
+    }
+});
 </script>
+
+	
 </body>
 </html>
