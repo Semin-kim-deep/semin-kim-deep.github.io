@@ -293,6 +293,22 @@
             margin-bottom: 24px;
             color: black;
         }
+        .shop-link {
+            position: fixed;
+            left: calc(50% - 550px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+        }
+        .shop-link a {
+            color: white;
+            text-decoration: none;
+        }
         @media (max-width: 1024px) {
             .changing-image {
                 width: 500px;
@@ -307,7 +323,7 @@
             .video-container {
                 margin-right: 150px;
             }
-            .info-section, .scroll-more {
+            .info-section, .scroll-more, .shop-link {
                 left: 20px;
             }
             .it-line-group {
@@ -336,9 +352,15 @@
                 padding-bottom: 60%;
                 margin: 20px 0;
             }
+            .info-title {
+                font-size: 28.8px; /* 60% of 48px */
+            }
+            .it-line-title {
+                font-size: 25.2px; /* 70% of 36px */
+            }
             .it-line-image {
-                width: 200px;
-                height: 200px;
+                width: 210px; /* 70% of 300px */
+                height: 210px; /* 70% of 300px */
             }
             .info-description, .it-line-description {
                 display: none;
@@ -349,6 +371,12 @@
             .hamburger {
                 left: 20px;
             }
+            .scroll-more {
+                display: none;
+            }
+            .shop-link {
+                font-size: 36px;
+            }
         }
         @media (max-width: 480px) {
             h1 {
@@ -358,8 +386,8 @@
                 width: 500px;
                 height: 500px;
             }
-            .info-title, .it-line-title, .scroll-more {
-                font-size: 36px;
+            .info-title, .it-line-title, .shop-link {
+                font-size: 28px;
             }
             .it-line-image {
                 width: 150px;
@@ -411,6 +439,7 @@
             <p class="info-more"><a href="about.html">More ></a></p>
         </div>
     </div>
+
 <div class="it-line-group">
         <div class="it-line-image">
             <img src="images/a_1253.png" alt="IT line Image">
@@ -422,7 +451,7 @@
             <p class="info-more-it"><a href="https://www.figma.com/@itseodanggae" target="blank">More ></a></p>
         </div>
     </div>
-    <div class="scroll-more">Scroll More</div>
+    <div class="shop-link"><a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a></div>
     <div class="anti-tarot-card">Anti-Tarot Card</div>
     <div class="menu-items" id="menu-items">
         <div class="close-btn" id="close-menu"></div>
@@ -438,7 +467,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const changingImage = document.querySelector('.changing-image');
     const aboutSection = document.querySelector('#about-section');
     const itlineGroup = document.querySelector('.it-line-group');
-    const scrollMore = document.querySelector('.scroll-more');
+    const shopLink = document.querySelector('.shop-link');
     const antiTarotCard = document.querySelector('.anti-tarot-card');
     const hamburger = document.getElementById('hamburger-menu');
     const menuItems = document.getElementById('menu-items');
@@ -515,24 +544,24 @@ document.addEventListener('DOMContentLoaded', function() {
             const translateY = Math.min((scrollTop - (isMobile ? 700 : 1230)) / 2, 50);
             itlineGroup.style.opacity = opacity;
             itlineGroup.style.transform = `translateY(calc(-50% - ${translateY}px))`;
-            scrollMore.style.opacity = 1 - opacity;
-            scrollMore.style.transform = `translateY(calc(-50% + ${50 - translateY}px))`;
+            shopLink.style.opacity = 1 - opacity;
+            shopLink.style.transform = `translateY(calc(-50% + ${50 - translateY}px))`;
         } else {
             itlineGroup.style.opacity = '0';
             itlineGroup.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
-        // Scroll More 텍스트 애니메이션
+        // Shop 링크 애니메이션
         if (scrollTop > (isMobile ? 800 : 1330) && scrollTop <= (isMobile ? 1000 : 1830)) {
-            scrollMore.style.opacity = '1';
-            scrollMore.style.transform = 'translateY(-50%)';
+            shopLink.style.opacity = '1';
+            shopLink.style.transform = 'translateY(-50%)';
         } else if (scrollTop > (isMobile ? 1000 : 1830) && scrollTop <= (isMobile ? 1100 : 1930)) {
             const opacity = Math.max(1 - (scrollTop - (isMobile ? 1000 : 1830)) / 100, 0);
-            scrollMore.style.opacity = opacity;
-            scrollMore.style.transform = 'translateY(-50%)';
+            shopLink.style.opacity = opacity;
+            shopLink.style.transform = 'translateY(-50%)';
         } else {
-            scrollMore.style.opacity = '0';
-            scrollMore.style.transform = 'translateY(calc(-50% + 50px))';
+            shopLink.style.opacity = '0';
+            shopLink.style.transform = 'translateY(calc(-50% + 50px))';
         }
 
         // Anti-Tarot Card 애니메이션 (스크롤 끝에서 나타남)
@@ -547,19 +576,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     animate();
 
-function openMenu() {
-    menuItems.style.left = '0';
-    dimmedBg.style.display = 'block';
-}
+    function openMenu() {
+        menuItems.style.left = '0';
+        dimmedBg.style.display = 'block';
+    }
 
-function closeMenu() {
-    menuItems.style.left = '-300px';
-    dimmedBg.style.display = 'none';
-}
+    function closeMenu() {
+        menuItems.style.left = '-300px';
+        dimmedBg.style.display = 'none';
+    }
 
-hamburger.addEventListener('click', openMenu);
-closeBtn.addEventListener('click', closeMenu);
-dimmedBg.addEventListener('click', closeMenu);
+    hamburger.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    dimmedBg.addEventListener('click', closeMenu);
 });
 </script>
 </body>
