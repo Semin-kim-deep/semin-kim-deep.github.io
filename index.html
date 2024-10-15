@@ -321,16 +321,16 @@
             vertical-align: middle;
         }
 
-@media (max-width: 768px) {
-    .info-title {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .custom-button-arrow {
-        display: inline-block;  /* 모바일에서만 표시 */
-    }
-}
+        @media (max-width: 768px) {
+            .info-title {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .custom-button-arrow {
+                display: inline-block;  /* 모바일에서만 표시 */
+            }
+        }
         @media (max-width: 1024px) {
             .changing-image {
                 width: 500px;
@@ -375,21 +375,44 @@
                 margin: 20px 0;
             }
        
-              .info-title {
-         font-size: 22px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .custom-button-arrow {
-        display: inline-block;  /* 모바일에서만 표시 */
-    }
-            .it-line-title {
-                font-size: 16.2px; /* 70% of 36px */
+            .info-title {
+                font-size: 22px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .custom-button-arrow {
+                display: inline-block;  /* 모바일에서만 표시 */
+            }
+            .it-line-group {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
             }
             .it-line-image {
-                width: 160px; /* 70% of 300px */
-                height: 160px; /* 70% of 300px */
+                width: 112px; /* 70% of 160px */
+                height: 112px; /* 70% of 160px */
+                margin-bottom: 10px;
+            }
+            .it-line-title {
+                font-size: 16.2px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 5px;
+            }
+            .it-line-title-arrow {
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                border-top: 2px solid #282828;
+                border-right: 2px solid #282828;
+                transform: rotate(45deg);
+                margin-left: 6px;
+                vertical-align: middle;
             }
             .info-description, .it-line-description {
                 display: none;
@@ -415,12 +438,8 @@
                 width: 500px;
                 height: 500px;
             }
-            .info-title, .it-line-title, .shop-link {
+            .info-title, .shop-link {
                 font-size: 22px;
-            }
-            .it-line-image {
-                width: 150px;
-                height: 150px;
             }
         }
         @media (min-width: 1024px) {
@@ -468,12 +487,11 @@
             <p class="info-more"><a href="about.html">More ></a></p>
         </div>
     </div>
-
-<div class="it-line-group">
+    <div class="it-line-group">
         <div class="it-line-image">
             <img src="images/a_1253.png" alt="IT line Image">
         </div>
-        <div class="it-line-title">IT line</div>
+        <div class="it-line-title">IT<br>line<span class="it-line-title-arrow"></span></div>
         <div class="it-line-description">
             <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. </p>
             <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' </span></p>
