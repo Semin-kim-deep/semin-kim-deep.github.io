@@ -298,25 +298,29 @@
             margin-bottom: 24px;
             color: black;
         }
-    .shop-link {
+.shop-link {
     position: fixed;
-    left: calc(50% - 550px);
+    left: 50%;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
     color: white;
     opacity: 0;
     transition: opacity 0.5s ease, transform 0.5s ease;
+    text-align: center; /* 텍스트 중앙 정렬 */
 }
+
 .shop-title {
     font-family: 'Jost', sans-serif;
     font-weight: 700;
     font-size: 48px;
     margin-bottom: 20px;
 }
+
 .shop-description {
     font-size: 16px;
     line-height: 1.5;
     max-width: 500px;
+    margin: 0 auto; /* 설명 텍스트 중앙 정렬 */
 }
 .shop-description p:first-child {
     font-family: 'Pretendard', sans-serif;
@@ -380,6 +384,12 @@
             .it-line-group {
                 right: 20px;
             }
+             .shop-link {
+        width: calc(100% - 40px); /* 좌우 여백 고려 */
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
         }
         @media (max-width: 768px) {
             html, body {
@@ -471,9 +481,23 @@
         align-items: center;
         justify-content: center;
     }
+    .shop-link {
+        width: 100%; /* 모바일에서 전체 너비 사용 */
+        left: 0;
+        transform: translateY(-50%);
+    }
+    
+    .shop-title {
+        font-size: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
     .shop-description {
         display: none;
     }
+    
     .shop-link .custom-button-arrow {
         display: inline-block;
     }
