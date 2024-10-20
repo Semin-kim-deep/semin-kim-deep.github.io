@@ -298,45 +298,22 @@
             margin-bottom: 24px;
             color: black;
         }
-    .shop-section {
-    position: fixed;
-    left: calc(50% - 550px);
-    top: 50%;
-    transform: translateY(-50%);
-    color: white;
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.shop-title {
-    font-family: 'Jost', sans-serif;
-    font-weight: 700;
-    font-size: 48px;
-    margin-bottom: 20px;
-}
-.shop-description {
-    font-size: 16px;
-    line-height: 1.5;
-    max-width: 500px;
-}
-.shop-description p:first-child {
-    font-family: 'Pretendard', sans-serif;
-    font-weight: 400;
-    margin-bottom: 10px;
-}
-.shop-description p:nth-child(2) {
-    font-family: 'Jost', sans-serif;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-.shop-more {
-    font-family: 'Jost', sans-serif;
-    font-weight: 700;
-    font-size: 24px;
-}
-.shop-more a {
-    color: white;
-    text-decoration: none;
-}
+        .shop-link {
+            position: fixed;
+            left: calc(50% - 550px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+        }
+        .shop-link a {
+            color: white;
+            text-decoration: none;
+        }
         .custom-button-arrow {
             display: none;  /* 기본적으로 숨김 */
             width: 8px;
@@ -349,7 +326,16 @@
             vertical-align: middle;
         }
 
-
+        @media (max-width: 768px) {
+            .info-title {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .custom-button-arrow {
+                display: inline-block;  /* 모바일에서만 표시 */
+            }
+        }
         @media (max-width: 1024px) {
             .changing-image {
                 width: 500px;
@@ -393,7 +379,7 @@
                 padding-bottom: 60%;
                 margin: 20px 0;
             }
-  
+       
             .info-title {
                 font-size: 22px;
                 display: flex;
@@ -455,26 +441,9 @@
             .scroll-more {
                 display: none;
             }
-         .shop-title {
-        font-size: 22px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .shop-description {
-        display: none;
-    }
-    .custom-button-arrow {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        border-top: 2px solid #fff;
-        border-right: 2px solid #fff;
-        transform: rotate(45deg);
-        margin-left: 6px;
-        vertical-align: middle;
-    }
-}
+            .shop-link {
+                font-size: 36px;
+            }
         }
         @media (max-width: 480px) {
             h1 {
@@ -492,10 +461,6 @@
             .hamburger {
                 left: 28px;
             }
-             .shop-section {
-        left: 20px;
-    }
-}
         }
         @media (min-width: 1920px) {
             .hamburger {
@@ -552,16 +517,7 @@
     </div>
 </div>
     </div>
-    <div class="shop-section" id="shop-section">
-    <div class="shop-title">Shop<span class="custom-button-arrow"></span></div>
-    <div class="shop-description">
-        <p>고유의 제품을 만나보세요<br>
-        안티타로카드, 포스터, 캘린더 등</p>
-        <p>Discover our unique products<br>
-        <span style="font-family: 'Jost', sans-serif; font-weight: 500;">Anti-tarot cards, posters, calendars, and more</span></p>
-        <p class="shop-more"><a href="https://smartstore.naver.com/deepdown-studio/" target="_blank">More ></a></p>
-    </div>
-</div>
+    <div class="shop-link"><a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a></div>
     <div class="anti-tarot-card">Anti-Tarot Card</div>
     <div class="menu-items" id="menu-items">
         <div class="close-btn" id="close-menu"></div>
@@ -660,21 +616,19 @@ document.addEventListener('DOMContentLoaded', function() {
             itlineGroup.style.opacity = '0';
             itlineGroup.style.transform = 'translateY(calc(-50% + 50px))';
         }
-const shopSection = document.querySelector('#shop-section');
 
-// Shop 섹션 애니메이션
-if (scrollTop > (isMobile ? 800 : 1330) && scrollTop <= (isMobile ? 1000 : 1830)) {
-    shopSection.style.opacity = '1';
-    shopSection.style.transform = 'translateY(-50%)';
-} else if (scrollTop > (isMobile ? 1000 : 1830) && scrollTop <= (isMobile ? 1100 : 1930)) {
-    const opacity = Math.max(1 - (scrollTop - (isMobile ? 1000 : 1830)) / 100, 0);
-    shopSection.style.opacity = opacity;
-    shopSection.style.transform = 'translateY(-50%)';
-} else {
-    shopSection.style.opacity = '0';
-    shopSection.style.transform = 'translateY(calc(-50% + 50px))';
-}
-
+        // Shop 링크 애니메이션
+        if (scrollTop > (isMobile ? 800 : 1330) && scrollTop <= (isMobile ? 1000 : 1830)) {
+            shopLink.style.opacity = '1';
+            shopLink.style.transform = 'translateY(-50%)';
+        } else if (scrollTop > (isMobile ? 1000 : 1830) && scrollTop <= (isMobile ? 1100 : 1930)) {
+            const opacity = Math.max(1 - (scrollTop - (isMobile ? 1000 : 1830)) / 100, 0);
+            shopLink.style.opacity = opacity;
+            shopLink.style.transform = 'translateY(-50%)';
+        } else {
+            shopLink.style.opacity = '0';
+            shopLink.style.transform = 'translateY(calc(-50% + 50px))';
+        }
 
         // Anti-Tarot Card 애니메이션 (스크롤 끝에서 나타남)
         if (scrollTop + windowHeight >= documentHeight - 1) {
