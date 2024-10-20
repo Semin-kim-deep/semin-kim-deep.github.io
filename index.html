@@ -168,12 +168,17 @@
             object-fit: cover;
             border-radius: 50%;
         }
-        .it-line-title {
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
+         .it-line-title {
+        font-family: 'Jost', sans-serif;
+        font-weight: 700;
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+        .mobile-arrow {
+        display: none;
+    }
+
         .it-line-description {
             font-size: 16px;
             line-height: 1.5;
@@ -397,23 +402,28 @@
                 margin-bottom: 10px;
             }
             .it-line-title {
-                font-size: 16.2px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 5px;
-            }
-            .it-line-title-arrow {
-                display: inline-block;
-                width: 8px;
-                height: 8px;
-                border-top: 2px solid #282828;
-                border-right: 2px solid #282828;
-                transform: rotate(45deg);
-                margin-left: 6px;
-                vertical-align: middle;
-            }
+        font-size: 16.2px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 5px;
+    }
+    
+    .it-line-title .line-text {
+        display: block;
+    }
+
+    .mobile-arrow {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-top: 2px solid #282828;
+        border-right: 2px solid #282828;
+        transform: rotate(45deg);
+        margin-left: 6px;
+        vertical-align: middle;
+    }
             .info-description, .it-line-description {
                 display: none;
             }
@@ -487,16 +497,21 @@
             <p class="info-more"><a href="about.html">More ></a></p>
         </div>
     </div>
-    <div class="it-line-group">
-        <div class="it-line-image">
-            <img src="images/a_1253.png" alt="IT line Image">
-        </div>
-        <div class="it-line-title">IT<br>line<span class="it-line-title-arrow"></span></div>
-        <div class="it-line-description">
-            <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. </p>
-            <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' </span></p>
-            <p class="info-more-it"><a href="https://www.figma.com/@itseodanggae" target="blank">More ></a></p>
-        </div>
+<div class="it-line-group">
+    <div class="it-line-image">
+        <img src="images/a_1253.png" alt="IT line Image">
+    </div>
+    <div class="it-line-title">
+        <span class="it-text">IT</span>
+        <span class="line-text">line</span>
+        <span class="mobile-arrow"></span>
+    </div>
+    <div class="it-line-description">
+        <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. </p>
+        <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' </span></p>
+        <p class="info-more-it"><a href="https://www.figma.com/@itseodanggae" target="blank">More ></a></p>
+    </div>
+</div>
     </div>
     <div class="shop-link"><a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a></div>
     <div class="anti-tarot-card">Anti-Tarot Card</div>
