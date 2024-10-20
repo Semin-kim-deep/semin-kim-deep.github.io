@@ -404,15 +404,20 @@
             .it-line-title {
         font-size: 16.2px;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         justify-content: center;
         margin-bottom: 5px;
     }
     
+    .it-line-title .it-text
     .it-line-title .line-text {
-        display: block;
+        display: inline;
     }
+
+            .it-line-title .line-text::after{
+                content:"";
+            }
 
     .mobile-arrow {
         display: inline-block;
