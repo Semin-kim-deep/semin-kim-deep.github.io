@@ -300,13 +300,13 @@
         }
 .shop-link {
     position: fixed;
-    left: 50%;
+    left: calc(50% - 550px); /* About 섹션과 동일한 위치 */
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
     color: white;
     opacity: 0;
     transition: opacity 0.5s ease, transform 0.5s ease;
-    text-align: center; /* 텍스트 중앙 정렬 */
+    text-align: left; /* 왼쪽 정렬 */
 }
 
 .shop-title {
@@ -320,28 +320,30 @@
     font-size: 16px;
     line-height: 1.5;
     max-width: 500px;
-    margin: 0 auto; /* 설명 텍스트 중앙 정렬 */
 }
+
 .shop-description p:first-child {
     font-family: 'Pretendard', sans-serif;
     font-weight: 400;
     margin-bottom: 10px;
 }
+
 .shop-description p:nth-child(2) {
     font-family: 'Jost', sans-serif;
     font-weight: 500;
     margin-bottom: 10px;
 }
+
 .shop-more {
     font-family: 'Jost', sans-serif;
     font-weight: 700;
     font-size: 24px;
 }
+
 .shop-more a {
     color: white;
     text-decoration: none;
-}xt-decoration: none;
-        }
+}
         .custom-button-arrow {
             display: none;  /* 기본적으로 숨김 */
             width: 8px;
@@ -384,11 +386,11 @@
             .it-line-group {
                 right: 20px;
             }
-             .shop-link {
-        width: calc(100% - 40px); /* 좌우 여백 고려 */
-        left: 50%;
-        transform: translate(-50%, -50%);
+      .shop-link {
+        left: 20px; /* About 섹션과 동일하게 조정 */
     }
+}
+
 }
         }
         @media (max-width: 768px) {
@@ -475,23 +477,10 @@
             .scroll-more {
                 display: none;
             }
-          .shop-title {
+       .shop-title {
         font-size: 22px;
         display: flex;
         align-items: center;
-        justify-content: center;
-    }
-    .shop-link {
-        width: 100%; /* 모바일에서 전체 너비 사용 */
-        left: 0;
-        transform: translateY(-50%);
-    }
-    
-    .shop-title {
-        font-size: 22px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
     
     .shop-description {
