@@ -300,13 +300,13 @@
         }
 .shop-link {
     position: fixed;
-    left: calc(50% - 550px); /* About 섹션과 동일한 위치 */
+    left: calc(50% - 550px);
     top: 50%;
     transform: translateY(-50%);
     color: white;
     opacity: 0;
     transition: opacity 0.5s ease, transform 0.5s ease;
-    text-align: left; /* 왼쪽 정렬 */
+    text-align: left;
 }
 
 .shop-title {
@@ -344,6 +344,7 @@
     color: white;
     text-decoration: none;
 }
+
         .custom-button-arrow {
             display: none;  /* 기본적으로 숨김 */
             width: 8px;
@@ -356,16 +357,6 @@
             vertical-align: middle;
         }
 
-        @media (max-width: 768px) {
-            .info-title {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .custom-button-arrow {
-                display: inline-block;  /* 모바일에서만 표시 */
-            }
-        }
         @media (max-width: 1024px) {
             .changing-image {
                 width: 500px;
@@ -380,19 +371,15 @@
             .video-container {
                 margin-right: 150px;
             }
-            .info-section, .scroll-more, .shop-link {
-                left: 20px;
-            }
             .it-line-group {
                 right: 20px;
             }
-      .shop-link {
-        left: 20px; /* About 섹션과 동일하게 조정 */
+       .info-section, .scroll-more, .shop-link {
+        left: 20px;
     }
-}
 
 }
-        }
+     
         @media (max-width: 768px) {
             html, body {
                 overflow-x: hidden;
@@ -477,7 +464,7 @@
             .scroll-more {
                 display: none;
             }
-       .shop-title {
+    .shop-title {
         font-size: 22px;
         display: flex;
         align-items: center;
