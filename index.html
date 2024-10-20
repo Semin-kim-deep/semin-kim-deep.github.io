@@ -298,21 +298,45 @@
             margin-bottom: 24px;
             color: black;
         }
-        .shop-link {
-            position: fixed;
-            left: calc(50% - 550px);
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            font-size: 48px;
-        }
-        .shop-link a {
-            color: white;
-            text-decoration: none;
+    .shop-link {
+    position: fixed;
+    left: calc(50% - 550px);
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.shop-title {
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+.shop-description {
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 500px;
+}
+.shop-description p:first-child {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+.shop-description p:nth-child(2) {
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.shop-more {
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+}
+.shop-more a {
+    color: white;
+    text-decoration: none;
+}xt-decoration: none;
         }
         .custom-button-arrow {
             display: none;  /* 기본적으로 숨김 */
@@ -441,9 +465,19 @@
             .scroll-more {
                 display: none;
             }
-            .shop-link {
-                font-size: 36px;
-            }
+          .shop-title {
+        font-size: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .shop-description {
+        display: none;
+    }
+    .shop-link .custom-button-arrow {
+        display: inline-block;
+    }
+}
         }
         @media (max-width: 480px) {
             h1 {
@@ -461,6 +495,9 @@
             .hamburger {
                 left: 28px;
             }
+              .shop-link {
+        left: 20px;
+    }
         }
         @media (min-width: 1920px) {
             .hamburger {
@@ -517,8 +554,16 @@
     </div>
 </div>
     </div>
-    <div class="shop-link"><a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a></div>
-    <div class="anti-tarot-card">Anti-Tarot Card</div>
+<div class="shop-link">
+    <div class="shop-title">Shop<span class="custom-button-arrow"></span></div>
+    <div class="shop-description">
+        <p>고유의 제품을 만나보세요<br>
+        안티타로카드, 포스터, 캘린더 등</p>
+        <p>Discover our unique products<br>
+        <span style="font-family: 'Jost', sans-serif; font-weight: 500;">Anti-tarot cards, posters, calendars, and more</span></p>
+        <p class="shop-more"><a href="https://smartstore.naver.com/deepdown-studio/" target="_blank">More ></a></p>
+    </div>
+</div>    <div class="anti-tarot-card">Anti-Tarot Card</div>
     <div class="menu-items" id="menu-items">
         <div class="close-btn" id="close-menu"></div>
         <div class="menu-title">Deepdown Studio</div>
