@@ -298,22 +298,39 @@
             margin-bottom: 24px;
             color: black;
         }
-        .shop-link {
-            position: fixed;
-            left: calc(50% - 550px);
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            font-size: 48px;
-        }
-        .shop-link a {
-            color: white;
-            text-decoration: none;
-        }
+       .shop-link {
+    position: fixed;
+    left: calc(50% - 550px);
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+}
+
+.shop-link a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.shop-title {
+    margin-right: 10px;
+}
+
+.custom-button-arrow {
+    display: none;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transform: rotate(45deg);
+    transition: border-color 0.3s, transform 0.3s;
+}
         .custom-button-arrow {
             display: none;  /* 기본적으로 숨김 */
             width: 8px;
@@ -326,16 +343,7 @@
             vertical-align: middle;
         }
 
-        @media (max-width: 768px) {
-            .info-title {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .custom-button-arrow {
-                display: inline-block;  /* 모바일에서만 표시 */
-            }
-        }
+ 
         @media (max-width: 1024px) {
             .changing-image {
                 width: 500px;
@@ -441,9 +449,20 @@
             .scroll-more {
                 display: none;
             }
-            .shop-link {
-                font-size: 36px;
-            }
+           .shop-link {
+        font-size: 22px;
+        left: 20px;
+        width: calc(100% - 40px);
+        text-align: center;
+    }
+
+    .shop-link a {
+        justify-content: center;
+    }
+
+    .custom-button-arrow {
+        display: inline-block;
+    }
         }
         @media (max-width: 480px) {
             h1 {
@@ -507,7 +526,7 @@
         <img src="images/a_1253.png" alt="IT line Image">
     </div>
     <div class="it-line-title">
-        <span class="it-text">IT</span><br>
+        <span class="it-text">IT<br></span>
         <span class="line-text">Line</span><span class="mobile-arrow"></span>
     </div>
     <div class="it-line-description">
@@ -517,8 +536,12 @@
     </div>
 </div>
     </div>
-    <div class="shop-link"><a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a></div>
-    <div class="anti-tarot-card">Anti-Tarot Card</div>
+<div class="shop-link">
+    <a href="https://smartstore.naver.com/deepdown-studio/" target="_blank">
+        <span class="shop-title">Shop</span>
+        <span class="custom-button-arrow"></span>
+    </a>
+</div>    <div class="anti-tarot-card">Anti-Tarot Card</div>
     <div class="menu-items" id="menu-items">
         <div class="close-btn" id="close-menu"></div>
         <div class="menu-title">Deepdown Studio</div>
