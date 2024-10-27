@@ -107,12 +107,15 @@
             color: white;
             opacity: 0;
             transition: opacity 0.5s ease, transform 0.5s ease;
+            z-index: 2;
         }
         .info-title {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
             font-size: 48px;
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
         }
         .info-description {
             font-size: 16px;
@@ -156,6 +159,7 @@
             opacity: 0;
             transition: opacity 0.5s ease, transform 0.5s ease;
             color: #282828;
+            z-index: 2;
         }
         .it-line-image {
             width: 300px;
@@ -173,13 +177,17 @@
             font-weight: 700;
             font-size: 36px;
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
         }
         .it-line-description {
             font-size: 16px;
             line-height: 1.5;
             max-width: 400px;
         }
-        .scroll-more {
+        
+        /* Shop 링크 스타일 */
+        .shop-link {
             position: fixed;
             left: calc(50% - 550px);
             top: 50%;
@@ -190,21 +198,51 @@
             font-family: 'Jost', sans-serif;
             font-weight: 700;
             font-size: 48px;
+            z-index: 2;
         }
-        .anti-tarot-card {
-            position: absolute;
-            bottom: 150px;
-            left: 50%;
-            transform: translateX(-50%);
+        .shop-link a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        /* 2025 CAL 섹션 스타일 */
+        .cal-section {
+            position: fixed;
+            right: calc(50% - 560px);
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            z-index: 2;
+        }
+        .cal-title {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
-            font-size: 24px;
-            color: black;
-            text-align: center;
-            width: 100%;
-            opacity: 0;
-            transition: opacity 0.5s ease;
+            font-size: 36px;
+            color: #282828;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
         }
+
+        /* 화살표 스타일 */
+        .custom-button-arrow {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid currentColor;
+            border-right: 2px solid currentColor;
+            transform: rotate(45deg);
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+        .mobile-arrow {
+            display: none;
+        }
+
+        /* 메뉴 스타일 */
         .hamburger {
             width: 18px;
             height: 16px;
@@ -216,7 +254,7 @@
             left: 20px;
             top: 50%;
             transform: translateY(-50%);
-            z-index: 1000;
+            z-index: 999;
         }
         .hamburger span {
             width: 100%;
@@ -233,7 +271,7 @@
             transition: left 0.3s ease-in-out;
             padding: 40px;
             box-sizing: border-box;
-            z-index: 1001;
+            z-index: 1002;
             text-align: center;
         }
         .menu-items a {
@@ -245,7 +283,7 @@
             font-size: 15px;
             font-weight: 700;
         }
-        .menu-open {
+        .menu-items.menu-open {
             left: 0;
         }
         .dimmed-background {
@@ -256,7 +294,7 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
             display: none;
-            z-index: 1000;
+            z-index: 1001;
         }
         .close-btn {
             position: absolute;
@@ -269,6 +307,7 @@
             line-height: 18px;
             text-align: center;
             color: #414141;
+            z-index: 1003;
         }
         .close-btn::before,
         .close-btn::after {
@@ -293,49 +332,8 @@
             margin-bottom: 24px;
             color: black;
         }
-        .shop-link {
-            position: fixed;
-            left: calc(50% - 550px);
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            font-size: 48px;
-            z-index: 2;
-        }
-        .shop-link a {
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .custom-button-arrow {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-top: 2px solid currentColor;
-            border-right: 2px solid currentColor;
-            transform: rotate(45deg);
-            margin-left: 6px;
-            vertical-align: middle;
-        }
-        .mobile-arrow {
-            display: none;
-            width: 8px;
-            height: 8px;
-            border-top: 2px solid #282828;
-            border-right: 2px solid #282828;
-            transform: rotate(45deg);
-            margin-left: 6px;
-            vertical-align: middle;
-        }
-        .calendar-text {
-            white-space: nowrap;
-        }
+
+        /* 반응형 스타일 */
         @media (max-width: 1024px) {
             .changing-image {
                 width: 500px;
@@ -347,13 +345,10 @@
             .circular-image-container {
                 margin: 0 50px;
             }
-            .video-container {
-                margin-right: 150px;
-            }
-            .info-section, .scroll-more, .shop-link {
+            .info-section, .shop-link {
                 left: 20px;
             }
-            .it-line-group {
+            .it-line-group, .cal-section {
                 right: 20px;
             }
         }
@@ -374,26 +369,24 @@
                 left: 50%;
                 transform: translateX(-50%);
             }
-            .circular-image-container {
-                width: 60%;
-                padding-bottom: 60%;
-                margin: 20px 0;
-            }
             .info-title {
                 font-size: 22px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
             }
-            .custom-button-arrow {
-                display: inline-block !important;
+            .shop-link {
+                font-size: 22px;
+                left: 20px;
+                transform: translateY(-50%);
+            }
+            .shop-link a {
+                color: white;
+            }
+            .shop-link .custom-button-arrow {
                 border-color: white;
             }
             .it-line-group {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
                 text-align: center;
             }
             .it-line-image {
@@ -404,39 +397,22 @@
             .it-line-title {
                 font-size: 16.2px;
                 margin-bottom: 5px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 6px;
             }
             .mobile-arrow {
                 display: inline-block;
             }
-            .info-description, .it-line-description {
-                display: none;
+            .cal-section {
+                text-align: center;
+            }
+            .cal-title {
+                font-size: 16.2px;
+                justify-content: center;
             }
             h1 {
                 font-size: 33.6px;
             }
-            .hamburger {
-                left: 20px;
-            }
-            .scroll-more {
+            .info-description, .it-line-description {
                 display: none;
-            }
-            .shop-link {
-                font-size: 22px;
-                left: 50%;
-                transform: translateX(-50%) translateY(-50%);
-                width: auto;
-                padding: 0 20px;
-            }
-            .shop-link a {
-                justify-content: center;
-                gap: 6px;
-            }
-            .calendar-text br {
-                display: inline;
             }
         }
         @media (max-width: 480px) {
@@ -447,16 +423,10 @@
                 width: 500px;
                 height: 500px;
             }
-            .info-title, .it-line-title, .shop-link {
-                font-size: 22px;
-            }
         }
         @media (min-width: 1024px) {
             .hamburger {
                 left: 28px;
-            }
-            .calendar-text br {
-                display: none;
             }
         }
         @media (min-width: 1920px) {
@@ -477,7 +447,7 @@
             </div>
             <h1>Deepdown Studio</h1>
         </header>
-<div class="changing-image"></div>
+        <div class="changing-image"></div>
         <div class="gallery">
             <div class="circular-image-container higher-image">
                 <div class="circular-image">
@@ -485,10 +455,9 @@
                 </div>
             </div>
         </div>
-        <div class="description">
-            <p></p>
-        </div>
     </div>
+
+    <!-- About 섹션 -->
     <div class="info-section" id="about-section">
         <div class="info-title">About<span class="custom-button-arrow"></span></div>
         <div class="info-description">
@@ -496,9 +465,11 @@
             음악과 책 등에서 영감을 받고, 재미있는 것들을 만들고자 해요.</p>
             <p>Deepdown Studio creates a variety of products with a focus on illustration.<br>
             <span style="font-family: 'Jost', sans-serif; font-weight: 500;">I got inspiration from music and books, and my goal is to make fun and interesting things.</span></p>
-            <p class="info-more"><a href="about.html">More ></a></p>
+<p class="info-more"><a href="about.html">More ></a></p>
         </div>
     </div>
+
+    <!-- IT Line 섹션 -->
     <div class="it-line-group">
         <div class="it-line-image">
             <img src="images/a_1253.png" alt="IT line Image">
@@ -514,13 +485,21 @@
             <p class="info-more-it"><a href="https://www.figma.com/@itseodanggae" target="_blank">More ></a></p>
         </div>
     </div>
+
+    <!-- Shop 섹션 -->
     <div class="shop-link">
         <a href="https://smartstore.naver.com/deepdown-studio/" target="_blank">
             <span class="shop-title">Shop</span>
             <span class="custom-button-arrow"></span>
         </a>
     </div>
-    <div class="anti-tarot-card">Anti-Tarot Card</div>
+
+    <!-- 2025 CAL 섹션 -->
+    <div class="cal-section">
+        <div class="cal-title">2025 CAL<span class="custom-button-arrow"></span></div>
+    </div>
+
+    <!-- 메뉴 -->
     <div class="menu-items" id="menu-items">
         <div class="close-btn" id="close-menu"></div>
         <div class="menu-title">Deepdown Studio</div>
@@ -528,15 +507,17 @@
         <a href="about.html">About</a>
         <a href="https://smartstore.naver.com/deepdown-studio/" target="_blank">Shop</a>
         <a href="/card/index.html">Anti-Tarot Card</a>
-        <a href="/calendar/" class="calendar-text">2025<br class="mobile-only">CAL</a>
+        <a href="/calendar/">Calendar 2025</a>
+        <a href="https://www.instagram.com/deepdown_studio" target="_blank">Instagram</a>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const changingImage = document.querySelector('.changing-image');
             const aboutSection = document.querySelector('#about-section');
             const itlineGroup = document.querySelector('.it-line-group');
             const shopLink = document.querySelector('.shop-link');
-            const antiTarotCard = document.querySelector('.anti-tarot-card');
+            const calSection = document.querySelector('.cal-section');
             const hamburger = document.getElementById('hamburger-menu');
             const menuItems = document.getElementById('menu-items');
             const closeBtn = document.getElementById('close-menu');
@@ -598,7 +579,7 @@
                     aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
                 }
 
-                // IT line 섹션 애니메이션
+                // IT Line 섹션 애니메이션
                 if (scrollTop > (isMobile ? 300 : 530) && scrollTop <= (isMobile ? 500 : 730)) {
                     const opacity = Math.min((scrollTop - (isMobile ? 300 : 530)) / 200, 1);
                     const translateY = Math.max(50 - (scrollTop - (isMobile ? 300 : 530)) / 4, 0);
@@ -627,16 +608,20 @@
                     const opacity = Math.max(1 - (scrollTop - (isMobile ? 1000 : 1830)) / 100, 0);
                     shopLink.style.opacity = opacity;
                     shopLink.style.transform = 'translateY(-50%)';
+                    calSection.style.opacity = 1 - opacity;
+                    calSection.style.transform = `translateY(calc(-50% + ${50 - (scrollTop - (isMobile ? 1000 : 1830)) / 2}px))`;
                 } else {
                     shopLink.style.opacity = '0';
                     shopLink.style.transform = 'translateY(calc(-50% + 50px))';
                 }
 
-                // Anti-Tarot Card 애니메이션
-                if (scrollTop + windowHeight >= documentHeight - 1) {
-                    antiTarotCard.style.opacity = '1';
+                // 2025 CAL 섹션 애니메이션
+                if (scrollTop > (isMobile ? 1100 : 1930)) {
+                    calSection.style.opacity = '1';
+                    calSection.style.transform = 'translateY(-50%)';
                 } else {
-                    antiTarotCard.style.opacity = '0';
+                    calSection.style.opacity = '0';
+                    calSection.style.transform = 'translateY(calc(-50% + 50px))';
                 }
 
                 requestAnimationFrame(animate);
