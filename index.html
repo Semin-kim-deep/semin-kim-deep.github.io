@@ -107,7 +107,7 @@
             color: white;
             opacity: 0;
             transition: opacity 0.5s ease, transform 0.5s ease;
-            z-index: 2;
+            z-index: 700;
         }
         .info-title {
             font-family: 'Jost', sans-serif;
@@ -116,6 +116,10 @@
             margin-bottom: 20px;
             display: flex;
             align-items: center;
+        }
+        .info-title a {
+            color: white;
+            text-decoration: none;
         }
         .info-description {
             font-size: 16px;
@@ -141,15 +145,6 @@
             color: white;
             text-decoration: none;
         }
-        .info-more-it {
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            font-size: 24px;
-        }
-        .info-more-it a {
-            color: #282828;
-            text-decoration: none;
-        }
         .it-line-group {
             position: fixed;
             right: calc(50% - 560px);
@@ -159,7 +154,7 @@
             opacity: 0;
             transition: opacity 0.5s ease, transform 0.5s ease;
             color: #282828;
-            z-index: 2;
+            z-index: 700;
         }
         .it-line-image {
             width: 300px;
@@ -180,13 +175,32 @@
             display: flex;
             align-items: center;
         }
-        .it-line-description {
-            font-size: 16px;
-            line-height: 1.5;
-            max-width: 400px;
+        .it-line-title a {
+            color: #282828;
+            text-decoration: none;
         }
-        
-        /* Shop 링크 스타일 */
+        .cal-section {
+            position: fixed;
+            right: calc(50% - 560px);
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            z-index: 700;
+        }
+        .cal-title {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 36px;
+            color: #282828;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .cal-title a {
+            color: #282828;
+            text-decoration: none;
+        }
         .shop-link {
             position: fixed;
             left: calc(50% - 550px);
@@ -198,7 +212,7 @@
             font-family: 'Jost', sans-serif;
             font-weight: 700;
             font-size: 48px;
-            z-index: 2;
+            z-index: 700;
         }
         .shop-link a {
             color: white;
@@ -206,30 +220,8 @@
             display: flex;
             align-items: center;
         }
-
-        /* 2025 CAL 섹션 스타일 */
-        .cal-section {
-            position: fixed;
-            right: calc(50% - 560px);
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            z-index: 2;
-        }
-        .cal-title {
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            font-size: 36px;
-            color: #282828;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-
-        /* 화살표 스타일 */
         .custom-button-arrow {
-            display: inline-block;
+            display: none;
             width: 8px;
             height: 8px;
             border-top: 2px solid currentColor;
@@ -240,9 +232,17 @@
         }
         .mobile-arrow {
             display: none;
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid #282828;
+            border-right: 2px solid #282828;
+            transform: rotate(45deg);
+            margin-left: 6px;
+            vertical-align: middle;
         }
-
-        /* 메뉴 스타일 */
+        .cal-br {
+            display: none;
+        }
         .hamburger {
             width: 18px;
             height: 16px;
@@ -254,7 +254,7 @@
             left: 20px;
             top: 50%;
             transform: translateY(-50%);
-            z-index: 999;
+            z-index: 950;
         }
         .hamburger span {
             width: 100%;
@@ -271,8 +271,10 @@
             transition: left 0.3s ease-in-out;
             padding: 40px;
             box-sizing: border-box;
-            z-index: 1002;
-            text-align: center;
+            z-index: 900;
+        }
+        .menu-items.menu-open {
+            left: 0;
         }
         .menu-items a {
             display: block;
@@ -283,9 +285,6 @@
             font-size: 15px;
             font-weight: 700;
         }
-        .menu-items.menu-open {
-            left: 0;
-        }
         .dimmed-background {
             position: fixed;
             top: 0;
@@ -294,7 +293,7 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
             display: none;
-            z-index: 1001;
+            z-index: 800;
         }
         .close-btn {
             position: absolute;
@@ -307,7 +306,7 @@
             line-height: 18px;
             text-align: center;
             color: #414141;
-            z-index: 1003;
+            z-index: 950;
         }
         .close-btn::before,
         .close-btn::after {
@@ -333,7 +332,6 @@
             color: black;
         }
 
-        /* 반응형 스타일 */
         @media (max-width: 1024px) {
             .changing-image {
                 width: 500px;
@@ -372,6 +370,9 @@
             .info-title {
                 font-size: 22px;
             }
+            .custom-button-arrow {
+                display: inline-block;
+            }
             .shop-link {
                 font-size: 22px;
                 left: 20px;
@@ -398,15 +399,18 @@
                 font-size: 16.2px;
                 margin-bottom: 5px;
             }
-            .mobile-arrow {
-                display: inline-block;
-            }
             .cal-section {
                 text-align: center;
             }
             .cal-title {
                 font-size: 16.2px;
                 justify-content: center;
+            }
+            .cal-br {
+                display: inline;
+            }
+            .mobile-arrow {
+                display: inline-block;
             }
             h1 {
                 font-size: 33.6px;
@@ -459,30 +463,31 @@
 
     <!-- About 섹션 -->
     <div class="info-section" id="about-section">
-        <div class="info-title">About<span class="custom-button-arrow"></span></div>
+        <div class="info-title">
+            <a href="about.html">About</a><span class="custom-button-arrow"></span>
+        </div>
         <div class="info-description">
             <p>딥다운 스튜디오는 일러스트를 중심으로 다양한 제품을 만들고 있어요.<br>
             음악과 책 등에서 영감을 받고, 재미있는 것들을 만들고자 해요.</p>
             <p>Deepdown Studio creates a variety of products with a focus on illustration.<br>
             <span style="font-family: 'Jost', sans-serif; font-weight: 500;">I got inspiration from music and books, and my goal is to make fun and interesting things.</span></p>
-<p class="info-more"><a href="about.html">More ></a></p>
         </div>
     </div>
-
-    <!-- IT Line 섹션 -->
+<!-- IT Line 섹션 -->
     <div class="it-line-group">
         <div class="it-line-image">
             <img src="images/a_1253.png" alt="IT line Image">
         </div>
         <div class="it-line-title">
-            <span class="it-text">IT</span>
-            <span class="line-text">Line</span>
-            <span class="mobile-arrow"></span>
+            <a href="https://www.figma.com/@itseodanggae" target="_blank">
+                <span class="it-text">IT </span>
+                <span class="line-text">Line</span>
+                <span class="mobile-arrow"></span>
+            </a>
         </div>
         <div class="it-line-description">
             <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. </p>
             <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' </span></p>
-            <p class="info-more-it"><a href="https://www.figma.com/@itseodanggae" target="_blank">More ></a></p>
         </div>
     </div>
 
@@ -496,7 +501,12 @@
 
     <!-- 2025 CAL 섹션 -->
     <div class="cal-section">
-        <div class="cal-title">2025 CAL<span class="custom-button-arrow"></span></div>
+        <div class="cal-title">
+            <a href="/calendar/">
+                2025<br class="cal-br">CAL
+                <span class="mobile-arrow"></span>
+            </a>
+        </div>
     </div>
 
     <!-- 메뉴 -->
@@ -600,26 +610,24 @@
                     itlineGroup.style.transform = 'translateY(calc(-50% + 50px))';
                 }
 
-                // Shop 링크 애니메이션
+                // Shop 링크와 CAL 섹션 애니메이션
                 if (scrollTop > (isMobile ? 800 : 1330) && scrollTop <= (isMobile ? 1000 : 1830)) {
                     shopLink.style.opacity = '1';
                     shopLink.style.transform = 'translateY(-50%)';
-                } else if (scrollTop > (isMobile ? 1000 : 1830) && scrollTop <= (isMobile ? 1100 : 1930)) {
-                    const opacity = Math.max(1 - (scrollTop - (isMobile ? 1000 : 1830)) / 100, 0);
-                    shopLink.style.opacity = opacity;
-                    shopLink.style.transform = 'translateY(-50%)';
-                    calSection.style.opacity = 1 - opacity;
-                    calSection.style.transform = `translateY(calc(-50% + ${50 - (scrollTop - (isMobile ? 1000 : 1830)) / 2}px))`;
-                } else {
+                    
+                    // Shop이 50% 정도 표시될 때 CAL도 함께 나타나도록
+                    if (scrollTop > (isMobile ? 900 : 1580)) {
+                        calSection.style.opacity = '1';
+                        calSection.style.transform = 'translateY(-50%)';
+                    }
+                } else if (scrollTop > (isMobile ? 1000 : 1830)) {
                     shopLink.style.opacity = '0';
                     shopLink.style.transform = 'translateY(calc(-50% + 50px))';
-                }
-
-                // 2025 CAL 섹션 애니메이션
-                if (scrollTop > (isMobile ? 1100 : 1930)) {
                     calSection.style.opacity = '1';
                     calSection.style.transform = 'translateY(-50%)';
                 } else {
+                    shopLink.style.opacity = '0';
+                    shopLink.style.transform = 'translateY(calc(-50% + 50px))';
                     calSection.style.opacity = '0';
                     calSection.style.transform = 'translateY(calc(-50% + 50px))';
                 }
