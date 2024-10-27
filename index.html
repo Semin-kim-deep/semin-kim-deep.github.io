@@ -117,10 +117,6 @@
             display: flex;
             align-items: center;
         }
-        .info-title a {
-            color: white;
-            text-decoration: none;
-        }
         .info-description {
             font-size: 16px;
             line-height: 1.5;
@@ -172,12 +168,40 @@
             font-weight: 700;
             font-size: 36px;
             margin-bottom: 20px;
-            display: flex;
-            align-items: center;
         }
-        .it-line-title a {
+        .it-line-description {
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 400px;
+        }
+        .info-more-it {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        .info-more-it a {
             color: #282828;
             text-decoration: none;
+        }
+        .shop-link {
+            position: fixed;
+            left: calc(50% - 550px);
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            z-index: 700;
+        }
+        .shop-link a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         .cal-section {
             position: fixed;
@@ -201,25 +225,6 @@
             color: #282828;
             text-decoration: none;
         }
-        .shop-link {
-            position: fixed;
-            left: calc(50% - 550px);
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            font-size: 48px;
-            z-index: 700;
-        }
-        .shop-link a {
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
         .custom-button-arrow {
             display: none;
             width: 8px;
@@ -240,9 +245,6 @@
             margin-left: 6px;
             vertical-align: middle;
         }
-        .cal-br {
-            display: none;
-        }
         .hamburger {
             width: 18px;
             height: 16px;
@@ -254,7 +256,7 @@
             left: 20px;
             top: 50%;
             transform: translateY(-50%);
-            z-index: 950;
+            z-index: 900;
         }
         .hamburger span {
             width: 100%;
@@ -271,7 +273,8 @@
             transition: left 0.3s ease-in-out;
             padding: 40px;
             box-sizing: border-box;
-            z-index: 900;
+            z-index: 1100;
+            text-align: center;
         }
         .menu-items.menu-open {
             left: 0;
@@ -293,7 +296,7 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
             display: none;
-            z-index: 800;
+            z-index: 1000;
         }
         .close-btn {
             position: absolute;
@@ -306,7 +309,6 @@
             line-height: 18px;
             text-align: center;
             color: #414141;
-            z-index: 950;
         }
         .close-btn::before,
         .close-btn::after {
@@ -406,9 +408,6 @@
                 font-size: 16.2px;
                 justify-content: center;
             }
-            .cal-br {
-                display: inline;
-            }
             .mobile-arrow {
                 display: inline-block;
             }
@@ -463,31 +462,26 @@
 
     <!-- About 섹션 -->
     <div class="info-section" id="about-section">
-        <div class="info-title">
-            <a href="about.html">About</a><span class="custom-button-arrow"></span>
-        </div>
+        <div class="info-title">About<span class="custom-button-arrow"></span></div>
         <div class="info-description">
             <p>딥다운 스튜디오는 일러스트를 중심으로 다양한 제품을 만들고 있어요.<br>
             음악과 책 등에서 영감을 받고, 재미있는 것들을 만들고자 해요.</p>
-            <p>Deepdown Studio creates a variety of products with a focus on illustration.<br>
+<p>Deepdown Studio creates a variety of products with a focus on illustration.<br>
             <span style="font-family: 'Jost', sans-serif; font-weight: 500;">I got inspiration from music and books, and my goal is to make fun and interesting things.</span></p>
+            <p class="info-more"><a href="about.html">More ></a></p>
         </div>
     </div>
-<!-- IT Line 섹션 -->
+
+    <!-- IT Line 섹션 -->
     <div class="it-line-group">
         <div class="it-line-image">
             <img src="images/a_1253.png" alt="IT line Image">
         </div>
-        <div class="it-line-title">
-            <a href="https://www.figma.com/@itseodanggae" target="_blank">
-                <span class="it-text">IT </span>
-                <span class="line-text">Line</span>
-                <span class="mobile-arrow"></span>
-            </a>
-        </div>
+        <div class="it-line-title">IT Line<span class="mobile-arrow"></span></div>
         <div class="it-line-description">
             <p>AI를 활용하여 IT제품을 만들고 있어요. 쉽지 않네요. 저는 IT업계에 종사하고 있어 서당개다운 지식을 가지고 있기도 해요. </p>
             <p><span style="font-family: 'Jost', sans-serif; font-weight: 500;">I'm using AI to develop IT products, and it's not easy. Since I work in the IT industry, I have some knowledge like an 'old dog learning new tricks (Korean proverb).' </span></p>
+            <p class="info-more-it"><a href="https://www.figma.com/@itseodanggae" target="_blank">More ></a></p>
         </div>
     </div>
 
@@ -502,10 +496,7 @@
     <!-- 2025 CAL 섹션 -->
     <div class="cal-section">
         <div class="cal-title">
-            <a href="/calendar/">
-                2025<br class="cal-br">CAL
-                <span class="mobile-arrow"></span>
-            </a>
+            <a href="/calendar/">2025 CAL<span class="mobile-arrow"></span></a>
         </div>
     </div>
 
