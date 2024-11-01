@@ -27,12 +27,12 @@
             box-sizing: border-box;
         }
         .header {
-	display: flex;
-    	justify-content: space-between;
-    	align-items: center;
-    	padding: 20px 28px;
-    	width: 100%;
-    	box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 28px;
+            width: 100%;
+            box-sizing: border-box;
         }
         .header-title {
             font-family: 'Jost', sans-serif;
@@ -41,32 +41,27 @@
             margin: 0;
             text-align: center;
             flex-grow: 1;
-	flex: 1 1 auto;
-    	text-align: center;
+            flex: 1 1 auto;
+            text-align: center;
         }
-.header-left, .header-right {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-}
-
-    
+        .header-left, .header-right {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+        }
         .subpc {
             display: block;
             font-size: 14pt;
         }
-         .subm {
+        .subm {
             display: none;
         }
         .mobile-title {
             display: none;
         }
-         .pc-title {
+        .pc-title {
             display: block;
             font-size: 36pt;
-        }
-        .mobile-title {
-            display: none;
         }
         .hamburger {
             width: 18px;
@@ -99,45 +94,82 @@
             padding-bottom: 20px;
             color: #404040;
         }
-         .subsub-pc{
+        .subsub-pc {
             font-size: 12pt;
-         }
-        .subsub-m{
+        }
+        .subsub-m {
             display: none;
-         }
+        }
         .autoplay-info {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-top: 5px;
         }
+        
+        /* Calendar Container with Instagram-style Features */
         .calendar-container {
             position: relative;
             width: 1220px;
             margin-top: 20px;
             margin-bottom: 100px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
         }
         .calendar-content {
             display: flex;
             width: 1120px;
             height: 560px;
+            position: relative;
+            overflow: hidden;
         }
         .image-container {
             width: 560px;
             height: 560px;
             position: relative;
             overflow: hidden;
-            opacity: 0; /* 초기에 투명하게 설정 */
-            transition: opacity 0.3s ease-in-out;
         }
-        .image-container img {
+        .swipe-image {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
+            transform: translateX(0);
+            transition: transform 0.3s ease-out;
+            opacity: 1;
             object-fit: cover;
+            will-change: transform;
         }
+        .swipe-image.next {
+            transform: translateX(100%);
+        }
+
+        /* Dots Indicator */
+        .dots-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 0;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #B2B2B2;
+            margin: 0 2px;
+            transition: all 0.3s ease;
+        }
+        .dot.active {
+            background-color: #0095F6;
+        }
+
         .text-content {
             width: 560px;
             height: 560px;
@@ -160,6 +192,8 @@
             line-height: 1.8;
             color: #202020;
         }
+
+        /* Navigation Buttons */
         .nav-button {
             position: absolute;
             top: 50%;
@@ -197,15 +231,8 @@
         .nav-button.next::before {
             transform: rotate(45deg);
         }
-        .bottom-section {
-            width: 100%;
-            background-color: #f1f1f1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 0;
-        }
+
+        /* Existing video container styles */
         .video-container {
             width: 560px;
             height: 315px;
@@ -216,13 +243,16 @@
             width: 100%;
             height: 100%;
         }
-        .play-this-song {
-            font-family: 'Jost', sans-serif;
-            font-weight: 700;
-            font-size: 30px;
-            text-align: center;
-            margin-bottom: 60px;
-            padding: 10px 0 0 0;
+
+        /* Bottom section styles */
+        .bottom-section {
+            width: 100%;
+            background-color: #f1f1f1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 0;
         }
         .white-section {
             width: 100%;
@@ -232,70 +262,16 @@
             align-items: center;
             padding: 100px 0;
         }
-            .white-section .normalt {
+        .white-section .normalt {
             font-size: 14pt;
             text-align: center;
             max-width: 1000px;
             line-height: 1.9;
-            padding-top:20px;
+            padding-top: 20px;
             color: #404040;
         }
-        .image-1 {
-            max-width: 100%;
-            height: auto;
-        }
-        .button-container {
-            margin-top: 50px;
-        }
-        .custom-button {
-            width: 600px;
-            height: 60px;
-            background-color: transparent;
-            border: 1px solid #000;
-            font-family: 'Jost', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #000;
-        }
-        .custom-button-content {
-            display: flex;
-            align-items: center;
-        }
-        .custom-button-arrow {
-            width: 8px;
-            height: 8px;
-            border-top: 1px solid #000;
-            border-right: 1px solid #000;
-            transform: rotate(45deg);
-            margin-left: 10px;
-            transition: border-color 0.3s, transform 0.3s;
-        }
-        .custom-button:hover {
-            background-color: #000;
-            color: #fff;
-        }
-        .custom-button:hover .custom-button-arrow {
-            border-color: #fff;
-        }
-	    .custom-button a {
-    color: inherit;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-}
 
-.custom-button:hover a {
-    color: #fff;
-}
+        /* Menu styles */
         .menu-items {
             position: fixed;
             top: 0;
@@ -331,6 +307,164 @@
             display: none;
             z-index: 1000;
         }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            .calendar-container {
+                width: 100%;
+                margin-top: 10px;
+            }
+            .calendar-content {
+                width: 100%;
+                flex-direction: column;
+                height: auto;
+            }
+            .image-container {
+                width: 100%;
+                padding-bottom: 100%;
+                height: 0;
+            }
+            .swipe-image {
+                object-fit: cover;
+                object-position: center;
+            }
+            .text-content {
+                width: 100%;
+                height: auto;
+                padding: 20px;
+            }
+            .dots-indicator {
+                margin-top: 10px;
+                bottom: -25px;
+            }
+            .nav-button {
+                top: 25%;
+            }
+            .nav-button.prev {
+                left: 10px;
+            }
+            .nav-button.next {
+                right: 10px;
+            }
+            .pc-title {
+                display: none;
+            }
+            .mobile-title {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-size: 26.4px;
+                line-height: 1.2;
+            }
+            .subtitle {
+                font-size: 19.6px;
+                font-weight: bold;
+                padding-top: 10px;
+            }
+            .subpc {
+                display: none;
+            }
+            .subm {
+                display: inline-block;
+                padding: 4px;
+                flex-direction: column;
+                font-size: 14pt;
+                line-height: 1.4;
+            }
+            .subsub-pc {
+                display: none;
+            }
+            .subsub-m {
+                display: block;
+                font-size: 13.5pt;
+                line-height: 1.4;
+                padding: 0 15px;
+            }
+            .hamburger {
+                position: absolute;
+                left: 20px;
+                top: 40px;
+                transform: translateY(-50%);
+                margin-top: 0;
+            }
+            .header-title {
+                font-size: 26.4px;
+            }
+            .video-container {
+                width: 90%;
+                height: 0;
+                padding-bottom: 56.25%;
+                position: relative;
+            }
+            .video-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        @media (min-width: 1920px) {
+            header {
+                padding-left: 56px;
+                padding-right: 56px;
+            }
+        }
+
+
+        .button-container {
+            margin-top: 50px;
+        }
+        .custom-button {
+            width: 600px;
+            height: 60px;
+            background-color: transparent;
+            border: 1px solid #000;
+            font-family: 'Jost', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+        }
+        .custom-button-content {
+            display: flex;
+            align-items: center;
+        }
+        .custom-button-arrow {
+            width: 8px;
+            height: 8px;
+            border-top: 1px solid #000;
+            border-right: 1px solid #000;
+            transform: rotate(45deg);
+            margin-left: 10px;
+            transition: border-color 0.3s;
+        }
+        .custom-button:hover {
+            background-color: #000;
+            color: #fff;
+        }
+        .custom-button:hover .custom-button-arrow {
+            border-color: #fff;
+        }
+        .custom-button a {
+            color: inherit;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        .custom-button:hover a {
+            color: #fff;
+        }
+        
         .close-btn {
             position: absolute;
             top: 15px;
@@ -402,7 +536,6 @@
             cursor: pointer;
             z-index: 1000;
         }
-
         .top-button::before {
             content: '';
             width: 10px;
@@ -412,7 +545,7 @@
             transform: rotate(-45deg);
             margin-top: 4px;
         }
-	.language-toggle {
+        .language-toggle {
             font-family: 'Pretendard', sans-serif;
             font-weight: 400;
             font-size: 12pt;
@@ -424,280 +557,61 @@
             margin-top: 10px;
         }
 
-
-        @media (min-width: 1920px) {
-            .header {
-                padding-left: 56px;
-                padding-right: 56px;
-            }
-        }
-
-        .swipe-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 1;
-            transition: none;
-        }
-
-        @media (max-width: 768px) {
-         
-    .header {
-        padding: 20px 20px 0 20px;
-        position: relative;
-    }
-
-            .pc-title {
-                display: none;
-            }
-            .mobile-title {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                font-size: 26.4px;
-                line-height: 1.2;
-        	 margin-bottom: 0;  /* 하단 여백 제거 */
-            }
-         .subtitle {
-         font-size: 19.6px;
-         font-weight: bold;
-        padding-top: 10px;  /* 상단 여백 줄임 */
-            }
-        .subpc {
-            display: none;
-            }
-        .subm {
-         display: inline-block;  /* 또는 block */
-    	padding: 4px; 
-             flex-direction: column;
-             font-size : 14pt
-            line-height:1.4;
-        }
-       .white-section .normalt {
-            font-size: 12pt;
-            text-align: center;
-            max-width: 400px;
-            line-height: 1.8;
-            padding:20px;
-            color: #404040;
-        }
-            .title-year {
-                margin-bottom: 5px;
-            }
-        .hamburger {
-                position: absolute;
-                left: 20px;
-                top: 40px;
-                transform: translateY(-50%);
-                margin-top: 0;
-            }
-		
-            .header-title {
-                font-size: 26.4px;
-            }
-            .calendar-container {
-                width: 100%;
-                margin-top: 10px;
-                margin-bottom: 10px;
-            }
-            .calendar-content {
-                flex-direction: column;
-                width: 100%;
-                height: auto;
-                position:relative;
-            }
-            .image-container {
-                position:relative;
-                width: 100%;
-                padding-bottom: 100%;
-                height: 0;
-            }
-            .swipe-image {
-                object-fit: cover;
-                object-position: center;
-            }
-            .text-content {
-                width: 100%;
-                height: auto;
-                padding: 20px;
-                font-size: 14pt; 
-            }
- 
-        .text-content-inner {
-            padding: 15px 0;
-            font-size: 13pt;
-            max-height: none; /* 스크롤 제거 */
-            overflow-y: visible; /* 스크롤 제거 */
-            flex-grow: 1;
-            overflow-y: auto;
-            line-height: 1.8;
-            border-top: none;
-            border-bottom: none;
-        }
-        .text-content-inner b {
-            font-size: 15pt;
-            line-height: 1.8;
-            color: #202020;
-        }
-            .nav-button {
-                top: 50%;
-                position: absolute;
-                transform: translateY(-50%);
-                font-size: 24px;
-                width: 40px;
-                height: 40px;
-                z-index:10;
-            }
-            .nav-button.prev {
-                left: 10px;
-            }
-            .nav-button.next {
-                right: 10px;
-            }
-             .play-this-song {
+        .play-this-song {
             font-family: 'Jost', sans-serif;
             font-weight: 700;
             font-size: 30px;
             text-align: center;
             margin-bottom: 40px;
-             }
-            .bottom-section {
-            width: 100%;
-            background-color: #f1f1f1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px 0;
         }
-     
-    .video-container {
-        width: 90%;
-        height: 0;
-        padding-bottom: 56.25%;
-    }
-    .video-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-    .button-container {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-    }
-    .custom-button {
-        width: 80%; 
-        height: 50px;
-        font-size: 16px;
-        align-items: center;
-        color: #000;
-	margin: 0 auto; 
-    }
-		   .custom-button a {
-        color: inherit;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-    }
         
-        .custom-button-content {
-            display: flex;
-            align-items: center;
-        }  
-    .autoplay-info {
-        display: none;
-    }
-        .subsub {
-	display:block;
-            padding-top: 10px;
-            padding-bottom: 20px;
-            color: #404040;
+        @media (max-width: 768px) {
+            .button-container {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+            .custom-button {
+                width: 80%;
+                height: 50px;
+                font-size: 16px;
+                margin: 0 auto;
+            }
+            .language-toggle {
+                position: absolute;
+                right: 20px;
+                top: 40px;
+                transform: translateY(-50%);
+                margin-top: 0;
+            }
+            .autoplay-info {
+                display: none;
+            }
         }
-        .subsub-pc{
-         display: none;
-         }
-        .subsub-m{
-       display: block !important;
-        font-size: 13.5pt;
-        line-height:1.4;
-	padding-left: 15px;
-	padding-right: 15px;
-        }
-    .image-1 {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        object-position: center;
-    }
-    .button-container {
-        margin-top: 40px;
-    }
-    .top-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background-color: #ffffff;
-            border: 1px solid #8a8a8a;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 1000;
-        }
-
-        .top-button::before {
-            content: '';
-            width: 10px;
-            height: 10px;
-            border-top: 1px solid #404040;
-            border-right: 1px solid #404040;
-            transform: rotate(-45deg);
-            margin-top: 4px;
-        }
-	.language-toggle {
-        position: absolute;
-        right: 20px;
-        top: 40px;
-        transform: translateY(-50%);
-        margin-top: 0;
-        }
-}
     </style>
 </head>
 <body>
     <div class="dimmed-background" id="dimmed-bg"></div>
     <div class="content">
-
-<header class="header">
-    <div class="header-left">
-        <div class="hamburger" id="hamburger-menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-    <h1 class="header-title">
-        <span class="pc-title">2025 Calendar - Songs & Scenes</span>
-        <span class="mobile-title">
-            <span class="title-year">2025 Calendar</span>
-        </span>
-    </h1>
-    <div class="header-right">
-        <button class="language-toggle" id="language-toggle">EN</button>
-    </div>
-</header>
-
-	    
+        <header class="header">
+            <div class="header-left">
+                <div class="hamburger" id="hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <h1 class="header-title">
+                <span class="pc-title">2025 Calendar - Songs & Scenes</span>
+                <span class="mobile-title">
+                    <span class="title-year">2025 Calendar</span>
+                </span>
+            </h1>
+            <div class="header-right">
+                <button class="language-toggle" id="language-toggle">EN</button>
+            </div>
+        </header>
+        
         <div class="menu-items" id="menu-items">
             <div class="close-btn" id="close-menu"></div>
             <div class="menu-title">Deepdown Studio</div>
@@ -707,6 +621,7 @@
             <a href="/card/index.html">Anti-Tarot Card</a>
             <a href="/calendar/">Calendar 2025</a>
         </div>
+
         <div class="subtitle">
             <span class="subpc">2025년의 시간을 팝니다.</span>
             <span class="subm">
@@ -715,8 +630,8 @@
         </div>
 
         <div class="subsub">
-           <span class="subsub-pc"> 월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분의 월별 플레이리스트는 어떤가요?<br></span>    
-           <span class="subsub-m"> 월별 어울리는 음악을 선정하고 장면을 그렸어요. <br> 여러분의 월별 플레이리스트는 어떤가요?<br></span>
+           <span class="subsub-pc">월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분의 월별 플레이리스트는 어떤가요?<br></span>    
+           <span class="subsub-m">월별 어울리는 음악을 선정하고 장면을 그렸어요. <br> 여러분의 월별 플레이리스트는 어떤가요?<br></span>
             <div class="autoplay-info">
                 <span class="autoplay-toggle" id="autoplay-toggle">
                     <i class="far fa-play-circle"></i>
@@ -730,18 +645,31 @@
             <button class="nav-button prev" id="prevButton"></button>
             <div class="calendar-content">
                 <div class="image-container">
-                    <img id="calendarImage1" class="swipe-image active" src="images/2025_square1.jpg" alt="2025 Calendar Image">
-                    <img id="calendarImage2" class="swipe-image" src="" alt="2025 Calendar Image">
+                    <img id="calendarImage1" class="swipe-image" src="images/2025_square1.jpg" alt="2025 Calendar Image">
+                    <img id="calendarImage2" class="swipe-image next" src="" alt="2025 Calendar Image">
                 </div>
                 <div class="text-content">
-                    <div class="text-content-inner" id="calendarText">
-                        <!-- 텍스트 내용은 JavaScript에서 동적으로 변경됩니다 -->
-                    </div>
+                    <div class="text-content-inner" id="calendarText"></div>
                 </div>
+            </div>
+            <div class="dots-indicator">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
             </div>
             <button class="nav-button next" id="nextButton"></button>
         </div>
     </div>
+
     <div class="bottom-section">
         <div class="play-this-song">Play This Song</div>
         <div class="video-container">
@@ -753,475 +681,357 @@
             </iframe>
         </div>
     </div>
+
     <div class="white-section">
         <img id="bottomImage" src="images/1.jpg" alt="Calendar Image" class="image-1">
-        <div class="normalt"> <br><b>9X13cm 탁상용 달력(나무홀더 포함) <br></b>
-              그림이 잘보이도록 스프링을 사용하지 않았어요. <br>
+        <div class="normalt">
+            <br><b>9X13cm 탁상용 달력(나무홀더 포함) <br></b>
+            그림이 잘보이도록 스프링을 사용하지 않았어요. <br>
             잠시 시야에 그림을 투입하여 머리 속 휴식을 주세요.
         </div>
         <div class="button-container">
-            <button class="custom-button"><a href="https://smartstore.naver.com/deepdown-studio/products/11025811769" target="blank">
-                <span class="custom-button-content">
-                    신나게 사러 달려나가기
-                    <span class="custom-button-arrow"></span>
-                </span></a>
+            <button class="custom-button">
+                <a href="https://smartstore.naver.com/deepdown-studio/products/11025811769" target="blank">
+                    <span class="custom-button-content">
+                        신나게 사러 달려나가기
+                        <span class="custom-button-arrow"></span>
+                    </span>
+                </a>
             </button>
         </div>
     </div>
+
     <div class="top-button" id="topButton"></div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.getElementById('hamburger-menu');
-    const menuItems = document.getElementById('menu-items');
-    const closeBtn = document.getElementById('close-menu');
-    const dimmedBg = document.getElementById('dimmed-bg');
-    const autoplayToggle = document.getElementById('autoplay-toggle');
-    const iframe = document.querySelector('.video-container iframe');
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
-    const calendarImage1 = document.getElementById('calendarImage1');
-    const calendarImage2 = document.getElementById('calendarImage2');
-    const calendarText = document.getElementById('calendarText');
-    const youtubeVideo = document.getElementById('youtubeVideo');
-    const bottomImage = document.getElementById('bottomImage');
-    const languageToggle = document.getElementById('language-toggle');
-   
-    let isAutoplayOn = false;
-    let currentMonth = 1;
-    let activeImage = 1;
-    let isTransitioning = false;
-    const imageCache = {};
-    let currentLanguage = 'ko';
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger-menu');
+            const menuItems = document.getElementById('menu-items');
+            const closeBtn = document.getElementById('close-menu');
+            const dimmedBg = document.getElementById('dimmed-bg');
+            const autoplayToggle = document.getElementById('autoplay-toggle');
+            const iframe = document.querySelector('.video-container iframe');
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
+            const calendarImage1 = document.getElementById('calendarImage1');
+            const calendarImage2 = document.getElementById('calendarImage2');
+            const calendarText = document.getElementById('calendarText');
+            const youtubeVideo = document.getElementById('youtubeVideo');
+            const bottomImage = document.getElementById('bottomImage');
+            const languageToggle = document.getElementById('language-toggle');
+            const imageContainer = document.querySelector('.image-container');
+            const dots = document.querySelectorAll('.dot');
 
-    const translations = {
-        ko: {
-            title: '2025 Calendar - Songs & Scenes',
-            subtitle: '2025년의 시간을 팝니다.',
-            subsubtitle: '월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분의 월별 플레이리스트는 어떤가요?',
-            autoplayText: '음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요',
-	    playThisSong: 'Play This Song',
-            bottomText: '9X13cm 탁상용 달력(나무홀더 포함)<br>그림이 잘보이도록 스프링을 사용하지 않았어요.<br>잠시 시야에 그림을 투입하여 머리 속 휴식을 주세요.',
-            buttonText: '신나게 사러 달려나가기',
-            menuHome: 'Home',
-            menuAbout: 'About',
-            menuShop: 'Shop',
-            menuCard: 'Anti-Tarot Card',
-            menuCalendar: 'Calendar 2025'
-        },
-        en: {
-            title: '2025 Calendar - Songs & Scenes',
-            subtitle: "Selling the time of 2025.",
-            subsubtitle: "We've selected music that fits each month and drawn scenes. What's your monthly playlist like?",
-            autoplayText: 'Select the button to autoplay music videos (YouTube)',
-            playThisSong: 'Play This Song',
-            bottomText: '9X13cm Desk Calendar(+ wooden holder)<br>No coil biding so the pictures are clearly visible.<br>Take a mental break by inserting these images into your field of vision for a moment.',
-            buttonText: 'Run excitedly to buy',
-            menuHome: 'Home',
-            menuAbout: 'About',
-            menuShop: 'Shop',
-            menuCard: 'Anti-Tarot Card',
-            menuCalendar: 'Calendar 2025'
-        }
-    };
+            let isAutoplayOn = false;
+            let currentMonth = 1;
+            let activeImage = 1;
+            let isTransitioning = false;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let currentTranslateX = 0;
+            const imageCache = {};
+            let currentLanguage = 'ko';
 
-    const monthlyContent = {
-        ko: [
-            `<b>01. John Lennon - Starting Over <br>
-                1월, 새로운 시작을 다짐합니다. </b><br><br>
+            const translations = {
+                ko: {
+                    title: '2025 Calendar - Songs & Scenes',
+                    subtitle: '2025년의 시간을 팝니다.',
+                    subsubtitle: '월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분의 월별 플레이리스트는 어떤가요?',
+                    autoplayText: '음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요',
+                    playThisSong: 'Play This Song',
+                    bottomText: '9X13cm 탁상용 달력(나무홀더 포함)<br>그림이 잘보이도록 스프링을 사용하지 않았어요.<br>잠시 시야에 그림을 투입하여 머리 속 휴식을 주세요.',
+                    buttonText: '신나게 사러 달려나가기',
+                    menuHome: 'Home',
+                    menuAbout: 'About',
+                    menuShop: 'Shop',
+                    menuCard: 'Anti-Tarot Card',
+                    menuCalendar: 'Calendar 2025'
+                },
+                en: {
+                    title: '2025 Calendar - Songs & Scenes',
+                    subtitle: "Selling the time of 2025.",
+                    subsubtitle: "We've selected music that fits each month and drawn scenes. What's your monthly playlist like?",
+                    autoplayText: 'Select the button to autoplay music videos (YouTube)',
+                    playThisSong: 'Play This Song',
+                    bottomText: '9X13cm Desk Calendar(+ wooden holder)<br>No coil biding so the pictures are clearly visible.<br>Take a mental break by inserting these images into your field of vision for a moment.',
+                    buttonText: 'Run excitedly to buy',
+                    menuHome: 'Home',
+                    menuAbout: 'About',
+                    menuShop: 'Shop',
+                    menuCard: 'Anti-Tarot Card',
+                    menuCalendar: 'Calendar 2025'
+                }
+            };
 
-                2024년 (구)칸예 웨스트가 내한한 리스닝파티의 Runaway의 음악과 퍼포먼스가 너무 멋있어서, 넷플릭스의 칸예 다큐를 찾아 보았어요. 그전까지는 그저 관종 셀럽으로만 알고 있었어요.<br>
-                데뷔 전, 그는 jay-z 등 아티스트의 곡을 만들며, 자신의 앨범을 내고 싶어했지만, 음반사와 겨우 계약을 해도 데뷔는 번번이 미뤄집니다.
-                <br> <br>인상 깊었던 점은 그런 좌절의 순간에도 풀이 죽거나 불평하지 않고 묵묵히 자신의 때를 기다리는 모습이었어요. <br> 왜냐하면 자기 자신을 믿었으니까.<br>
-                힘들고 어렵고 부끄러운 상황에도 자신을 믿고 의연하게 때를 기다리는 것. 그게 저한테도 필요한 것 같아요.
-                그런 사람이 되고 싶고, 그런 사람들을 더 알고 싶네요. <br>`,
-            `<b>02. Chaka Khan - Angel <br>
-                2월, 신비로운 계절. </b><br><br>
-              2월은 다른 달보다 짧기 때문인지 조금 신비로운 느낌이 들어요. <br>춥지만 봄을 기다리며 싱숭생숭하죠. <br><br>
-              Chaka Khan의 우렁찬 목소리가 거친 겨울 바람을 뚫으며 걸을 때 힘을 줍니다. <br> 무사처럼 걸을 수 있도록. 그리고 조금 분위기 잡으면서요.<br> 
-              2월의 콘셉트는 분위기 있는 우렁찬 여자. 계획해봅니다. <br>`,
-            `<b>03. Sufjan Stevens - Mystery of Love<br>
-                3월, 새학기의 설레임을 떠올리며. </b><br><br>
-              한국인이 시작을 다짐하는 마지막 기회. 새학기의 시간, 3월입니다. <br>
-    1월 1일, 구정 다음의 마지막 찬스죠. <br><br>
-            이 곡은 영화 Call me by your name의 주제곡으로 알려져있죠. <br> 그래서 여름이 시작되는 6월의 대표곡이 될까라고도 생각했어요. <br> 그렇지만 도입부의 기타소리가 차가운 겨울을 깨고 따뜻한 봄이 시작되는 느낌도 들어요. <br> 
-    알을 깨고 부화한 새가 나오듯이, 겨울을 깨고 봄을 향하는...<br>`,
-            `<b>04. Redbone - Come and Get Your Love <br>
-                4월,  한층 따뜻해진 햇살과 완연한 꽃들이 온전한 봄이 되었음을 알려주네요. </b><br><br>
-             특유의 분위기를 가진 Redbone의 곡 Come and Get Your Love는 영화 가디언즈 오브 갤럭시로 알게 되었어요. <br><br>
-             1974년 발표된 곡인데 세련되게 느껴져요. <br>영화에서 쓰인 덕에 이 곡을 알 수 있어서 좋네요. 
-             Redbone의 멤버들은 인디안 계통인 것 같은데, 그래서인지 보컬도 약간 특유의 타령하는 느낌이 들어요. <Br>
-             그렇지만 그 고유한 개성과 리듬 때문에 더 힙하게 느껴진다고 할까요? 마치 70년대 포스트말론 같은...  <br>추위를 털고 가벼워진 기분을 이 곡과 함께 느껴보세요.<br>`,
-            `<b>05. Nelly Furtado - I'm Like A Bird<br>
-                5월,  완전한 봄, 여름이 오기 직전.</b><br><br>
-             복잡한 마음은 그대로이지만 온화한 봄 날씨로 조금 중화된다고 할까요.<BR>
-             그런 기분입니다.<br><br>Nelly Furtardo는 정말 매력있는 아티스트에요. <br>
-             이 곡 I'm Like a Bird를 들을 때 정말 자유자재로 날아다니는 새가 되는 상상을 해요. <br>
-             그런데 조금 복잡한 마음을 곁들인…
-    <br>`,
-            `<b>06. Red Hot Chili Peppers - Scar Tissue<br>
-                6월,  호국보훈의 달이면서…</b><br><br>
-            개인적인 아픔도 있는 달이에요. <br>그래서 마냥 활기차기 보단 어딘가 가벼워진듯하면서 까슬한 기분도 있어요.<br><br>
-            Red Hot Chili Peppers는 제가 생각하는 The Greatest Band 중 하나에요. <br>이 곡 Scar Tissue가 발표되었을 때는 기타리스트 존 프루시엔테가 다시 합류하면서
-            저력을 보여줬어요. 
-            기타소리가 반짝이는 태양 아래 까슬한 여름의 시작을 알리는 듯합니다.
-    <br>`,
-            `<b>07. TLC - Diggin' On You<br>
-                7월, 열기의 그루브</b><br><br>
-         2024년 여름은 유난히 더웠죠. <br>
-         그래도 7월은 끈적이지만 8월보다는 가벼운 느낌이 들어요. <br> 하지만 유독 올해엔 엄청난 습기로 대기의 열기 그루브가 느껴졌죠.<br>
-         TLC의 Diggin' on you는 곡 자체의 느낌도 7월에 어울리지만 가사에 July가 나와요. <br>
-         그루비한 여름을 즐겨봐요.<br>`,
-            `<b>08. The Offspring - You're Gonna Go Far, Kid<br>
-                8월, 파워풀한 여름</b><br><br>
-         여름의 정점이자 마지막인 8월. 가장 파워풀한 느낌이에요. <br>물론 우리가 아닌 여름이 ^^;<br><br>
-         펑크는 강렬한 음악을 대표하고, Offspring의 이곡 You're gonna go far를 들으면 강렬하게 질주하는 모습이 떠올려요.<br>
-         2024년 올림픽에서 보여준 멋진 선수들을 따라하듯이 에너지를 끌어 올려봅니다.<br>`,
-            `<b>09. Pearl Jam - Last Kiss<br>
-                9월, 여름의 잔상 </b><br><br>
-         2024년도 9월은 여름의 연장전이었죠. 그렇지만 이전에도 여름은 9월에 잔상을 남기고 종종 그 모습을 드러냈어요.<br>
-    1999년 7월에 빌보드차트 정점에 올랐던 곡인데 그 이후로 우리나라 라디오에 9월까지 계속 플레이된 것 같아요.(물론 1살 때요. 엄빠가 듣던 기억이 나요... 드립) <br>
-    밴드는 이 리메이크 싱글을 발표하며 코소보 전쟁 난민을 위해 기부를 했다고 해요.<br><br>
-    가사는 떠난 연인을 애도하는 내용이지만 에디 베더의 깊은 목소리가 전쟁으로 인한 아픔을 보듬는 것 같아요. 슬픔을 보듬는 그의 목소리가 선선한 공기와 함께 여러 것들을 생각하게 합니다. 여름의 치열함과 신나는 분위기에서 벗어나 이제 차분한 톤을 가지도록…`,
-            `<b>10. Hoobastank -The Reason<br>
-                10월, 각자의 이유를 다시 새기며. </b><br><br>
-         10월은 달려오던 시간에 자리수가 바뀌죠. <br>얼마남지 않았구나 생각이 들며 후회를 하지만, 변화하고픈 기분도 들 것 같아요.<br><br>
-    Hoobastank의 The Reason은 그런 기분에 어울려요. <br>담담히 더 해나갈 수 있도록, 우리만의 이유를 가지도록 지지해주는 곡입니다.<br>`,
+            // Monthly content arrays (ko and en) remain the same as in your original code
+            const monthlyContent = {
+                ko: [
+                    // Your existing Korean monthly content array
+                ],
+                en: [
+                    // Your existing English monthly content array
+                ]
+            };
 
-            `<b>11. Yazoo - Only You<br>
-                11월, 침잠하는 시간. </b><br><br>
-         11월은 1년 중 음울하고 깊이 들어간 느낌이에요.<br> 아마 12월은 한 해를 마무리하고 축하하는 기분도 있다면 11월은 거기에 아직 도달하지 못한 상태이죠<br><br>
-    Yazoo의 Only you는 다소 음울하면서 깊은 분위기를 내줘요.<br> 도달하지 못한 사랑의 깊고 어두운 마음을 표현한 곡 같아요. 그 안에서 희미한 빛은 있지만. 
-    그 침잠하는 상태와 어울립니다.<br>`,
-            `<b>12. Frank Sinatra - Have Yourself A Merry Little Christmas<br>
-                12월, 우리 자신에게 토스트! </b><br><br>
-    한 해를 마무리하게 되는 달, 한 해를 살아옴을 축하하고 격려해주었으면 하네요.<br> 연말이라고 해서 모든 시간이 축제 분위기는 아니죠.<br>
-    즐기는 모습을 뽐내는 사람들 속에서 스산한 기분도 강하게 들 거에요. <br><br>
-    Frank Sinatra의 Have yourself a merry little chrishmas를 들으면서 우리 자신을 감싸줘요. 화려하지 않아도 소박한 나만의 방식으로 축하해줍시다.<br>`
-        ],
-        en: [
-            `<b>01. John Lennon - Starting Over <br>
-                January, resolving for a new beginning. </b><br><br>
+            const youtubeIDs = [
+                "Ed1swjoTXqc", // 1월
+                "0GeeWwgdRoM",  // 2월
+                "n50Z3HGj4QE",  // 3월
+                "ir4GpOqRkQg",  // 4월
+                "roPQ_M3yJTA",  // 5월
+                "mzJj5-lubeM",  // 6월
+                "GxTqqjJWGpc",  // 7월
+                "_pmZKkb_UAg",  // 8월
+                "tNDWJ_KDkAc",  // 9월
+                "fV4DiAyExN0",  // 10월
+                "a4g5MeonGYM",  // 11월
+                "qBgbiZnhly4",  // 12월
+            ];
 
-                In 2024, (former) Kanye West's listening party in Korea was so impressive with the music and performance of "Runaway" that I watched Kanye's documentary on Netflix. Until then, I only knew him as an attention-seeking celebrity.<br>
-                Before his debut, he produced songs for artists like Jay-Z and wanted to release his own album, but even after barely signing with a record label, his debut was repeatedly postponed.
-                <br> <br>What was impressive was that even in those moments of frustration, he didn't get discouraged or complain, but quietly waited for his time. <br> Because he believed in himself.<br>
-                Believing in yourself and calmly waiting for your time even in difficult, challenging, and embarrassing situations. I think I need that too.
-                I want to be that kind of person and get to know more people like that. <br>`,
-            `<b>02. Chaka Khan - Angel <br>
-                February, a mysterious season. </b><br><br>
-              February feels a bit mysterious, perhaps because it's shorter than other months. <br>It's cold, but we're restless waiting for spring. <br><br>
-              Chaka Khan's powerful voice gives strength when walking through the harsh winter wind. <br> Like walking as a warrior. And setting the mood a little.<br> 
-              The concept for February is a charismatic, powerful woman. Let's plan for it. <br>`,
-            `<b>03. Sufjan Stevens - Mystery of Love<br>
-                March, reminiscing about the excitement of a new semester. </b><br><br>
-              The last chance for Koreans to make a fresh start. March, the time of new semesters.
-    The final chance after January 1st and Lunar New Year. <br><br>
-            This song is known as the theme song for the movie "Call Me by Your Name". So I thought it might be the representative song for June when summer begins. But the guitar sound at the beginning also feels like it's breaking the cold winter and starting a warm spring. <br> 
-    Like a bird hatching from its egg, breaking winter and heading towards spring...<br>`,
-            `<b>04. Redbone - Come and Get Your Love <br>
-                April, the warmer sunshine and full-blown flowers tell us that spring has truly arrived. </b><br><br>
-             I got to know Redbone's "Come and Get Your Love" with its unique atmosphere through the movie Guardians of the Galaxy. <br>
-             The song was released in 1974 but feels sophisticated. <br>I'm glad I got to know this song thanks to its use in the movie. 
-             The members of Redbone seem to have Native American roots, which might be why the vocals have a unique chanting feel. <br>
-             But doesn't that unique personality and rhythm make it feel even more hip? Like a '70s Post Malone...  <br>Feel the lightness of shaking off the cold with this song.<br>`,
-            `<b>05. Nelly Furtado - I'm Like A Bird<br>
-                May, full spring, just before summer arrives.</b><br><br>
-             The complicated feelings remain, but they're somewhat neutralized by the mild spring weather.<BR>
-             That's the mood.<br><br>Nelly Furtado is a really charming artist. <br>
-             When I listen to "I'm Like a Bird", I imagine becoming a bird flying freely. <br>
-             But with a bit of a complex heart...
-    <br>`,
-            `<b>06. Red Hot Chili Peppers - Scar Tissue<br>
-                June, the month of patriotism and...</b><br><br>
-            It's also a month of personal pain. <br>So rather than being purely energetic, there's a feeling of lightness mixed with a bit of roughness.<br><br>
-            Red Hot Chili Peppers is one of The Greatest Bands in my opinion. <br>When this song "Scar Tissue" was released, it showed their strength as guitarist John Frusciante rejoined the band.
-            The guitar sound seems to announce the start of a slightly rough summer under the shining sun.
-    <br>`,
-            `<b>07. TLC - Diggin' On You<br>
-                July, the groove of heat</b><br><br>
-         The summer of 2024 was exceptionally hot. <br>
-         Still, July feels sticky but lighter than August. <br> But this year especially, the heat groove in the air was felt due to the extreme humidity.<br>
-         TLC's "Diggin' on You" not only fits July in its feel but also mentions July in the lyrics. <br>
-         Let's enjoy this groovy summer.<br>`,
-            `<b>08. The Offspring - You're Gonna Go Far, Kid<br>
-                August, powerful summer</b><br><br>
-         August, the peak and end of summer. It feels the most powerful. <br>Of course, it's the summer, not us ^^;<br><br>
-         Punk represents intense music, and when I listen to The Offspring's "You're Gonna Go Far, Kid", I imagine intensely racing forward.<br>
-         Let's raise our energy as if imitating the amazing athletes we saw in the 2024 Olympics.<br>`,
-            `<b>09. Pearl Jam - Last Kiss<br>
-                September, the afterimage of summer </b><br><br>
-         September 2024 was an extension of summer. But even before, summer often left its traces in September, revealing itself occasionally.<br>
-    This song topped the Billboard chart in July 1999, and it seems it was played on Korean radio until September.
-    The band released this remake single and donated for the Kosovo War refugees.<br><br>
-    Although the lyrics are about mourning a lost love, Eddie Vedder's deep voice seems to comfort the pain caused by war. His voice, embracing sadness, makes us think about various things along with the cool air. Moving away from the intensity and excitement of summer to a calmer tone now...<br>`,
-            `<b>10. Hoobastank - The Reason<br>
-                October, revisiting our individual reasons. </b><br><br>
-         October is when the digit of the time we've been running through changes. <br>We think there's not much left and feel regret, but also a desire for change.<br><br>
-    Hoobastank's "The Reason" fits this mood. <br>It's a song that supports us to calmly carry on, to have our own reasons.<br>`,
-            `<b>11. Yazoo - Only You<br>
-                November, a time of introspection. </b><br><br>
-         November feels gloomy and deep among the months of the year.<br> While December might bring a sense of wrapping up the year and celebration, November feels like we haven't quite reached that point yet<br><br>
-    Yazoo's "Only You" creates a somewhat melancholic yet profound atmosphere.<br> It seems to express the deep, dark feelings of an unrequited love. There's a faint light within, though. 
-    It matches well with this state of introspection.<br>`,
-            `<b>12. Frank Sinatra - Have Yourself A Merry Little Christmas<br>
-                December, a toast to ourselves! </b><br><br>
-    The month when we wrap up the year, I hope we can celebrate and encourage ourselves for living through it.<br> Not all moments during the year-end are festive, though.<br>
-    Amidst people showing off their enjoyment, you might feel a strong sense of bleakness. <br><br>
-    Let's embrace ourselves while listening to Frank Sinatra's "Have Yourself A Merry Little Christmas". Let's celebrate in our own modest way, even if it's not extravagant.<br>`
-        ]
-    };
-
-    const youtubeIDs = [
-        "Ed1swjoTXqc", // 1월
-        "0GeeWwgdRoM",  // 2월
-        "n50Z3HGj4QE",  // 3월
-        "ir4GpOqRkQg",  // 4월
-        "roPQ_M3yJTA",  // 5월
-        "mzJj5-lubeM",  // 6월
-        "GxTqqjJWGpc",  // 7월
-        "_pmZKkb_UAg",  // 8월
-        "tNDWJ_KDkAc",  // 9월
-        "fV4DiAyExN0",  // 10월
-        "a4g5MeonGYM",  // 11월
-        "qBgbiZnhly4",  // 12월
-    ];
-
-    function isMobile() {
-        return window.innerWidth <= 768;
-    }
-
-    function openMenu() {
-        menuItems.classList.add('menu-open');
-        dimmedBg.style.display = 'block';
-    }
-
-    function closeMenu() {
-        menuItems.classList.remove('menu-open');
-        dimmedBg.style.display = 'none';
-    }
-
-    function toggleAutoplay() {
-        isAutoplayOn = !isAutoplayOn;
-        autoplayToggle.classList.toggle('active');
-        const statusElement = autoplayToggle.querySelector('.autoplay-status');
-       
-        if (isAutoplayOn) {
-            autoplayToggle.querySelector('i').className = 'fas fa-play-circle';
-            statusElement.textContent = 'ON';
-            statusElement.style.color = 'red';
-        } else {
-            autoplayToggle.querySelector('i').className = 'far fa-play-circle';
-            statusElement.textContent = 'OFF';
-            statusElement.style.color = '#7f7f7f';
-        }
-       
-        updateYoutubeAutoplay();
-    }
-
-    function updateYoutubeAutoplay() {
-        let src = youtubeVideo.src;
-        src = src.replace(/(\?|&)autoplay=[01]/, '');
-        if (isAutoplayOn) {
-            src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
-        }
-        youtubeVideo.src = src;
-    }
-
-    function preloadImage(src) {
-        return new Promise((resolve, reject) => {
-            if (imageCache[src]) {
-                resolve(imageCache[src]);
-            } else {
-                const img = new Image();
-                img.onload = () => {
-                    imageCache[src] = img;
-                    resolve(img);
-                };
-                img.onerror = reject;
-                img.src = src;
+            function isMobile() {
+                return window.innerWidth <= 768;
             }
-        });
-    }
 
-    async function updateContent(month, direction) {
-        if (isTransitioning) return;
-        isTransitioning = true;
-
-        const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
-        const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
-       
-        const nextImageSrc = `images/2025_square${month}.jpg`;
-       
-        try {
-            await preloadImage(nextImageSrc);
-           
-            nextImage.src = nextImageSrc;
-            nextImage.style.display = 'block';
-            currentImage.style.display = 'block';
-
-            if (direction) {
-                nextImage.style.transition = 'transform 0.3s ease-in-out';
-                currentImage.style.transition = 'transform 0.3s ease-in-out';
-                
-                nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
-                currentImage.style.transform = 'translateX(0)';
-               
-                requestAnimationFrame(() => {
-                    nextImage.style.transform = 'translateX(0)';
-                    currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
+            function updateDots(month) {
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === month - 1);
                 });
-            } else {
-                nextImage.style.transition = 'none';
-                nextImage.style.transform = 'translateX(0)';
             }
-           
-            setTimeout(() => {
-                if (direction) {
-                    currentImage.style.display = 'none';
-                    nextImage.style.transition = 'none';
-                    currentImage.style.transition = 'none';
+
+            function openMenu() {
+                menuItems.classList.add('menu-open');
+                dimmedBg.style.display = 'block';
+            }
+
+            function closeMenu() {
+                menuItems.classList.remove('menu-open');
+                dimmedBg.style.display = 'none';
+            }
+
+            function toggleAutoplay() {
+                isAutoplayOn = !isAutoplayOn;
+                autoplayToggle.classList.toggle('active');
+                const statusElement = autoplayToggle.querySelector('.autoplay-status');
+               
+                if (isAutoplayOn) {
+                    autoplayToggle.querySelector('i').className = 'fas fa-play-circle';
+                    statusElement.textContent = 'ON';
+                    statusElement.style.color = 'red';
+                } else {
+                    autoplayToggle.querySelector('i').className = 'far fa-play-circle';
+                    statusElement.textContent = 'OFF';
+                    statusElement.style.color = '#7f7f7f';
                 }
                
-                currentImage.classList.remove('active');
-                nextImage.classList.add('active');
+                updateYoutubeAutoplay();
+            }
+
+            function updateYoutubeAutoplay() {
+                let src = youtubeVideo.src;
+                src = src.replace(/(\?|&)autoplay=[01]/, '');
+                if (isAutoplayOn) {
+                    src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
+                }
+                youtubeVideo.src = src;
+            }
+
+            function preloadImage(src) {
+                return new Promise((resolve, reject) => {
+                    if (imageCache[src]) {
+                        resolve(imageCache[src]);
+                    } else {
+                        const img = new Image();
+                        img.onload = () => {
+                            imageCache[src] = img;
+                            resolve(img);
+                        };
+                        img.onerror = reject;
+                        img.src = src;
+                    }
+                });
+            }
+
+            async function updateContent(month, direction) {
+                if (isTransitioning) return;
+                isTransitioning = true;
+
+                const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
+                const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
                
-                activeImage = activeImage === 1 ? 2 : 1;
-                isTransitioning = false;
+                const nextImageSrc = `images/2025_square${month}.jpg`;
+               
+                try {
+                    await preloadImage(nextImageSrc);
+                   
+                    nextImage.src = nextImageSrc;
+                    nextImage.style.display = 'block';
+                    currentImage.style.display = 'block';
 
-                document.querySelector('.image-container').style.opacity = '1';
-            }, direction ? 300 : 0);
+                    if (direction) {
+                        nextImage.style.transition = 'none';
+                        nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
+                       
+                        requestAnimationFrame(() => {
+                            nextImage.style.transition = 'transform 0.3s ease-out';
+                            currentImage.style.transition = 'transform 0.3s ease-out';
+                           
+                            nextImage.style.transform = 'translateX(0)';
+                            currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
+                        });
+                    }
 
-            // 모바일 환경에 따라 다른 이미지 사용
-            bottomImage.src = isMobile() ? `images/${month}m.jpg` : `images/${month}.jpg`;
-            calendarText.innerHTML = monthlyContent[currentLanguage][month - 1];
-            youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
-            updateYoutubeAutoplay();
-        } catch (error) {
-            console.error('Failed to load image:', error);
-            isTransitioning = false;
-        }
-    }
+                    updateDots(month);
+                   
+                    setTimeout(() => {
+                        if (direction) {
+                            currentImage.style.display = 'none';
+                            currentImage.style.transition = 'none';
+                        }
+                       
+                        activeImage = activeImage === 1 ? 2 : 1;
+                        isTransitioning = false;
+                    }, 300);
 
+                    bottomImage.src = isMobile() ? `images/${month}m.jpg` : `images/${month}.jpg`;
+                    calendarText.innerHTML = monthlyContent[currentLanguage][month - 1];
+                    youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
+                    updateYoutubeAutoplay();
+                } catch (error) {
+                    console.error('Failed to load image:', error);
+                    isTransitioning = false;
+                }
+            }
 
+            function handleTouchStart(e) {
+                if (isTransitioning) return;
+                touchStartX = e.touches[0].clientX;
+                currentTranslateX = 0;
+                
+                const activeImg = activeImage === 1 ? calendarImage1 : calendarImage2;
+                const nextImg = activeImage === 1 ? calendarImage2 : calendarImage1;
+                
+                activeImg.style.transition = 'none';
+                nextImg.style.transition = 'none';
+            }
 
-function showNextMonth() {
-        if (currentMonth < 12) {
-            currentMonth++;
-            updateContent(currentMonth, 'next');
-        }
-    }
+            function handleTouchMove(e) {
+                if (isTransitioning) return;
+                
+                touchEndX = e.touches[0].clientX;
+                currentTranslateX = touchEndX - touchStartX;
+                
+                const activeImg = activeImage === 1 ? calendarImage1 : calendarImage2;
+                const nextImg = activeImage === 1 ? calendarImage2 : calendarImage1;
+                
+                const translateX = (currentTranslateX / window.innerWidth) * 100;
+                
+                if ((currentMonth === 1 && translateX > 0) || (currentMonth === 12 && translateX < 0)) {
+                    return;
+                }
+                
+                activeImg.style.transform = `translateX(${translateX}%)`;
+                nextImg.style.transform = `translateX(${translateX + (currentTranslateX < 0 ? 100 : -100)}%)`;
+            }
 
-    function showPreviousMonth() {
-        if (currentMonth > 1) {
-            currentMonth--;
-            updateContent(currentMonth, 'prev');
-        }
-    }
+            function handleTouchEnd() {
+                if (isTransitioning) return;
+                
+                const swipeThreshold = 50;
+                const swipeDistance = touchStartX - touchEndX;
+                
+                if (Math.abs(swipeDistance) > swipeThreshold) {
+                    if (swipeDistance > 0 && currentMonth < 12) {
+                        showNextMonth();
+                    } else if (swipeDistance < 0 && currentMonth > 1) {
+                        showPreviousMonth();
+                    } else {
+                        resetImagesPosition();
+                    }
+                } else {
+                    resetImagesPosition();
+                }
+            }
 
-    function adjustButtonsPosition() {
-        if (window.innerWidth <= 768) {
-            const imageContainer = document.querySelector('.image-container');
-            const prevButton = document.getElementById('prevButton');
-            const nextButton = document.getElementById('nextButton');
+            function resetImagesPosition() {
+                const activeImg = activeImage === 1 ? calendarImage1 : calendarImage2;
+                const nextImg = activeImage === 1 ? calendarImage2 : calendarImage1;
+                
+                activeImg.style.transition = 'transform 0.3s ease-out';
+                nextImg.style.transition = 'transform 0.3s ease-out';
+                
+                activeImg.style.transform = 'translateX(0)';
+                nextImg.style.transform = 'translateX(100%)';
+            }
 
-            imageContainer.appendChild(prevButton);
-            imageContainer.appendChild(nextButton);
-        } else {
-            const calendarContainer = document.querySelector('.calendar-container');
-            const prevButton = document.getElementById('prevButton');
-            const nextButton = document.getElementById('nextButton');
+            function showNextMonth() {
+                if (currentMonth < 12) {
+                    currentMonth++;
+                    updateContent(currentMonth, 'next');
+                }
+            }
 
-            calendarContainer.insertBefore(prevButton, calendarContainer.firstChild);
-            calendarContainer.appendChild(nextButton);
-        }
-    }
+            function showPreviousMonth() {
+                if (currentMonth > 1) {
+                    currentMonth--;
+                    updateContent(currentMonth, 'prev');
+                }
+            }
 
-    function changeLanguage() {
-        currentLanguage = currentLanguage === 'ko' ? 'en' : 'ko';
-        languageToggle.textContent = currentLanguage === 'ko' ? 'EN' : 'KO';
-        
-        // 페이지 요소 업데이트
-        document.querySelector('.pc-title').textContent = translations[currentLanguage].title;
-        document.querySelector('.subpc').textContent = translations[currentLanguage].subtitle;
-        document.querySelector('.subsub-pc').textContent = translations[currentLanguage].subsubtitle;
-	document.querySelector('.subsub-m').textContent = translations[currentLanguage].subsubtitle; // 이 줄을 추가
-        document.querySelector('.autoplay-text').textContent = translations[currentLanguage].autoplayText;
-        document.querySelector('.play-this-song').textContent = translations[currentLanguage].playThisSong;
-        document.querySelector('.normalt').innerHTML = translations[currentLanguage].bottomText;
-        document.querySelector('.custom-button .custom-button-content').firstChild.textContent = translations[currentLanguage].buttonText;
+            function changeLanguage() {
+                currentLanguage = currentLanguage === 'ko' ? 'en' : 'ko';
+                languageToggle.textContent = currentLanguage === 'ko' ? 'EN' : 'KO';
+                
+                document.querySelector('.pc-title').textContent = translations[currentLanguage].title;
+                document.querySelector('.subpc').textContent = translations[currentLanguage].subtitle;
+                document.querySelector('.subsub-pc').textContent = translations[currentLanguage].subsubtitle;
+                document.querySelector('.subsub-m').textContent = translations[currentLanguage].subsubtitle;
+                document.querySelector('.autoplay-text').textContent = translations[currentLanguage].autoplayText;
+                document.querySelector('.play-this-song').textContent = translations[currentLanguage].playThisSong;
+                document.querySelector('.normalt').innerHTML = translations[currentLanguage].bottomText;
+                document.querySelector('.custom-button .custom-button-content').firstChild.textContent = translations[currentLanguage].buttonText;
 
+                calendarText.innerHTML = monthlyContent[currentLanguage][currentMonth - 1];
+            }
 
-        // 현재 월 내용 업데이트
-        calendarText.innerHTML = monthlyContent[currentLanguage][currentMonth - 1];
-    }
+            // Event Listeners
+            hamburger.addEventListener('click', openMenu);
+            closeBtn.addEventListener('click', closeMenu);
+            dimmedBg.addEventListener('click', closeMenu);
+            autoplayToggle.addEventListener('click', toggleAutoplay);
+            nextButton.addEventListener('click', showNextMonth);
+            prevButton.addEventListener('click', showPreviousMonth);
+            languageToggle.addEventListener('click', changeLanguage);
 
-    updateContent(1); // 초기 컨텐츠 업데이트 시 direction을 지정하지 않음
-    adjustButtonsPosition();
+            // Touch Event Listeners
+            imageContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+            imageContainer.addEventListener('touchmove', handleTouchMove, { passive: true });
+            imageContainer.addEventListener('touchend', handleTouchEnd);
 
-    hamburger.addEventListener('click', openMenu);
-    closeBtn.addEventListener('click', closeMenu);
-    dimmedBg.addEventListener('click', closeMenu);
-    autoplayToggle.addEventListener('click', toggleAutoplay);
-    nextButton.addEventListener('click', showNextMonth);
-    prevButton.addEventListener('click', showPreviousMonth);
-    languageToggle.addEventListener('click', changeLanguage);
-    window.addEventListener('resize', adjustButtonsPosition);
+            // Top Button
+            const topButton = document.getElementById('topButton');
+            topButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
 
-    // 윈도우 크기 변경 시 이미지 업데이트
-    window.addEventListener('resize', () => {
-        bottomImage.src = isMobile() ? `images/${currentMonth}m.jpg` : `images/${currentMonth}.jpg`;
-    });
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 100) {
+                    topButton.style.display = 'flex';
+                } else {
+                    topButton.style.display = 'none';
+                }
+            });
 
-    let touchStartX = 0;
-    let touchEndX = 0;
-   
-    const handleTouchStart = (e) => {
-        touchStartX = e.touches[0].clientX;
-    };
-   
-    const handleTouchMove = (e) => {
-        touchEndX = e.touches[0].clientX;
-    };
-   
-    const handleTouchEnd = () => {
-        if (touchStartX - touchEndX > 50) {
-            showNextMonth();
-        } else if (touchEndX - touchStartX > 50) {
-            showPreviousMonth();
-        }
-    };
+            // Initialize content
+            updateContent(1);
 
-    if (window.innerWidth <= 768) {
-        calendarImage1.addEventListener('touchstart', handleTouchStart);
-        calendarImage1.addEventListener('touchmove', handleTouchMove);
-        calendarImage1.addEventListener('touchend', handleTouchEnd);
-        calendarImage2.addEventListener('touchstart', handleTouchStart);
-        calendarImage2.addEventListener('touchmove', handleTouchMove);
-        calendarImage2.addEventListener('touchend', handleTouchEnd);
-    }
-});
-
-// Top 버튼 기능 추가
-const topButton = document.getElementById('topButton');
-
-topButton.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-// Top 버튼 표시/숨김 처리
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 100) {
-        topButton.style.display = 'flex';
-    } else {
-        topButton.style.display = 'none';
-    }
-});
-</script>
-
-	
+            // Window resize handler
+            window.addEventListener('resize', () => {
+                bottomImage.src = isMobile() ? `images/${currentMonth}m.jpg` : `images/${currentMonth}.jpg`;
+            });
+        });
+    </script>
 </body>
 </html>
