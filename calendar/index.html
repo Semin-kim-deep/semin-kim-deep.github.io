@@ -423,26 +423,6 @@
             padding: 0;
             margin-top: 10px;
         }
-.dots-indicator {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    padding: 8px 0;
-    margin: 15px 0;
-}
-
-.dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: #B2B2B2;
-    transition: background-color 0.3s ease;
-}
-
-.dot.active {
-    background-color: #0095F6;
-}
 
 
         @media (min-width: 1920px) {
@@ -468,30 +448,7 @@
         padding: 20px 20px 0 20px;
         position: relative;
     }
-    .calendar-container {
-        width: 100%;
-        margin: 10px 0;
-        overflow: hidden;
-    }
-    
-    .dots-indicator {
-        position: absolute;
-        bottom: -30px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        margin: 0;
-    }
 
-    .calendar-content {
-        position: relative;
-        padding-bottom: 40px;  /* dots를 위한 공간 */
-    }
-    
-    .text-content {
-        margin-top: 20px;
-    }
-}
             .pc-title {
                 display: none;
             }
@@ -769,36 +726,22 @@
             </div>
         </div>
 
-
-<div class="calendar-container">
-    <button class="nav-button prev" id="prevButton"></button>
-    <div class="calendar-content">
-        <div class="image-container">
-            <img id="calendarImage1" class="swipe-image active" src="images/2025_square1.jpg" alt="2025 Calendar Image">
-            <img id="calendarImage2" class="swipe-image" src="" alt="2025 Calendar Image">
-        </div>
-        <!-- 도트 인디케이터 추가 -->
-        <div class="dots-indicator">
-            <div class="dot active"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
-        <div class="text-content">
-            <div class="text-content-inner" id="calendarText"></div>
+        <div class="calendar-container">
+            <button class="nav-button prev" id="prevButton"></button>
+            <div class="calendar-content">
+                <div class="image-container">
+                    <img id="calendarImage1" class="swipe-image active" src="images/2025_square1.jpg" alt="2025 Calendar Image">
+                    <img id="calendarImage2" class="swipe-image" src="" alt="2025 Calendar Image">
+                </div>
+                <div class="text-content">
+                    <div class="text-content-inner" id="calendarText">
+                        <!-- 텍스트 내용은 JavaScript에서 동적으로 변경됩니다 -->
+                    </div>
+                </div>
+            </div>
+            <button class="nav-button next" id="nextButton"></button>
         </div>
     </div>
-    <button class="nav-button next" id="nextButton"></button>
-</div>
-
     <div class="bottom-section">
         <div class="play-this-song">Play This Song</div>
         <div class="video-container">
@@ -1132,14 +1075,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 nextImage.style.transition = 'none';
                 nextImage.style.transform = 'translateX(0)';
             }
-function updateDots(month) {
-    const dots = document.querySelectorAll('.dot');
-    dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === month - 1);
-    });
-}
-
-
+           
             setTimeout(() => {
                 if (direction) {
                     currentImage.style.display = 'none';
