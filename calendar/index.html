@@ -49,8 +49,6 @@
     display: flex;
     align-items: center;
 }
-
-    
         .subpc {
             display: block;
             font-size: 14pt;
@@ -441,14 +439,36 @@
             opacity: 1;
             transition: none;
         }
+.dot-indicators {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 0;
+    margin-top: -8px;
+}
 
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #D9D9D9;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background-color: #404040;
+    transform: scale(1.2);
+}
         @media (max-width: 768px) {
          
     .header {
         padding: 20px 20px 0 20px;
         position: relative;
     }
-
+   .dot-indicators {
+        display: flex;
+    }
             .pc-title {
                 display: none;
             }
@@ -733,6 +753,20 @@
                     <img id="calendarImage1" class="swipe-image active" src="images/2025_square1.jpg" alt="2025 Calendar Image">
                     <img id="calendarImage2" class="swipe-image" src="" alt="2025 Calendar Image">
                 </div>
+		    <div class="dot-indicators">
+		    <div class="dot active" data-month="1"></div>
+		    <div class="dot" data-month="2"></div>
+		    <div class="dot" data-month="3"></div>
+		    <div class="dot" data-month="4"></div>
+		    <div class="dot" data-month="5"></div>
+		    <div class="dot" data-month="6"></div>
+		    <div class="dot" data-month="7"></div>
+		    <div class="dot" data-month="8"></div>
+		    <div class="dot" data-month="9"></div>
+		    <div class="dot" data-month="10"></div>
+		    <div class="dot" data-month="11"></div>
+		    <div class="dot" data-month="12"></div>
+			</div>
                 <div class="text-content">
                     <div class="text-content-inner" id="calendarText">
                         <!-- 텍스트 내용은 JavaScript에서 동적으로 변경됩니다 -->
@@ -786,6 +820,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const youtubeVideo = document.getElementById('youtubeVideo');
     const bottomImage = document.getElementById('bottomImage');
     const languageToggle = document.getElementById('language-toggle');
+	const dots = document.querySelectorAll('.dot');
+dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+        const targetMonth = parseInt(dot.dataset.month);
+        if (targetMonth > currentMonth) {
+            updateContent(targetMonth, 'next');
+        } else if (targetMonth < currentMonth) {
+            updateContent(targetMonth, 'prev');
+        }
+        currentMonth = targetMonth;
+    });
+});
    
     let isAutoplayOn = false;
     let currentMonth = 1;
@@ -1087,6 +1133,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 nextImage.classList.add('active');
                
                 activeImage = activeImage === 1 ? 2 : 1;
+		    // 도트 인디케이터 업데이트
+		const dots = document.querySelectorAll('.dot');
+		dots.forEach(dot => {
+		    dot.classList.remove('active');
+		    if (parseInt(dot.dataset.month) === month) {
+		        dot.classList.add('active');
+		    }
+		});
                 isTransitioning = false;
 
                 document.querySelector('.image-container').style.opacity = '1';
