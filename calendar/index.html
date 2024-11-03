@@ -136,6 +136,21 @@
             height: 100%;
             object-fit: cover;
         }
+	    .swipe-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transform: translateX(0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
         .text-content {
             width: 560px;
             height: 560px;
@@ -1090,37 +1105,39 @@ dots.forEach(dot => {
         });
     }
 
-    async function updateContent(month, direction) {
-        if (isTransitioning) return;
-        isTransitioning = true;
+async function updateContent(month, direction) {
+    if (isTransitioning) return;
+    isTransitioning = true;
 
-        const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
-        const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
-       
-        const nextImageSrc = `images/2025_square${month}.jpg`;
-       
-        try {
-            await preloadImage(nextImageSrc);
-           
-            nextImage.src = nextImageSrc;
-            nextImage.style.display = 'block';
-            currentImage.style.display = 'block';
+    const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
+    const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
+    
+    const nextImageSrc = `images/2025_square${month}.jpg`;
+    
+    try {
+        await preloadImage(nextImageSrc);
+        
+        nextImage.src = nextImageSrc;
+        nextImage.style.display = 'block';
+        currentImage.style.display = 'block';
 
-            if (direction) {
-                nextImage.style.transition = 'transform 0.3s ease-in-out';
-                currentImage.style.transition = 'transform 0.3s ease-in-out';
-                
-                nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
+        // 더 부드러운 애니메이션을 위한 requestAnimationFrame 사용
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                nextImage.style.transform = direction === 'next' ? 
+                    'translateX(100%)' : 'translateX(-100%)';
                 currentImage.style.transform = 'translateX(0)';
-               
+
                 requestAnimationFrame(() => {
+                    nextImage.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                    currentImage.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                    
                     nextImage.style.transform = 'translateX(0)';
-                    currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
+                    currentImage.style.transform = direction === 'next' ? 
+                        'translateX(-100%)' : 'translateX(100%)';
                 });
-            } else {
-                nextImage.style.transition = 'none';
-                nextImage.style.transform = 'translateX(0)';
-            }
+            });
+        });
            
             setTimeout(() => {
                 if (direction) {
@@ -1227,24 +1244,52 @@ function showNextMonth() {
         bottomImage.src = isMobile() ? `images/${currentMonth}m.jpg` : `images/${currentMonth}.jpg`;
     });
 
-    let touchStartX = 0;
-    let touchEndX = 0;
-   
-    const handleTouchStart = (e) => {
-        touchStartX = e.touches[0].clientX;
-    };
-   
-    const handleTouchMove = (e) => {
-        touchEndX = e.touches[0].clientX;
-    };
-   
-    const handleTouchEnd = () => {
-        if (touchStartX - touchEndX > 50) {
-            showNextMonth();
-        } else if (touchEndX - touchStartX > 50) {
+let touchStartX = 0;
+let touchEndX = 0;
+let touchMoveX = 0;
+let isDragging = false;
+
+const handleTouchStart = (e) => {
+    touchStartX = e.touches[0].clientX;
+    isDragging = true;
+    
+    // 현재 활성화된 이미지
+    const currentImage = document.querySelector('.swipe-image.active');
+    currentImage.style.transition = 'none';
+};
+
+const handleTouchMove = (e) => {
+    if (!isDragging) return;
+    
+    touchMoveX = e.touches[0].clientX;
+    const deltaX = touchMoveX - touchStartX;
+    const currentImage = document.querySelector('.swipe-image.active');
+    
+    // 드래그 중인 이미지 움직임을 부드럽게 처리
+    requestAnimationFrame(() => {
+        currentImage.style.transform = `translateX(${deltaX}px)`;
+    });
+};
+
+const handleTouchEnd = () => {
+    if (!isDragging) return;
+    
+    isDragging = false;
+    const deltaX = touchEndX - touchStartX;
+    
+    if (Math.abs(deltaX) > 50) {
+        if (deltaX > 0) {
             showPreviousMonth();
+        } else {
+            showNextMonth();
         }
-    };
+    } else {
+        // 스와이프가 충분하지 않으면 원위치
+        const currentImage = document.querySelector('.swipe-image.active');
+        currentImage.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        currentImage.style.transform = 'translateX(0)';
+    }
+};
 
     if (window.innerWidth <= 768) {
         calendarImage1.addEventListener('touchstart', handleTouchStart);
