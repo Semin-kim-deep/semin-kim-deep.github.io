@@ -418,6 +418,33 @@
                 display: none;
             }
         }
+
+
+        /* 기존 미디어 쿼리는 그대로 두고 아래 내용만 추가 */
+@media screen and (min-width: 428px) and (max-width: 432px) {
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+    }
+    
+    body {
+        background-image: url('images/m_bg.jpg');
+        background-size: cover;
+    }
+    
+    .container {
+        width: 100vw;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .changing-image {
+        width: 100%;
+        max-width: 430px;
+    }
+}
         @media (max-width: 480px) {
             h1 {
                 font-size: 24px;
