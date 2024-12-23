@@ -575,7 +575,7 @@
                     const pageWidth = Math.min(window.innerWidth, bgImage.width);
                     const pageHeight = pageWidth / aspectRatio;
                     document.body.style.height = `${pageHeight}px`;
-                    document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
+                   // document.body.style.backgroundSize = `${pageWidth}px ${pageHeight}px`;
                 }
                 bgImage.src = window.innerWidth <= 768 ? 'images/m_bg.jpg' : 'images/bg_hp.jpg';
             }
