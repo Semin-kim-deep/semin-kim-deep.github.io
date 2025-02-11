@@ -154,107 +154,11 @@
             font-size: 16pt;
             color: black;
             line-height: 1.7;
-        }  /* Mobile specific styles */
+        }  
 @media screen and (max-width: 768px) {
-    .container {
-        padding: 0;
-        height: calc(100vh - 120px);
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .card {
-        position: absolute;
-        width: 80vw;
-        height: calc(80vw * 1.67); /* Maintaining aspect ratio of 1:1.67 */
-        margin: 0;
-        opacity: 0;
-        transform: scale(0.8);
-        transition: opacity 0.4s ease, transform 0.4s ease;
-        display: none;
-    }
-
-    .card.active {
-        position: absolute;
-        display: block;
-        opacity: 1;
-        transform: scale(1);
-        width: 80vw;
-        height: calc(80vw * 1.67);
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 10;
-    }
-
-    .card.current {
-        display: block;
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    .nav-button {
-        position: fixed;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 40px;
-        height: 60px;
-        background-color: rgba(255, 255, 255, 0.2);
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 100;
-    }
-
-    .nav-button.left {
-        left: 10px;
-    }
-
-    .nav-button.right {
-        right: 10px;
-    }
-
-    .info-box {
-        position: fixed;
-        top: auto;
-        bottom: 0;
-        left: 0;
-        width: 100vw;
-        height: auto;
-        max-height: 40vh;
-        transform: translateY(100%);
-        background-color: rgba(255, 255, 255, 0.95);
-        border-radius: 20px 20px 0 0;
-        padding: 20px;
-        transition: transform 0.4s ease;
-    }
-
-    .info-box.show {
-        transform: translateY(0);
-    }
-
-    .info-box h2 {
-        font-size: 16pt;
-        margin-bottom: 10px;
-    }
-
-    .info-box p {
-        font-size: 14pt;
-        line-height: 1.5;
-        margin-bottom: 20px;
-    }
-
-    /* Disable desktop hover effects */
-    .card:hover {
-        transform: none;
-    }
-
-    /* Hide placeholder elements */
-    .placeholder {
-        display: none;
+    .title-container h1 {
+        color: red !important;
+        font-size: 24px !important;
     }
 }
     </style>
