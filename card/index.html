@@ -156,59 +156,81 @@
             line-height: 1.7;
         }  
 }
-/* Mobile specific styles */
+// CSS 수정사항
+const mobileStyles = `
 @media screen and (max-width: 768px) {
     .container {
-        padding: 0;
-        height: calc(100vh - 120px);
+        padding: 0 20px;
+        height: calc(100vh - 200px);
+        display: flex;
         justify-content: center;
         align-items: center;
-        position: relative;
         overflow: hidden;
     }
 
     .card {
         position: absolute;
         width: 80vw;
-        height: calc(80vw * 1.67); /* Maintaining aspect ratio of 1:1.67 */
+        max-width: 300px;
+        height: calc((80vw * 1.67));
+        max-height: 500px;
         margin: 0;
         opacity: 0;
-        transform: scale(0.8);
-        transition: opacity 0.4s ease, transform 0.4s ease;
-        display: none;
+        transform: translateX(100vw) scale(0.8);
+        transition: all 0.4s ease;
+        pointer-events: none;
     }
 
-    .card.active {
-        position: absolute;
-        display: block;
-        opacity: 1;
-        transform: scale(1);
-        width: 80vw;
-        height: calc(80vw * 1.67);
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 10;
+    .card.previous {
+        transform: translateX(-100vw) scale(0.8);
+        opacity: 0;
     }
 
     .card.current {
-        display: block;
+        transform: translateX(0) scale(1);
         opacity: 1;
-        transform: scale(1);
+        pointer-events: auto;
+    }
+
+    .card.next {
+        transform: translateX(100vw) scale(0.8);
+        opacity: 0;
+    }
+
+    .card.active {
+        position: fixed;
+        width: 90vw;
+        height: calc(90vw * 1.67);
+        max-width: 340px;
+        max-height: 568px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+    }
+
+    .info-box {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        max-height: 50vh;
+        transform: translateY(100%);
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 20px 20px 0 0;
+        padding: 20px;
+        z-index: 1001;
+    }
+
+    .info-box.show {
+        transform: translateY(0);
     }
 
     .nav-button {
-        position: fixed;
-        top: 50%;
-        transform: translateY(-50%);
         width: 40px;
         height: 60px;
         background-color: rgba(255, 255, 255, 0.2);
         border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 100;
     }
 
     .nav-button.left {
@@ -218,54 +240,14 @@
     .nav-button.right {
         right: 10px;
     }
-
-    .info-box {
-        position: fixed;
-        top: auto;
-        bottom: 0;
-        left: 0;
-        width: 100vw;
-        height: auto;
-        max-height: 40vh;
-        transform: translateY(100%);
-        background-color: rgba(255, 255, 255, 0.95);
-        border-radius: 20px 20px 0 0;
-        padding: 20px;
-        transition: transform 0.4s ease;
-    }
-
-    .info-box.show {
-        transform: translateY(0);
-    }
-
-    .info-box h2 {
-        font-size: 16pt;
-        margin-bottom: 10px;
-    }
-
-    .info-box p {
-        font-size: 14pt;
-        line-height: 1.5;
-        margin-bottom: 20px;
-    }
-
-    /* Disable desktop hover effects */
-    .card:hover {
-        transform: none;
-    }
-
-    /* Hide placeholder elements */
-    .placeholder {
-        display: none;
-    }
-}
+}`;
 
     </style>
 </head>
 <body>
     <div class="title-container">
         <h1>Anti-Tarot Card</h1>
-        <p class="subtitle">안티타로카드, 미래는 알 수 없으니까 지금 할 수 있는 일을 해요.d </p>
+        <p class="subtitle">안티타로카드, 미래는 알 수 없으니까 지금 할 수 있는 일을 해요.do </p>
         <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
         </p>
             <p class="subtitle_s">각 카드를 눌러보세요. Click on each card. </p>.
@@ -560,6 +542,115 @@ window.addEventListener('resize', handleResize);
 
 // 초기 업데이트
 updateContainerWidth();
+
+const mobileLogic = `
+let currentIndex = 0;
+let isMobile = window.innerWidth <= 768;
+
+function updateCardClasses() {
+    if (!isMobile) return;
+    
+    cardData.forEach((_, index) => {
+        const card = container.children[index];
+        card.classList.remove('previous', 'current', 'next');
+        
+        if (index === currentIndex - 1) {
+            card.classList.add('previous');
+        } else if (index === currentIndex) {
+            card.classList.add('current');
+        } else if (index === currentIndex + 1) {
+            card.classList.add('next');
+        }
+    });
+}
+
+function handleMobileNavigation(direction) {
+    if (!isMobile) return;
+    
+    if (direction === 'left' && currentIndex > 0) {
+        currentIndex--;
+    } else if (direction === 'right' && currentIndex < cardData.length - 1) {
+        currentIndex++;
+    }
+    
+    updateCardClasses();
+}
+
+// 모바일 터치 이벤트 처리
+let touchStartX = 0;
+let touchEndX = 0;
+
+container.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+});
+
+container.addEventListener('touchmove', (e) => {
+    touchEndX = e.touches[0].clientX;
+});
+
+container.addEventListener('touchend', () => {
+    if (touchStartX - touchEndX > 50) { // 오른쪽으로 스와이프
+        handleMobileNavigation('right');
+    } else if (touchEndX - touchStartX > 50) { // 왼쪽으로 스와이프
+        handleMobileNavigation('left');
+    }
+});
+
+// 리사이즈 이벤트 수정
+window.addEventListener('resize', () => {
+    isMobile = window.innerWidth <= 768;
+    handleResize();
+    if (isMobile) {
+        updateCardClasses();
+    }
+});
+
+// 네비게이션 버튼 이벤트 수정
+leftNav.addEventListener('click', () => {
+    if (isMobile) {
+        handleMobileNavigation('left');
+    } else {
+        container.scrollBy({left: -scrollDistance, behavior: 'smooth'});
+    }
+    if (activeCard) {
+        returnToOriginalPosition(activeCard);
+        activeCard = null;
+    }
+});
+
+rightNav.addEventListener('click', () => {
+    if (isMobile) {
+        handleMobileNavigation('right');
+    } else {
+        container.scrollBy({left: scrollDistance, behavior: 'smooth'});
+    }
+    if (activeCard) {
+        returnToOriginalPosition(activeCard);
+        activeCard = null;
+    }
+});
+
+// 초기화 시 모바일 상태 설정
+window.addEventListener('load', () => {
+    // 스타일 추가
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = mobileStyles;
+    document.head.appendChild(styleSheet);
+    
+    // 카드 생성 및 초기 상태 설정
+    cardData.forEach((data, index) => {
+        const card = createCard(data, index);
+        card.addEventListener('mousemove', handleMouseMove);
+        card.addEventListener('mouseleave', handleMouseLeave);
+        container.appendChild(card);
+    });
+    
+    isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+        updateCardClasses();
+    }
+    updateContainerWidth();
+});`;
 </script>
 </body>
 </html>  
