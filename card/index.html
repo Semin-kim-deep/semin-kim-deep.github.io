@@ -280,13 +280,14 @@ function enlargeCard(card) {
             infoBox.style.opacity = '1';
             if (Array.from(container.children).indexOf(card) === 0) {
                 infoTitle.style.fontSize = '20pt';
-                infoDescription.style.fontSize = '15pt';
+                infoDescription.style.fontSize = '18pt';
                 infoTitle.innerHTML = "마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
                 infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상한 하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
-            } else {
-                infoTitle.innerHTML = '';
-                infoDescription.innerHTML = '';
-            }
+            }         else if (Array.from(container.children).indexOf(card) === 1) {
+                infoTitle.style.fontSize = '20pt';
+                infoDescription.style.fontSize = '18pt';
+                infoTitle.innerHTML = “책을 읽고 생각을 엮으세요.”;
+                infoDescription.innerHTML = “이 카드의 모티브가 된 것은 영화 굿윌헌팅의 첫 장면입니다. 주인공 윌은 우두커니 자신의 방에서 여러 책을 읽고 있죠. 생각에 잠기기도 하고, 생각을 정리하기라도 하는듯이요. 그는 천재니까 한번에 읽고 다 정리를 하고 부럽습니다... 아니 그렇지만 평범한 저 역시 책을 좋아합니다. .”; 
         }, 50);
     }, 1200);
 }
