@@ -242,26 +242,25 @@ function enlargeCard(card) {
     const newLeft = (viewportWidth - enlargedWidth * 2 - 15) / 2;
     const newTop = (viewportHeight - enlargedHeight) / 2;
 
-    // 먼저 카드를 뒤집습니다
-    card.style.transform = 'rotateY(180deg)';
+    card.style.position = 'fixed';
+    card.style.left = `${newLeft}px`;
+    card.style.top = `${newTop}px`;
+    card.style.width = `${enlargedWidth}px`;
+    card.style.height = `${enlargedHeight}px`;
+    card.style.zIndex = '1000';
+    
+    const placeholder = createPlaceholder();
+    card.parentNode.insertBefore(placeholder, card.nextSibling);
 
-    // 잠시 후 위치를 이동하고 다시 앞면으로 돌립니다
+    // 첫 번째 회전 (앞면 -> 뒷면)
     setTimeout(() => {
-        card.style.position = 'fixed';
-        card.style.left = `${newLeft}px`;
-        card.style.top = `${newTop}px`;
-        card.style.width = `${enlargedWidth}px`;
-        card.style.height = `${enlargedHeight}px`;
-        card.style.zIndex = '1000';
-        
-        const placeholder = createPlaceholder();
-        card.parentNode.insertBefore(placeholder, card.nextSibling);
-
-        // 위치 이동이 완료된 후 다시 앞면으로 돌립니다
-        setTimeout(() => {
-            card.style.transform = 'rotateY(0deg)';
-        }, 200);
+        card.style.transform = 'rotateY(180deg)';
     }, 400);
+
+    // 두 번째 회전 (뒷면 -> 앞면)
+    setTimeout(() => {
+        card.style.transform = 'rotateY(360deg)';
+    }, 800);
 
     setTimeout(() => {
         // Info box 표시
@@ -281,7 +280,7 @@ function enlargeCard(card) {
                 infoDescription.innerHTML = '';
             }
         }, 50);
-    }, 800);
+    }, 1200);
 }
 
 function returnToOriginalPosition(card) {
