@@ -268,25 +268,38 @@ function enlargeCard(card) {
         card.style.transform = 'rotateY(360deg)';
     }, 800);
 
+  setTimeout(() => {
+    // Info box 표시
+    infoBox.style.display = 'block';
+    infoBox.style.left = `${newLeft + enlargedWidth + 15}px`;
+    infoBox.style.top = `${newTop}px`;
+
     setTimeout(() => {
-        // Info box 표시
-        infoBox.style.display = 'block';
-        infoBox.style.left = `${newLeft + enlargedWidth + 15}px`;
-        infoBox.style.top = `${newTop}px`;
-        setTimeout(() => {
-            infoBox.style.transform = 'translateX(0)';
-            infoBox.style.opacity = '1';
-            if (Array.from(container.children).indexOf(card) === 0) {
-                infoTitle.style.fontSize = '20pt';
-                infoDescription.style.fontSize = '18pt';
-                infoTitle.innerHTML = "마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
-                infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상한 하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
-            } else {
-                infoTitle.innerHTML = '';
-                infoDescription.innerHTML = '';
-            }
-        }, 50);
-    }, 1200);
+        infoBox.style.transform = 'translateX(0)';
+        infoBox.style.opacity = '1';
+
+        // 클릭한 카드의 인덱스에 따라 타이틀과 본문 변경
+        const cardIndex = Array.from(container.children).indexOf(card);
+
+        infoTitle.style.fontSize = '20pt';
+        infoDescription.style.fontSize = '18pt';
+
+        // 카드의 인덱스에 따라 다른 내용 표시
+        if (cardIndex === 0) {
+            infoTitle.innerHTML = "마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
+            infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상한 하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
+        } else if (cardIndex === 1) {
+            infoTitle.innerHTML = "2번째 카드 타이틀";
+            infoDescription.innerHTML = "2번째 카드에 대한 내용이 들어갑니다. 이 부분은 예시입니다.";
+        } else if (cardIndex === 2) {
+            infoTitle.innerHTML = "3번째 카드 타이틀";
+            infoDescription.innerHTML = "3번째 카드에 대한 내용이 들어갑니다. 이 부분은 예시입니다.";
+        } else {
+            infoTitle.innerHTML = '기타 카드';
+            infoDescription.innerHTML = '다른 카드에 대한 내용입니다.';
+        }
+    }, 50);
+}, 1200);
 }
 
 function returnToOriginalPosition(card) {
