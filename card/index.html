@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+(((추가 / 수정 전)))  <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anti-Tarot Cards with Animated Info Box</title>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet">
+     <link  href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@500&display=swap" rel="stylesheet">
     <style>
         body, html {
@@ -186,28 +186,15 @@ let activeCard = null;
 let containerWidth = 0;
 const scrollDistance = 800;
 
+const cardData = [
+    {image: "atc01.png"}, {image: "atc02.png"}, {image: "atc03.png"},
+    {image: "atc04_2.png"}, {image: "atc05.png"}, {image: "atc06.png"},
+    {image: "atc07.png"}, {image: "atc08.png"}, {image: "atc09.png"},
+    {image: "atc10.png"}, {image: "atc11.png"}, {image: "atc12.png"},
+    {image: "atc13.png"}, {image: "atc14.png"}, {image: "atc15.png"},
+    {image: "atc16.png"}, {image: "atc17.png"}, {image: "atc18.png"}
+];
 
->>>
- const cardData = [
-    {image: "atc01.png", title: "마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록", description: "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상한 하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 것들을 시작했어요. 쉽지 않지만 일단은 합니다."},
-    {image: "atc02.png", title: "두 번째 카드 제목", description: "두 번째 카드 설명"},
-    {image: "atc03.png", title: "세 번째 카드 제목", description: "세 번째 카드 설명"},
-    {image: "atc04_2.png", title: "네 번째 카드 제목", description: "네 번째 카드 설명"},
-    {image: "atc05.png", title: "다섯 번째 카드 제목", description: "다섯 번째 카드 설명"},
-    {image: "atc06.png", title: "여섯 번째 카드 제목", description: "여섯 번째 카드 설명"},
-    {image: "atc07.png", title: "일곱 번째 카드 제목", description: "일곱 번째 카드 설명"},
-    {image: "atc08.png", title: "여덟 번째 카드 제목", description: "여덟 번째 카드 설명"},
-    {image: "atc09.png", title: "아홉 번째 카드 제목", description: "아홉 번째 카드 설명"},
-    {image: "atc10.png", title: "열 번째 카드 제목", description: "열 번째 카드 설명"},
-    {image: "atc11.png", title: "열한 번째 카드 제목", description: "열한 번째 카드 설명"},
-    {image: "atc12.png", title: "열두 번째 카드 제목", description: "열두 번째 카드 설명"},
-    {image: "atc13.png", title: "열세 번째 카드 제목", description: "열세 번째 카드 설명"},
-    {image: "atc14.png", title: "열네 번째 카드 제목", description: "열네 번째 카드 설명"},
-    {image: "atc15.png", title: "열다섯 번째 카드 제목", description: "열다섯 번째 카드 설명"},
-    {image: "atc16.png", title: "열여섯 번째 카드 제목", description: "열여섯 번째 카드 설명"},
-    {image: "atc17.png", title: "열일곱 번째 카드 제목", description: "열일곱 번째 카드 설명"},
-    {image: "atc18.png", title: "열여덟 번째 카드 제목", description: "열여덟 번째 카드 설명"}
-];   >>> 
 function createCard(data, index) {
     const card = document.createElement('div');
     card.className = 'card';
@@ -289,14 +276,18 @@ function enlargeCard(card) {
         setTimeout(() => {
             infoBox.style.transform = 'translateX(0)';
             infoBox.style.opacity = '1';
-            const index = Array.from(container.children).indexOf(card);
-            const data = cardData[index];
-            infoTitle.innerHTML = data.title;
-            infoDescription.innerHTML = data.description;
+            if (Array.from(container.children).indexOf(card) === 0) {
+                infoTitle.style.fontSize = '20pt';
+                infoDescription.style.fontSize = '18pt';
+                infoTitle.innerHTML = "마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
+                infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상한 하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
+            } else {
+                infoTitle.innerHTML = '';
+                infoDescription.innerHTML = '';
+            }
         }, 50);
     }, 1200);
-} 
-
+}
 
 function returnToOriginalPosition(card) {
     const placeholder = card.nextElementSibling;
