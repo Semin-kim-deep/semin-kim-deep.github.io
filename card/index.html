@@ -268,26 +268,36 @@ function enlargeCard(card) {
         card.style.transform = 'rotateY(360deg)';
     }, 800);
 
+ setTimeout(() => {
+    // Info box 표시
+    infoBox.style.display = 'block';
+    infoBox.style.left = `${newLeft + enlargedWidth + 15}px`;
+    infoBox.style.top = `${newTop}px`;
     setTimeout(() => {
-        // Info box 표시
-        infoBox.style.display = 'block';
-        infoBox.style.left = `${newLeft + enlargedWidth + 15}px`;
-        infoBox.style.top = `${newTop}px`;
-        setTimeout(() => {
-            infoBox.style.transform = 'translateX(0)';
-            infoBox.style.opacity = '1';
-            if (Array.from(container.children).indexOf(card) === 0) {
-                infoTitle.style.fontSize = '20pt';
-                infoDescription.style.fontSize = '18pt';
-                infoTitle.innerHTML = "마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
-                infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상한 하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
-            } else {
-                infoTitle.innerHTML = '';
-                infoDescription.innerHTML = '';
-            }
-        }, 50);
-    }, 1200);
-}
+        infoBox.style.transform = 'translateX(0)';
+        infoBox.style.opacity = '1';
+        if (Array.from(container.children).indexOf(card) === 0) {
+            infoTitle.style.fontSize = '20pt';
+            infoDescription.style.fontSize = '18pt';
+            infoTitle.innerHTML = "마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
+            infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상한 하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
+        } else if (Array.from(container.children).indexOf(card) === 1) {
+            infoTitle.style.fontSize = '20pt';
+            infoDescription.style.fontSize = '18pt';
+            infoTitle.innerHTML = "1";
+            infoDescription.innerHTML = "2";
+        } else if (Array.from(container.children).indexOf(card) === 2) {
+            infoTitle.style.fontSize = '20pt';
+            infoDescription.style.fontSize = '18pt';
+            infoTitle.innerHTML = "3";
+            infoDescription.innerHTML = "4";
+        } else {
+            infoTitle.innerHTML = '';
+            infoDescription.innerHTML = '';
+        }
+    }, 50);
+}, 1200);
+
 
 function returnToOriginalPosition(card) {
     const placeholder = card.nextElementSibling;
