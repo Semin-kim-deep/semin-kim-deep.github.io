@@ -154,7 +154,58 @@
             font-size: 16pt;
             color: black;
             line-height: 1.7;
-        }
+        } @media (max-width: 768px) {
+    .card {
+        width: 80vw !important;
+        height: calc(80vw * 1.67) !important; /* 카드 비율 유지 */
+        margin: 0 auto;
+        transform: none !important;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .card.active {
+        width: 80vw !important;
+        height: calc(80vw * 1.67) !important;
+        position: relative;
+        z-index: 1;
+    }
+
+    .card__back {
+        display: none;
+    }
+
+    .card.flipped .card__front {
+        display: none;
+    }
+
+    .card.flipped .card__back {
+        display: block;
+    }
+
+    .info-box {
+        width: 80vw;
+        height: auto;
+        position: fixed;
+        bottom: 20px;
+        left: 10vw;
+        transform: none;
+        opacity: 1;
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 10px;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    .container {
+        padding-left: 0;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .nav-button {
+        display: block;
+    }
+}  
     </style>
 </head>
 <body>
@@ -454,7 +505,52 @@ window.addEventListener('load', () => {
 window.addEventListener('resize', handleResize);
 
 // 초기 업데이트
-updateContainerWidth();
+updateContainerWidth();  // 모바일 환경 감지
+const isMobile = window.innerWidth <= 768;
+
+if (isMobile) {
+    let currentCardIndex = 0;
+    const cards = document.querySelectorAll('.card');
+    const infoBox = document.getElementById('infoBox');
+    const infoTitle = document.getElementById('infoTitle');
+    const infoDescription = document.getElementById('infoDescription');
+
+    // 첫 번째 카드 활성화
+    cards[currentCardIndex].classList.add('active');
+
+    // 좌우 버튼 클릭 이벤트
+    leftNav.addEventListener('click', () => {
+        if (currentCardIndex > 0) {
+            cards[currentCardIndex].classList.remove('active');
+            currentCardIndex--;
+            cards[currentCardIndex].classList.add('active');
+        }
+    });
+
+    rightNav.addEventListener('click', () => {
+        if (currentCardIndex < cards.length - 1) {
+            cards[currentCardIndex].classList.remove('active');
+            currentCardIndex++;
+            cards[currentCardIndex].classList.add('active');
+        }
+    });
+
+    // 카드 클릭 이벤트
+    cards.forEach((card, index) => {
+        card.addEventListener('click', () => {
+            if (card.classList.contains('flipped')) {
+                card.classList.remove('flipped');
+                infoBox.style.display = 'none';
+            } else {
+                card.classList.add('flipped');
+                infoBox.style.display = 'block';
+                // 카드 설명 업데이트
+                infoTitle.innerHTML = `카드 ${index + 1} 제목`;
+                infoDescription.innerHTML = `카드 ${index + 1} 설명`;
+            }
+        });
+    });
+} 
 </script>
 </body>
 </html>
