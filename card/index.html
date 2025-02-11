@@ -154,65 +154,116 @@
             font-size: 16pt;
             color: black;
             line-height: 1.7;
-        } @media (max-width: 768px) {
+        }  /* Mobile specific styles */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 0;
+        height: calc(100vh - 120px);
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+
     .card {
-        width: 80vw !important;
-        height: calc(80vw * 1.67) !important; /* 카드 비율 유지 */
-        margin: 0 auto;
-        transform: none !important;
+        position: absolute;
+        width: 80vw;
+        height: calc(80vw * 1.67); /* Maintaining aspect ratio of 1:1.67 */
+        margin: 0;
+        opacity: 0;
+        transform: scale(0.8);
         transition: opacity 0.4s ease, transform 0.4s ease;
+        display: none;
     }
 
     .card.active {
-        width: 80vw !important;
-        height: calc(80vw * 1.67) !important;
-        position: relative;
-        z-index: 1;
-    }
-
-    .card__back {
-        display: none;
-    }
-
-    .card.flipped .card__front {
-        display: none;
-    }
-
-    .card.flipped .card__back {
+        position: absolute;
         display: block;
-    }
-
-    .info-box {
-        width: 80vw;
-        height: auto;
-        position: fixed;
-        bottom: 20px;
-        left: 10vw;
-        transform: none;
         opacity: 1;
-        background-color: rgba(255, 255, 255, 0.95);
-        border-radius: 10px;
-        padding: 15px;
-        box-sizing: border-box;
+        transform: scale(1);
+        width: 80vw;
+        height: calc(80vw * 1.67);
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
     }
 
-    .container {
-        padding-left: 0;
-        overflow: hidden;
-        white-space: nowrap;
+    .card.current {
+        display: block;
+        opacity: 1;
+        transform: scale(1);
     }
 
     .nav-button {
-        display: block;
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 60px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
     }
-}  
+
+    .nav-button.left {
+        left: 10px;
+    }
+
+    .nav-button.right {
+        right: 10px;
+    }
+
+    .info-box {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: auto;
+        max-height: 40vh;
+        transform: translateY(100%);
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 20px 20px 0 0;
+        padding: 20px;
+        transition: transform 0.4s ease;
+    }
+
+    .info-box.show {
+        transform: translateY(0);
+    }
+
+    .info-box h2 {
+        font-size: 16pt;
+        margin-bottom: 10px;
+    }
+
+    .info-box p {
+        font-size: 14pt;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+    /* Disable desktop hover effects */
+    .card:hover {
+        transform: none;
+    }
+
+    /* Hide placeholder elements */
+    .placeholder {
+        display: none;
+    }
+}
     </style>
 </head>
 <body>
     <div class="title-container">
         <h1>Anti-Tarot Card</h1>
         <p class="subtitle">안티타로카드, 미래는 알 수 없으니까 지금 할 수 있는 일을 해요.</p>
-        <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
+        <p class="subtitle-en">We don't know the future, so we just do what we can do now.(dr)</p>
         </p>
             <p class="subtitle_s">각 카드를 눌러보세요. Click on each card. </p>.
     </div>
@@ -505,52 +556,7 @@ window.addEventListener('load', () => {
 window.addEventListener('resize', handleResize);
 
 // 초기 업데이트
-updateContainerWidth();  // 모바일 환경 감지
-const isMobile = window.innerWidth <= 768;
-
-if (isMobile) {
-    let currentCardIndex = 0;
-    const cards = document.querySelectorAll('.card');
-    const infoBox = document.getElementById('infoBox');
-    const infoTitle = document.getElementById('infoTitle');
-    const infoDescription = document.getElementById('infoDescription');
-
-    // 첫 번째 카드 활성화
-    cards[currentCardIndex].classList.add('active');
-
-    // 좌우 버튼 클릭 이벤트
-    leftNav.addEventListener('click', () => {
-        if (currentCardIndex > 0) {
-            cards[currentCardIndex].classList.remove('active');
-            currentCardIndex--;
-            cards[currentCardIndex].classList.add('active');
-        }
-    });
-
-    rightNav.addEventListener('click', () => {
-        if (currentCardIndex < cards.length - 1) {
-            cards[currentCardIndex].classList.remove('active');
-            currentCardIndex++;
-            cards[currentCardIndex].classList.add('active');
-        }
-    });
-
-    // 카드 클릭 이벤트
-    cards.forEach((card, index) => {
-        card.addEventListener('click', () => {
-            if (card.classList.contains('flipped')) {
-                card.classList.remove('flipped');
-                infoBox.style.display = 'none';
-            } else {
-                card.classList.add('flipped');
-                infoBox.style.display = 'block';
-                // 카드 설명 업데이트
-                infoTitle.innerHTML = `카드 ${index + 1} 제목`;
-                infoDescription.innerHTML = `카드 ${index + 1} 설명`;
-            }
-        });
-    });
-} 
+updateContainerWidth();
 </script>
 </body>
-</html>
+</html>  
