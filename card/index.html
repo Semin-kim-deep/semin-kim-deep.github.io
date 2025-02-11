@@ -280,16 +280,23 @@ function enlargeCard(card) {
             infoBox.style.opacity = '1';
             if (Array.from(container.children).indexOf(card) === 0) {
                 infoTitle.style.fontSize = '20pt';
-                infoDescription.style.fontSize = '15pt';
+                infoDescription.style.fontSize = '18pt';
                 infoTitle.innerHTML = "마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
-                infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상한 하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
-            } else {
-                infoTitle.innerHTML = '';
-                infoDescription.innerHTML = '';
-            }
-        }, 50);
-    }, 1200);
-}
+                infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상한 하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 것들을 시작했어요. 쉽지 않지만 일단은 합니다.";       else if (cardIndex === 1) {
+        infoTitle.innerHTML = “책을 읽고, 생각을 엮으세요.”;
+        infoDescription.innerHTML = “이 그림의 모티브가 된 장면은 영화 굿윌헌팅입니다. 첫 시작에서 주인공 윌은 책을 읽고 있죠. 그는 머리가 좋아 책 속의 지식을 다 자기것으로 흡수하겠죠. 그렇지 않다고 하더라도 책을 읽으면, 지식과 지혜 외에 표현의 아름다움을 발견하기도 하고, 머리 속에 새로운 바람을 넣어주죠. 또다른 것의 씨앗이 되기도 합니다.“;
+    }
+    else if (cardIndex === 2) {
+        infoTitle.innerHTML = "세 번째 카드 제목";
+        infoDescription.innerHTML = "세 번째 카드 설명";
+    }
+    // ... 나머지 카드들에 대해서도 같은 방식으로 추가
+    else {
+        infoTitle.innerHTML = '';
+        infoDescription.innerHTML = '';
+    }
+	}, 50); 		}, 1200);
+}     
 
 function returnToOriginalPosition(card) {
     const placeholder = card.nextElementSibling;
