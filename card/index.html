@@ -228,19 +228,6 @@ function getCardPosition(card) {
     };
 }
 
-function typeText(element, text, speed = 50) {
-    let i = 0;
-    element.innerHTML = '';
-    function typing() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typing, speed);
-        }
-    }
-    typing();
-}
-
 function enlargeCard(card) {
     const viewportWidth = document.documentElement.clientWidth;
     const viewportHeight = document.documentElement.clientHeight;
@@ -270,7 +257,6 @@ function enlargeCard(card) {
     }, 200);
 
     setTimeout(() => {
-        card.style.transform = 'none';
         // Info box 표시
         infoBox.style.display = 'block';
         infoBox.style.left = `${newLeft + enlargedWidth + 15}px`;
@@ -281,16 +267,14 @@ function enlargeCard(card) {
             if (Array.from(container.children).indexOf(card) === 0) {
                 infoTitle.style.fontSize = '20pt';
                 infoDescription.style.fontSize = '15pt';
-                typeText(infoTitle, "마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록");
-                setTimeout(() => {
-                    typeText(infoDescription, "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상한 하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 것들을 시작했어요. 쉽지 않지만 일단은 합니다.");
-                }, 2000);
+                infoTitle.innerHTML = "마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
+                infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상한 하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
             } else {
                 infoTitle.innerHTML = '';
                 infoDescription.innerHTML = '';
             }
         }, 50);
-    }, 600);
+    }, 400);
 }
 
 function returnToOriginalPosition(card) {
