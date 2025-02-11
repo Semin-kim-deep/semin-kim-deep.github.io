@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anti-Tarot Cards with Animated Info Box</title>
-    <link  href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet">
+     <link  href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@500&display=swap" rel="stylesheet">
     <style>
         body, html {
@@ -60,19 +60,22 @@
             transition: transform 0.4s ease;
         }
      .card {
-        width: 213.6px;
-        height: 356.4px;
-        background-color: transparent;
-        margin-right: 30px;
-        flex-shrink: 0;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        position: relative;
-        transform-style: preserve-3d;
-        border-radius: 14px;
-        perspective: 1000px;
-        transform: translateZ(0);
-    }
+    width: 213.6px;
+    height: 356.4px;
+    background-color: transparent;
+    margin-right: 30px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    border-radius: 14px;
+    /* 새로 추가되는 속성들 */
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
         .card.active {
             width: 284px;
             height: 474.4px;
@@ -257,99 +260,143 @@ function enlargeCard(card) {
 
     // 첫 번째 회전 (앞면 -> 뒷면)
     setTimeout(() => {
-        card.style.transform = '
-
-
-
-
-
-
-    // 첫 번째 회전 (앞면 -> 뒷면)
-    setTimeout(() => {
         card.style.transform = 'rotateY(180deg)';
-    }, 200);
+    }, 400);
 
-    // 정보 박스를 보여주기
+    // 두 번째 회전 (뒷면 -> 앞면)
     setTimeout(() => {
-        infoBox.style.transform = 'translateX(0)';
-        infoBox.style.opacity = '1';
-    }, 500);
+        card.style.transform = 'rotateY(360deg)';
+    }, 800);
+
+    setTimeout(() => {
+        // Info box 표시
+        infoBox.style.display = 'block';
+        infoBox.style.left = `${newLeft + enlargedWidth + 15}px`;
+        infoBox.style.top = `${newTop}px`;
+        setTimeout(() => {
+            infoBox.style.transform = 'translateX(0)';
+            infoBox.style.opacity = '1';
+            if (Array.from(container.children).indexOf(card) === 0) {
+                infoTitle.style.fontSize = '20pt';
+                infoDescription.style.fontSize = '18pt';
+                infoTitle.innerHTML = "마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
+                infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상한 하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
+            } else {
+                infoTitle.innerHTML = '';
+                infoDescription.innerHTML = '';
+            }
+        }, 50);
+    }, 1200);
 }
 
-function hideCardInfo() {
-    infoBox.style.transform = 'translateX(-100%)';
+function returnToOriginalPosition(card) {
+    const placeholder = card.nextElementSibling;
+    const index = Array.from(container.children).indexOf(placeholder);
+
+    // Info box 숨기기
     infoBox.style.opacity = '0';
     setTimeout(() => {
-        if (activeCard) {
-            activeCard.classList.remove('active');
-            activeCard.style.transform = getInitialTransform(cardData.indexOf(activeCard.dataset));
-            activeCard.style.position = '';
-            activeCard.style.left = '';
-            activeCard.style.top = '';
-            activeCard.style.width = '';
-            activeCard.style.height = '';
+        infoBox.style.display = 'none';
+        infoBox.style.transform = 'translateX(-100%)';
+    }, 400);
+
+    // 먼저 뒤집기
+    card.style.transform = 'rotateY(180deg)';
+
+    // 잠시 후 원래 위치로 돌아가면서 앞면으로 돌리기
+    setTimeout(() => {
+        card.classList.remove('active');
+        card.style.transition = 'all 0.4s ease';
+        card.style.position = '';
+        card.style.left = '';
+        card.style.top = '';
+        card.style.width = '';
+        card.style.height = '';
+        card.style.zIndex = '';
+        card.style.transform = getInitialTransform(index);
+
+        if (placeholder && placeholder.classList.contains('placeholder')) {
+            placeholder.parentNode.removeChild(placeholder);
         }
     }, 400);
 }
 
-function showCardInfo(card) {
-    const cardIndex = cardData.indexOf(card.dataset);
-    if (cardIndex !== -1) {
-        infoTitle.textContent = `Card ${cardIndex + 1}`;
-        infoDescription.textContent = 'This is the description for the selected card.';
+function updateContainerWidth() {
+    containerWidth = container.scrollWidth;
+}
+
+function handleResize() {
+    updateContainerWidth();
+    if (activeCard) {
+        enlargeCard(activeCard);
     }
 }
 
-function updateCardPosition() {
-    const containerRect = container.getBoundingClientRect();
-    const cards = Array.from(container.querySelectorAll('.card'));
-    let xPos = containerRect.left;
-    cards.forEach((card, index) => {
-        card.style.transform = `translateX(${xPos}px)`;
-        xPos += card.offsetWidth + 30;
-    });
+function handleMouseMove(e) {
+    if (this.classList.contains('active')) return;
+    const rect = this.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const dx = (mx - rect.width / 2) / 10;
+    const dy = (my - rect.height / 2) / 10;
+
+    this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
 }
 
-// 좌우 버튼 클릭 이벤트
+function handleMouseLeave() {
+    if (this.classList.contains('active')) return;
+    const index = Array.from(container.children).indexOf(this);
+    this.style.transform = getInitialTransform(index);
+}
+
+// 이벤트 리스너
+container.addEventListener('click', function(e) {
+    const clickedCard = e.target.closest('.card');
+    if (clickedCard) {
+        if (activeCard === clickedCard) {
+            returnToOriginalPosition(clickedCard);
+            activeCard = null;
+        } else {
+            if (activeCard) {
+                returnToOriginalPosition(activeCard);
+            }
+            enlargeCard(clickedCard);
+            activeCard = clickedCard;
+        }
+    }
+});
+
+// 좌우 네비게이션 버튼 리스너
 leftNav.addEventListener('click', () => {
-    container.scrollBy({
-        left: -scrollDistance,
-        behavior: 'smooth'
-    });
+    container.scrollBy({left: -scrollDistance, behavior: 'smooth'});
+    if (activeCard) {
+        returnToOriginalPosition(activeCard);
+        activeCard = null;
+    }
 });
 
 rightNav.addEventListener('click', () => {
-    container.scrollBy({
-        left: scrollDistance,
-        behavior: 'smooth'
-    });
-});
-
-// 카드 클릭 이벤트
-container.addEventListener('click', (event) => {
-    const card = event.target.closest('.card');
-    if (card && !card.classList.contains('active')) {
-        if (activeCard) {
-            hideCardInfo();
-        }
-        activeCard = card;
-        enlargeCard(card);
-        showCardInfo(card);
+    container.scrollBy({left: scrollDistance, behavior: 'smooth'});
+    if (activeCard) {
+        returnToOriginalPosition(activeCard);
+        activeCard = null;
     }
 });
 
-// 카드 생성 및 화면에 추가
-cardData.forEach((data, index) => {
-    const card = createCard(data, index);
-    card.dataset.index = index;  // 카드에 인덱스 추가
-    container.appendChild(card);
+window.addEventListener('load', () => {
+    cardData.forEach((data, index) => {
+        const card = createCard(data, index);
+        card.addEventListener('mousemove', handleMouseMove);
+        card.addEventListener('mouseleave', handleMouseLeave);
+        container.appendChild(card);
+    });
+    updateContainerWidth();
 });
 
-// 카드 위치 업데이트
-updateCardPosition();
+window.addEventListener('resize', handleResize);
 
-// 윈도우 크기 변경 시 카드 위치 업데이트
-window.addEventListener('resize', updateCardPosition);
+// 초기 업데이트
+updateContainerWidth();
 </script>
 </body>
 </html>
