@@ -188,6 +188,23 @@
     .subtitle br {
         display: block;
     }
+    /* 카드 스타일 수정 */
+    .card {
+        position: absolute;
+        width: 70%;  /* 모바일 화면의 70% */
+        max-width: 300px;
+        aspect-ratio: 0.6;  /* 카드 비율 유지 */
+        margin: 0;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    /* 첫 번째 카드만 보이게 */
+    .card:first-child {
+        opacity: 1;
+    }
+}
+
 }
 
     </style>
