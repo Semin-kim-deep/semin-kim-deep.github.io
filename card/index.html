@@ -1,460 +1,1088 @@
- <!DOCTYPE html>
-<html lang="en">
+(((고치기 전)))
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anti-Tarot Cards with Animated Info Box</title>
-     <link  href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@500&display=swap" rel="stylesheet">
+    <title>2025 Calendar - Songs & Scenes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
         body, html {
             margin: 0;
             padding: 0;
-            height: 100%;
-            overflow-x: hidden;
-            overflow-y: auto;
-            font-family: 'Jost', sans-serif;
-            background-image: url('../images/bg_hp.jpg');
-            background-size: cover;
-            background-position: top center;
-            background-repeat: no-repeat;
-            perspective: 1000px;
-        }
-        .title-container {
-            text-align: center;
-            padding-top: 20px;
-            margin-bottom: 20px;
-            color: white;
-        }
-        h1 {
-            font-weight: 700;
-            font-size: 48px;
-            margin: 0;
-        }
-        .subtitle {
             font-family: 'Pretendard', sans-serif;
-            font-weight: 500;
-            font-size: 18px;
-            margin-top: 10px;
-            margin-bottom: 5px;
-        }
-        .subtitle-en {
-            font-weight: 500;
-            font-size: 18px;
-            margin: 0;
-        }
-        .subtitle_s {
-            font-family: 'Pretendard', sans-serif;
-            font-weight: 300;
-            font-size: 14px;
-            margin-top: 10px;
-            margin-bottom: 5px;
-        }
-        
-        .container {
-            display: flex;
-            align-items: center;
-            height: calc(100vh - 150px);
-            padding-left: 120px;
-            position: relative;
-            transition: transform 0.4s ease;
-        }
-     .card {
-    width: 213.6px;
-    height: 356.4px;
-    background-color: transparent;
-    margin-right: 30px;
-    flex-shrink: 0;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    transform-style: preserve-3d;
-    border-radius: 14px;
-    /* 새로 추가되는 속성들 */
-    -webkit-perspective: 1000px;
-    perspective: 1000px;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-}
-        .card.active {
-            width: 284px;
-            height: 474.4px;
-            position: fixed;
-            z-index: 1000;
-            border-radius: 18px;
-        }
-        .card__front, .card__back {
-            position: absolute;
+            color: #404040;
+            background-color: white;
             width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            transition: transform 0.4s ease;
-            box-shadow: 0 8.4px 16.8px rgba(0,0,0,0.25), 0 6px 6px rgba(0,0,0,0.22);
-            border-radius: inherit;
+            overflow-x: hidden;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            width: 100%;
             overflow: hidden;
         }
-        .card__back {
-            transform: rotateY(180deg);
-        }
-        .card img {
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 28px;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .placeholder {
-            width: 213.6px;
-            height: 356.4px;
-            margin-right: 30px;
-            flex-shrink: 0;
-            visibility: hidden;
-        }
-        .nav-button {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 46px;
-            height: 68px;
-            cursor: pointer;
-            z-index: 100;
-        }
-        .nav-button.left {
-            left: 0px;
-        }
-        .nav-button.right {
-            right: 0px;
-        }
-        .container {
-            overflow-x: auto;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            scroll-behavior: smooth;
-        }
-        .info-box {
-            width: 284px;
-            height: 474.4px;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 18px;
-            position: fixed;
-            z-index: 999;
-            display: none;
-            transform: translateX(-100%);
-            transition: transform 0.4s ease, opacity 0.4s ease;
-            opacity: 0;
-            padding: 20px;
             box-sizing: border-box;
-            font-family: 'Pretendard', sans-serif;
+        }
+        .header-title {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            color: black;
+            margin: 0;
+            text-align: center;
+            flex: 1 1 auto;
+        }
+        .header-left, .header-right {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
         }
 
-        .info-box h2 {
-            font-size: 20pt;
-            color: black;
-            margin-bottom: 20px;
+        /* Title Styles */
+        .subpc {
+            display: block;
+            font-size: 14pt;
         }
-        .info-box p {
-            font-size: 16pt;
-            color: black;
-            line-height: 1.7;
+        .subm {
+            display: none;
+        }
+        .mobile-title {
+            display: none;
+        }
+        .pc-title {
+            display: block;
+            font-size: 36pt;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            width: 18px;
+            height: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .hamburger span {
+            width: 100%;
+            height: 2px;
+            background-color: #7f7f7f;
+        }
+
+        /* Calendar Container */
+        .calendar-container {
+            position: relative;
+            width: 1220px;
+            margin: 20px auto 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .calendar-content {
+            display: flex;
+            width: 1120px;
+            height: 560px;
+            position: relative;
+            overflow: hidden;
+        }
+        .image-container {
+            width: 560px;
+            height: 560px;
+            position: relative;
+            overflow: hidden;
+            touch-action: pan-y pinch-zoom;
+        }
+        .swipe-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: translateX(0);
+            transition: none;
+            opacity: 1;
+            object-fit: cover;
+            will-change: transform;
+        }
+        .swipe-image.next {
+            transform: translateX(100%);
+        }
+
+        /* Dots Indicator */
+        .dots-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 0;
+            margin: 15px 0;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #B2B2B2;
+            transition: background-color 0.3s ease;
+        }
+        .dot.active {
+            background-color: #0095F6;
+        }
+
+        /* Text Content */
+        .text-content {
+            width: 560px;
+            height: 560px;
+            padding: 0 0 0 40px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        .text-content-inner {
+            border-top: 2px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 20px 0;
+            font-size: 14pt;
+            flex-grow: 1;
+            overflow-y: auto;
+            line-height: 1.8;
+        }
+        .text-content-inner b {
+            font-size: 15pt;
+            line-height: 1.8;
+            color: #202020;
+        }
+
+        /* Navigation Buttons */
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #404040;
+            font-size: 40.56px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        .nav-button::before {
+            content: '';
+            display: inline-block;
+            width: 0.52em;
+            height: 0.52em;
+            border-top: 1px solid currentColor;
+            border-right: 1px solid currentColor;
+            position: absolute;
+        }
+        .nav-button.prev {
+            left: 0;
+        }
+        .nav-button.next {
+            right: 0;
+        }
+        .nav-button.prev::before {
+            transform: rotate(-135deg);
+        }
+        .nav-button.next::before {
+            transform: rotate(45deg);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .calendar-container {
+                width: 100%;
+                margin: 10px 0;
+                overflow: hidden;
+            }
+            .calendar-content {
+                width: 100%;
+                flex-direction: column;
+                height: auto;
+            }
+            .image-container {
+                width: 100%;
+                padding-bottom: 100%;
+                height: 0;
+            }
+            .text-content {
+                width: 100%;
+                height: auto;
+                padding: 20px;
+            }
+            .dots-indicator {
+                margin: 8px 0;
+            }
+            .pc-title {
+                display: none;
+            }
+            .mobile-title {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-size: 26.4px;
+                line-height: 1.2;
+            }
+            .header {
+                padding: 20px;
+            }
+            .hamburger {
+                position: absolute;
+                left: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+
+        /* Menu Items */
+        .menu-items {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: #f5f3f2;
+            transition: left 0.3s ease-in-out;
+            padding: 40px;
+            box-sizing: border-box;
+            z-index: 1001;
+            text-align: center;
+        }
+        .menu-items a {
+            display: block;
+            padding: 10px 0;
+            text-decoration: none;
+            color: #414141;
+            font-family: 'Jost', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+        }
+        .menu-open {
+            left: 0;
+        }
+        .dimmed-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+        }
+
+/* AutoPlay Toggle */
+        .autoplay-toggle {
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #7f7f7f;
+        }
+        .autoplay-status {
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        .autoplay-toggle.active {
+            color: red;
+        }
+        .autoplay-toggle.active .autoplay-status {
+            color: red;
+        }
+        .autoplay-text {
+            font-size: 11pt;
+            color: #404040;
+        }
+
+        /* Button Styles */
+        .custom-button {
+            width: 600px;
+            height: 60px;
+            background-color: transparent;
+            border: 1px solid #000;
+            font-family: 'Jost', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            margin: 20px 0;
+        }
+        .custom-button:hover {
+            background-color: #000;
+            color: #fff;
+        }
+        .custom-button a {
+            color: inherit;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Play Section */
+        .play-this-song {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+            font-size: 30px;
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 10px 0 0 0;
+        }
+
+        /* Video Container */
+        .video-container {
+            width: 560px;
+            height: 315px;
+            position: relative;
+            margin: 0 0 16px 0;
+        }
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Section Styles */
+        .bottom-section {
+            width: 100%;
+            background-color: #f1f1f1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 0;
+        }
+        .white-section {
+            width: 100%;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 100px 0;
+        }
+        .white-section .normalt {
+            font-size: 14pt;
+            text-align: center;
+            max-width: 1000px;
+            line-height: 1.9;
+            padding-top: 20px;
+            color: #404040;
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 400;
+            font-size: 12pt;
+            color: #404040;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        /* Top Button */
+        .top-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #ffffff;
+            border: 1px solid #8a8a8a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .top-button::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-top: 1px solid #404040;
+            border-right: 1px solid #404040;
+            transform: rotate(-45deg);
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .video-container {
+                width: 90%;
+                padding-bottom: 56.25%;
+                height: 0;
+            }
+            .video-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+            .custom-button {
+                width: 80%;
+                height: 50px;
+                font-size: 16px;
+            }
+            .language-toggle {
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+                margin-top: 0;
+            }
+            .white-section .normalt {
+                padding: 20px;
+                font-size: 12pt;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="title-container">
-        <h1>Anti-Tarot Card</h1>
-        <p class="subtitle">안티타로카드, 미래는 알 수 없으니까 지금 할 수 있는 일을 해요.</p>
-        <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
-        </p>
-            <p class="subtitle_s">각 카드를 눌러보세요. Click on each card. </p>.
-    </div>
-    <div class="container" id="container">
-        <!-- Cards will be dynamically added here -->
-    </div>
-    <div class="info-box" id="infoBox">
-        <h2 id="infoTitle"></h2>
-        <p id="infoDescription"></p>
-    </div>
-    <img src="images/left_indi3.png" alt="Left Navigation" class="nav-button left">
-    <img src="images/right_indi3.png" alt="Right Navigation" class="nav-button right">
+    <div class="dimmed-background" id="dimmed-bg"></div>
+    <div class="content">
+        <header class="header">
+            <div class="header-left">
+                <div class="hamburger" id="hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <h1 class="header-title">
+                <span class="pc-title">2025 Calendar - Songs & Scenes</span>
+                <span class="mobile-title">
+                    <span class="title-year">2025 Calendar</span>
+                </span>
+            </h1>
+            <div class="header-right">
+                <button class="language-toggle" id="language-toggle">EN</button>
+            </div>
+        </header>
 
-<script>
-   const container = document.getElementById('container');
-const leftNav = document.querySelector('.nav-button.left');
-const rightNav = document.querySelector('.nav-button.right');
-const infoBox = document.getElementById('infoBox');
-const infoTitle = document.getElementById('infoTitle');
-const infoDescription = document.getElementById('infoDescription');
-let activeCard = null;
-let containerWidth = 0;
-const scrollDistance = 800;
-
-const cardData = [
-    {image: "atc01.png"}, {image: "atc02.png"}, {image: "atc03.png"},
-    {image: "atc04_2.png"}, {image: "atc05.png"}, {image: "atc06.png"},
-    {image: "atc07.png"}, {image: "atc08.png"}, {image: "atc09.png"},
-    {image: "atc10.png"}, {image: "atc11.png"}, {image: "atc12.png"},
-    {image: "atc13.png"}, {image: "atc14.png"}, {image: "atc15.png"},
-    {image: "atc16.png"}, {image: "atc17.png"}, {image: "atc18.png"}
-];
-
-function createCard(data, index) {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-        <div class="card__front">
-            <img src="images/${data.image}" alt="Anti-Tarot Card Front">
+        <div class="menu-items" id="menu-items">
+            <div class="close-btn" id="close-menu"></div>
+            <div class="menu-title">Deepdown Studio</div>
+            <a href="/">Home</a>
+            <a href="/about.html">About</a>
+            <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">Shop</a>
+            <a href="/card/index.html">Anti-Tarot Card</a>
+            <a href="/calendar/">Calendar 2025</a>
         </div>
-        <div class="card__back">
-            <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
+
+        <div class="subtitle">
+            <span class="subpc">2025년의 시간을 팝니다.</span>
+            <span class="subm">
+                Songs & Scenes<br>
+                2025년의 시간을 팝니다.
+            </span>
         </div>
-    `;
-    card.style.transform = getInitialTransform(index);
-    return card;
-}
 
-function getInitialTransform(index) {
-    switch(index % 4) {
-        case 0: return 'rotateX(5deg) rotateY(-5deg)';
-        case 1: return 'rotateX(-5deg) rotateY(5deg)';
-        case 2: return 'rotateX(10deg) rotateY(0deg)';
-        case 3: return 'rotateX(0deg) rotateY(-10deg)';
-    }
-}
+        <div class="subsub">
+            <span class="subsub-pc">월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분의 월별 플레이리스트는 어떤가요?<br></span>    
+            <span class="subsub-m">월별 어울리는 음악을 선정하고 장면을 그렸어요. <br> 여러분의 월별 플레이리스트는 어떤가요?<br></span>
+            <div class="autoplay-info">
+                <span class="autoplay-toggle" id="autoplay-toggle">
+                    <i class="far fa-play-circle"></i>
+                    <span class="autoplay-status">OFF</span>
+                </span>
+                <span class="autoplay-text">음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요</span>
+            </div>
+        </div>
 
-function createPlaceholder() {
-    const placeholder = document.createElement('div');
-    placeholder.className = 'placeholder';
-    return placeholder;
-}
+        <div class="calendar-container">
+            <button class="nav-button prev" id="prevButton"></button>
+            <div class="calendar-content">
+                <div class="image-container">
+                    <img id="calendarImage1" class="swipe-image" src="images/2025_square1.jpg" alt="2025 Calendar Image">
+                    <img id="calendarImage2" class="swipe-image next" src="" alt="2025 Calendar Image">
+                </div>
+                <div class="text-content">
+                    <div class="text-content-inner" id="calendarText"></div>
+                </div>
+            </div>
+            <div class="dots-indicator">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <button class="nav-button next" id="nextButton"></button>
+        </div>
 
-function getCardPosition(card) {
-    const cardRect = card.getBoundingClientRect();
-    const containerRect = container.getBoundingClientRect();
-    return {
-        left: cardRect.left - containerRect.left,
-        top: cardRect.top - containerRect.top
-    };
-}
+<div class="bottom-section">
+            <div class="play-this-song">Play This Song</div>
+            <div class="video-container">
+                <iframe id="youtubeVideo"
+                    src="https://www.youtube.com/embed/Ed1swjoTXqc"
+                    frameborder="0"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
 
-function enlargeCard(card) {
-    const viewportWidth = document.documentElement.clientWidth;
-    const viewportHeight = document.documentElement.clientHeight;
-    const cardPosition = getCardPosition(card);
+        <div class="white-section">
+            <img id="bottomImage" src="images/1.jpg" alt="Calendar Image" class="image-1">
+            <div class="normalt">
+                <br><b>9X13cm 탁상용 달력(나무홀더 포함) <br></b>
+                그림이 잘보이도록 스프링을 사용하지 않았어요. <br>
+                잠시 시야에 그림을 투입하여 머리 속 휴식을 주세요.
+            </div>
+            <div class="button-container">
+                <button class="custom-button">
+                    <a href="https://smartstore.naver.com/deepdown-studio/products/11025811769" target="blank">
+                        <span class="custom-button-content">
+                            신나게 사러 달려나가기
+                            <span class="custom-button-arrow"></span>
+                        </span>
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
 
-    card.style.transition = 'all 0.4s ease';
-    card.classList.add('active');
-    
-    const enlargedWidth = 284;
-    const enlargedHeight = 474.4;
+    <div class="top-button" id="topButton"></div>
 
-    const newLeft = (viewportWidth - enlargedWidth * 2 - 15) / 2;
-    const newTop = (viewportHeight - enlargedHeight) / 2;
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger-menu');
+            const menuItems = document.getElementById('menu-items');
+            const closeBtn = document.getElementById('close-menu');
+            const dimmedBg = document.getElementById('dimmed-bg');
+            const autoplayToggle = document.getElementById('autoplay-toggle');
+            const iframe = document.querySelector('.video-container iframe');
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
+            const calendarImage1 = document.getElementById('calendarImage1');
+            const calendarImage2 = document.getElementById('calendarImage2');
+            const calendarText = document.getElementById('calendarText');
+            const youtubeVideo = document.getElementById('youtubeVideo');
+            const bottomImage = document.getElementById('bottomImage');
+            const languageToggle = document.getElementById('language-toggle');
+            const imageContainer = document.querySelector('.image-container');
+            const dots = document.querySelectorAll('.dot');
 
-    card.style.position = 'fixed';
-    card.style.left = `${newLeft}px`;
-    card.style.top = `${newTop}px`;
-    card.style.width = `${enlargedWidth}px`;
-    card.style.height = `${enlargedHeight}px`;
-    card.style.zIndex = '1000';
-    
-    const placeholder = createPlaceholder();
-    card.parentNode.insertBefore(placeholder, card.nextSibling);
+            let isAutoplayOn = false;
+            let currentMonth = 1;
+            let activeImage = 1;
+            let isTransitioning = false;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let currentTranslateX = 0;
+            let initialTouchX = 0;
+            const imageCache = {};
+            let currentLanguage = 'ko';
 
-    // 첫 번째 회전 (앞면 -> 뒷면)
-    setTimeout(() => {
-        card.style.transform = 'rotateY(180deg)';
-    }, 400);
+            const translations = {
+                ko: {
+                    title: '2025 Calendar - Songs & Scenes',
+                    subtitle: '2025년의 시간을 팝니다.',
+                    subsubtitle: '월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분의 월별 플레이리스트는 어떤가요?',
+                    autoplayText: '음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요',
+                    playThisSong: 'Play This Song',
+                    bottomText: '9X13cm 탁상용 달력(나무홀더 포함)<br>그림이 잘보이도록 스프링을 사용하지 않았어요.<br>잠시 시야에 그림을 투입하여 머리 속 휴식을 주세요.',
+                    buttonText: '신나게 사러 달려나가기',
+                    menuHome: 'Home',
+                    menuAbout: 'About',
+                    menuShop: 'Shop',
+                    menuCard: 'Anti-Tarot Card',
+                    menuCalendar: 'Calendar 2025'
+                },
+                en: {
+                    title: '2025 Calendar - Songs & Scenes',
+                    subtitle: "Selling the time of 2025.",
+                    subsubtitle: "We've selected music that fits each month and drawn scenes. What's your monthly playlist like?",
+                    autoplayText: 'Select the button to autoplay music videos (YouTube)',
+                    playThisSong: 'Play This Song',
+                    bottomText: '9X13cm Desk Calendar(+ wooden holder)<br>No coil biding so the pictures are clearly visible.<br>Take a mental break by inserting these images into your field of vision for a moment.',
+                    buttonText: 'Run excitedly to buy',
+                    menuHome: 'Home',
+                    menuAbout: 'About',
+                    menuShop: 'Shop',
+                    menuCard: 'Anti-Tarot Card',
+                    menuCalendar: 'Calendar 2025'
+                }
+            };
 
-    // 두 번째 회전 (뒷면 -> 앞면)
-    setTimeout(() => {
-        card.style.transform = 'rotateY(360deg)';
-    }, 800);
+            const monthlyContent = {
+                ko: [
+                    `<b>01. John Lennon - Starting Over <br>
+                        1월, 새로운 시작을 다짐합니다. </b><br><br>
+                        2024년 (구)칸예 웨스트가 내한한 리스닝파티의 Runaway의 음악과 퍼포먼스가 너무 멋있어서, 넷플릭스의 칸예 다큐를 찾아 보았어요. 그전까지는 그저 관종 셀럽으로만 알고 있었어요.<br>
+                        데뷔 전, 그는 jay-z 등 아티스트의 곡을 만들며, 자신의 앨범을 내고 싶어했지만, 음반사와 겨우 계약을 해도 데뷔는 번번이 미뤄집니다.
+                        <br> <br>인상 깊었던 점은 그런 좌절의 순간에도 풀이 죽거나 불평하지 않고 묵묵히 자신의 때를 기다리는 모습이었어요. <br> 왜냐하면 자기 자신을 믿었으니까.<br>
+                        힘들고 어렵고 부끄러운 상황에도 자신을 믿고 의연하게 때를 기다리는 것. 그게 저한테도 필요한 것 같아요.
+                        그런 사람이 되고 싶고, 그런 사람들을 더 알고 싶네요. <br>`,
+`<b>02. Chaka Khan - Angel <br>
+                        2월, 신비로운 계절. </b><br><br>
+                      2월은 다른 달보다 짧기 때문인지 조금 신비로운 느낌이 들어요. <br>춥지만 봄을 기다리며 싱숭생숭하죠. <br><br>
+                      Chaka Khan의 우렁찬 목소리가 거친 겨울 바람을 뚫으며 걸을 때 힘을 줍니다. <br> 무사처럼 걸을 수 있도록. 그리고 조금 분위기 잡으면서요.<br> 
+                      2월의 콘셉트는 분위기 있는 우렁찬 여자. 계획해봅니다. <br>`,
 
-  setTimeout(() => {
-    // Info box 표시
-    infoBox.style.display = 'block';
-    infoBox.style.left = `${newLeft + enlargedWidth + 15}px`;
-    infoBox.style.top = `${newTop}px`;
+                    `<b>03. Sufjan Stevens - Mystery of Love<br>
+                        3월, 새학기의 설레임을 떠올리며. </b><br><br>
+                      한국인이 시작을 다짐하는 마지막 기회. 새학기의 시간, 3월입니다. <br>
+                1월 1일, 구정 다음의 마지막 찬스죠. <br><br>
+                    이 곡은 영화 Call me by your name의 주제곡으로 알려져있죠. <br> 그래서 여름이 시작되는 6월의 대표곡이 될까라고도 생각했어요. <br> 그렇지만 도입부의 기타소리가 차가운 겨울을 깨고 따뜻한 봄이 시작되는 느낌도 들어요. <br> 
+            알을 깨고 부화한 새가 나오듯이, 겨울을 깨고 봄을 향하는...<br>`,
 
-    setTimeout(() => {
-        infoBox.style.transform = 'translateX(0)';
-        infoBox.style.opacity = '1';
+                    `<b>04. Redbone - Come and Get Your Love <br>
+                        4월, 한층 따뜻해진 햇살과 완연한 꽃들이 온전한 봄이 되었음을 알려주네요. </b><br><br>
+                     특유의 분위기를 가진 Redbone의 곡 Come and Get Your Love는 영화 가디언즈 오브 갤럭시로 알게 되었어요. <br><br>
+                     1974년 발표된 곡인데 세련되게 느껴져요. <br>영화에서 쓰인 덕에 이 곡을 알 수 있어서 좋네요. 
+                     Redbone의 멤버들은 인디안 계통인 것 같은데, 그래서인지 보컬도 약간 특유의 타령하는 느낌이 들어요. <Br>
+                     그렇지만 그 고유한 개성과 리듬 때문에 더 힙하게 느껴진다고 할까요? 마치 70년대 포스트말론 같은...  <br>추위를 털고 가벼워진 기분을 이 곡과 함께 느껴보세요.<br>`,
 
-        // 클릭한 카드의 인덱스에 따라 타이틀과 본문 변경
-        const cardIndex = Array.from(container.children).indexOf(card);
+                    `<b>05. Nelly Furtado - I'm Like A Bird<br>
+                        5월, 완전한 봄, 여름이 오기 직전.</b><br><br>
+                     복잡한 마음은 그대로이지만 온화한 봄 날씨로 조금 중화된다고 할까요.<BR>
+                     그런 기분입니다.<br><br>Nelly Furtardo는 정말 매력있는 아티스트에요. <br>
+                     이 곡 I'm Like a Bird를 들을 때 정말 자유자재로 날아다니는 새가 되는 상상을 해요. <br>
+                     그런데 조금 복잡한 마음을 곁들인…
+            <br>`,
 
-        infoTitle.style.fontSize = '20pt';
-        infoDescription.style.fontSize = '17pt';
+                    `<b>06. Red Hot Chili Peppers - Scar Tissue<br>
+                        6월, 호국보훈의 달이면서…</b><br><br>
+                    개인적인 아픔도 있는 달이에요. <br>그래서 마냥 활기차기 보단 어딘가 가벼워진듯하면서 까슬한 기분도 있어요.<br><br>
+                    Red Hot Chili Peppers는 제가 생각하는 The Greatest Band 중 하나에요. <br>이 곡 Scar Tissue가 발표되었을 때는 기타리스트 존 프루시엔테가 다시 합류하면서
+                    저력을 보여줬어요. 
+                    기타소리가 반짝이는 태양 아래 까슬한 여름의 시작을 알리는 듯합니다.
+            <br>`,
 
-        // 카드의 인덱스에 따라 다른 내용 표시
-        if (cardIndex === 0) {
-            infoTitle.innerHTML = "1. 마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
-            infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 훌륭한...것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
-        } else if (cardIndex === 1) {
-            infoTitle.innerHTML = "2. 책을 읽고 생각을 엮으세요";
-            infoDescription.innerHTML = "저의 최애 영화 굿윌헌팅의 첫 장면이 이 카드의 모티브가 되었습니다. 윌처럼 천재는 아니지만 저도 책 읽는 것을 좋아해요. 책은 지식과 지혜를 주고, 머리 속에 신선한 바람을 불어넣어 줍니다.";
-        } else if (cardIndex === 2) {
-            infoTitle.innerHTML = "3. 꽃을 사고 새로운 장면을 만드세요";
-            infoDescription.innerHTML = "꽃을 보면 눈길이 절로 가죠. 쉽게 새로운 방법으로 장면을 연출할 수 있어요. 만약 꽃을 사기 어렵다면 이 카드를 사세요.";
-        } else if (cardIndex === 3) {
-            infoTitle.innerHTML = "4. 꾸준하게 해서 당신의 궤도를 넓히세요";
-            infoDescription.innerHTML = "무례와 혐오와 경쟁과 분열과 비교와 나태와 허무의 달콤함에 길들지 말길, 의미와 무의미의 온갖 폭력을 이겨내고 하루하루를 온전히 경험하길(허준이 교수님의 졸업식 축사에서)  .";
-        } else if (cardIndex === 4) {
-            infoTitle.innerHTML = "5. 운동하세요. 국가대표 후보 선수가 되었다고 상상하며";
-            infoDescription.innerHTML = "창의적인 플레이를 하는 선수들을 보면 감탄이 절로 나죠. 신선한 플레이를 하는데 약간 부족한 선수가 콘셉트. 기자들이나 업계에서는 아는데, 아직 극복할 것이 남아있는. 그래서 응원하는.";
-         } else if (cardIndex === 5) {
-            infoTitle.innerHTML = "6. 잊어버려요.";
-            infoDescription.innerHTML = "오히려 쉽지 않다는 것을 알지만, 필요없는 것에는 더이상 우리를 괴롭히지 않도록.";
-         } else if (cardIndex === 6) {
-            infoTitle.innerHTML = "7. 복습하고 복기하여 도망치는 기억을 잡으세요.";
-            infoDescription.innerHTML = "복기라는 단어 좋아합니다. 무언가 놓쳤던 기운을 다시 찾아가는 느낌. 형사에 빙의하여 애써 공부한 것들을 다시 잡으러 갑시다. 주제곡은 비밀의 숲 OST입니다.";
-         } else if (cardIndex === 7) {
-            infoTitle.innerHTML = "8. 기백있는 토론을 하세요, 그것은 논리에서 나옵니다. 태도가 아니라.";
-            infoDescription.innerHTML = "물론 태도도 중요하지만 폼만 잡고 이야기하는지, 얼마나 논리로 무장하고 준비를 했는지 들어보면 다 압니다. 영혼 spirit에서 온 spirited가 기백있는 이라는 뜻이라니.. 멋지네요.";
-         } else if (cardIndex === 8) {
-            infoTitle.innerHTML = "9. 플러팅하세요. 누군가는 해야죠, 재밌을 거에요.";
-            infoDescription.innerHTML = "시시덕거리며 농담하고, 설레고, 재밌겠네요. 누구는 너무 잘하고 누구는 뚝딱거리는... 나는 하소연을 해버리는.";
-         } else if (cardIndex === 9) {
-            infoTitle.innerHTML = "10. 쉐도우복싱 하세요. 언젠가 빛을 볼거에요.";
-            infoDescription.innerHTML = "스파링 상대 없이 혼자서라도 시간을 투자하여 갈고 닦는 연습은 꼭 필요합니다. 주제곡은 Eminem의 Lose yourself 또는 (쨍하고) 해뜰날.";
-         } else if (cardIndex === 10) {
-            infoTitle.innerHTML = "11. 팀에 합류하세요. 더 자극을 받을 수 있도록";
-            infoDescription.innerHTML = "그룹이나 팀에 속했을 때 좋은 점은 잘하는 사람, 열심히 하는 사람을 가까이에서 보고 더 자극을 받을 수 있죠. 내가 어떤 방향으로 나아갈지 좌표를 삼을 수 있어요.";
-       } else if (cardIndex === 11) {
-            infoTitle.innerHTML = "12. 좋아하는 것을 말하세요. 다른 사람이나 자신을 기분좋게 만드는 씨앗이 됩니다";
-            infoDescription.innerHTML = "어떤 것을 좋아하세요? 좋아하는 것을 소개하고 소환해보세요. 그것들은 우리를 더욱 기분좋게 만들어 줄 거에요.";
-       } else if (cardIndex === 12) {
-            infoTitle.innerHTML = "13. 마일스톤을 설정하세요. 발표한 일정대로 움직이게 될거에요";
-            infoDescription.innerHTML = "마일스톤은 특정 시점에 수행되어야 하는 특별한 내용을 뜻합니다. 공개적 약속이나 계약은 그것을 지키기 위해 움직이게 되죠. 자신을 목표한 일정대로 끌어 당기세요.";
-       } else if (cardIndex === 13) {
-            infoTitle.innerHTML = "14. 당신만의 특별한 요리를 만드세요. 그리고 그 요리에 당신의 이름을 붙여보세요";
-            infoDescription.innerHTML = "거창하거나 훌륭하지 않아도 나만의 요리를 만들고 이름을 붙여보세요. 일상이 조금 더 풍부해집니다(너무 맛없지 않다면).";
-       } else if (cardIndex === 14) {
-            infoTitle.innerHTML = "15. 멋지게 꾸미고 착한 일을 하세요. 또는 작지만 좋은 일을 해봐요.";
-            infoDescription.innerHTML = "꾸미는 것은 재미있고 자신을 다른 모드로 바꿔줄 수 있어요. 그렇지만 나만 아니라 다른사람까지 다른 모드로 바꾸어 줄 수 있는 것은 작더라도 좋은 일을 하는 것이죠.";
-   } else if (cardIndex === 15) {
-            infoTitle.innerHTML = "16. 당신의 이야기를 쓰고 사람들을 울리세요.";
-            infoDescription.innerHTML = "창작은 이야기와 글에서 시작합니다. 위대한 작품에 개인적인 이야기가 조금도 없었다면 거짓이라고 생각해요. 우리가 마주한 실제 사건과 사람들은 이야기로서 위대한 힘을 가집니다. 그것으로 나만 울지 말고, 사람들을 울리세요.";
-   } else if (cardIndex === 16) {
-            infoTitle.innerHTML = "17. 둔필승총, 둔한 필기로 총명함을 이기게 하세요.";
-            infoDescription.innerHTML = "둔한 붓이 총명한 머리를 이긴다는 정약용의 말입니다. 머리로만 알기 어려운 내용을 손으로 써서 정립합니다. 저의 말이 아닌 정약용의 말을 들으세요~.";
-   } else if (cardIndex === 17) {
-            infoTitle.innerHTML = "18. 순간을 발견하여 마음에 불을 켜세요";
-            infoDescription.innerHTML = "지겨운 일상 속, 지구에 파견되어 새로움을 발견하려는 미션을 가진 요원이 되었다는 상상을 해요. 작은 것이라도 분위기를 전환할 나만의 요소를 모아보세요.";
-        } else {
-            infoTitle.innerHTML = '기타 카드';
-            infoDescription.innerHTML = '다른 카드에 대한 내용입니다.';
-        }
-    }, 50);
-}, 1200);
-}
+                    `<b>07. TLC - Diggin' On You<br>
+                        7월, 열기의 그루브</b><br><br>
+                     2024년 여름은 유난히 더웠죠. <br>
+                     그래도 7월은 끈적이지만 8월보다는 가벼운 느낌이 들어요. <br> 하지만 유독 올해엔 엄청난 습기로 대기의 열기 그루브가 느껴졌죠.<br>
+                     TLC의 Diggin' on you는 곡 자체의 느낌도 7월에 어울리지만 가사에 July가 나와요. <br>
+                     그루비한 여름을 즐겨봐요.<br>`,
 
-function returnToOriginalPosition(card) {
-    const placeholder = card.nextElementSibling;
-    const index = Array.from(container.children).indexOf(placeholder);
+                    `<b>08. The Offspring - You're Gonna Go Far, Kid<br>
+                        8월, 파워풀한 여름</b><br><br>
+                     여름의 정점이자 마지막인 8월. 가장 파워풀한 느낌이에요. <br>물론 우리가 아닌 여름이 ^^;<br><br>
+                     펑크는 강렬한 음악을 대표하고, Offspring의 이곡 You're gonna go far를 들으면 강렬하게 질주하는 모습이 떠올려요.<br>
+                     2024년 올림픽에서 보여준 멋진 선수들을 따라하듯이 에너지를 끌어 올려봅니다.<br>`,
 
-    // Info box 숨기기
-    infoBox.style.opacity = '0';
-    setTimeout(() => {
-        infoBox.style.display = 'none';
-        infoBox.style.transform = 'translateX(-100%)';
-    }, 400);
+                    `<b>09. Pearl Jam - Last Kiss<br>
+                        9월, 여름의 잔상 </b><br><br>
+                     2024년도 9월은 여름의 연장전이었죠. 그렇지만 이전에도 여름은 9월에 잔상을 남기고 종종 그 모습을 드러냈어요.<br>
+                1999년 7월에 빌보드차트 정점에 올랐던 곡인데 그 이후로 우리나라 라디오에 9월까지 계속 플레이된 것 같아요.(물론 1살 때요. 엄빠가 듣던 기억이 나요... 드립) <br>
+                밴드는 이 리메이크 싱글을 발표하며 코소보 전쟁 난민을 위해 기부를 했다고 해요.<br><br>
+                가사는 떠난 연인을 애도하는 내용이지만 에디 베더의 깊은 목소리가 전쟁으로 인한 아픔을 보듬는 것 같아요. 슬픔을 보듬는 그의 목소리가 선선한 공기와 함께 여러 것들을 생각하게 합니다. 여름의 치열함과 신나는 분위기에서 벗어나 이제 차분한 톤을 가지도록…`,
 
-    // 먼저 뒤집기
-    card.style.transform = 'rotateY(180deg)';
+                    `<b>10. Hoobastank - The Reason<br>
+                        10월, 각자의 이유를 다시 새기며. </b><br><br>
+                     10월은 달려오던 시간에 자리수가 바뀌죠. <br>얼마남지 않았구나 생각이 들며 후회를 하지만, 변화하고픈 기분도 들 것 같아요.<br><br>
+                Hoobastank의 The Reason은 그런 기분에 어울려요. <br>담담히 더 해나갈 수 있도록, 우리만의 이유를 가지도록 지지해주는 곡입니다.<br>`,
 
-    // 잠시 후 원래 위치로 돌아가면서 앞면으로 돌리기
-    setTimeout(() => {
-        card.classList.remove('active');
-        card.style.transition = 'all 0.4s ease';
-        card.style.position = '';
-        card.style.left = '';
-        card.style.top = '';
-        card.style.width = '';
-        card.style.height = '';
-        card.style.zIndex = '';
-        card.style.transform = getInitialTransform(index);
+                    `<b>11. Yazoo - Only You<br>
+                        11월, 침잠하는 시간. </b><br><br>
+                     11월은 1년 중 음울하고 깊이 들어간 느낌이에요.<br> 아마 12월은 한 해를 마무리하고 축하하는 기분도 있다면 11월은 거기에 아직 도달하지 못한 상태이죠<br><br>
+                Yazoo의 Only you는 다소 음울하면서 깊은 분위기를 내줘요.<br> 도달하지 못한 사랑의 깊고 어두운 마음을 표현한 곡 같아요. 그 안에서 희미한 빛은 있지만. 
+                그 침잠하는 상태와 어울립니다.<br>`,
 
-        if (placeholder && placeholder.classList.contains('placeholder')) {
-            placeholder.parentNode.removeChild(placeholder);
-        }
-    }, 400);
-}
+                    `<b>12. Frank Sinatra - Have Yourself A Merry Little Christmas<br>
+                        12월, 우리 자신에게 토스트! </b><br><br>
+                한 해를 마무리하게 되는 달, 한 해를 살아옴을 축하하고 격려해주었으면 하네요.<br> 연말이라고 해서 모든 시간이 축제 분위기는 아니죠.<br>
+                즐기는 모습을 뽐내는 사람들 속에서 스산한 기분도 강하게 들 거에요. <br><br>
+                Frank Sinatra의 Have yourself a merry little chrishmas를 들으면서 우리 자신을 감싸줘요. 화려하지 않아도 소박한 나만의 방식으로 축하해줍시다.<br>`
+                ],
+                en: [
 
-function updateContainerWidth() {
-    containerWidth = container.scrollWidth;
-}
 
-function handleResize() {
-    updateContainerWidth();
-    if (activeCard) {
-        enlargeCard(activeCard);
-    }
-}
+en: [
+                    `<b>01. John Lennon - Starting Over <br>
+                        January, resolving for a new beginning. </b><br><br>
+                        In 2024, (former) Kanye West's listening party in Korea was so impressive with the music and performance of "Runaway" that I watched Kanye's documentary on Netflix. Until then, I only knew him as an attention-seeking celebrity.<br>
+                        Before his debut, he produced songs for artists like Jay-Z and wanted to release his own album, but even after barely signing with a record label, his debut was repeatedly postponed.
+                        <br> <br>What was impressive was that even in those moments of frustration, he didn't get discouraged or complain, but quietly waited for his time. <br> Because he believed in himself.<br>
+                        Believing in yourself and calmly waiting for your time even in difficult, challenging, and embarrassing situations. I think I need that too.
+                        I want to be that kind of person and get to know more people like that. <br>`,
 
-function handleMouseMove(e) {
-    if (this.classList.contains('active')) return;
-    const rect = this.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
-    const dx = (mx - rect.width / 2) / 10;
-    const dy = (my - rect.height / 2) / 10;
+                    `<b>02. Chaka Khan - Angel <br>
+                        February, a mysterious season. </b><br><br>
+                      February feels a bit mysterious, perhaps because it's shorter than other months. <br>It's cold, but we're restless waiting for spring. <br><br>
+                      Chaka Khan's powerful voice gives strength when walking through the harsh winter wind. <br> Like walking as a warrior. And setting the mood a little.<br> 
+                      The concept for February is a charismatic, powerful woman. Let's plan for it. <br>`,
 
-    this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
-}
+                    `<b>03. Sufjan Stevens - Mystery of Love<br>
+                        March, reminiscing about the excitement of a new semester. </b><br><br>
+                      The last chance for Koreans to make a fresh start. March, the time of new semesters.
+                The final chance after January 1st and Lunar New Year. <br><br>
+                    This song is known as the theme song for the movie "Call Me by Your Name". So I thought it might be the representative song for June when summer begins. But the guitar sound at the beginning also feels like it's breaking the cold winter and starting a warm spring. <br> 
+                Like a bird hatching from its egg, breaking winter and heading towards spring...<br>`,
 
-function handleMouseLeave() {
-    if (this.classList.contains('active')) return;
-    const index = Array.from(container.children).indexOf(this);
-    this.style.transform = getInitialTransform(index);
-}
+                    `<b>04. Redbone - Come and Get Your Love <br>
+                        April, the warmer sunshine and full-blown flowers tell us that spring has truly arrived. </b><br><br>
+                     I got to know Redbone's "Come and Get Your Love" with its unique atmosphere through the movie Guardians of the Galaxy. <br>
+                     The song was released in 1974 but feels sophisticated. <br>I'm glad I got to know this song thanks to its use in the movie. 
+                     The members of Redbone seem to have Native American roots, which might be why the vocals have a unique chanting feel. <br>
+                     But doesn't that unique personality and rhythm make it feel even more hip? Like a '70s Post Malone... <br>Feel the lightness of shaking off the cold with this song.<br>`,
 
-// 이벤트 리스너
-container.addEventListener('click', function(e) {
-    const clickedCard = e.target.closest('.card');
-    if (clickedCard) {
-        if (activeCard === clickedCard) {
-            returnToOriginalPosition(clickedCard);
-            activeCard = null;
-        } else {
-            if (activeCard) {
-                returnToOriginalPosition(activeCard);
+                    `<b>05. Nelly Furtado - I'm Like A Bird<br>
+                        May, full spring, just before summer arrives.</b><br><br>
+                     The complicated feelings remain, but they're somewhat neutralized by the mild spring weather.<BR>
+                     That's the mood.<br><br>Nelly Furtado is a really charming artist. <br>
+                     When I listen to "I'm Like a Bird", I imagine becoming a bird flying freely. <br>
+                     But with a bit of a complex heart...
+                <br>`,
+
+                    `<b>06. Red Hot Chili Peppers - Scar Tissue<br>
+                        June, the month of patriotism and...</b><br><br>
+                    It's also a month of personal pain. <br>So rather than being purely energetic, there's a feeling of lightness mixed with a bit of roughness.<br><br>
+                    Red Hot Chili Peppers is one of The Greatest Bands in my opinion. <br>When this song "Scar Tissue" was released, it showed their strength as guitarist John Frusciante rejoined the band.
+                    The guitar sound seems to announce the start of a slightly rough summer under the shining sun.
+                <br>`,
+
+                    `<b>07. TLC - Diggin' On You<br>
+                        July, the groove of heat</b><br><br>
+                     The summer of 2024 was exceptionally hot. <br>
+                     Still, July feels sticky but lighter than August. <br> But this year especially, the heat groove in the air was felt due to the extreme humidity.<br>
+                     TLC's "Diggin' on You" not only fits July in its feel but also mentions July in the lyrics. <br>
+                     Let's enjoy this groovy summer.<br>`,
+
+                    `<b>08. The Offspring - You're Gonna Go Far, Kid<br>
+                        August, powerful summer</b><br><br>
+                     August, the peak and end of summer. It feels the most powerful. <br>Of course, it's the summer, not us ^^;<br><br>
+                     Punk represents intense music, and when I listen to The Offspring's "You're Gonna Go Far, Kid", I imagine intensely racing forward.<br>
+                     Let's raise our energy as if imitating the amazing athletes we saw in the 2024 Olympics.<br>`,
+
+                    `<b>09. Pearl Jam - Last Kiss<br>
+                        September, the afterimage of summer </b><br><br>
+                     September 2024 was an extension of summer. But even before, summer often left its traces in September, revealing itself occasionally.<br>
+                This song topped the Billboard chart in July 1999, and it seems it was played on Korean radio until September.
+                The band released this remake single and donated for the Kosovo War refugees.<br><br>
+                Although the lyrics are about mourning a lost love, Eddie Vedder's deep voice seems to comfort the pain caused by war. His voice, embracing sadness, makes us think about various things along with the cool air. Moving away from the intensity and excitement of summer to a calmer tone now...<br>`,
+
+                    `<b>10. Hoobastank - The Reason<br>
+                        October, revisiting our individual reasons. </b><br><br>
+                     October is when the digit of the time we've been running through changes. <br>We think there's not much left and feel regret, but also a desire for change.<br><br>
+                Hoobastank's "The Reason" fits this mood. <br>It's a song that supports us to calmly carry on, to have our own reasons.<br>`,
+
+                    `<b>11. Yazoo - Only You<br>
+                        November, a time of introspection. </b><br><br>
+                     November feels gloomy and deep among the months of the year.<br> While December might bring a sense of wrapping up the year and celebration, November feels like we haven't quite reached that point yet<br><br>
+                Yazoo's "Only You" creates a somewhat melancholic yet profound atmosphere.<br> It seems to express the deep, dark feelings of an unrequited love. There's a faint light within, though. 
+                It matches well with this state of introspection.<br>`,
+
+                    `<b>12. Frank Sinatra - Have Yourself A Merry Little Christmas<br>
+                        December, a toast to ourselves! </b><br><br>
+                The month when we wrap up the year, I hope we can celebrate and encourage ourselves for living through it.<br> Not all moments during the year-end are festive, though.<br>
+                Amidst people showing off their enjoyment, you might feel a strong sense of bleakness. <br><br>
+                Let's embrace ourselves while listening to Frank Sinatra's "Have Yourself A Merry Little Christmas". Let's celebrate in our own modest way, even if it's not extravagant.<br>`
+                ]
+            };
+
+            const youtubeIDs = [
+                "Ed1swjoTXqc", // 1월
+                "0GeeWwgdRoM",  // 2월
+                "n50Z3HGj4QE",  // 3월
+                "ir4GpOqRkQg",  // 4월
+                "roPQ_M3yJTA",  // 5월
+                "mzJj5-lubeM",  // 6월
+                "GxTqqjJWGpc",  // 7월
+                "_pmZKkb_UAg",  // 8월
+                "tNDWJ_KDkAc",  // 9월
+                "fV4DiAyExN0",  // 10월
+                "a4g5MeonGYM",  // 11월
+                "qBgbiZnhly4"   // 12월
+            ];
+
+function isMobile() {
+                return window.innerWidth <= 768;
             }
-            enlargeCard(clickedCard);
-            activeCard = clickedCard;
-        }
-    }
-});
 
-// 좌우 네비게이션 버튼 리스너
-leftNav.addEventListener('click', () => {
-    container.scrollBy({left: -scrollDistance, behavior: 'smooth'});
-    if (activeCard) {
-        returnToOriginalPosition(activeCard);
-        activeCard = null;
-    }
-});
+            function updateDots(month) {
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === month - 1);
+                });
+            }
 
-rightNav.addEventListener('click', () => {
-    container.scrollBy({left: scrollDistance, behavior: 'smooth'});
-    if (activeCard) {
-        returnToOriginalPosition(activeCard);
-        activeCard = null;
-    }
-});
+            function openMenu() {
+                menuItems.classList.add('menu-open');
+                dimmedBg.style.display = 'block';
+            }
 
-window.addEventListener('load', () => {
-    cardData.forEach((data, index) => {
-        const card = createCard(data, index);
-        card.addEventListener('mousemove', handleMouseMove);
-        card.addEventListener('mouseleave', handleMouseLeave);
-        container.appendChild(card);
-    });
-    updateContainerWidth();
-});
+            function closeMenu() {
+                menuItems.classList.remove('menu-open');
+                dimmedBg.style.display = 'none';
+            }
 
-window.addEventListener('resize', handleResize);
+            function toggleAutoplay() {
+                isAutoplayOn = !isAutoplayOn;
+                autoplayToggle.classList.toggle('active');
+                const statusElement = autoplayToggle.querySelector('.autoplay-status');
+               
+                if (isAutoplayOn) {
+                    autoplayToggle.querySelector('i').className = 'fas fa-play-circle';
+                    statusElement.textContent = 'ON';
+                    statusElement.style.color = 'red';
+                } else {
+                    autoplayToggle.querySelector('i').className = 'far fa-play-circle';
+                    statusElement.textContent = 'OFF';
+                    statusElement.style.color = '#7f7f7f';
+                }
+               
+                updateYoutubeAutoplay();
+            }
 
-// 초기 업데이트
-updateContainerWidth();
-</script>
+            function updateYoutubeAutoplay() {
+                let src = youtubeVideo.src;
+                src = src.replace(/(\?|&)autoplay=[01]/, '');
+                if (isAutoplayOn) {
+                    src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
+                }
+                youtubeVideo.src = src;
+            }
+
+            function preloadImage(src) {
+                return new Promise((resolve, reject) => {
+                    if (imageCache[src]) {
+                        resolve(imageCache[src]);
+                    } else {
+                        const img = new Image();
+                        img.onload = () => {
+                            imageCache[src] = img;
+                            resolve(img);
+                        };
+                        img.onerror = reject;
+                        img.src = src;
+                    }
+                });
+            }
+
+            async function updateContent(month, direction) {
+                if (isTransitioning) return;
+                isTransitioning = true;
+
+                const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
+                const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
+               
+                const nextImageSrc = `images/2025_square${month}.jpg`;
+               
+                try {
+                    await preloadImage(nextImageSrc);
+                   
+                    nextImage.src = nextImageSrc;
+                    nextImage.style.display = 'block';
+                    currentImage.style.display = 'block';
+
+                    if (direction) {
+                        nextImage.style.transition = 'none';
+                        nextImage.style.transform = `translateX(${direction === 'next' ? '100%' : '-100%'})`;
+                        
+                        requestAnimationFrame(() => {
+                            nextImage.style.transition = 'transform 0.3s ease-out';
+                            currentImage.style.transition = 'transform 0.3s ease-out';
+                            
+                            nextImage.style.transform = 'translateX(0)';
+                            currentImage.style.transform = `translateX(${direction === 'next' ? '-100%' : '100%'})`;
+                        });
+                    }
+
+                    updateDots(month);
+                   
+                    setTimeout(() => {
+                        if (direction) {
+                            currentImage.style.display = 'none';
+                            currentImage.style.transition = 'none';
+                        }
+                       
+                        activeImage = activeImage === 1 ? 2 : 1;
+                        isTransitioning = false;
+                    }, 300);
+
+                    bottomImage.src = isMobile() ? `images/${month}m.jpg` : `images/${month}.jpg`;
+                    calendarText.innerHTML = monthlyContent[currentLanguage][month - 1];
+                    youtubeVideo.src = `https://www.youtube.com/embed/${youtubeIDs[month - 1]}`;
+                    updateYoutubeAutoplay();
+                } catch (error) {
+                    console.error('Failed to load image:', error);
+                    isTransitioning = false;
+                }
+            }
+
+            // Touch Event Handlers
+            function handleTouchStart(e) {
+                if (isTransitioning) return;
+                
+                touchStartX = e.touches[0].clientX;
+                initialTouchX = touchStartX;
+                currentTranslateX = 0;
+                
+                const activeImg = activeImage === 1 ? calendarImage1 : calendarImage2;
+                const nextImg = activeImage === 1 ? calendarImage2 : calendarImage1;
+                
+                activeImg.style.transition = 'none';
+                nextImg.style.transition = 'none';
+
+                // 다음/이전 이미지 준비
+                if (!isTransitioning) {
+                    nextImg.src = `images/2025_square${
+                        currentMonth + (touchStartX > window.innerWidth / 2 ? -1 : 1)
+                    }.jpg`;
+                }
+            }
+
+            function handleTouchMove(e) {
+                if (isTransitioning) return;
+                
+                const currentX = e.touches[0].clientX;
+                const diff = currentX - touchStartX;
+                currentTranslateX = diff;
+
+                // 처음/마지막 페이지에서의 저항감 추가
+                if ((currentMonth === 1 && diff > 0) || (currentMonth === 12 && diff < 0)) {
+                    currentTranslateX = diff * 0.2;
+                }
+                
+                const activeImg = activeImage === 1 ? calendarImage1 : calendarImage2;
+                const nextImg = activeImage === 1 ? calendarImage2 : calendarImage1;
+                
+                if (diff < 0 && currentMonth < 12) {
+                    nextImg.style.transform = `translateX(${100 + (diff / window.innerWidth) * 100}%)`;
+                    activeImg.style.transform = `translateX(${(diff / window.innerWidth) * 100}%)`;
+                } else if (diff > 0 && currentMonth > 1) {
+                    nextImg.style.transform = `translateX(${-100 + (diff / window.innerWidth) * 100}%)`;
+                    activeImg.style.transform = `translateX(${(diff / window.innerWidth) * 100}%)`;
+                }
+            }
+
+            function handleTouchEnd() {
+                if (isTransitioning) return;
+                
+                const activeImg = activeImage === 1 ? calendarImage1 : calendarImage2;
+                const nextImg = activeImage === 1 ? calendarImage2 : calendarImage1;
+                
+                activeImg.style.transition = 'transform 0.3s ease-out';
+                nextImg.style.transition = 'transform 0.3s ease-out';
+
+                const diff = currentTranslateX;
+                const threshold = window.innerWidth * 0.2; // 20% threshold
+
+                if (Math.abs(diff) > threshold) {
+                    if (diff < 0 && currentMonth < 12) {
+                        showNextMonth();
+                    } else if (diff > 0 && currentMonth > 1) {
+                        showPreviousMonth();
+                    } else {
+                        resetImagesPosition();
+                    }
+                } else {
+                    resetImagesPosition();
+                }
+            }
+
+            function resetImagesPosition() {
+                const activeImg = activeImage === 1 ? calendarImage1 : calendarImage2;
+                const nextImg = activeImage === 1 ? calendarImage2 : calendarImage1;
+                
+                activeImg.style.transform = 'translateX(0)';
+                nextImg.style.transform = 'translateX(100%)';
+            }
+
+            function showNextMonth() {
+                if (currentMonth < 12 && !isTransitioning) {
+                    currentMonth++;
+                    updateContent(currentMonth, 'next');
+                }
+            }
+
+            function showPreviousMonth() {
+                if (currentMonth > 1 && !isTransitioning) {
+                    currentMonth--;
+                    updateContent(currentMonth, 'prev');
+                }
+            }
+
+            function changeLanguage() {
+                currentLanguage = currentLanguage === 'ko' ? 'en' : 'ko';
+                languageToggle.textContent = currentLanguage === 'ko' ? 'EN' : 'KO';
+                
+                document.querySelector('.pc-title').textContent = translations[currentLanguage].title;
+                document.querySelector('.subpc').textContent = translations[currentLanguage].subtitle;
+                document.querySelector('.subsub-pc').textContent = translations[currentLanguage].subsubtitle;
+                document.querySelector('.subsub-m').textContent = translations[currentLanguage].subsubtitle;
+                document.querySelector('.autoplay-text').textContent = translations[currentLanguage].autoplayText;
+                document.querySelector('.play-this-song').textContent = translations[currentLanguage].playThisSong;
+                document.querySelector('.normalt').innerHTML = translations[currentLanguage].bottomText;
+                document.querySelector('.custom-button .custom-button-content').firstChild.textContent = translations[currentLanguage].buttonText;
+
+                calendarText.innerHTML = monthlyContent[currentLanguage][currentMonth - 1];
+            }
+
+            // Event Listeners
+            hamburger.addEventListener('click', openMenu);
+            closeBtn.addEventListener('click', closeMenu);
+            dimmedBg.addEventListener('click', closeMenu);
+            autoplayToggle.addEventListener('click', toggleAutoplay);
+            nextButton.addEventListener('click', showNextMonth);
+            prevButton.addEventListener('click', showPreviousMonth);
+            languageToggle.addEventListener('click', changeLanguage);
+
+            // Touch Event Listeners
+            imageContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+            imageContainer.addEventListener('touchmove', handleTouchMove, { passive: true });
+            imageContainer.addEventListener('touchend', handleTouchEnd);
+
+            // Top Button
+            const topButton = document.getElementById('topButton');
+            topButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            window.addEventListener('scroll', () => {
+                topButton.style.display = window.pageYOffset > 100 ? 'flex' : 'none';
+            });
+
+            // Initialize content
+            updateContent(1);
+
+            // Window resize handler
+            window.addEventListener('resize', () => {
+                bottomImage.src = isMobile() ? `images/${currentMonth}m.jpg` : `images/${currentMonth}.jpg`;
+            });
+        });
+    </script>
 </body>
-</html>  
+</html>
