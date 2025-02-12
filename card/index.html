@@ -196,8 +196,18 @@
 
 
 <script> 
-const container = document.getElementById('container'); const leftNav = document.querySelector('.nav-button.left'); const rightNav = document.querySelector('.nav-button.right'); const infoBox = document.getElementById('infoBox'); const infoTitle = document.getElementById('infoTitle'); const infoDescription = document.getElementById('infoDescription'); let activeCard = null; let containerWidth = 0; const scrollDistance = 800;
- // 여기에 모바일 체크 함수 추가 const checkMobile = () => { const isMobile = window.innerWidth <= 768; document.body.classList.toggle('mobile', isMobile); }; 
+const container = document.getElementById('container'); 
+    const leftNav = document.querySelector('.nav-button.left'); 
+    const rightNav = document.querySelector('.nav-button.right'); const infoBox = document.getElementById('infoBox'); 
+    const infoTitle = document.getElementById('infoTitle'); 
+    const infoDescription = document.getElementById('infoDescription'); 
+    let activeCard = null; let containerWidth = 0; const scrollDistance = 800;
+
+ // 여기에 모바일 체크 함수 추가 
+    const checkMobile = () => { 
+        const isMobile = window.innerWidth <= 768; document.body.classList.toggle('mobile', isMobile); 
+}; 
+
 const cardData = [
     {image: "atc01.png"}, {image: "atc02.png"}, {image: "atc03.png"},
     {image: "atc04_2.png"}, {image: "atc05.png"}, {image: "atc06.png"},
