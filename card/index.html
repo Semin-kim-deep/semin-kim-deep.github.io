@@ -516,6 +516,11 @@ container.addEventListener('click', function(e) {
 
 // 좌우 네비게이션 버튼 리스너
 leftNav.addEventListener('click', () => {
+    if (checkMobile()) {
+        // 모바일에서는 아무 동작도 하지 않음
+        return;
+    }
+
     container.scrollBy({left: -scrollDistance, behavior: 'smooth'});
     if (activeCard) {
         returnToOriginalPosition(activeCard);
@@ -524,27 +529,16 @@ leftNav.addEventListener('click', () => {
 });
 
 rightNav.addEventListener('click', () => {
+    if (checkMobile()) {
+        // 모바일에서는 아무 동작도 하지 않음
+        return;
+    }
+
     container.scrollBy({left: scrollDistance, behavior: 'smooth'});
     if (activeCard) {
         returnToOriginalPosition(activeCard);
         activeCard = null;
     }
-});
-
-window.addEventListener('load', () => {
-    checkMobile(); // 추가
-    cardData.forEach((data, index) => {
-        const card = createCard(data, index);
-        card.addEventListener('mousemove', handleMouseMove);
-        card.addEventListener('mouseleave', handleMouseLeave);
-        container.appendChild(card);
-    });
-    updateContainerWidth();
-});
-
-window.addEventListener('resize', () => {
-    checkMobile(); // 추가
-    handleResize();
 });
 
 // 초기 업데이트
