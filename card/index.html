@@ -404,7 +404,73 @@ function getCardPosition(card) {
         top: cardRect.top - containerRect.top
     };
 }
-
+// enlargeCard 함수 위에 이 함수를 추가
+function updateCardInfo(card, index) {
+    if (isMobile()) {  // 모바일일 때만 실행
+        const title = card.querySelector('.card-info-mobile h2');
+        const description = card.querySelector('.card-info-mobile p');
+        
+  
+        if (index === 0) {
+             title.textContent = "1. 마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
+            description.textContent = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 훌륭한...것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
+        } else if (index === 1) {
+            title.textContent = "2. 책을 읽고 생각을 엮으세요";
+            description.textContent = "저의 최애 영화 굿윌헌팅의 첫 장면이 이 카드의 모티브가 되었습니다. 윌처럼 천재는 아니지만 저도 책 읽는 것을 좋아해요. 책은 지식과 지혜를 주고, 머리 속에 신선한 바람을 불어넣어 줍니다.";
+        } else if (index === 2) {
+            title.textContent = "3. 꽃을 사고 새로운 장면을 만드세요";
+            description.textContent = "꽃을 보면 눈길이 절로 가죠. 쉽게 새로운 방법으로 장면을 연출할 수 있어요. 만약 꽃을 사기 어렵다면 이 카드를 사세요.";
+        } else if (index === 3) {
+            title.textContent = "4. 꾸준하게 해서 당신의 궤도를 넓히세요";
+            description.textContent = "무례와 혐오와 경쟁과 분열과 비교와 나태와 허무의 달콤함에 길들지 말길, 의미와 무의미의 온갖 폭력을 이겨내고 하루하루를 온전히 경험하길(허준이 교수님의 졸업식 축사에서)  .";
+        } else if (index === 4) {
+            title.textContent = "5. 운동하세요. 국가대표 후보 선수가 되었다고 상상하며";
+            description.textContent = "창의적인 플레이를 하는 선수들을 보면 감탄이 절로 나죠. 신선한 플레이를 하는데 약간 부족한 선수가 콘셉트. 기자들이나 업계에서는 아는데, 아직 극복할 것이 남아있는. 그래서 응원하는.";
+         } else if (index === 5) {
+            title.textContent = "6. 잊어버려요.";
+            description.textContent = "오히려 쉽지 않다는 것을 알지만, 필요없는 것에는 더이상 우리를 괴롭히지 않도록.";
+         } else if (index === 6) {
+            title.textContent = "7. 복습하고 복기하여 도망치는 기억을 잡으세요.";
+            description.textContent = "복기라는 단어 좋아합니다. 무언가 놓쳤던 기운을 다시 찾아가는 느낌. 형사에 빙의하여 애써 공부한 것들을 다시 잡으러 갑시다. 주제곡은 비밀의 숲 OST입니다.";
+         } else if (index === 7) {
+            title.textContent = "8. 기백있는 토론을 하세요, 그것은 논리에서 나옵니다. 태도가 아니라.";
+            description.textContent = "물론 태도도 중요하지만 폼만 잡고 이야기하는지, 얼마나 논리로 무장하고 준비를 했는지 들어보면 다 압니다. 영혼 spirit에서 온 spirited가 기백있는 이라는 뜻이라니.. 멋지네요.";
+         } else if (index === 8) {
+            title.textContent = "9. 플러팅하세요. 누군가는 해야죠, 재밌을 거에요.";
+            description.textContent = "시시덕거리며 농담하고, 설레고, 재밌겠네요. 누구는 너무 잘하고 누구는 뚝딱거리는... 나는 하소연을 해버리는.";
+         } else if (index === 9) {
+            title.textContent = "10. 쉐도우복싱 하세요. 언젠가 빛을 볼거에요.";
+            description.textContent = "스파링 상대 없이 혼자서라도 시간을 투자하여 갈고 닦는 연습은 꼭 필요합니다. 주제곡은 Eminem의 Lose yourself 또는 (쨍하고) 해뜰날.";
+         } else if (index === 10) {
+            title.textContent = "11. 팀에 합류하세요. 더 자극을 받을 수 있도록";
+            description.textContent = "그룹이나 팀에 속했을 때 좋은 점은 잘하는 사람, 열심히 하는 사람을 가까이에서 보고 더 자극을 받을 수 있죠. 내가 어떤 방향으로 나아갈지 좌표를 삼을 수 있어요.";
+       } else if (index === 11) {
+            title.textContent = "12. 좋아하는 것을 말하세요. 다른 사람이나 자신을 기분좋게 만드는 씨앗이 됩니다";
+            description.textContent = "어떤 것을 좋아하세요? 좋아하는 것을 소개하고 소환해보세요. 그것들은 우리를 더욱 기분좋게 만들어 줄 거에요.";
+       } else if (index === 12) {
+            title.textContent = "13. 마일스톤을 설정하세요. 발표한 일정대로 움직이게 될거에요";
+            description.textContent = "마일스톤은 특정 시점에 수행되어야 하는 특별한 내용을 뜻합니다. 공개적 약속이나 계약은 그것을 지키기 위해 움직이게 되죠. 자신을 목표한 일정대로 끌어 당기세요.";
+       } else if (index === 13) {
+            title.textContent = "14. 당신만의 특별한 요리를 만드세요. 그리고 그 요리에 당신의 이름을 붙여보세요";
+            description.textContent = "거창하거나 훌륭하지 않아도 나만의 요리를 만들고 이름을 붙여보세요. 일상이 조금 더 풍부해집니다(너무 맛없지 않다면).";
+       } else if (index === 14) {
+            title.textContent = "15. 멋지게 꾸미고 착한 일을 하세요. 또는 작지만 좋은 일을 해봐요.";
+            description.textContent = "꾸미는 것은 재미있고 자신을 다른 모드로 바꿔줄 수 있어요. 그렇지만 나만 아니라 다른사람까지 다른 모드로 바꾸어 줄 수 있는 것은 작더라도 좋은 일을 하는 것이죠.";
+   } else if (index === 15) {
+            title.textContent = "16. 당신의 이야기를 쓰고 사람들을 울리세요.";
+            description.textContent = "창작은 이야기와 글에서 시작합니다. 위대한 작품에 개인적인 이야기가 조금도 없었다면 거짓이라고 생각해요. 우리가 마주한 실제 사건과 사람들은 이야기로서 위대한 힘을 가집니다. 그것으로 나만 울지 말고, 사람들을 울리세요.";
+   } else if (index === 16) {
+            title.textContent = "17. 둔필승총, 둔한 필기로 총명함을 이기게 하세요.";
+            description.textContent = "둔한 붓이 총명한 머리를 이긴다는 정약용의 말입니다. 머리로만 알기 어려운 내용을 손으로 써서 정립합니다. 저의 말이 아닌 정약용의 말을 들으세요~.";
+   } else if (index === 17) {
+            title.textContent = "18. 순간을 발견하여 마음에 불을 켜세요";
+            description.textContent = "지겨운 일상 속, 지구에 파견되어 새로움을 발견하려는 미션을 가진 요원이 되었다는 상상을 해요. 작은 것이라도 분위기를 전환할 나만의 요소를 모아보세요.";
+        } else {
+            title.textContent = '기타 카드';
+            description.textContent = '다른 카드에 대한 내용입니다.';
+        }
+}
+}
 function enlargeCard(card) {
     const viewportWidth = document.documentElement.clientWidth;
     const viewportHeight = document.documentElement.clientHeight;
