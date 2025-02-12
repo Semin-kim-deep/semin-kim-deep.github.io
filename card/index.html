@@ -493,52 +493,23 @@ function handleMouseLeave() {
 
 // 이벤트 리스너
 container.addEventListener('click', function(e) {
-    // 모바일 환경인지 확인
+    // 모바일 환경에서는 아무 동작도 하지 않음
     if (checkMobile()) {
-        // 클릭된 카드 확인
-        const clickedCard = e.target.closest('.card');
-        
-        // 첫 번째 카드(중앙 카드)인지 확인
-        if (clickedCard && Array.from(container.children).indexOf(clickedCard) === 0) {
-            // 기존에 열려있는 info-box가 있다면 닫기
-            if (infoBox.style.display === 'block') {
-                infoBox.style.display = 'none';
-                infoBox.style.opacity = '0';
-                return;
+        return;
+    }
+
+    // PC 모드의 기존 로직
+    const clickedCard = e.target.closest('.card');
+    if (clickedCard) {
+        if (activeCard === clickedCard) {
+            returnToOriginalPosition(clickedCard);
+            activeCard = null;
+        } else {
+            if (activeCard) {
+                returnToOriginalPosition(activeCard);
             }
-
-            // 카드의 위치 계산
-            const cardRect = clickedCard.getBoundingClientRect();
-
-            // 카드의 인덱스에 따라 설명 표시
-            infoTitle.style.fontSize = '16pt';
-            infoDescription.style.fontSize = '14pt';
-
-            infoTitle.innerHTML = "1. 마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
-            infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 훌륭한...것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
-
-            // 정보 박스 표시 (카드 아래에)
-            infoBox.style.display = 'block';
-            infoBox.style.left = `${cardRect.left}px`;
-            infoBox.style.top = `${cardRect.bottom + 10}px`;
-            infoBox.style.width = `${cardRect.width}px`;
-            infoBox.style.transform = 'translateX(0)';
-            infoBox.style.opacity = '1';
-        }
-    } else {
-        // PC 모드의 기존 로직 유지
-        const clickedCard = e.target.closest('.card');
-        if (clickedCard) {
-            if (activeCard === clickedCard) {
-                returnToOriginalPosition(clickedCard);
-                activeCard = null;
-            } else {
-                if (activeCard) {
-                    returnToOriginalPosition(activeCard);
-                }
-                enlargeCard(clickedCard);
-                activeCard = clickedCard;
-            }
+            enlargeCard(clickedCard);
+            activeCard = clickedCard;
         }
     }
 });
