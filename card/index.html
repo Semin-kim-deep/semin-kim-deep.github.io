@@ -156,23 +156,22 @@
             line-height: 1.7;
         }
 
-        @media (max-width: 768px) {
-            html, body {
-                overflow-x: hidden;
-                width: 100%;
-                position: relative;
-            }
+    @media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+        height: 100%; /* 높이 설정 추가 */
+    }
             
-            body {
-                background-image: url('../images/m_bg.jpg') !important;
-                background-size: 100% auto !important;
-                background-position: top center !important;
-                background-repeat: no-repeat !important;
-                width: 100vw;
-                height: auto;
-                overflow-y: auto;
-            }
-
+       body {
+        background-image: url('../images/m_bg.jpg') !important;
+        background-size: 100% 100% !important; /* 수정 */
+        background-position: top center !important;
+        background-repeat: no-repeat !important;
+        width: 100vw;
+        min-height: 100vh; /* 최소 높이 설정 */
+    }
             h1 {
                 font-size: 32px;
             }
@@ -197,27 +196,30 @@
                 white-space: normal !important;
             }
 
-            .card {
-                width: 70%;
-                max-width: 300px;
-                height: auto;
-                aspect-ratio: 213.6/356.4;
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%) !important;
-                opacity: 0;
-                margin: 0;
-                transition: opacity 0.5s ease;
-            }
+       /* 카드 표시 방식 수정 */
+    .card {
+        width: 70%;
+        max-width: 300px;
+        height: auto;
+        aspect-ratio: 213.6/356.4;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%) !important;
+        display: none; /* opacity 대신 display로 변경 */
+        margin: 0;
+    }
 
-            .card:first-child {
-                opacity: 1;
-            }
+    .card:first-child {
+        display: block; /* opacity 대신 display로 변경 */
+    }
 
-            .card:not(:first-child) {
-                pointer-events: none;
-                visibility: hidden;
-            }
+    .card:not(:first-child) {
+        pointer-events: none;
+        display: none; /* visibility 대신 display로 변경 */
+    }
+}
+
+
 
             .card__front {
                 opacity: 1;
