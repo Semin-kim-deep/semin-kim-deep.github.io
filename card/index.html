@@ -161,7 +161,7 @@
     <div class="title-container">
         <h1>Anti-Tarot Card</h1>
         <p class="subtitle">안티타로카드, 미래는 알 수 없으니까 지금 할 수 있는 일을 해요.</p>
-        <p class="subtitle-en">We don't know the future, so we just do what we can do now.(dr)</p>
+        <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
         </p>
             <p class="subtitle_s">각 카드를 눌러보세요. Click on each card. </p>.
     </div>
@@ -454,7 +454,77 @@ window.addEventListener('load', () => {
 window.addEventListener('resize', handleResize);
 
 // 초기 업데이트
-updateContainerWidth();
+updateContainerWidth();  let currentCardIndex = 0;
+const isMobile = window.innerWidth <= 768;
+
+function showCurrentCard() {
+    if (isMobile) {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            card.style.opacity = index === currentCardIndex ? '1' : '0';
+            card.style.zIndex = index === currentCardIndex ? '2' : '1';
+        });
+    }
+}
+
+// 기존의 leftNav 이벤트 리스너를 수정
+leftNav.addEventListener('click', () => {
+    if (isMobile) {
+        if (currentCardIndex > 0) {
+            currentCardIndex--;
+            showCurrentCard();
+        }
+    } else {
+        container.scrollBy({left: -scrollDistance, behavior: 'smooth'});
+    }
+    if (activeCard) {
+        returnToOriginalPosition(activeCard);
+        activeCard = null;
+    }
+});
+
+// 기존의 rightNav 이벤트 리스너를 수정
+rightNav.addEventListener('click', () => {
+    if (isMobile) {
+        if (currentCardIndex < cardData.length - 1) {
+            currentCardIndex++;
+            showCurrentCard();
+        }
+    } else {
+        container.scrollBy({left: scrollDistance, behavior: 'smooth'});
+    }
+    if (activeCard) {
+        returnToOriginalPosition(activeCard);
+        activeCard = null;
+    }
+});
+
+// window load 이벤트 리스너 수정
+window.addEventListener('load', () => {
+    cardData.forEach((data, index) => {
+        const card = createCard(data, index);
+        if (!isMobile) {
+            card.addEventListener('mousemove', handleMouseMove);
+            card.addEventListener('mouseleave', handleMouseLeave);
+        }
+        container.appendChild(card);
+    });
+    showCurrentCard();
+});
+
+// 모바일에서 카드 클릭 시 동작
+container.addEventListener('click', function(e) {
+    const clickedCard = e.target.closest('.card');
+    if (clickedCard && isMobile) {
+        const infoBox = document.getElementById('infoBox');
+        if (infoBox.classList.contains('active')) {
+            infoBox.classList.remove('active');
+        } else {
+            infoBox.classList.add('active');
+            updateInfoBoxContent(currentCardIndex);
+        }
+    }
+}); 
 </script>
 </body>
 </html>  
