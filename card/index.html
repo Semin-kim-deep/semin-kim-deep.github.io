@@ -265,37 +265,10 @@ const container = document.getElementById('container');
     const infoDescription = document.getElementById('infoDescription'); 
     let activeCard = null; let containerWidth = 0; const scrollDistance = 800;
 
-// 여기에 모바일 체크 함수 추가 
-const checkMobile = () => { 
-    const isMobile = window.innerWidth <= 768; 
-    document.body.classList.toggle('mobile', isMobile); 
-    return isMobile;
-}; 
-
-// 모바일 카드 네비게이션 함수
-function navigateMobileCards(direction) {
-    const cards = document.querySelectorAll('.card');
-    
-    // 현재 카드 페이드 아웃
-    cards[currentMobileCardIndex].style.opacity = '0';
-    
-    // 방향에 따라 인덱스 조정
-    if (direction === 'right') {
-        currentMobileCardIndex = (currentMobileCardIndex + 1) % cards.length;
-    } else {
-        currentMobileCardIndex = (currentMobileCardIndex - 1 + cards.length) % cards.length;
-    }
-    
-    // 새 카드 페이드 인
-    cards[currentMobileCardIndex].style.opacity = '1';
-    
-    // 다른 카드들 숨기기
-    cards.forEach((card, index) => {
-        if (index !== currentMobileCardIndex) {
-            card.style.opacity = '0';
-        }
-    });
-}
+ // 여기에 모바일 체크 함수 추가 
+    const checkMobile = () => { 
+        const isMobile = window.innerWidth <= 768; document.body.classList.toggle('mobile', isMobile); 
+}; 
 
 const cardData = [
     {image: "atc01.png"}, {image: "atc02.png"}, {image: "atc03.png"},
@@ -570,6 +543,98 @@ window.addEventListener('resize', () => {
 
 // 초기 업데이트
 updateContainerWidth();
+
+// 이벤트 리스너
+container.addEventListener('click', function(e) {
+    // 모바일 환경에서는 아무 동작도 하지 않음
+    if (checkMobile()) return;
+
+    const clickedCard = e.target.closest('.card');
+    if (clickedCard) {
+        if (activeCard === clickedCard) {
+            returnToOriginalPosition(clickedCard);
+            activeCard = null;
+        } else {
+            if (activeCard) {
+                returnToOriginalPosition(activeCard);
+            }
+            enlargeCard(clickedCard);
+            activeCard = clickedCard;
+        }
+    }
+});
+
+// 마우스 이벤트 리스너도 모바일에서는 비활성화
+function handleMouseMove(e) {
+    if (checkMobile() || this.classList.contains('active')) return;
+    const rect = this.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const dx = (mx - rect.width / 2) / 10;
+    const dy = (my - rect.height / 2) / 10;
+
+    this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
+}
+
+function handleMouseLeave() {
+    if (checkMobile() || this.classList.contains('active')) return;
+    const index = Array.from(container.children).indexOf(this);
+    this.style.transform = getInitialTransform(index);
+}
+
+window.addEventListener('load', () => {
+    const isMobile = checkMobile();
+    cardData.forEach((data, index) => {
+        const card = createCard(data, index);
+        
+        // 모바일이 아닐 때만 마우스 이벤트 추가
+        if (!isMobile) {
+            card.addEventListener('mousemove', handleMouseMove);
+            card.addEventListener('mouseleave', handleMouseLeave);
+        }
+        
+        container.appendChild(card);
+    });
+    updateContainerWidth();
+});let activeCard = null; 
+let containerWidth = 0; 
+const scrollDistance = 800;
+let currentMobileCardIndex = 0;
+
+// 여기에 모바일 체크 함수 추가 
+const checkMobile = () => { 
+    const isMobile = window.innerWidth <= 768; 
+    document.body.classList.toggle('mobile', isMobile); 
+    return isMobile;
+}; 
+
+// 모바일 카드 네비게이션 함수
+function navigateMobileCards(direction) {
+    const cards = Array.from(document.querySelectorAll('.card'));
+    console.log('Navigating mobile cards, current index:', currentMobileCardIndex, 'Direction:', direction);
+    
+    // 현재 카드 페이드 아웃
+    cards[currentMobileCardIndex].style.opacity = '0';
+    
+    // 방향에 따라 인덱스 조정
+    if (direction === 'right') {
+        currentMobileCardIndex = (currentMobileCardIndex + 1) % cards.length;
+    } else {
+        currentMobileCardIndex = (currentMobileCardIndex - 1 + cards.length) % cards.length;
+    }
+    
+    console.log('New card index:', currentMobileCardIndex);
+    
+    // 새 카드 페이드 인
+    cards[currentMobileCardIndex].style.opacity = '1';
+    
+    // 다른 카드들 숨기기
+    cards.forEach((card, index) => {
+        if (index !== currentMobileCardIndex) {
+            card.style.opacity = '0';
+        }
+    });
+}
 </script>
 </body>
 </html>  
