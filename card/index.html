@@ -161,7 +161,8 @@ body.mobile {
     background-size: 100% auto !important;
     background-position: top center !important;
     background-repeat: no-repeat !important;
-    overflow: hidden;
+    width: 100vw !important;
+    min-height: 100vh !important;
 }
 
 body.mobile .container {
@@ -542,7 +543,9 @@ rightNav.addEventListener('click', () => {
     }
 });
 
+    // DOMContentLoaded나 load 이벤트에서도 체크
 window.addEventListener('load', () => {
+    document.body.classList.toggle('mobile', window.innerWidth <= 768);
     cardData.forEach((data, index) => {
         const card = createCard(data, index);
         if (!isMobile) {
@@ -552,9 +555,21 @@ window.addEventListener('load', () => {
         container.appendChild(card);
     });
     showCurrentCard();
-});
+}); 
 
-window.addEventListener('resize', handleResize);
+// 변수 선언 부분에 추가
+document.body.classList.toggle('mobile', window.innerWidth <= 768);
+
+
+// resize 이벤트에서 체크
+window.addEventListener('resize', () => {
+    updateContainerWidth();
+    document.body.classList.toggle('mobile', window.innerWidth <= 768);
+    console.log('mobile check:', window.innerWidth <= 768); // 디버깅용
+    if (activeCard) {
+        enlargeCard(activeCard);
+    }
+});
 
 // 모바일에서 카드 클릭 시 동작
 container.addEventListener('click', function(e) {
@@ -568,7 +583,8 @@ container.addEventListener('click', function(e) {
             updateInfoBoxContent(currentCardIndex);
         }
     }
-}); 
+});
+
 </script>
 </body>
 </html>  
