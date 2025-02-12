@@ -157,74 +157,18 @@
         } 
 
 @media (max-width: 768px) {
-    /* 모바일용 배경 이미지 설정 */
-   body {
-        background-image: url('../images/m_bg.jpg');
-        background-color: red; /* 테스트용 */
-        overflow: hidden;
-}
-    .container {
-        padding: 0;
-        height: calc(100vh - 200px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        overflow: hidden; /* 컨테이너의 스크롤도 제거 */
-    }
-
-    /* 기존 카드 스타일 유지 */
-    .card {
-        position: absolute;
-        width: 80%;
-        max-width: 300px;
-        aspect-ratio: 0.6;
-        margin: 0;
-        opacity: 0;
-        transition: opacity 0.5s ease;
-        transform: none !important;
-    }
-
-    .card:first-child {
-        opacity: 1;
-    }
-
-    .card.active {
-        width: 80%;
-        max-width: 300px;
-        position: relative;
-        z-index: 2;
-    }
-
-    .card__front, .card__back {
-        transform: none !important;
-        backface-visibility: visible;
-    }
-
-    .nav-button {
-        display: block;
-        opacity: 0.8;
-        background-color: rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        top: 50%;
-    }
-
-    .info-box {
-        position: fixed;
-        bottom: 0;
-        left: 0;
+    html, body {
+        overflow-x: hidden;
         width: 100%;
-        max-height: 40vh;
-        transform: translateY(100%);
-        margin: 0;
-        border-radius: 18px 18px 0 0;
-        overflow-y: auto;
+        position: relative;
     }
-
-    .info-box.active {
-        transform: translateY(0);
+    
+    body {
+        background-image: url('../images/m_bg.jpg') !important;
+        background-size: 100% auto !important;
+        background-position: top center !important;
+        background-repeat: no-repeat !important;
+        width: 100vw;
     }
 }  
     </style>
@@ -232,7 +176,7 @@
 <body>
     <div class="title-container">
         <h1>Anti-Tarot Card</h1>
-        <p class="subtitle">안티타로카드, 미래는 알 수 없으니까 지금 할 수 있는 일을 해요. d </p>
+        <p class="subtitle">안티타로카드, 미래는 알 수 없으니까 지금 할 수 있는 일을 해요. do </p>
         <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
         </p>
             <p class="subtitle_s">각 카드를 눌러보세요. Click on each card. </p>.
