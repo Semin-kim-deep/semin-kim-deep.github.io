@@ -70,6 +70,7 @@
     position: relative;
     transform-style: preserve-3d;
     border-radius: 14px;
+
     /* 새로 추가되는 속성들 */
     -webkit-perspective: 1000px;
     perspective: 1000px;
@@ -155,6 +156,23 @@
             color: black;
             line-height: 1.7;
         }
+
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+    }
+    
+    body {
+        background-image: url('../images/m_bg.jpg') !important;
+        background-size: 100% auto !important;
+        background-position: top center !important;
+        background-repeat: no-repeat !important;
+        width: 100vw;
+    }
+}
+
     </style>
 </head>
 <body>
