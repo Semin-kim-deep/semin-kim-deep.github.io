@@ -463,11 +463,24 @@ rightNav.addEventListener('click', () => {
     }
 });
 
-window.addEventListener('load', () => { checkMobile(); // 추가 cardData.forEach((data, index) => { const card = createCard(data, index); card.addEventListener('mousemove', handleMouseMove); card.addEventListener('mouseleave', handleMouseLeave); container.appendChild(card); }); updateContainerWidth(); });
-window.addEventListener('resize', handleResize);
+window.addEventListener('load', () => {
+    checkMobile(); // 추가
+    cardData.forEach((data, index) => {
+        const card = createCard(data, index);
+        card.addEventListener('mousemove', handleMouseMove);
+        card.addEventListener('mouseleave', handleMouseLeave);
+        container.appendChild(card);
+    });
+    updateContainerWidth();
+});
 
-}); updateContainerWidth();  });  window.addEventListener('resize', () => { checkMobile(); // 추가 handleResize();
- }); 
+window.addEventListener('resize', () => {
+    checkMobile(); // 추가
+    handleResize();
+});
+
+// 초기 업데이트
+updateContainerWidth();
 </script>
 </body>
 </html>  
