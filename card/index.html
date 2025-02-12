@@ -498,7 +498,7 @@ container.addEventListener('click', function(e) {
         // 클릭된 카드 확인
         const clickedCard = e.target.closest('.card');
         
-        // 첫 번째 카드(중앙 카드)인지 확인
+        // 첫 번째 카드(중앙 카드)만 반응
         if (clickedCard && Array.from(container.children).indexOf(clickedCard) === 0) {
             // 기존에 열려있는 info-box가 있다면 닫기
             if (infoBox.style.display === 'block') {
@@ -535,15 +535,33 @@ container.addEventListener('click', function(e) {
         }
     }
 });
+
 // 좌우 네비게이션 버튼 리스너
 leftNav.addEventListener('click', () => {
-    // PC 모드일 때만 스크롤 및 카드 확대/축소 기능 작동
-    if (!checkMobile()) {
-        container.scrollBy({left: -scrollDistance, behavior: 'smooth'});
-        if (activeCard) {
-            returnToOriginalPosition(activeCard);
-            activeCard = null;
-        }
+    // 모바일 환경에서는 아무 동작도 하지 않음
+    if (checkMobile()) {
+        return;
+    }
+
+    // PC 모드의 기존 로직 유지
+    container.scrollBy({left: -scrollDistance, behavior: 'smooth'});
+    if (activeCard) {
+        returnToOriginalPosition(activeCard);
+        activeCard = null;
+    }
+});
+
+rightNav.addEventListener('click', () => {
+    // 모바일 환경에서는 아무 동작도 하지 않음
+    if (checkMobile()) {
+        return;
+    }
+
+    // PC 모드의 기존 로직 유지
+    container.scrollBy({left: scrollDistance, behavior: 'smooth'});
+    if (activeCard) {
+        returnToOriginalPosition(activeCard);
+        activeCard = null;
     }
 });
 
