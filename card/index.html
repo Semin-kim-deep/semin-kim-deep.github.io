@@ -159,6 +159,31 @@
             color: black;
             line-height: 1.7;
         }
+.card-info-mobile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+    font-family: 'Pretendard', sans-serif;
+    pointer-events: none;
+}
+
+.card-info-mobile h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.card-info-mobile p {
+    font-size: 14px;
+    line-height: 1.4;
+}
 
 @media (max-width: 768px) {
    /* 전체 스크롤 제거 */
@@ -225,9 +250,17 @@
        transform: none !important;
    }
 
-   .card__back {
-       display: none;
-   }
+    .card__back {
+        display: block;  /* none에서 block으로 변경 */
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+    
+    .card.show-back .card__back,
+    .card.show-back .card-info-mobile {
+        opacity: 1;
+    }
+}
 
    .card img {
        width: 100%;
@@ -257,7 +290,8 @@
 
 
 
-<script>  // 모바일 체크 함수
+<script>  
+// 모바일 체크 함수
 function isMobile() {
     return window.innerWidth <= 768;
 } 
@@ -579,6 +613,16 @@ window.addEventListener('resize', () => {
     }
     handleResize();
 });
+function handleCardClick(e) {
+    const clickedCard = e.target.closest('.card');
+    if (clickedCard && isMobile()) {
+        clickedCard.classList.add('show-back');
+        const index = Array.from(container.children).indexOf(clickedCard);
+        updateCardInfo(clickedCard, index);
+    }
+}
+
+container.addEventListener('click', handleCardClick);
 
 // 초기 업데이트
 updateContainerWidth();
