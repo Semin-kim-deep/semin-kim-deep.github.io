@@ -534,6 +534,26 @@ rightNav.addEventListener('click', () => {
     }
 });
 
+window.addEventListener('load', () => {
+    const isMobile = checkMobile();
+    cardData.forEach((data, index) => {
+        const card = createCard(data, index);
+        
+        // 모바일이 아닐 때만 마우스 이벤트 추가
+        if (!isMobile) {
+            card.addEventListener('mousemove', handleMouseMove);
+            card.addEventListener('mouseleave', handleMouseLeave);
+        }
+        
+        // 모바일일 때 첫 번째 카드만 보이도록 처리
+        if (isMobile) {
+            card.style.opacity = index === 0 ? '1' : '0';
+        }
+        
+        container.appendChild(card);
+    });
+    updateContainerWidth();
+});
 // 초기 업데이트
 updateContainerWidth();
 </script>
