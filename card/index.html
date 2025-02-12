@@ -322,56 +322,88 @@ function getCardPosition(card) {
 }
 
 function enlargeCard(card) {
-    const viewportWidth = document.documentElement.clientWidth;
-    const viewportHeight = document.documentElement.clientHeight;
-    const cardPosition = getCardPosition(card);
+    if (isMobile()) {
+        // 모바일용 카드 확대/설명 표시
+        const viewportWidth = document.documentElement.clientWidth;
+        const viewportHeight = document.documentElement.clientHeight;
+        
+        card.style.transition = 'all 0.4s ease';
+        card.classList.add('active');
+        
+        const enlargedWidth = 284;
+        const enlargedHeight = 474.4;
+        const newLeft = (viewportWidth - enlargedWidth) / 2;
+        const newTop = (viewportHeight - enlargedHeight) / 2;
 
-    card.style.transition = 'all 0.4s ease';
-    card.classList.add('active');
-    
-    const enlargedWidth = 284;
-    const enlargedHeight = 474.4;
+        card.style.position = 'fixed';
+        card.style.left = `${newLeft}px`;
+        card.style.top = `${newTop}px`;
+        card.style.width = `${enlargedWidth}px`;
+        card.style.height = `${enlargedHeight}px`;
+        card.style.zIndex = '1000';
 
-    const newLeft = (viewportWidth - enlargedWidth * 2 - 15) / 2;
-    const newTop = (viewportHeight - enlargedHeight) / 2;
+        const placeholder = createPlaceholder();
+        card.parentNode.insertBefore(placeholder, card.nextSibling);
 
-    card.style.position = 'fixed';
-    card.style.left = `${newLeft}px`;
-    card.style.top = `${newTop}px`;
-    card.style.width = `${enlargedWidth}px`;
-    card.style.height = `${enlargedHeight}px`;
-    card.style.zIndex = '1000';
-    
-    const placeholder = createPlaceholder();
-    card.parentNode.insertBefore(placeholder, card.nextSibling);
-
-    // 첫 번째 회전 (앞면 -> 뒷면)
-    setTimeout(() => {
-        card.style.transform = 'rotateY(180deg)';
-    }, 400);
-
-    // 두 번째 회전 (뒷면 -> 앞면)
-    setTimeout(() => {
-        card.style.transform = 'rotateY(360deg)';
-    }, 800);
-
-  setTimeout(() => {
-    // Info box 표시
-    infoBox.style.display = 'block';
-    infoBox.style.left = `${newLeft + enlargedWidth + 15}px`;
-    infoBox.style.top = `${newTop}px`;
-
-    setTimeout(() => {
-        infoBox.style.transform = 'translateX(0)';
-        infoBox.style.opacity = '1';
-
-        // 클릭한 카드의 인덱스에 따라 타이틀과 본문 변경
+        // 모바일에서는 회전 효과 대신 페이드로 전환
+        const cardFront = card.querySelector('.card__front');
+        const cardBack = card.querySelector('.card__back');
+        
+        cardFront.style.opacity = '0';
+        cardBack.style.opacity = '1';
+        cardBack.style.transform = 'none';  // 뒤집기 효과 제거
+        
+        // 카드 뒷면에 텍스트 추가
         const cardIndex = Array.from(container.children).indexOf(card);
+        cardBack.innerHTML = getMobileCardContent(cardIndex);
 
-        infoTitle.style.fontSize = '20pt';
-        infoDescription.style.fontSize = '17pt';
+    } else {
+        // PC용 기존 카드 확대/설명 표시
+        const viewportWidth = document.documentElement.clientWidth;
+        const viewportHeight = document.documentElement.clientHeight;
+        const cardPosition = getCardPosition(card);
 
-        // 카드의 인덱스에 따라 다른 내용 표시
+        card.style.transition = 'all 0.4s ease';
+        card.classList.add('active');
+        
+        const enlargedWidth = 284;
+        const enlargedHeight = 474.4;
+
+        const newLeft = (viewportWidth - enlargedWidth * 2 - 15) / 2;
+        const newTop = (viewportHeight - enlargedHeight) / 2;
+
+        card.style.position = 'fixed';
+        card.style.left = `${newLeft}px`;
+        card.style.top = `${newTop}px`;
+        card.style.width = `${enlargedWidth}px`;
+        card.style.height = `${enlargedHeight}px`;
+        card.style.zIndex = '1000';
+        
+        const placeholder = createPlaceholder();
+        card.parentNode.insertBefore(placeholder, card.nextSibling);
+
+        setTimeout(() => {
+            card.style.transform = 'rotateY(180deg)';
+        }, 400);
+
+        setTimeout(() => {
+            card.style.transform = 'rotateY(360deg)';
+        }, 800);
+
+        setTimeout(() => {
+            infoBox.style.display = 'block';
+            infoBox.style.left = `${newLeft + enlargedWidth + 15}px`;
+            infoBox.style.top = `${newTop}px`;
+
+            setTimeout(() => {
+                infoBox.style.transform = 'translateX(0)';
+                infoBox.style.opacity = '1';
+
+                const cardIndex = Array.from(container.children).indexOf(card);
+                infoTitle.style.fontSize = '20pt';
+                infoDescription.style.fontSize = '17pt';
+
+          // 카드의 인덱스에 따라 다른 내용 표시
         if (cardIndex === 0) {
             infoTitle.innerHTML = "1. 마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
             infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 훌륭한...것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
@@ -581,7 +613,47 @@ window.addEventListener('resize', () => {
 });
 
 // 초기 업데이트
-updateContainerWidth();
+updateContainerWidth();   function getMobileCardContent(cardIndex) {
+    let title, description;
+    
+    switch(cardIndex) {
+        case 0:
+            title = "1. 마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
+            description = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 훌륭한...것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
+            break;
+        // 나머지 카드에 대한 case 추가
+    }
+    
+    return `
+        <div style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            color: black;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        ">
+            <h2 style="
+                font-size: 20pt;
+                margin-bottom: 20px;
+                font-family: 'Pretendard', sans-serif;
+            ">${title}</h2>
+            <p style="
+                font-size: 16pt;
+                line-height: 1.7;
+                font-family: 'Pretendard', sans-serif;
+            ">${description}</p>
+        </div>
+    `;
+}
 </script>
 </body>
 </html>  
+ 
