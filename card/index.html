@@ -493,57 +493,23 @@ function handleMouseLeave() {
 
 // 이벤트 리스너
 container.addEventListener('click', function(e) {
-    // 모바일 환경인지 확인
-    if (checkMobile()) {
-        // 클릭된 카드 확인
-        const clickedCard = e.target.closest('.card');
-        
-        // 첫 번째 카드(중앙 카드)만 반응
-        if (clickedCard && Array.from(container.children).indexOf(clickedCard) === 0) {
-            // 기존에 열려있는 info-box가 있다면 닫기
-            if (infoBox.style.display === 'block') {
-                infoBox.style.display = 'none';
-                infoBox.style.opacity = '0';
-                return;
+    const clickedCard = e.target.closest('.card');
+    if (clickedCard) {
+        if (activeCard === clickedCard) {
+            returnToOriginalPosition(clickedCard);
+            activeCard = null;
+        } else {
+            if (activeCard) {
+                returnToOriginalPosition(activeCard);
             }
-
-            // 카드의 인덱스에 따라 설명 표시
-            infoTitle.style.fontSize = '16pt';
-            infoDescription.style.fontSize = '14pt';
-
-            infoTitle.innerHTML = "1. 마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
-            infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 훌륭한...것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
-
-            // 정보 박스 표시
-            infoBox.style.display = 'block';
-            infoBox.style.opacity = '1';
-        }
-    } else {
-        // PC 모드의 기존 로직 유지
-        const clickedCard = e.target.closest('.card');
-        if (clickedCard) {
-            if (activeCard === clickedCard) {
-                returnToOriginalPosition(clickedCard);
-                activeCard = null;
-            } else {
-                if (activeCard) {
-                    returnToOriginalPosition(activeCard);
-                }
-                enlargeCard(clickedCard);
-                activeCard = clickedCard;
-            }
+            enlargeCard(clickedCard);
+            activeCard = clickedCard;
         }
     }
 });
 
 // 좌우 네비게이션 버튼 리스너
 leftNav.addEventListener('click', () => {
-    // 모바일 환경에서는 아무 동작도 하지 않음
-    if (checkMobile()) {
-        return;
-    }
-
-    // PC 모드의 기존 로직 유지
     container.scrollBy({left: -scrollDistance, behavior: 'smooth'});
     if (activeCard) {
         returnToOriginalPosition(activeCard);
@@ -552,12 +518,6 @@ leftNav.addEventListener('click', () => {
 });
 
 rightNav.addEventListener('click', () => {
-    // 모바일 환경에서는 아무 동작도 하지 않음
-    if (checkMobile()) {
-        return;
-    }
-
-    // PC 모드의 기존 로직 유지
     container.scrollBy({left: scrollDistance, behavior: 'smooth'});
     if (activeCard) {
         returnToOriginalPosition(activeCard);
@@ -565,37 +525,22 @@ rightNav.addEventListener('click', () => {
     }
 });
 
-rightNav.addEventListener('click', () => {
-    // PC 모드일 때만 스크롤 및 카드 확대/축소 기능 작동
-    if (!checkMobile()) {
-        container.scrollBy({left: scrollDistance, behavior: 'smooth'});
-        if (activeCard) {
-            returnToOriginalPosition(activeCard);
-            activeCard = null;
-        }
-    }
-});
-
 window.addEventListener('load', () => {
-    const isMobile = checkMobile();
+    checkMobile(); // 추가
     cardData.forEach((data, index) => {
         const card = createCard(data, index);
-        
-        // 모바일이 아닐 때만 마우스 이벤트 추가
-        if (!isMobile) {
-            card.addEventListener('mousemove', handleMouseMove);
-            card.addEventListener('mouseleave', handleMouseLeave);
-        }
-        
-        // 모바일일 때 첫 번째 카드만 보이도록 처리
-        if (isMobile) {
-            card.style.opacity = index === 0 ? '1' : '0';
-        }
-        
+        card.addEventListener('mousemove', handleMouseMove);
+        card.addEventListener('mouseleave', handleMouseLeave);
         container.appendChild(card);
     });
     updateContainerWidth();
 });
+
+window.addEventListener('resize', () => {
+    checkMobile(); // 추가
+    handleResize();
+});
+
 // 초기 업데이트
 updateContainerWidth();
 </script>
