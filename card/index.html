@@ -597,48 +597,23 @@ window.addEventListener('load', () => {
             card.addEventListener('mouseleave', handleMouseLeave);
         }
         
+        // 모바일일 때 첫 번째 카드만 보이도록 처리
+        if (isMobile) {
+            card.style.opacity = index === 0 ? '1' : '0';
+        }
+        
         container.appendChild(card);
     });
     updateContainerWidth();
-});let activeCard = null; 
-let containerWidth = 0; 
-const scrollDistance = 800;
-let currentMobileCardIndex = 0;
+});
 
-// 여기에 모바일 체크 함수 추가 
-const checkMobile = () => { 
-    const isMobile = window.innerWidth <= 768; 
-    document.body.classList.toggle('mobile', isMobile); 
-    return isMobile;
-}; 
+window.addEventListener('resize', () => {
+    checkMobile(); // 추가
+    handleResize();
+});
 
-// 모바일 카드 네비게이션 함수
-function navigateMobileCards(direction) {
-    const cards = Array.from(document.querySelectorAll('.card'));
-    console.log('Navigating mobile cards, current index:', currentMobileCardIndex, 'Direction:', direction);
-    
-    // 현재 카드 페이드 아웃
-    cards[currentMobileCardIndex].style.opacity = '0';
-    
-    // 방향에 따라 인덱스 조정
-    if (direction === 'right') {
-        currentMobileCardIndex = (currentMobileCardIndex + 1) % cards.length;
-    } else {
-        currentMobileCardIndex = (currentMobileCardIndex - 1 + cards.length) % cards.length;
-    }
-    
-    console.log('New card index:', currentMobileCardIndex);
-    
-    // 새 카드 페이드 인
-    cards[currentMobileCardIndex].style.opacity = '1';
-    
-    // 다른 카드들 숨기기
-    cards.forEach((card, index) => {
-        if (index !== currentMobileCardIndex) {
-            card.style.opacity = '0';
-        }
-    });
-}
+// 초기 업데이트
+updateContainerWidth();
 </script>
 </body>
 </html>  
