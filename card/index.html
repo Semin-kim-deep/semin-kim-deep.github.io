@@ -500,17 +500,28 @@ container.addEventListener('click', function(e) {
         
         // 첫 번째 카드(중앙 카드)인지 확인
         if (clickedCard && Array.from(container.children).indexOf(clickedCard) === 0) {
+            // 기존에 열려있는 info-box가 있다면 닫기
+            if (infoBox.style.display === 'block') {
+                infoBox.style.display = 'none';
+                infoBox.style.opacity = '0';
+                return;
+            }
+
+            // 카드의 위치 계산
+            const cardRect = clickedCard.getBoundingClientRect();
+
             // 카드의 인덱스에 따라 설명 표시
-            infoTitle.style.fontSize = '20pt';
-            infoDescription.style.fontSize = '17pt';
+            infoTitle.style.fontSize = '16pt';
+            infoDescription.style.fontSize = '14pt';
 
             infoTitle.innerHTML = "1. 마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
             infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 훌륭한...것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
 
-            // 정보 박스 표시
+            // 정보 박스 표시 (카드 아래에)
             infoBox.style.display = 'block';
-            infoBox.style.left = '20px';
-            infoBox.style.top = '200px';
+            infoBox.style.left = `${cardRect.left}px`;
+            infoBox.style.top = `${cardRect.bottom + 10}px`;
+            infoBox.style.width = `${cardRect.width}px`;
             infoBox.style.transform = 'translateX(0)';
             infoBox.style.opacity = '1';
         }
