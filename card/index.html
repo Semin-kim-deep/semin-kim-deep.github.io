@@ -493,17 +493,41 @@ function handleMouseLeave() {
 
 // 이벤트 리스너
 container.addEventListener('click', function(e) {
-    const clickedCard = e.target.closest('.card');
-    if (clickedCard) {
-        if (activeCard === clickedCard) {
-            returnToOriginalPosition(clickedCard);
-            activeCard = null;
-        } else {
-            if (activeCard) {
-                returnToOriginalPosition(activeCard);
+    // 모바일 환경인지 확인
+    if (checkMobile()) {
+        // 클릭된 카드 확인
+        const clickedCard = e.target.closest('.card');
+        
+        // 첫 번째 카드(중앙 카드)인지 확인
+        if (clickedCard && Array.from(container.children).indexOf(clickedCard) === 0) {
+            // 카드의 인덱스에 따라 설명 표시
+            infoTitle.style.fontSize = '20pt';
+            infoDescription.style.fontSize = '17pt';
+
+            infoTitle.innerHTML = "1. 마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
+            infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 훌륭한...것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
+
+            // 정보 박스 표시
+            infoBox.style.display = 'block';
+            infoBox.style.left = '20px';
+            infoBox.style.top = '200px';
+            infoBox.style.transform = 'translateX(0)';
+            infoBox.style.opacity = '1';
+        }
+    } else {
+        // PC 모드의 기존 로직 유지
+        const clickedCard = e.target.closest('.card');
+        if (clickedCard) {
+            if (activeCard === clickedCard) {
+                returnToOriginalPosition(clickedCard);
+                activeCard = null;
+            } else {
+                if (activeCard) {
+                    returnToOriginalPosition(activeCard);
+                }
+                enlargeCard(clickedCard);
+                activeCard = clickedCard;
             }
-            enlargeCard(clickedCard);
-            activeCard = clickedCard;
         }
     }
 });
@@ -531,77 +555,6 @@ window.addEventListener('load', () => {
         const card = createCard(data, index);
         card.addEventListener('mousemove', handleMouseMove);
         card.addEventListener('mouseleave', handleMouseLeave);
-        container.appendChild(card);
-        
-        // 모바일일 때 첫 번째 카드만 보이도록 처리
-        if (checkMobile()) {
-            card.style.opacity = index === 0 ? '1' : '0';
-        }
-    });
-    updateContainerWidth();
-});
-window.addEventListener('resize', () => {
-    checkMobile(); // 추가
-    handleResize();
-});
-
-// 초기 업데이트
-updateContainerWidth();
-
-// 이벤트 리스너
-container.addEventListener('click', function(e) {
-    // 모바일 환경에서는 아무 동작도 하지 않음
-    if (checkMobile()) return;
-
-    const clickedCard = e.target.closest('.card');
-    if (clickedCard) {
-        if (activeCard === clickedCard) {
-            returnToOriginalPosition(clickedCard);
-            activeCard = null;
-        } else {
-            if (activeCard) {
-                returnToOriginalPosition(activeCard);
-            }
-            enlargeCard(clickedCard);
-            activeCard = clickedCard;
-        }
-    }
-});
-
-// 마우스 이벤트 리스너도 모바일에서는 비활성화
-function handleMouseMove(e) {
-    if (checkMobile() || this.classList.contains('active')) return;
-    const rect = this.getBoundingClientRect();
-    const mx = e.clientX - rect.left;
-    const my = e.clientY - rect.top;
-    const dx = (mx - rect.width / 2) / 10;
-    const dy = (my - rect.height / 2) / 10;
-
-    this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
-}
-
-function handleMouseLeave() {
-    if (checkMobile() || this.classList.contains('active')) return;
-    const index = Array.from(container.children).indexOf(this);
-    this.style.transform = getInitialTransform(index);
-}
-
-window.addEventListener('load', () => {
-    const isMobile = checkMobile();
-    cardData.forEach((data, index) => {
-        const card = createCard(data, index);
-        
-        // 모바일이 아닐 때만 마우스 이벤트 추가
-        if (!isMobile) {
-            card.addEventListener('mousemove', handleMouseMove);
-            card.addEventListener('mouseleave', handleMouseLeave);
-        }
-        
-        // 모바일일 때 첫 번째 카드만 보이도록 처리
-        if (isMobile) {
-            card.style.opacity = index === 0 ? '1' : '0';
-        }
-        
         container.appendChild(card);
     });
     updateContainerWidth();
