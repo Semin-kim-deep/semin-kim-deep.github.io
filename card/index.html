@@ -532,10 +532,14 @@ window.addEventListener('load', () => {
         card.addEventListener('mousemove', handleMouseMove);
         card.addEventListener('mouseleave', handleMouseLeave);
         container.appendChild(card);
+        
+        // 모바일일 때 첫 번째 카드만 보이도록 처리
+        if (checkMobile()) {
+            card.style.opacity = index === 0 ? '1' : '0';
+        }
     });
     updateContainerWidth();
 });
-
 window.addEventListener('resize', () => {
     checkMobile(); // 추가
     handleResize();
