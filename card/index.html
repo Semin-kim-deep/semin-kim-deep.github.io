@@ -658,6 +658,7 @@ container.addEventListener('click', function(e) {
                 clickedCard.classList.add('show-back');
                 const index = Array.from(container.children).indexOf(clickedCard);
                 updateCardInfo(clickedCard, index);
+            }
         } else {  // PC일 때
             if (activeCard === clickedCard) {
                 returnToOriginalPosition(clickedCard);
