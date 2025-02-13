@@ -333,7 +333,7 @@
 <body>
   <div class="title-container">
         <h1>Anti-Tarot Card</h1>
-        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.c9 </p>
+        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.c10 </p>
         <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
         </p>
             <p class="subtitle_s">각 카드를 눌러보세요. Click on each card. </p>.
@@ -382,9 +382,8 @@ let currentCardIndex = 0;
 function showNextCard() {
     if (currentCardIndex < cardData.length - 1) {
         const currentCard = container.querySelector('.card');
-        currentCard.style.transition = 'transform 0.2s ease';
+        currentCard.style.transition = 'transform 0.2s cubic-bezier(.4,0,.2,1)';
         currentCard.style.transform = 'translateX(100%)';
-
         setTimeout(() => {
             currentCardIndex++;
             updateMobileCard('next');
@@ -395,9 +394,8 @@ function showNextCard() {
 function showPrevCard() {
     if (currentCardIndex > 0) {
         const currentCard = container.querySelector('.card');
-        currentCard.style.transition = 'transform 0.2s ease';
+        currentCard.style.transition = 'transform 0.2s cubic-bezier(.4,0,.2,1)';
         currentCard.style.transform = 'translateX(-100%)';
-
         setTimeout(() => {
             currentCardIndex--;
             updateMobileCard('prev');
@@ -405,27 +403,23 @@ function showPrevCard() {
     }
 }
 
+
 function updateMobileCard(direction = 'next') {
     const container = document.getElementById('container');
     
-    setTimeout(() => {
-        container.innerHTML = '';
-
-        const card = createCard(cardData[currentCardIndex], currentCardIndex);
-        
-        card.style.transition = 'none';
-        card.style.opacity = '0';
-        card.style.transform = 'translateX(-50%) scale(0.3)';
-        
-        container.appendChild(card);
-
-        requestAnimationFrame(() => {
-            card.style.transition = 'all 0.4s cubic-bezier(.4,0,.2,1)';
-            card.style.opacity = '1';
-            card.style.transform = 'translateX(-50%) scale(1)';
-        });
-
-    }, 100);
+    container.innerHTML = '';
+    const card = createCard(cardData[currentCardIndex], currentCardIndex);
+    
+    card.style.transition = 'none';
+    card.style.opacity = '0';
+    card.style.transform = 'translateX(-50%) scale(0.3)';
+    
+    container.appendChild(card);
+    requestAnimationFrame(() => {
+        card.style.transition = 'all 0.4s cubic-bezier(.4,0,.2,1)';
+        card.style.opacity = '1';
+        card.style.transform = 'translateX(-50%) scale(1)';
+    });
 }
 function createCard(data, index) {
     const card = document.createElement('div');
