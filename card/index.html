@@ -481,6 +481,28 @@
         <a href="https://www.instagram.com/deepdown_studio" target="_blank">Instagram</a>
     </div>
 <script>  
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const menuItems = document.getElementById('menu-items');
+    const closeBtn = document.getElementById('close-menu');
+    const dimmedBg = document.getElementById('dimmed-bg');
+
+    hamburger.addEventListener('click', function() {
+        menuItems.classList.add('menu-open');
+        dimmedBg.style.display = 'block';
+    });
+
+    closeBtn.addEventListener('click', function() {
+        menuItems.classList.remove('menu-open');
+        dimmedBg.style.display = 'none';
+    });
+
+    dimmedBg.addEventListener('click', function() {
+        menuItems.classList.remove('menu-open');
+        dimmedBg.style.display = 'none';
+    });
+});
+
 // 모바일 체크 함수
 function isMobile() {
     return window.innerWidth <= 768;
@@ -957,27 +979,7 @@ window.addEventListener('resize', () => {
 // 초기 업데이트
 updateContainerWidth();
 
-document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.getElementById('hamburger-menu');
-    const menuItems = document.getElementById('menu-items');
-    const closeBtn = document.getElementById('close-menu');
-    const dimmedBg = document.getElementById('dimmed-bg');
 
-    hamburger.addEventListener('click', function() {
-        menuItems.classList.add('menu-open');
-        dimmedBg.style.display = 'block';
-    });
-
-    closeBtn.addEventListener('click', function() {
-        menuItems.classList.remove('menu-open');
-        dimmedBg.style.display = 'none';
-    });
-
-    dimmedBg.addEventListener('click', function() {
-        menuItems.classList.remove('menu-open');
-        dimmedBg.style.display = 'none';
-    });
-});
 </script>
 </body>
 </html>  
