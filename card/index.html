@@ -333,7 +333,7 @@
 <body>
   <div class="title-container">
         <h1>Anti-Tarot Card</h1>
-        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.c4 </p>
+        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.c5 </p>
         <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
         </p>
             <p class="subtitle_s">각 카드를 눌러보세요. Click on each card. </p>.
@@ -478,25 +478,25 @@ function getCardPosition(card) {
 }
 
  // enlargeCard 함수 위에 이 함수를 추가
-  if (isMobile()) {  // 모바일일 때만 실행
+function updateCardInfo(card, index) {
+    if (isMobile()) {  // 모바일일 때만 실행
         const title = card.querySelector('.card-info-mobile h2');
         const description = card.querySelector('.card-info-mobile p');
         
         if (card.classList.contains('show-back')) {
-            // 해당 카드의 인덱스에 맞는 설명글 설정
             if (index === 0) {
                 title.textContent = "1. 마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
                 description.textContent = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 훌륭한...것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
             } else if (index === 1) {
                 title.textContent = "2. 책을 읽고 생각을 엮으세요";
                 description.textContent = "저의 최애 영화 굿윌헌팅의 첫 장면이 이 카드의 모티브가 되었습니다. 윌처럼 천재는 아니지만 저도 책 읽는 것을 좋아해요. 책은 지식과 지혜를 주고, 머리 속에 신선한 바람을 불어넣어 줍니다.";
+            } else if (index === 2) {
+                title.textContent = "3. 꽃을 사고 새로운 장면을 만드세요";
+                description.textContent = "꽃을 보면 눈길이 절로 가죠. 쉽게 새로운 방법으로 장면을 연출할 수 있어요. 만약 꽃을 사기 어렵다면 이 카드를 사세요.";
             } 
-            // 나머지 카드들의 설명글도 동일하게 index에 맞게 추가
-            else if (index === 2) {
-            title.textContent = "3. 꽃을 사고 새로운 장면을 만드세요";
-            description.textContent = "꽃을 보면 눈길이 절로 가죠. 쉽게 새로운 방법으로 장면을 연출할 수 있어요. 만약 꽃을 사기 어렵다면 이 카드를 사세요.";
-        } else if (index === 3) {
-            title.textContent = "4. 꾸준하게 해서 당신의 궤도를 넓히세요";
+            // 나머지 카드들의 설명글 추가 (이전 코드와 동일)
+            else if (index === 3) {
+             title.textContent = "4. 꾸준하게 해서 당신의 궤도를 넓히세요";
             description.textContent = "무례와 혐오와 경쟁과 분열과 비교와 나태와 허무의 달콤함에 길들지 말길, 의미와 무의미의 온갖 폭력을 이겨내고 하루하루를 온전히 경험하길(허준이 교수님의 졸업식 축사에서)  .";
         } else if (index === 4) {
             title.textContent = "5. 운동하세요. 국가대표 후보 선수가 되었다고 상상하며";
@@ -548,9 +548,11 @@ function getCardPosition(card) {
             // card.classList.contains('show-back')이 false인 경우, 즉 카드 앞면을 보여줄 때 실행되는 블록
             title.textContent = '';
             description.textContent = '';
+
         }
     }
 }  
+    
 function enlargeCard(card) {
     const viewportWidth = document.documentElement.clientWidth;
     const viewportHeight = document.documentElement.clientHeight;
