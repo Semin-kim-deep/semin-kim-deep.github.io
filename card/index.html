@@ -652,9 +652,12 @@ container.addEventListener('click', function(e) {
     const clickedCard = e.target.closest('.card');
     if (clickedCard) {
         if (isMobile()) {  // 모바일일 때
-            clickedCard.classList.add('show-back');
-            const index = Array.from(container.children).indexOf(clickedCard);
-            updateCardInfo(clickedCard, index);
+            if (clickedCard.classList.contains('show-back')) {
+                clickedCard.classList.remove('show-back');
+            } else {
+                clickedCard.classList.add('show-back');
+                const index = Array.from(container.children).indexOf(clickedCard);
+                updateCardInfo(clickedCard, index);
         } else {  // PC일 때
             if (activeCard === clickedCard) {
                 returnToOriginalPosition(clickedCard);
