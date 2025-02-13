@@ -165,10 +165,9 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: auto;
-    min-height: 100%;
-    padding: 10px;
+    width: 213.6px;    /* 카드의 기본 너비와 동일하게 설정 */
+    max-width: 100%;   /* 부모 요소를 넘지 않도록 제한 */
+    padding: 20px;
     box-sizing: border-box;
     color: black;
     opacity: 1;
@@ -177,13 +176,16 @@
     font-family: 'Pretendard', sans-serif;
     pointer-events: none;
     background-color: transparent;
-    overflow: visible;
-     word-break: break-word;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
+
+
 
 .card-info-mobile h2 {
     font-size: 14px;
@@ -194,7 +196,9 @@
     font-size: 12px;
     line-height: 1.2;
 }
-
+.card.show-back .card-info-mobile {
+    opacity: 1;
+}
 
 @media (max-width: 768px) {
    /* 전체 스크롤 제거 */
@@ -292,6 +296,8 @@
         opacity: 1;
     }
 }
+
+
 
    /* 나머지 카드 관련 스타일 유지 */
    .card:first-child {
