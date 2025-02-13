@@ -382,59 +382,51 @@ let currentCardIndex = 0;
 function showNextCard() {
     if (currentCardIndex < cardData.length - 1) {
         const currentCard = container.querySelector('.card');
-        currentCard.style.transition = 'transform 0.3s ease';
-        currentCard.style.transform = 'translateX(-100%)';
+        currentCard.style.transition = 'transform 0.1s ease';
+        currentCard.style.transform = 'translateX(100%)';
 
         setTimeout(() => {
             currentCardIndex++;
             updateMobileCard('next');
-        }, 300);
+        }, 100);
     }
 }
 
 function showPrevCard() {
     if (currentCardIndex > 0) {
         const currentCard = container.querySelector('.card');
-        currentCard.style.transition = 'transform 0.3s ease';
+        currentCard.style.transition = 'transform 0.1s ease';
         currentCard.style.transform = 'translateX(100%)';
 
         setTimeout(() => {
             currentCardIndex--;
             updateMobileCard('prev');
-        }, 300);
+        }, 100);
     }
 }
 
 function updateMobileCard(direction = 'next') {
     const container = document.getElementById('container');
     
-    // 기존 카드 제거
     setTimeout(() => {
         container.innerHTML = '';
 
         const card = createCard(cardData[currentCardIndex], currentCardIndex);
         
-        // 시작 스타일 설정
         card.style.transition = 'none';
         card.style.opacity = '0';
-        if (direction === 'next') {
-            card.style.transform = 'translateX(100%)';
-        } else {
-            card.style.transform = 'translateX(-100%)';
-        }
+        card.style.transform = 'translateX(-50%) scale(0.3)';
         
         container.appendChild(card);
 
-        // 최종 상태로 애니메이션
         requestAnimationFrame(() => {
             card.style.transition = 'all 0.4s cubic-bezier(.4,0,.2,1)';
             card.style.opacity = '1';
-            card.style.transform = 'translateX(0)';
+            card.style.transform = 'translateX(-50%) scale(1)';
         });
 
-    }, 300);
+    }, 100);
 }
-
 function createCard(data, index) {
     const card = document.createElement('div');
     card.className = 'card';
