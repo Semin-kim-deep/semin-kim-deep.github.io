@@ -333,7 +333,7 @@
 <body>
   <div class="title-container">
         <h1>Anti-Tarot Card</h1>
-        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.bt </p>
+        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.c1 </p>
         <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
         </p>
             <p class="subtitle_s">각 카드를 눌러보세요. Click on each card. </p>.
@@ -394,14 +394,13 @@ function showPrevCard() {
 }
 
 function updateMobileCard(direction = 'next') {
-      const container = document.getElementById('container');
+    const container = document.getElementById('container');
     
-    // 기존 카드에 scale down 애니메이션과 투명도 추가
+    // 기존 카드에 페이드아웃 애니메이션 
     const existingCard = container.querySelector('.card');
     if (existingCard) {
-        existingCard.style.transition = 'all 0.4s cubic-bezier(.4,0,.2,1)';
+        existingCard.style.transition = 'opacity 0.3s ease';
         existingCard.style.opacity = '0';
-        existingCard.style.transform = 'scale(0.5)';
     }
 
     // 새 카드 생성 및 초기 스타일 설정
@@ -413,7 +412,7 @@ function updateMobileCard(direction = 'next') {
         // 시작 스타일 설정
         card.style.transition = 'none'; // 초기 상태에는 트랜지션 없음
         card.style.opacity = '0';
-        card.style.transform = 'translateX(-50%) scale(0.5)'; // 작은 크기로 시작
+        card.style.transform = 'translateX(-50%) scale(0.3)'; // 약간 작은 크기로 시작
         
         container.appendChild(card);
 
@@ -446,6 +445,11 @@ function createCard(data, index) {
         </div>
     `;
     card.style.transform = getInitialTransform(index);
+
+ if (!isMobile()) {
+        card.style.transform = getInitialTransform(index);
+    }
+    
     return card;
 }
 
