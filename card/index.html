@@ -200,10 +200,17 @@
      font-family: 'Pretendard', sans-serif;
     font-weight: 600;  
 }
+.card.show-back .card__back {
+    opacity: 1; 
+    transition: opacity 0.4s ease 0s; 
+}
+.card.show-back .card-info-mobile {
+    opacity: 0; 
+    transition: opacity 0.4s ease 0.2s; 
+}
 .card.show-back .card-info-mobile {
     opacity: 1;
 }
-
 @media (max-width: 768px) {
    /* 전체 스크롤 제거 */
    html, body {
