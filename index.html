@@ -698,14 +698,15 @@ if (scrollTop > (isMobile ? 800 : 450) && scrollTop <= (isMobile ? 1100 : 1100))
     shopLink.style.opacity = '1';
     shopLink.style.transform = 'translateY(-50%)';
 } else if (scrollTop > (isMobile ? 1100 : 1100) && scrollTop <= (isMobile ? 1300 : 1830)) {
-    // 모바일에서만 Card 섹션이 빠르게 사라지도록 조정
-    if (isMobile) {
-        cardSection.style.opacity = '0';
-        cardSection.style.transform = 'translateY(calc(-50% + 50px))';
-    }
-
+    // Shop 섹션이 사라질 때 Card 섹션이 나오도록 조정
     shopLink.style.opacity = '0';
     shopLink.style.transform = 'translateY(calc(-50% + 50px))';
+
+    // 모바일에서 Card 섹션 나타나기
+    if (isMobile) {
+        cardSection.style.opacity = '1';
+        cardSection.style.transform = 'translateY(-50%)';
+    }
     
     // IT Line이 사라진 후에 CAL 섹션 나타나도록
     if (scrollTop > (isMobile ? 1200 : 1330)) {
