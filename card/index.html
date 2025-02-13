@@ -222,13 +222,15 @@
     position: absolute;
     left: 20px;
     top: 32px;  /* PC에서는 32px */
-    z-index: 900;
+    z-index: 1000;
 }
 .hamburger span {
     width: 100%;
     height: 2px;
     background-color: white;
-}
+    transition: all 0.3s ease; /* 트랜지션 추가 */
+        }
+
 @media (max-width: 768px) {
     .hamburger {
         left: 20px;
@@ -258,7 +260,7 @@
     transition: left 0.3s ease-in-out;
     padding: 40px;
     box-sizing: border-box;
-    z-index: 1100;
+    z-index: 1200;
     text-align: center;
 }
 
@@ -284,7 +286,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
-    z-index: 1000;
+    z-index: 1050;
 }
 
 .close-btn {
@@ -453,7 +455,7 @@
     </div>
  <div class="title-container">
         <h1>Anti-Tarot Card</h1>
-        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.c14 </p>
+        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.c15 </p>
         <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
         </p>
             <p class="subtitle_s">각 카드를 눌러보세요. Click on each card. </p>.
@@ -955,25 +957,45 @@ window.addEventListener('resize', () => {
 // 초기 업데이트
 updateContainerWidth();
 document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.getElementById('hamburger-menu');
-    const menuItems = document.getElementById('menu-items');
-    const closeBtn = document.getElementById('close-menu');
-    const dimmedBg = document.getElementById('dimmed-bg');
+            const hamburger = document.getElementById('hamburger-menu');
+            const menuItems = document.getElementById('menu-items');
+            const closeBtn = document.getElementById('close-menu');
+            const dimmedBg = document.getElementById('dimmed-bg');
 
-    function openMenu() {
-        menuItems.classList.add('menu-open');
-        dimmedBg.style.display = 'block';
-    }
+            // 메뉴 열기
+            function openMenu(e) {
+                e.stopPropagation(); // 이벤트 전파 중단
+                menuItems.classList.add('menu-open');
+                dimmedBg.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+            }
 
-    function closeMenu() {
-        menuItems.classList.remove('menu-open');
-        dimmedBg.style.display = 'none';
-    }
+            // 메뉴 닫기
+            function closeMenu() {
+                menuItems.classList.remove('menu-open');
+                dimmedBg.style.display = 'none';
+                document.body.style.overflow = ''; // 스크롤 복원
+            }
 
-    hamburger.addEventListener('click', openMenu);
-    closeBtn.addEventListener('click', closeMenu);
-    dimmedBg.addEventListener('click', closeMenu);
-});
+            // 이벤트 리스너 추가
+            hamburger.addEventListener('click', openMenu);
+            closeBtn.addEventListener('click', closeMenu);
+            dimmedBg.addEventListener('click', closeMenu);
+
+            // ESC 키로 메뉴 닫기
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeMenu();
+                }
+            });
+
+            // 메뉴 외부 클릭시 닫기
+            document.addEventListener('click', function(e) {
+                if (!menuItems.contains(e.target) && !hamburger.contains(e.target)) {
+                    closeMenu();
+                }
+            });
+        });
 
 </script>
 </body>
