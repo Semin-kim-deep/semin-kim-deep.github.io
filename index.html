@@ -373,8 +373,17 @@
         flex-direction: column;
         line-height: 1.2;
     }
+      .desktop-view {
+        display: none;
+    }
 }
+  
 
+@media (min-width: 769px) {
+    .mobile-view {
+        display: none;
+    }
+}
         @media (max-width: 1024px) {
             .changing-image {
                 width: 500px;
