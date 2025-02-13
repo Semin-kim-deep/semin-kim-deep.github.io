@@ -698,11 +698,7 @@ if (scrollTop > (isMobile ? 800 : 450) && scrollTop <= (isMobile ? 1000 : 1100))
     shopLink.style.opacity = '1';
     shopLink.style.transform = 'translateY(-50%)';
     
-    // Shop이 50% 정도 표시될 때 CAL도 함께 나타나도록
-    if (scrollTop > (isMobile ? 900 : 700)) {
-        calSection.style.opacity = '1';
-        calSection.style.transform = 'translateY(-50%)';
-    }
+    // 기존 IT Line과 CAL 섹션 로직 그대로 유지
 } else if (scrollTop > (isMobile ? 1000 : 1100) && scrollTop <= (isMobile ? 1200 : 1830)) {
     shopLink.style.opacity = '0';
     shopLink.style.transform = 'translateY(calc(-50% + 50px))';
@@ -710,20 +706,15 @@ if (scrollTop > (isMobile ? 800 : 450) && scrollTop <= (isMobile ? 1000 : 1100))
     cardSection.style.opacity = '1';
     cardSection.style.transform = 'translateY(-50%)';
     
-    calSection.style.opacity = '1';
-    calSection.style.transform = 'translateY(-50%)';
+    // 기존 CAL 섹션 로직 그대로 유지
 } else if (scrollTop > (isMobile ? 1200 : 1830)) {
-    cardSection.style.opacity = '1';
-    cardSection.style.transform = 'translateY(-50%)';
-    calSection.style.opacity = '1';
-    calSection.style.transform = 'translateY(-50%)';
+    // 기존 로직 그대로 유지
 } else {
     shopLink.style.opacity = '0';
     shopLink.style.transform = 'translateY(calc(-50% + 50px))';
     cardSection.style.opacity = '0';
     cardSection.style.transform = 'translateY(calc(-50% + 50px))';
-    calSection.style.opacity = '0';
-    calSection.style.transform = 'translateY(calc(-50% + 50px))';
+    // 기존 CAL 섹션 로직 그대로 유지
 }
                 requestAnimationFrame(animate);
             }
