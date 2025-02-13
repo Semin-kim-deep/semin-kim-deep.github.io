@@ -455,7 +455,7 @@
     </div>
  <div class="title-container">
         <h1>Anti-Tarot Card</h1>
-        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.c17 </p>
+        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.c18 </p>
         <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
         </p>
             <p class="subtitle_s">각 카드를 눌러보세요. Click on each card. </p>.
@@ -957,26 +957,27 @@ window.addEventListener('resize', () => {
 // 초기 업데이트
 updateContainerWidth();
 
- document.addEventListener('DOMContentLoaded', function() {
-        const hamburger = document.getElementById('hamburger-menu');
-        const menuItems = document.getElementById('menu-items');
-        const closeBtn = document.getElementById('close-menu');
-        const dimmedBg = document.getElementById('dimmed-bg');
-       function openMenu() {
-                menuItems.classList.add('menu-open');
-                dimmedBg.style.display = 'block';
-            }
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const menuItems = document.getElementById('menu-items');
+    const closeBtn = document.getElementById('close-menu');
+    const dimmedBg = document.getElementById('dimmed-bg');
 
-            function closeMenu() {
-                menuItems.classList.remove('menu-open');
-                dimmedBg.style.display = 'none';
-            }
+    hamburger.addEventListener('click', function() {
+        menuItems.classList.add('menu-open');
+        dimmedBg.style.display = 'block';
+    });
 
-            hamburger.addEventListener('click', openMenu);
-            closeBtn.addEventListener('click', closeMenu);
-            dimmedBg.addEventListener('click', closeMenu);
-        });
+    closeBtn.addEventListener('click', function() {
+        menuItems.classList.remove('menu-open');
+        dimmedBg.style.display = 'none';
+    });
 
+    dimmedBg.addEventListener('click', function() {
+        menuItems.classList.remove('menu-open');
+        dimmedBg.style.display = 'none';
+    });
+});
 </script>
 </body>
 </html>  
