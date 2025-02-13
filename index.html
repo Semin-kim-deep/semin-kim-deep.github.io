@@ -692,8 +692,11 @@
 
 // Shop 링크와 CAL 섹션 애니메이션
 if (scrollTop > (isMobile ? 800 : 450) && scrollTop <= (isMobile ? 1100 : 1100)) {
-    cardSection.style.opacity = '0';
-    cardSection.style.transform = 'translateY(calc(-50% + 50px))';
+    // Card 섹션이 Shop 섹션 나오기 전에 더 빨리 사라지도록 수정
+    if (isMobile) {
+        cardSection.style.opacity = '0';
+        cardSection.style.transform = 'translateY(calc(-50% + 50px))';
+    }
 
     shopLink.style.opacity = '1';
     shopLink.style.transform = 'translateY(-50%)';
