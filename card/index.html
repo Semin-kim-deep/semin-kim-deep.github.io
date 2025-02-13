@@ -257,23 +257,22 @@
     }
    /* 카드 스타일 수정 */
    .card {
-    width: 70%;
-    max-width: 300px;
-    height: auto;
-    aspect-ratio: 213.6/356.4;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);  /* !important 제거 */
-    opacity: 0;
-    margin: 0;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    backface-visibility: hidden;
-    transform-origin: center center;
-    will-change: transform, opacity; /* 한 번만 선언 */
-    transition: all 0.4s cubic-bezier(.4,0,.2,1); /* 한 번만 선언 */
-}
-
+     width: 70%;
+       max-width: 300px;
+       height: auto;
+       aspect-ratio: 213.6/356.4;
+       position: absolute;
+       left: 50%;
+       transform: translateX(-50%) !important;  /* 다시 원래대로 복구 */
+       opacity: 0;
+       margin: 0;
+       transform-style: preserve-3d;
+       perspective: 1000px;
+       backface-visibility: hidden;
+       transform-origin: center center;
+       will-change: transform, opacity;
+       transition: all 0.4s cubic-bezier(.4,0,.2,1);
+   }
 
     .card.active {
         position: relative;
@@ -333,7 +332,7 @@
 <body>
   <div class="title-container">
         <h1>Anti-Tarot Card</h1>
-        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.bt </p>
+        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.bu </p>
         <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
         </p>
             <p class="subtitle_s">각 카드를 눌러보세요. Click on each card. </p>.
@@ -393,15 +392,17 @@ function showPrevCard() {
     }
 }
 
+
+
+
 function updateMobileCard(direction = 'next') {
-      const container = document.getElementById('container');
+    const container = document.getElementById('container');
     
-    // 기존 카드에 scale down 애니메이션과 투명도 추가
+    // 기존 카드는 제자리에서 페이드아웃만 하고
     const existingCard = container.querySelector('.card');
     if (existingCard) {
-        existingCard.style.transition = 'all 0.4s cubic-bezier(.4,0,.2,1)';
+        existingCard.style.transition = 'opacity 0.4s cubic-bezier(.4,0,.2,1)';
         existingCard.style.opacity = '0';
-        existingCard.style.transform = 'scale(0.5)';
     }
 
     // 새 카드 생성 및 초기 스타일 설정
@@ -411,9 +412,9 @@ function updateMobileCard(direction = 'next') {
         const card = createCard(cardData[currentCardIndex], currentCardIndex);
         
         // 시작 스타일 설정
-        card.style.transition = 'none'; // 초기 상태에는 트랜지션 없음
+        card.style.transition = 'none';
         card.style.opacity = '0';
-        card.style.transform = 'translateX(-50%) scale(0.5)'; // 작은 크기로 시작
+        card.style.transform = 'translateX(-50%) scale(0.5)'; // scale만 적용
         
         container.appendChild(card);
 
@@ -424,10 +425,10 @@ function updateMobileCard(direction = 'next') {
         requestAnimationFrame(() => {
             card.style.transition = 'all 0.4s cubic-bezier(.4,0,.2,1)';
             card.style.opacity = '1';
-            card.style.transform = 'translateX(-50%) scale(1)'; // 원래 크기로 확대
+            card.style.transform = 'translateX(-50%) scale(1)'; // 원래 크기로
         });
 
-    }, 300); // 이전 카드의 페이드아웃을 기다림
+    }, 300);
 }
 
 function createCard(data, index) {
