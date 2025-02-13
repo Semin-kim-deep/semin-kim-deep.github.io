@@ -340,6 +340,40 @@
             margin-bottom: 24px;
             color: black;
         }
+.card-section {
+    position: fixed;
+    left: calc(50% - 550px);
+    top: 50%;
+    transform: translateY(-50%);
+    color: #282828; /* IT Line과 같은 색상 */
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    z-index: 700;
+}
+.card-section a {
+    color: #282828;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    .card-section {
+        font-size: 16.2px;
+        left: 20px;
+        transform: translateY(-50%);
+        text-align: left;
+    }
+    .card-section-mobile {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+    }
+}
 
         @media (max-width: 1024px) {
             .changing-image {
@@ -534,7 +568,16 @@
             <a href="/calendar/">2025 CAL<span class="mobile-arrow"></span></a>
         </div>
     </div>
-
+<!-- Anti-Tarot Card 섹션 -->
+<div class="card-section" id="card-section">
+    <a href="/card/">
+        <span class="card-title">
+            <span class="desktop-view">Anti-Tarot Card</span>
+            <span class="mobile-view card-section-mobile">Anti-Tarot<br>Card</span>
+            <span class="mobile-arrow"></span>
+        </span>
+    </a>
+</div>
     <!-- 메뉴 -->
     <div class="menu-items" id="menu-items">
         <div class="close-btn" id="close-menu"></div>
@@ -636,28 +679,35 @@
                     itlineGroup.style.transform = 'translateY(calc(-50% + 50px))';
                 }
 
-                // Shop 링크와 CAL 섹션 애니메이션
-                if (scrollTop > (isMobile ? 800 : 1330) && scrollTop <= (isMobile ? 1000 : 1830)) {
-                    shopLink.style.opacity = '1';
-                    shopLink.style.transform = 'translateY(-50%)';
-                    
-                    // Shop이 50% 정도 표시될 때 CAL도 함께 나타나도록
-                    if (scrollTop > (isMobile ? 900 : 1580)) {
-                        calSection.style.opacity = '1';
-                        calSection.style.transform = 'translateY(-50%)';
-                    }
-                } else if (scrollTop > (isMobile ? 1000 : 1830)) {
-                    shopLink.style.opacity = '0';
-                    shopLink.style.transform = 'translateY(calc(-50% + 50px))';
-                    calSection.style.opacity = '1';
-                    calSection.style.transform = 'translateY(-50%)';
-                } else {
-                    shopLink.style.opacity = '0';
-                    shopLink.style.transform = 'translateY(calc(-50% + 50px))';
-                    calSection.style.opacity = '0';
-                    calSection.style.transform = 'translateY(calc(-50% + 50px))';
-                }
+         const cardSection = document.querySelector('#card-section');
 
+// Shop 링크와 CAL 섹션 애니메이션
+if (scrollTop > (isMobile ? 800 : 1330) && scrollTop <= (isMobile ? 1000 : 1830)) {
+    shopLink.style.opacity = '1';
+    shopLink.style.transform = 'translateY(-50%)';
+    
+    // Shop이 50% 정도 표시될 때 CAL도 함께 나타나도록
+    if (scrollTop > (isMobile ? 900 : 1580)) {
+        calSection.style.opacity = '1';
+        calSection.style.transform = 'translateY(-50%)';
+    }
+} else if (scrollTop > (isMobile ? 1000 : 1830)) {
+    shopLink.style.opacity = '0';
+    shopLink.style.transform = 'translateY(calc(-50% + 50px))';
+    
+    cardSection.style.opacity = '1';
+    cardSection.style.transform = 'translateY(-50%)';
+    
+    calSection.style.opacity = '1';
+    calSection.style.transform = 'translateY(-50%)';
+} else {
+    shopLink.style.opacity = '0';
+    shopLink.style.transform = 'translateY(calc(-50% + 50px))';
+    cardSection.style.opacity = '0';
+    cardSection.style.transform = 'translateY(calc(-50% + 50px))';
+    calSection.style.opacity = '0';
+    calSection.style.transform = 'translateY(calc(-50% + 50px))';
+}
                 requestAnimationFrame(animate);
             }
 
