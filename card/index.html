@@ -333,7 +333,7 @@
 <body>
   <div class="title-container">
         <h1>Anti-Tarot Card</h1>
-        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.c1 </p>
+        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.c2 </p>
         <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
         </p>
             <p class="subtitle_s">각 카드를 눌러보세요. Click on each card. </p>.
@@ -771,6 +771,13 @@ window.addEventListener('load', () => {
         const card = createCard(cardData[0], 0);
         card.addEventListener('mousemove', handleMouseMove);
         card.addEventListener('mouseleave', handleMouseLeave);
+        
+        // 모바일일 때 카드 스타일 직접 설정
+        card.style.position = 'absolute';
+        card.style.left = '50%';
+        card.style.transform = 'translateX(-50%)';
+        card.style.opacity = '1';
+        
         container.appendChild(card);
     } else {
         cardData.forEach((data, index) => {
@@ -796,6 +803,13 @@ window.addEventListener('resize', () => {
         const card = createCard(cardData[0], 0);
         card.addEventListener('mousemove', handleMouseMove);
         card.addEventListener('mouseleave', handleMouseLeave);
+        
+        // 모바일일 때 카드 스타일 직접 설정
+        card.style.position = 'absolute';
+        card.style.left = '50%';
+        card.style.transform = 'translateX(-50%)';
+        card.style.opacity = '1';
+        
         container.appendChild(card);
     } else {
         cardData.forEach((data, index) => {
