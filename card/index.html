@@ -322,7 +322,7 @@
 <body>
   <div class="title-container">
         <h1>Anti-Tarot Card</h1>
-        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.bp </p>
+        <p class="subtitle">안티타로카드 미래는 알 수 없으니까<br>지금 할 수 있는 일을 해요.bq </p>
         <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
         </p>
             <p class="subtitle_s">각 카드를 눌러보세요. Click on each card. </p>.
@@ -658,13 +658,22 @@ container.addEventListener('click', function(e) {
     if (clickedCard) {
         if (isMobile()) {  // 모바일일 때
             if (clickedCard.classList.contains('show-back')) {
+                // 이미 뒷면일 때 다시 클릭하면 앞면으로 돌아가고 설명 지우기
                 clickedCard.classList.remove('show-back');
+                
+                // 모바일 정보 박스의 제목과 설명 초기화
+                const mobileInfoTitle = clickedCard.querySelector('.card-info-mobile h2');
+                const mobileInfoDescription = clickedCard.querySelector('.card-info-mobile p');
+                
+                if (mobileInfoTitle) mobileInfoTitle.textContent = '';
+                if (mobileInfoDescription) mobileInfoDescription.textContent = '';
             } else {
+                // 앞면일 때 클릭하면 뒷면으로 바꾸고 정보 표시
                 clickedCard.classList.add('show-back');
                 const index = Array.from(container.children).indexOf(clickedCard);
                 updateCardInfo(clickedCard, index);
             }
-        } else {  // PC일 때
+        } else {  // PC일 때 기존 로직 유지
             if (activeCard === clickedCard) {
                 returnToOriginalPosition(clickedCard);
                 activeCard = null;
@@ -678,7 +687,6 @@ container.addEventListener('click', function(e) {
         }
     }
 });
-
 
 // 좌우 네비게이션 버튼 리스너
 leftNav.addEventListener('click', () => {
