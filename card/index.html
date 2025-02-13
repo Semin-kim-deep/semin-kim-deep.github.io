@@ -211,7 +211,7 @@
        max-width: 300px;
        height: auto;
         min-height: calc(70vw * (356.4/213.6));  /* 최소 높이는 aspect ratio 유지 */
-       position: absolute;
+       position: relative;;
        left: 50%;
        transform: translateX(-50%) !important;  /* 세로 transform 제거, 가로만 중앙 정렬 */
        opacity: 0;
@@ -240,7 +240,7 @@
         box-sizing: border-box;
         color: black;
         opacity: 0;
-        z-index: 2;
+        z-index: 3;
         font-family: 'Pretendard', sans-serif;
         background-color: rgba(255, 255, 255, 0.95);
         display: block;
@@ -274,23 +274,26 @@
        opacity: 1;
    }
 
-    .card__front, .card__back {
-        backface-visibility: visible;
-        transition: opacity 0.4s ease;
-        transform: none !important;
+   .card__front {
         position: absolute;
         top: 0;
         left: 0;
+        transition: opacity 0.4s ease;
+        transform: none !important;
+        opacity: 1;
+        z-index: 1;
+        backface-visibility: visible;
     }
 
     .card__back {
-        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: opacity 0.4s ease;
+        transform: none !important;
         opacity: 0;
-        z-index: 1; 
-    }
-
-    .card__front {
-        opacity: 1;
+        z-index: 2;
+        backface-visibility: visible;
     }
 
     /* info-box는 모바일에서 완전히 숨김 */
