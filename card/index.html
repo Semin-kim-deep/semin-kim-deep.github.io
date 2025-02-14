@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anti-Tarot Cards with Animated Info Box</title>
      <link  href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@500;600;700&display=swap" rel="stylesheet">
@@ -333,30 +333,7 @@
     color: black;
 }
 
-/* 이미지 드래그 방지 */
-img {
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-    -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
-    user-drag: none;
-    pointer-events: none;
-}
 
-/* 전체 컨텐츠 선택 방지 */
-.container, .card {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none;   /* Chrome/Safari/Opera */
-    -khtml-user-select: none;    /* Konqueror */
-    -moz-user-select: none;      /* Firefox */
-    -ms-user-select: none;       /* Internet Explorer/Edge */
-    user-select: none;           /* Non-prefixed version */
-}
 
 @media (max-width: 768px) {
    /* 전체 스크롤 제거 */
@@ -1028,39 +1005,6 @@ window.addEventListener('resize', () => {
     }
     handleResize();
 });
-// 우클릭 방지
-document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-});
-
-// 키보드 단축키 방지 (Ctrl+S, Ctrl+U, F12 등)
-document.addEventListener('keydown', function(e) {
-    if (
-        // Ctrl + S, Ctrl + U
-        (e.ctrlKey && (e.keyCode === 83 || e.keyCode === 85)) ||
-        // F12
-        (e.keyCode === 123)
-    ) {
-        e.preventDefault();
-        return false;
-    }
-});
-
-// 모바일 터치 이벤트 방지
-document.addEventListener('touchstart', function(e) {
-    if (e.touches.length > 1) {
-        e.preventDefault();
-    }
-}, { passive: false });
-
-// 더블탭 줌 방지
-document.addEventListener('touchend', function(e) {
-    const now = Date.now();
-    if (now - lastTap < 500) {
-        e.preventDefault();
-    }
-    lastTap = now;
-}, { passive: false });
 
 // 초기 업데이트
 updateContainerWidth();
