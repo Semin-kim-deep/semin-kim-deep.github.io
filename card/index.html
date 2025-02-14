@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anti-Tarot Cards with Animated Info Box</title>
      <link  href="https://fonts.googleapis.com/css2?family=Jost:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@500;600;700&display=swap" rel="stylesheet">
@@ -333,30 +333,7 @@
     color: black;
 }
 
-/* 이미지 드래그 방지 */
-img {
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-    -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
-    user-drag: none;
-    pointer-events: none;
-}
 
-/* 전체 컨텐츠 선택 방지 */
-.container, .card {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none;   /* Chrome/Safari/Opera */
-    -khtml-user-select: none;    /* Konqueror */
-    -moz-user-select: none;      /* Firefox */
-    -ms-user-select: none;       /* Internet Explorer/Edge */
-    user-select: none;           /* Non-prefixed version */
-}
 
 @media (max-width: 768px) {
    /* 전체 스크롤 제거 */
@@ -1028,34 +1005,6 @@ window.addEventListener('resize', () => {
     }
     handleResize();
 });
-
-// 이전 터치 이벤트 리스너를 삭제하고, 아래 코드로 대체
-document.addEventListener('touchstart', function(e) {
-    // 카드(.card), 네비게이션 버튼(.nav-button)을 클릭한 경우는 터치 이벤트를 허용
-    if (e.target.closest('.card') || e.target.closest('.nav-button')) {
-        return;
-    }
-    
-    // 그 외의 경우 멀티터치 방지
-    if (e.touches.length > 1) {
-        e.preventDefault();
-    }
-}, { passive: false });
-
-// 더블탭 줌 방지도 동일하게 수정
-let lastTap = 0;
-document.addEventListener('touchend', function(e) {
-    // 카드와 네비게이션 버튼은 제외
-    if (e.target.closest('.card') || e.target.closest('.nav-button')) {
-        return;
-    }
-
-    const now = Date.now();
-    if (now - lastTap < 500) {
-        e.preventDefault();
-    }
-    lastTap = now;
-}, { passive: false });
 
 // 초기 업데이트
 updateContainerWidth();
