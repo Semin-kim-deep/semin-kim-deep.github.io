@@ -530,24 +530,6 @@
     </div>
 <script>  
 
-// 우클릭 방지만 남기고 나머지 터치 이벤트는 제거
-document.addEventListener('contextmenu', function(e) {
-    if (e.target.tagName === 'IMG') {  // 이미지에 대해서만 우클릭 방지
-        e.preventDefault();
-    }
-});
-
-// 이미지에 대해서만 키보드 단축키 방지
-document.addEventListener('keydown', function(e) {
-    if (
-        e.target.tagName === 'IMG' && 
-        (e.ctrlKey && (e.keyCode === 83 || e.keyCode === 85))
-    ) {
-        e.preventDefault();
-        return false;
-    }
-});
-
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.getElementById('hamburger-menu');
     const menuItems = document.getElementById('menu-items');
@@ -1043,7 +1025,23 @@ window.addEventListener('resize', () => {
     handleResize();
 });
 
+// 우클릭 방지만 남기고 나머지 터치 이벤트는 제거
+document.addEventListener('contextmenu', function(e) {
+    if (e.target.tagName === 'IMG') {  // 이미지에 대해서만 우클릭 방지
+        e.preventDefault();
+    }
+});
 
+// 이미지에 대해서만 키보드 단축키 방지
+document.addEventListener('keydown', function(e) {
+    if (
+        e.target.tagName === 'IMG' && 
+        (e.ctrlKey && (e.keyCode === 83 || e.keyCode === 85))
+    ) {
+        e.preventDefault();
+        return false;
+    }
+});
 
 // 초기 업데이트
 updateContainerWidth();
