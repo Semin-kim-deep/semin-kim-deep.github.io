@@ -94,7 +94,7 @@
             margin: 0; /* 기존 50px 0에서 변경 */
         }
         .main-image {
-            max-width: 70%; /* 모바일에서도 더 크게 보이도록 40%에서 70%로 수정 */
+            max-width: 49%; /* PC 버전 이미지 크기 축소 */
             height: auto;
         }
         .white-section {
@@ -340,7 +340,7 @@
                 object-position: center;
             }
             .main-image {
-                max-width: 90%; /* 모바일에서 더 크게 보이도록 */
+                max-width: 100%; /* 모바일에서는 전체 너비로 표시 */
             }
             .main-image-container {
                 margin: 10px 0; /* 모바일에서 여백 줄임 */
@@ -437,11 +437,10 @@
             <a href="/calendar/">Calendar 2025</a>
         </div>
         
+        <!-- 한글 문구 제거 -->
         <div class="subtitle">
-            <span class="subpc">그라운드에서 펼치고 그리드에서 정리하는 노트</span>
+            <span class="subpc"></span>
             <span class="subm">
-                Ground & Grid Note<br>
-                그라운드에서 펼치고 그리드에서 정리합니다.
             </span>
         </div>
 
@@ -523,13 +522,10 @@
             // 페이지 요소 업데이트
             document.querySelector('.pc-title').textContent = translations[currentLanguage].title;
             document.querySelector('.title-year').textContent = translations[currentLanguage].title;
-            document.querySelector('.subpc').textContent = translations[currentLanguage].subtitle;
             
-            if (currentLanguage === 'en') {
-                document.querySelector('.subm').innerHTML = 'Ground & Grid Note<br>Express on Ground, organize on Grid';
-            } else {
-                document.querySelector('.subm').innerHTML = 'Ground & Grid Note<br>그라운드에서 펼치고 그리드에서 정리합니다.';
-            }
+            // 설명 문구 업데이트 제거 (빈 문자열로 유지)
+            document.querySelector('.subpc').textContent = '';
+            document.querySelector('.subm').innerHTML = '';
             
             document.querySelector('.normalt').innerHTML = translations[currentLanguage].bottomText;
             document.querySelector('.custom-button .custom-button-content').firstChild.textContent = translations[currentLanguage].buttonText;
