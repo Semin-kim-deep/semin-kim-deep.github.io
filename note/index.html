@@ -84,16 +84,17 @@
             line-height: 1.4;
             padding-bottom: 0px;
             color: black;
+            margin-bottom: 30px; /* 제목과 아래 섹션 간 간격 조정 */
         }
         .main-image-container {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 50px 0;
+            margin: 0; /* 기존 50px 0에서 변경 */
         }
         .main-image {
-            max-width: 40%;
+            max-width: 70%; /* 모바일에서도 더 크게 보이도록 40%에서 70%로 수정 */
             height: auto;
         }
         .white-section {
@@ -102,7 +103,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 100px 0;
+            padding: 60px 0; /* 패딩 조정 (100px에서 60px로) */
         }
         .white-section .normalt {
             font-size: 14pt;
@@ -299,6 +300,7 @@
                 font-size: 19.6px;
                 font-weight: bold;
                 padding-top: 10px;
+                margin-bottom: 20px; /* 모바일에서 간격 조정 */
             }
             .subpc {
                 display: none;
@@ -336,6 +338,12 @@
                 height: auto;
                 object-fit: cover;
                 object-position: center;
+            }
+            .main-image {
+                max-width: 90%; /* 모바일에서 더 크게 보이도록 */
+            }
+            .main-image-container {
+                margin: 10px 0; /* 모바일에서 여백 줄임 */
             }
             .button-container {
                 display: flex;
@@ -394,9 +402,6 @@
                 transform: translateY(-50%);
                 margin-top: 0;
             }
-            .main-image-container {
-                margin: 30px 0;
-            }
         }
     </style>
 </head>
@@ -431,6 +436,14 @@
             <a href="/card/index.html">Anti-Tarot Card</a>
             <a href="/calendar/">Calendar 2025</a>
         </div>
+        
+        <div class="subtitle">
+            <span class="subpc">그라운드에서 펼치고 그리드에서 정리하는 노트</span>
+            <span class="subm">
+                Ground & Grid Note<br>
+                그라운드에서 펼치고 그리드에서 정리합니다.
+            </span>
+        </div>
 
         <div class="main-image-container">
             <img src="images/like_note2.jpg" alt="Ground & Grid Note" class="main-image">
@@ -438,7 +451,7 @@
     </div>
     
     <div class="white-section">
-        <img id="bottomImage" src="images/in_1.png" alt="Ground & Grid Note" class="image-1">
+        <img id="bottomImage" src="images/in_1.png" alt="Ground & Grid Note 내부" class="image-1">
         <div class="normalt"> <br><b>Ground & Grid Note<br></b>
             생각을 그라운드에서 펼치고 그리드에서 정리하는<br>
             딥다운 스튜디오의 노트
@@ -543,6 +556,9 @@
                 topButton.style.display = 'none';
             }
         });
+
+        // 초기에 Top 버튼 숨기기
+        topButton.style.display = 'none';
     });
     </script>
 </body>
