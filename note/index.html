@@ -30,7 +30,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 28px;
+            padding: 20px 28px 0; /* 하단 패딩 제거 */
             width: 100%;
             box-sizing: border-box;
         }
@@ -84,18 +84,20 @@
             line-height: 1.4;
             padding-bottom: 0px;
             color: black;
-            margin-bottom: 10px; /* 제목과 아래 섹션 간 간격 조정 */
+            margin-bottom: 0; /* 간격 완전 제거 */
+            display: none; /* 빈 요소이므로 표시하지 않음 */
         }
         .main-image-container {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0; /* 기존 50px 0에서 변경 */
+            margin: 0; /* 여백 제거 */
         }
         .main-image {
-            max-width: 49%; /* PC 버전 이미지 크기 축소 */
+            width: 600px; /* 고정 너비 설정 */
             height: auto;
+            max-width: 100%; /* 화면보다 커지지 않도록 */
         }
         .white-section {
             width: 100%;
@@ -297,20 +299,13 @@
                 margin-bottom: 0;
             }
             .subtitle {
-                font-size: 19.6px;
-                font-weight: bold;
-                padding-top: 10px;
-                margin-bottom: 0px; /* 모바일에서 간격 조정 */
+                display: none; /* 모바일에서도 subtitle 숨김 */
             }
             .subpc {
                 display: none;
             }
             .subm {
-                display: inline-block;
-                padding: 4px; 
-                flex-direction: column;
-                font-size: 14pt;
-                line-height: 1.4;
+                display: none; /* 모바일에서도 텍스트 숨김 */
             }
             .white-section .normalt {
                 font-size: 12pt;
@@ -341,9 +336,10 @@
             }
             .main-image {
                 max-width: 100%; /* 모바일에서는 전체 너비로 표시 */
+                width: auto; /* 모바일에서는 고정 너비 대신 100% 사용 */
             }
             .main-image-container {
-                margin: 10px 0; /* 모바일에서 여백 줄임 */
+                margin: 0; /* 모바일에서도 여백 제거 */
             }
             .button-container {
                 display: flex;
@@ -437,11 +433,10 @@
             <a href="/calendar/">Calendar 2025</a>
         </div>
         
-        <!-- 한글 문구 제거 -->
-        <div class="subtitle">
+        <!-- 빈 요소 부분 숨김 처리 -->
+        <div class="subtitle" style="display:none;">
             <span class="subpc"></span>
-            <span class="subm">
-            </span>
+            <span class="subm"></span>
         </div>
 
         <div class="main-image-container">
@@ -483,7 +478,7 @@
         const translations = {
             ko: {
                 title: 'Ground & Grid Note',
-                subtitle: '그라운드에서 펼치고 그리드에서 정리하는 노트',
+                subtitle: '',
                 bottomText: 'Ground & Grid Note<br>생각을 그라운드에서 펼치고 그리드에서 정리하는<br>딥다운 스튜디오의 노트',
                 buttonText: '신나게 사러 달려나가기',
                 menuHome: 'Home',
@@ -494,7 +489,7 @@
             },
             en: {
                 title: 'Ground & Grid Note',
-                subtitle: "Express on Ground, organize on Grid",
+                subtitle: '',
                 bottomText: 'Ground & Grid Note<br>A note from Deepdown Studio<br>to expand your ideas on the ground and organize them on the grid',
                 buttonText: 'Run excitedly to buy',
                 menuHome: 'Home',
@@ -522,10 +517,6 @@
             // 페이지 요소 업데이트
             document.querySelector('.pc-title').textContent = translations[currentLanguage].title;
             document.querySelector('.title-year').textContent = translations[currentLanguage].title;
-            
-            // 설명 문구 업데이트 제거 (빈 문자열로 유지)
-            document.querySelector('.subpc').textContent = '';
-            document.querySelector('.subm').innerHTML = '';
             
             document.querySelector('.normalt').innerHTML = translations[currentLanguage].bottomText;
             document.querySelector('.custom-button .custom-button-content').firstChild.textContent = translations[currentLanguage].buttonText;
