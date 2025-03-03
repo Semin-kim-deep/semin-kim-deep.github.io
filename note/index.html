@@ -85,121 +85,16 @@
             padding-bottom: 0px;
             color: black;
         }
-        .subsub {
-            font-size: 12pt;
-            text-align: center;
-            max-width: 1000px;
-            line-height: 1.4;
-            padding-top: 20px;
-            padding-bottom: 20px;
-            color: #404040;
-        }
-        .subsub-pc{
-            font-size: 12pt;
-        }
-        .subsub-m{
-            display: none;
-        }
-        .calendar-container {
-            position: relative;
-            width: 1220px;
-            margin-top: 20px;
-            margin-bottom: 100px;
+        .main-image-container {
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+            margin: 50px 0;
         }
-        .calendar-content {
-            display: flex;
-            width: 1120px;
-            height: 560px;
-        }
-        .image-container {
-            width: 560px;
-            height: 560px;
-            position: relative;
-            overflow: hidden;
-            opacity: 0; /* 초기에 투명하게 설정 */
-            transition: opacity 0.3s ease-in-out;
-        }
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .swipe-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 1;
-            transform: translateX(0);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: transform;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
-        }
-        .text-content {
-            width: 560px;
-            height: 560px;
-            padding: 0 0 0 40px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-        }
-        .text-content-inner {
-            border-top: 2px solid #000;
-            border-bottom: 1px solid #000;
-            padding: 20px 0;
-            font-size: 14pt;
-            flex-grow: 1;
-            overflow-y: auto;
-            line-height: 1.8;
-        }
-        .text-content-inner b {
-            font-size: 15pt;
-            line-height: 1.8;
-            color: #202020;
-        }
-        .nav-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #404040;
-            font-size: 40.56px;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-        }
-        .nav-button::before {
-            content: '';
-            display: inline-block;
-            width: 0.52em;
-            height: 0.52em;
-            border-top: 1px solid currentColor;
-            border-right: 1px solid currentColor;
-            position: absolute;
-        }
-        .nav-button.prev {
-            left: 0;
-        }
-        .nav-button.next {
-            right: 0;
-        }
-        .nav-button.prev::before {
-            transform: rotate(-135deg);
-        }
-        .nav-button.next::before {
-            transform: rotate(45deg);
+        .main-image {
+            max-width: 100%;
+            height: auto;
         }
         .white-section {
             width: 100%;
@@ -214,7 +109,7 @@
             text-align: center;
             max-width: 1000px;
             line-height: 1.9;
-            padding-top:20px;
+            padding-top: 20px;
             color: #404040;
         }
         .image-1 {
@@ -356,7 +251,6 @@
             cursor: pointer;
             z-index: 1000;
         }
-
         .top-button::before {
             content: '';
             width: 10px;
@@ -385,43 +279,10 @@
             }
         }
 
-        .swipe-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 1;
-            transition: none;
-        }
-        .dot-indicators {
-            display: none;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            padding: 16px 0;
-            margin-top: -8px;
-        }
-
-        .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: #D9D9D9;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background-color: #404040;
-            transform: scale(1.2);
-        }
         @media (max-width: 768px) {
             .header {
                 padding: 20px 20px 0 20px;
                 position: relative;
-            }
-            .dot-indicators {
-                display: flex;
             }
             .pc-title {
                 display: none;
@@ -470,64 +331,6 @@
             .header-title {
                 font-size: 26.4px;
             }
-            .calendar-container {
-                width: 100%;
-                margin-top: 10px;
-                margin-bottom: 10px;
-            }
-            .calendar-content {
-                flex-direction: column;
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
-            .image-container {
-                position: relative;
-                width: 100%;
-                padding-bottom: 100%;
-                height: 0;
-            }
-            .swipe-image {
-                object-fit: cover;
-                object-position: center;
-            }
-            .text-content {
-                width: 100%;
-                height: auto;
-                padding: 20px;
-                font-size: 14pt; 
-            }
-            .text-content-inner {
-                padding: 15px 0;
-                font-size: 13pt;
-                max-height: none;
-                overflow-y: visible;
-                flex-grow: 1;
-                overflow-y: auto;
-                line-height: 1.8;
-                border-top: none;
-                border-bottom: none;
-            }
-            .text-content-inner b {
-                font-size: 15pt;
-                line-height: 1.8;
-                color: #202020;
-            }
-            .nav-button {
-                top: 50%;
-                position: absolute;
-                transform: translateY(-50%);
-                font-size: 24px;
-                width: 40px;
-                height: 40px;
-                z-index: 10;
-            }
-            .nav-button.prev {
-                left: 10px;
-            }
-            .nav-button.next {
-                right: 10px;
-            }
             .image-1 {
                 width: 100%;
                 height: auto;
@@ -561,22 +364,6 @@
                 display: flex;
                 align-items: center;
             }
-            .subsub {
-                display: block;
-                padding-top: 10px;
-                padding-bottom: 20px;
-                color: #404040;
-            }
-            .subsub-pc{
-                display: none;
-            }
-            .subsub-m{
-                display: block !important;
-                font-size: 13.5pt;
-                line-height: 1.4;
-                padding-left: 15px;
-                padding-right: 15px;
-            }
             .top-button {
                 position: fixed;
                 bottom: 20px;
@@ -606,6 +393,9 @@
                 top: 40px;
                 transform: translateY(-50%);
                 margin-top: 0;
+            }
+            .main-image-container {
+                margin: 30px 0;
             }
         }
     </style>
@@ -650,37 +440,13 @@
             </span>
         </div>
 
-        <div class="subsub">
-           <span class="subsub-pc"> 무지(그라운드) 페이지에서 필기를 합니다. 그리드 페이지에서 다시 정리합니다.<br></span>    
-           <span class="subsub-m"> 무지(그라운드) 페이지에서 필기를 합니다. <br> 그리드 페이지에서 다시 정리합니다.<br></span>
-        </div>
-
-        <div class="calendar-container">
-            <button class="nav-button prev" id="prevButton"></button>
-            <div class="calendar-content">
-                <div class="image-container">
-            <img id="calendarImage1" class="swipe-image active" src="images/like_note2.jpg" alt="Ground & Grid Note Image">
-
-                    <img id="calendarImage2" class="swipe-image" src="" alt="Ground & Grid Note Image">
-                </div>
-                <div class="dot-indicators">
-                    <div class="dot active" data-month="1"></div>
-                    <div class="dot" data-month="2"></div>
-                    <div class="dot" data-month="3"></div>
-                    <div class="dot" data-month="4"></div>
-                </div>
-                <div class="text-content">
-                    <div class="text-content-inner" id="calendarText">
-                        <!-- 텍스트 내용은 JavaScript에서 동적으로 변경됩니다 -->
-                    </div>
-                </div>
-            </div>
-            <button class="nav-button next" id="nextButton"></button>
+        <div class="main-image-container">
+            <img src="images/like_note2.jpg" alt="Ground & Grid Note" class="main-image">
         </div>
     </div>
     
     <div class="white-section">
-<img id="bottomImage" src="images/in_1.png" alt="Ground & Grid Note" class="image-1">	
+        <img id="bottomImage" src="images/in_1.png" alt="Ground & Grid Note" class="image-1">
         <div class="normalt"> <br><b>Ground & Grid Note<br></b>
             생각을 그라운드에서 펼치고 그리드에서 정리하는<br>
             딥다운 스튜디오의 노트
@@ -705,20 +471,9 @@
         const menuItems = document.getElementById('menu-items');
         const closeBtn = document.getElementById('close-menu');
         const dimmedBg = document.getElementById('dimmed-bg');
-        const prevButton = document.getElementById('prevButton');
-        const nextButton = document.getElementById('nextButton');
-        const calendarImage1 = document.getElementById('calendarImage1');
-        const calendarImage2 = document.getElementById('calendarImage2');
-        const calendarText = document.getElementById('calendarText');
-        const bottomImage = document.getElementById('bottomImage');
         const languageToggle = document.getElementById('language-toggle');
         const topButton = document.getElementById('topButton');
-        const dots = document.querySelectorAll('.dot');
         
-        let currentMonth = 1;
-        let activeImage = 1;
-        let isTransitioning = false;
-        const imageCache = {};
         let currentLanguage = 'ko';
 
         const translations = {
@@ -746,54 +501,6 @@
             }
         };
 
-        // 노트 정보
-        const noteContent = [
-            {
-        image: 'images/like_note2.jpg',
-                text: {
-                    ko: '<b>필기...좋아하세요? </b><br> <b>저는 좋아합니다. 필기를 하면, 놓치지 않고 내 것으로 남길 수 있는 것 같아요.</b><br>하지만 그냥 쓰다보면 단순히 쓰는 행위가 되어 버리기도 해요. 그래서 필기를 시작할지, 말아야할지 고민하다가 어느때에는 하고, 어느때에는 하지 않죠. <br><br>이것을 개선하고 싶어서 그라운드 앤 그리드 노트를 만들었어요. 무지 페이지에서 필기한 내용을 표 형태의 그리드페이지에서 다시 정리하는 콘셉트입니다.',
-                    en: '<b>Ground & Grid Note</b><br><br>On blank (Ground) pages, you can freely express your thoughts.<br><br>On Grid pages, you can systematically organize them.<br><br>This is the ideal way to develop your ideas.'
-                }
-            },
-            {
-        image: 'images/note_01.png',
-                text: {
-                    ko: '<b>둔필승총</b><br> <b>둔한 필기가 총명함을 이기게 하세요. </b><br><br> 둔필승총은 저의 말이 아닌 정약용의 말입니다. 무지 펼침페이지 3장 이후, 40칸이 그려진 그리드 펼침페이지가 나타납니다. 이 구조가 8번 반복됩니다. 총 32장(64p)<br> 128*180mm(B6사이즈). 실제본으로 펼침이 쉽습니다. <br>표지 젠틀페이스, 내지 미색 모조지 100g. <br>.',
-                    en: '<b>Various Applications</b><br><br>Daily notes, meeting minutes, idea sketches, planning, etc.<br><br>Write freely on Ground pages and organize systematically on Grid pages.'
-                }
-            },
-            {
-        image: 'images/note_03.png',
-                text: {
-                    ko: '<b>고품질 재질</b><br><br>필기감이 좋은 프리미엄 용지와 견고한 제본으로<br><br>오래 사용해도 내구성이 뛰어납니다.',
-                    en: '<b>High Quality Materials</b><br><br>Premium paper with excellent writing feel and sturdy binding<br><br>Ensures durability even with prolonged use.'
-                }
-            },
-            {
-        image: 'images/note_04.png',
-                text: {
-                    ko: '<b>심플한 디자인</b><br><br>집중력을 높이는 미니멀한 디자인으로<br><br>어디서나 사용하기 좋습니다.',
-                    en: '<b>Simple Design</b><br><br>Minimal design that enhances focus<br><br>Perfect for use anywhere.'
-                }
-            }
-        ];
-
-        dots.forEach(dot => {
-            dot.addEventListener('click', () => {
-                const targetMonth = parseInt(dot.dataset.month);
-                if (targetMonth > currentMonth) {
-                    updateContent(targetMonth, 'next');
-                } else if (targetMonth < currentMonth) {
-                    updateContent(targetMonth, 'prev');
-                }
-                currentMonth = targetMonth;
-            });
-        });
-
-        function isMobile() {
-            return window.innerWidth <= 768;
-        }
-
         function openMenu() {
             menuItems.classList.add('menu-open');
             dimmedBg.style.display = 'block';
@@ -802,121 +509,6 @@
         function closeMenu() {
             menuItems.classList.remove('menu-open');
             dimmedBg.style.display = 'none';
-        }
-
-        function preloadImage(src) {
-            return new Promise((resolve, reject) => {
-                if (imageCache[src]) {
-                    resolve(imageCache[src]);
-                } else {
-                    const img = new Image();
-                    img.onload = () => {
-                        imageCache[src] = img;
-                        resolve(img);
-                    };
-                    img.onerror = reject;
-                    img.src = src;
-                }
-            });
-        }
-
-        async function updateContent(month, direction) {
-            if (isTransitioning) return;
-            isTransitioning = true;
-
-            const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
-            const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
-            
-            const nextImageSrc = noteContent[month - 1].image;
-            
-            try {
-                await preloadImage(nextImageSrc);
-                
-                nextImage.src = nextImageSrc;
-                nextImage.style.display = 'block';
-                currentImage.style.display = 'block';
-
-                // 더 부드러운 애니메이션을 위한 requestAnimationFrame 사용
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        nextImage.style.transform = direction === 'next' ? 
-                            'translateX(100%)' : 'translateX(-100%)';
-                        currentImage.style.transform = 'translateX(0)';
-
-                        requestAnimationFrame(() => {
-nextImage.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-currentImage.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-                            
-nextImage.style.transform = 'translateX(0)';
-currentImage.style.transform = direction === 'next' ? 
-    'translateX(-100%)' : 'translateX(100%)';
-                        });
-                    });
-                });
-
-                setTimeout(() => {
-                    if (direction) {
-                        currentImage.style.display = 'none';
-                        nextImage.style.transition = 'none';
-                        currentImage.style.transition = 'none';
-                    }
-                    
-                    currentImage.classList.remove('active');
-                    nextImage.classList.add('active');
-                    
-                    activeImage = activeImage === 1 ? 2 : 1;
-                    
-                    // 도트 인디케이터 업데이트
-                    const dots = document.querySelectorAll('.dot');
-                    dots.forEach(dot => {
-                        dot.classList.remove('active');
-                        if (parseInt(dot.dataset.month) === month) {
-                            dot.classList.add('active');
-                        }
-                    });
-                    
-                    isTransitioning = false;
-
-                    document.querySelector('.image-container').style.opacity = '1';
-                }, direction ? 300 : 0);
-
-                calendarText.innerHTML = noteContent[month - 1].text[currentLanguage];
-            } catch (error) {
-                console.error('Failed to load image:', error);
-                isTransitioning = false;
-            }
-        }
-
-        function showNextMonth() {
-            if (currentMonth < 4) {
-                currentMonth++;
-                updateContent(currentMonth, 'next');
-            }
-        }
-
-        function showPreviousMonth() {
-            if (currentMonth > 1) {
-                currentMonth--;
-                updateContent(currentMonth, 'prev');
-            }
-        }
-
-        function adjustButtonsPosition() {
-            if (window.innerWidth <= 768) {
-                const imageContainer = document.querySelector('.image-container');
-                const prevButton = document.getElementById('prevButton');
-                const nextButton = document.getElementById('nextButton');
-
-                imageContainer.appendChild(prevButton);
-                imageContainer.appendChild(nextButton);
-            } else {
-                const calendarContainer = document.querySelector('.calendar-container');
-                const prevButton = document.getElementById('prevButton');
-                const nextButton = document.getElementById('nextButton');
-
-                calendarContainer.insertBefore(prevButton, calendarContainer.firstChild);
-                calendarContainer.appendChild(nextButton);
-            }
         }
 
         function changeLanguage() {
@@ -936,79 +528,13 @@ currentImage.style.transform = direction === 'next' ?
             
             document.querySelector('.normalt').innerHTML = translations[currentLanguage].bottomText;
             document.querySelector('.custom-button .custom-button-content').firstChild.textContent = translations[currentLanguage].buttonText;
-            
-            // 현재 콘텐츠 업데이트
-            calendarText.innerHTML = noteContent[currentMonth - 1].text[currentLanguage];
         }
-
-        updateContent(1); // 초기 컨텐츠 업데이트 시 direction을 지정하지 않음
-        adjustButtonsPosition();
 
         hamburger.addEventListener('click', openMenu);
         closeBtn.addEventListener('click', closeMenu);
         dimmedBg.addEventListener('click', closeMenu);
-        nextButton.addEventListener('click', showNextMonth);
-        prevButton.addEventListener('click', showPreviousMonth);
         languageToggle.addEventListener('click', changeLanguage);
-        window.addEventListener('resize', adjustButtonsPosition);
 
-        let touchStartX = 0;
-        let touchEndX = 0;
-        let touchMoveX = 0;
-        let isDragging = false;
-
-        const handleTouchStart = (e) => {
-            touchStartX = e.touches[0].clientX;
-            isDragging = true;
-            
-            // 현재 활성화된 이미지
-            const currentImage = document.querySelector('.swipe-image.active');
-            currentImage.style.transition = 'none';
-        };
-
-        const handleTouchMove = (e) => {
-            if (!isDragging) return;
-            
-            touchMoveX = e.touches[0].clientX;
-            const deltaX = touchMoveX - touchStartX;
-            const currentImage = document.querySelector('.swipe-image.active');
-            
-            // 드래그 중인 이미지 움직임을 부드럽게 처리
-            requestAnimationFrame(() => {
-                currentImage.style.transform = `translateX(${deltaX}px)`;
-            });
-        };
-
-        const handleTouchEnd = (e) => {
-            if (!isDragging) return;
-            
-            isDragging = false;
-            touchEndX = e.changedTouches[0].clientX;
-            const deltaX = touchEndX - touchStartX;
-            
-            if (Math.abs(deltaX) > 50) {
-                if (deltaX > 0) {
-                    showPreviousMonth();
-                } else {
-                    showNextMonth();
-                }
-            } else {
-                // 스와이프가 충분하지 않으면 원위치
-                const currentImage = document.querySelector('.swipe-image.active');
-                currentImage.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-                currentImage.style.transform = 'translateX(0)';
-            }
-        };
-
-        if (window.innerWidth <= 768) {
-            calendarImage1.addEventListener('touchstart', handleTouchStart);
-            calendarImage1.addEventListener('touchmove', handleTouchMove);
-            calendarImage1.addEventListener('touchend', handleTouchEnd);
-            calendarImage2.addEventListener('touchstart', handleTouchStart);
-            calendarImage2.addEventListener('touchmove', handleTouchMove);
-            calendarImage2.addEventListener('touchend', handleTouchEnd);
-        }
-        
         // Top 버튼 기능
         topButton.addEventListener('click', () => {
             window.scrollTo({
@@ -1026,8 +552,6 @@ currentImage.style.transform = direction === 'next' ?
             }
         });
     });
-
-
-</script>
+    </script>
 </body>
 </html>
