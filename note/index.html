@@ -8,13 +8,14 @@
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
+        /* 기본 스타일 */
         body, html {
             margin: 0;
             padding: 0;
             font-family: 'Pretendard', sans-serif;
             color: #404040;
             background-color: white;
-            overflow-x: hidden; /* 가로 스크롤 방지 */
+            overflow-x: hidden;
         }
         body {
             display: flex;
@@ -28,13 +29,15 @@
             align-items: center;
             box-sizing: border-box;
             width: 100%;
-            overflow-x: hidden; /* 가로 스크롤 방지 */
+            overflow-x: hidden;
         }
+        
+        /* 헤더 스타일 */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 28px 0; /* 하단 패딩 제거 */
+            padding: 20px 28px 0;
             width: 100%;
             box-sizing: border-box;
         }
@@ -46,26 +49,18 @@
             text-align: center;
             flex-grow: 1;
             flex: 1 1 auto;
-            text-align: center;
         }
         .header-left, .header-right {
             flex: 0 0 auto;
             display: flex;
             align-items: center;
         }
-        .subpc {
-            display: block;
-            font-size: 14pt;
-        }
-        .subm {
-            display: none;
-        }
-        .mobile-title {
-            display: none;
-        }
         .pc-title {
             display: block;
             font-size: 36pt;
+        }
+        .mobile-title {
+            display: none;
         }
         .hamburger {
             width: 18px;
@@ -88,21 +83,32 @@
             line-height: 1.4;
             padding-bottom: 0px;
             color: black;
-            margin-bottom: 0; /* 간격 완전 제거 */
-            display: none; /* 빈 요소이므로 표시하지 않음 */
+            margin-bottom: 0;
+            display: none;
         }
+        .subpc {
+            display: block;
+            font-size: 14pt;
+        }
+        .subm {
+            display: none;
+        }
+        
+        /* 메인 이미지 스타일 */
         .main-image-container {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0; /* 여백 제거 */
+            margin: 0;
         }
         .main-image {
-            width: 600px; /* 고정 너비 설정 */
+            width: 600px;
             height: auto;
-            max-width: 100%; /* 화면보다 커지지 않도록 */
+            max-width: 100%;
         }
+        
+        /* 텍스트 섹션 스타일 */
         .text-section {
             width: 100%;
             padding: 50px 20px;
@@ -111,7 +117,7 @@
             flex-direction: column;
             align-items: center;
             box-sizing: border-box;
-            overflow-x: hidden; /* 가로 스크롤 방지 */
+            overflow-x: hidden;
         }
         .intro-title {
             font-family: 'Pretendard', sans-serif;
@@ -120,44 +126,42 @@
             color: #1b1b1c;
             margin-bottom: 40px;
             text-align: center;
-            max-width: 100%; /* 최대 너비 제한 */
-            word-wrap: break-word; /* 긴 단어 줄바꿈 */
+            max-width: 100%;
+            word-wrap: break-word;
         }
         .intro-text {
-                        display:block;
+            display: block;
             font-family: 'Pretendard', sans-serif;
             font-weight: bold;
             font-size: 18pt;
             line-height: 30pt;
             color: #6e6e73;
             text-align: center;
-            max-width: 100%; /* 화면 너비에 맞게 제한 */
+            max-width: 100%;
             margin: 0 auto;
-            word-wrap: break-word; /* 긴 단어 줄바꿈 */
+            word-wrap: break-word;
             box-sizing: border-box;
         }
-       .intro-text_m {
-        display:none;
+        .intro-text_m {
+            display: none;
         }
         .intro-text2 {
-            display:block;
+            display: block;
             font-family: 'Pretendard', sans-serif;
             font-weight: bold;
             font-size: 14pt;
             line-height: 26pt;
             color: #444445;
-            text-align: center; /* 왼쪽 정렬로 변경 */
-            max-width: 800px; /* 이미지와 동일한 너비 */
-            margin: 20px auto; /* 가운데 정렬을 위한 마진 */
-            padding: 0 20px; /* 모바일에서 여백 추가 */
+            text-align: center;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
             box-sizing: border-box;
-            word-wrap: break-word; /* 긴 단어 줄바꿈 */
+            word-wrap: break-word;
         }
         .intro-text2_m {
-      Display:none;
+            display: none;
         }
-        
-        /* 새로 추가된 클래스 - 특별 텍스트 영역 */
         .special-text {
             font-family: 'Pretendard', sans-serif;
             font-weight: normal;
@@ -165,242 +169,64 @@
             line-height: 26pt;
             color: #404040;
             text-align: left;
-            max-width: 800px; /* 이미지와 동일한 너비 */
-            margin: 20px auto; /* 가운데 정렬을 위한 마진 */
-            padding: 0 20px; /* 모바일에서 여백 추가 */
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
             box-sizing: border-box;
-            word-wrap: break-word; /* 긴 단어 줄바꿈 */
+            word-wrap: break-word;
         }
-        
         .special-text p {
             margin-bottom: 15px;
         }
-  /* 스와이퍼 관련 스타일 */
-        .swiper-container {
-            position: relative;
-            width: 100%;
-            max-width: 920px;
-            margin: 30px auto;
-            overflow: hidden;
-        }
         
-        .swiper-content {
-            display: flex;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .swiper-slide {
-            width: 100%;
-            flex-shrink: 0;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        
-        .swiper-slide.active {
-            opacity: 1;
-            position: relative;
-        }
-        
-        .swiper-slide img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .swiper-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            pointer-events: none;
-            z-index: 10;
-        }
-        
-        .swiper-button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #404040;
-            font-size: 40px;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            pointer-events: auto;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-        }
-        
-        .swiper-button::before {
-            content: '';
-            display: inline-block;
-            width: 15px;
-            height: 15px;
-            border-top: 2px solid #404040;
-            border-right: 2px solid #404040;
-            position: absolute;
-        }
-        
-        .swiper-button.prev {
-            left: 20px;
-        }
-        
-        .swiper-button.next {
-            right: 20px;
-        }
-        
-        .swiper-button.prev::before {
-            transform: rotate(-135deg);
-        }
-        
-        .swiper-button.next::before {
-            transform: rotate(45deg);
-        }
-        
-        .swiper-dots {
-            display: flex;
-            justify-content: center;
-            margin-top: 15px;
-            gap: 8px;
-        }
-        
-        .swiper-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #ccc;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .swiper-dot.active {
-            background-color: #404040;
-        }
-        .divider {
-    width: 50px;
-    height: 1px;
-    background-color: #404040;
-    margin: 20px auto;
-    display: block;
-	}
-.white-section {
-    width: auto; /* 또는 원본 사이즈와 맞는 값으로 설정 */
-    max-width: 920px; /* 최대 너비 제한 */
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 50px 0;
-    box-sizing: border-box;
-    overflow-x: hidden;
-    margin: 0 auto; /* 중앙 정렬 */
-}
-        .white-section .normalt {
-            display:block;
-            font-size: 16pt;
-            text-align: center;
-            max-width: 800px; /* 이미지와 동일한 너비 */
-            line-height: 1.9;
-            padding: 10px 20px;
-            color: #404040;
-            box-sizing: border-box;
-            word-wrap: break-word; /* 긴 단어 줄바꿈 */
-        }
-        .white-section .normalt {
-            Display:none;
-            font-size: 16pt;
-            text-align: center;
-            max-width: 800px; /* 이미지와 동일한 너비 */
-            line-height: 1.9;
-            padding: 10px 20px;
-            color: #404040;
-            box-sizing: border-box;
-            word-wrap: break-word; /* 긴 단어 줄바꿈 */
-        }
-
-        @media (max-width: 768px) {
-            .intro-title {
-                font-size: 28pt;
-                margin-bottom: 30px;
-            }
-            .intro-text {
-             Display:none;
-            }
-           .intro-text_m {
-            display:block;
-            font-family: 'Pretendard', sans-serif;
-            font-weight: bold;
-            font-size: 16pt;
-            line-height: 23pt;
-            color: #444445;
-            text-align: left;
-            max-width: 100%; /* 화면 너비에 맞게 제한 */
-            margin: 0 auto;
-            word-wrap: break-word; /* 긴 단어 줄바꿈 */
-            box-sizing: border-box;
-            padding: 20px;
-
-            }
-            .intro-text2 {
-         display:none;
-            }
-            .intro-text2_m {
-            display:block;
-            font-family: 'Pretendard', sans-serif;
-            font-weight: bold;
-            font-size: 12pt;
-            line-height: 20pt;
-            color: #444445;
-            text-align: left; /* 왼쪽 정렬로 변경 */
-            max-width: 800px; /* 이미지와 동일한 너비 */
-            margin: 20px auto; /* 가운데 정렬을 위한 마진 */
-            padding: 0 20px; /* 모바일에서 여백 추가 */
-            box-sizing: border-box;
-            word-wrap: break-word; /* 긴 단어 줄바꿈 */                
-            }
-            .special-text {
-                font-size: 12pt;
-                line-height: 20pt;
-                max-width: 100%;
-            }
-        }
+        /* 화이트 섹션 스타일 */
         .white-section {
-            width: 100%;
+            width: auto;
+            max-width: 920px;
+            margin: 0 auto;
             background-color: white;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 50px 0; /* 패딩 조정 (100px에서 60px로) */
+            padding: 50px 0;
             box-sizing: border-box;
-            overflow-x: hidden; /* 가로 스크롤 방지 */
+            overflow-x: hidden;
         }
         .white-section .normalt {
-            display:none;
-        }
-            .white-section .normalt_m {
-                 font-size: 14pt;
+            display: block;
+            font-size: 16pt;
             text-align: center;
-            max-width: 800px; /* 이미지와 동일한 너비 */
+            max-width: 800px;
             line-height: 1.9;
             padding: 10px 20px;
             color: #404040;
             box-sizing: border-box;
-            word-wrap: break-word; /* 긴 단어 줄바꿈 */
+            word-wrap: break-word;
+        }
+        .white-section .normalt_m {
+            display: none;
+            font-size: 14pt;
+            text-align: center;
+            max-width: 800px;
+            line-height: 1.9;
+            padding: 10px 20px;
+            color: #404040;
+            box-sizing: border-box;
+            word-wrap: break-word;
         }
         .image-1 {
             max-width: 100%;
             height: auto;
         }
+        .divider {
+            width: 50px;
+            height: 1px;
+            background-color: #404040;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        /* 버튼 스타일 */
         .button-container {
             margin-top: 50px;
         }
@@ -419,7 +245,7 @@
             align-items: center;
             justify-content: center;
             color: #000;
-            max-width: 100%; /* 화면보다 커지지 않도록 */
+            max-width: 100%;
             box-sizing: border-box;
         }
         .custom-button-content {
@@ -454,6 +280,8 @@
         .custom-button:hover a {
             color: #fff;
         }
+        
+        /* 메뉴 아이템 스타일 */
         .menu-items {
             position: fixed;
             top: 0;
@@ -524,6 +352,8 @@
             margin-bottom: 24px;
             color: black;
         }
+        
+        /* 탑 버튼 스타일 */
         .top-button {
             position: fixed;
             bottom: 20px;
@@ -558,29 +388,107 @@
             padding: 0;
             margin-top: 10px;
         }
-           .swiper-container {
-                margin: 20px auto;
-            }
-            
-            .swiper-button {
-                font-size: 30px;
-                width: 40px;
-                height: 40px;
-            }
-            
-            .swiper-button::before {
-                width: 10px;
-                height: 10px;
-            }
-            
-            .swiper-button.prev {
-                left: 10px;
-            }
-            
-            .swiper-button.next {
-                right: 10px;
-            }
         
+        /* 스와이퍼 스타일 - 오직 마지막 섹션에만 적용 */
+        .swiper-container {
+            position: relative;
+            width: 100%;
+            max-width: 920px;
+            margin: 30px auto;
+            overflow: hidden;
+        }
+        .swiper-content {
+            display: flex;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .swiper-slide {
+            width: 100%;
+            flex-shrink: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .swiper-slide.active {
+            opacity: 1;
+            position: relative;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .swiper-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .swiper-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #404040;
+            font-size: 40px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: auto;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        .swiper-button::before {
+            content: '';
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-top: 2px solid #404040;
+            border-right: 2px solid #404040;
+            position: absolute;
+        }
+        .swiper-button.prev {
+            left: 20px;
+        }
+        .swiper-button.next {
+            right: 20px;
+        }
+        .swiper-button.prev::before {
+            transform: rotate(-135deg);
+        }
+        .swiper-button.next::before {
+            transform: rotate(45deg);
+        }
+        .swiper-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            gap: 8px;
+        }
+        .swiper-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .swiper-dot.active {
+            background-color: #404040;
+        }
+        
+        /* 모바일 미디어 쿼리 */
+        @media (max-width: 768px) {
             .header {
                 padding: 20px 20px 0 20px;
                 position: relative;
@@ -596,23 +504,6 @@
                 line-height: 1.2;
                 margin-bottom: 0;
             }
-            .subtitle {
-                display: none; /* 모바일에서도 subtitle 숨김 */
-            }
-            .subpc {
-                display: none;
-            }
-            .subm {
-                display: none; /* 모바일에서도 텍스트 숨김 */
-            }
-            .white-section .normalt {
-                font-size: 12pt;
-                text-align: center;
-                max-width: 100%;
-                line-height: 1.8;
-                padding: 20px;
-                color: #404040;
-            }
             .title-year {
                 margin-bottom: 5px;
             }
@@ -626,6 +517,66 @@
             .header-title {
                 font-size: 26.4px;
             }
+            
+            .intro-title {
+                font-size: 28pt;
+                margin-bottom: 30px;
+            }
+            .intro-text {
+                display: none;
+            }
+            .intro-text_m {
+                display: block;
+                font-family: 'Pretendard', sans-serif;
+                font-weight: bold;
+                font-size: 16pt;
+                line-height: 23pt;
+                color: #444445;
+                text-align: left;
+                max-width: 100%;
+                margin: 0 auto;
+                word-wrap: break-word;
+                box-sizing: border-box;
+                padding: 20px;
+            }
+            .intro-text2 {
+                display: none;
+            }
+            .intro-text2_m {
+                display: block;
+                font-family: 'Pretendard', sans-serif;
+                font-weight: bold;
+                font-size: 12pt;
+                line-height: 20pt;
+                color: #444445;
+                text-align: left;
+                max-width: 800px;
+                margin: 20px auto;
+                padding: 0 20px;
+                box-sizing: border-box;
+                word-wrap: break-word;
+            }
+            .special-text {
+                font-size: 12pt;
+                line-height: 20pt;
+                max-width: 100%;
+            }
+            
+            .white-section {
+                width: 100%;
+            }
+            .white-section .normalt {
+                display: none;
+            }
+            .white-section .normalt_m {
+                display: block;
+                font-size: 12pt;
+                text-align: center;
+                max-width: 100%;
+                line-height: 1.8;
+                padding: 20px;
+            }
+            
             .image-1 {
                 width: 100%;
                 height: auto;
@@ -633,12 +584,13 @@
                 object-position: center;
             }
             .main-image {
-                max-width: 100%; /* 모바일에서는 전체 너비로 표시 */
-                width: auto; /* 모바일에서는 고정 너비 대신 100% 사용 */
+                max-width: 100%;
+                width: 100%;
             }
             .main-image-container {
-                margin: 0; /* 모바일에서도 여백 제거 */
+                margin: 0;
             }
+            
             .button-container {
                 display: flex;
                 justify-content: center;
@@ -646,49 +598,12 @@
                 margin-top: 40px;
             }
             .custom-button {
-                width: 80%; 
+                width: 80%;
                 height: 50px;
                 font-size: 16px;
-                align-items: center;
-                color: #000;
-                margin: 0 auto; 
+                margin: 0 auto;
             }
-            .custom-button a {
-                color: inherit;
-                text-decoration: none;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                height: 100%;
-            }
-            .custom-button-content {
-                display: flex;
-                align-items: center;
-            }
-            .top-button {
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                width: 40px;
-                height: 40px;
-                background-color: #ffffff;
-                border: 1px solid #8a8a8a;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-                z-index: 1000;
-            }
-            .top-button::before {
-                content: '';
-                width: 10px;
-                height: 10px;
-                border-top: 1px solid #404040;
-                border-right: 1px solid #404040;
-                transform: rotate(-45deg);
-                margin-top: 4px;
-            }
+            
             .language-toggle {
                 position: absolute;
                 right: 20px;
@@ -696,13 +611,33 @@
                 transform: translateY(-50%);
                 margin-top: 0;
             }
+            
+            .swiper-button {
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
+            }
+            .swiper-button::before {
+                width: 10px;
+                height: 10px;
+            }
+            .swiper-button.prev {
+                left: 10px;
+            }
+            .swiper-button.next {
+                right: 10px;
+            }
+            .swiper-container {
+                margin: 20px auto;
+            }
         }
-                   @media (min-width: 1920px) {
+        
+        /* 대형 화면 미디어 쿼리 */
+        @media (min-width: 1920px) {
             .header {
                 padding-left: 56px;
                 padding-right: 56px;
             }
-        }
         }
     </style>
 </head>
@@ -748,34 +683,40 @@
             <img src="images/like_note2.jpg" alt="Ground & Grid Note" class="main-image">
         </div>
         
-        <!-- 새로 추가되는 텍스트 섹션 -->
-
+        <!-- 텍스트 섹션 -->
         <div class="text-section">
             <h2 class="intro-title">저는 좋아합니다, 필기.</h2>
             <p class="intro-text">필기를 하면, 내용을 놓치지 않고, 내 것으로 남길 수 있죠. 하지만 그냥 쓰다보면 단순히 쓰는 행위가 되어 버리기도 해요.<br> 그래서 필기를 시작할지, 말아야할지 고민하다가 어느 때에는 하고, 어느 때에는 하지 않죠. <br>
 <br>이것을 개선하고 싶어서 그라운드 앤 그리드 노트를 만들었어요. <br>무지 페이지에서 필기한 내용을 표 형태의 그리드페이지에서 다시 정리하는 콘셉트입니다. 
-                          <br> <br>       <p class="intro-text_m">필기를 하면, 내용을 놓치지 않고, 내 것으로 남길 수 있죠.<br> 하지만 그냥 쓰다보면 단순히 쓰는 행위가 되어 버리기도 해요.<br> 그래서 필기를 시작할지, 말아야할지 고민하다가 어느 때에는 하고, 어느 때에는 하지 않죠. <br>
+                          <br> <br>
+            </p>       
+            <p class="intro-text_m">필기를 하면, 내용을 놓치지 않고, 내 것으로 남길 수 있죠.<br> 하지만 그냥 쓰다보면 단순히 쓰는 행위가 되어 버리기도 해요.<br> 그래서 필기를 시작할지, 말아야할지 고민하다가 어느 때에는 하고, 어느 때에는 하지 않죠. <br>
 <br>이것을 개선하고 싶어서 그라운드 앤 그리드 노트를 만들었어요. 무지 페이지에서 필기한 내용을 표 형태의 그리드페이지에서 다시 정리하는 콘셉트입니다. 
-                          <br> <br> </p>        <img id="bottomImage" src="images/table2.png" alt="Ground & Grid Note 내부" class="image-1"><br> 
-           <p class="intro-text"> <br> 필기만 하지 않고 정리까지 하라니, 다소 번거롭죠? 그런데 제법 괜찮아요. 공부와 필기의 효용감이 생겨요. </p>             <p class="intro-text_m"> <br> 필기만 하지 않고 정리까지 하라니, 다소 번거롭죠?<br> 그런데 제법 괜찮아요. 공부와 필기의 효용감이 생겨요. </p>
+                          <br> <br>
+            </p>
+            
+            <img id="bottomImage" src="images/table2.png" alt="Ground & Grid Note 내부" class="image-1"><br> 
+            
+            <p class="intro-text"> <br> 필기만 하지 않고 정리까지 하라니, 다소 번거롭죠? 그런데 제법 괜찮아요. 공부와 필기의 효용감이 생겨요. </p>
+            <p class="intro-text_m"> <br> 필기만 하지 않고 정리까지 하라니, 다소 번거롭죠?<br> 그런데 제법 괜찮아요. 공부와 필기의 효용감이 생겨요. </p>
         </div>
     </div>
+    
     <div class="white-section">
         <div>
-            <p class="intro-text2">이 예시는 제가 좋아하는 책, 앵무새 죽이기 To Kill A Mocking Bird를 원서로 읽으며 공부한 예시에요. <br> 그냥 읽으면 이해가 정말 안되어서 필기를 했습니다.<br> <br>  </p>
-            <p class="intro-text2_m">이 예시는 제가 좋아하는 책, 앵무새 죽이기 To Kill A Mocking Bird를 원서로 읽으며 공부한 예시에요. 그냥 읽으면 이해가 정말 안되어서 필기를 했습니다.<br> <br>  </p>
+            <p class="intro-text2">이 예시는 제가 좋아하는 책, 앵무새 죽이기 To Kill A Mocking Bird를 원서로 읽으며 공부한 예시에요. <br> 그냥 읽으면 이해가 정말 안되어서 필기를 했습니다.<br> <br></p>
+            <p class="intro-text2_m">이 예시는 제가 좋아하는 책, 앵무새 죽이기 To Kill A Mocking Bird를 원서로 읽으며 공부한 예시에요. 그냥 읽으면 이해가 정말 안되어서 필기를 했습니다.<br> <br></p>
        
             <img id="bottomImage" src="images/in_2.png" alt="Ground & Grid Note 내부" class="image-1">
-            <p class="intro-text2"> 우선 하나의 챕터를 공부해볼께요.<br> 문단 순서에 번호를 달고, 각 문단에서 모르는 단어와 표현, 주요 내용을 필기합니다. </p>
-          <p class="intro-text2_m"> 우선 하나의 챕터를 공부해볼께요.<br> 문단 순서에 번호를 달고, 각 문단에서 모르는 단어와 표현, 주요 내용을 필기합니다. </p>
-    
+            <p class="intro-text2">우선 하나의 챕터를 공부해볼께요.<br> 문단 순서에 번호를 달고, 각 문단에서 모르는 단어와 표현, 주요 내용을 필기합니다.</p>
+            <p class="intro-text2_m">우선 하나의 챕터를 공부해볼께요.<br> 문단 순서에 번호를 달고, 각 문단에서 모르는 단어와 표현, 주요 내용을 필기합니다.</p>
         </div>
     </div>
     
     <div class="white-section">
         <img id="bottomImage" src="images/in_3.png" alt="Ground & Grid Note 내부" class="image-1">
         <p class="intro-text2">다음 무지의 페이지에서도 계속해서 문단의 내용을 정리해서 필기를 합니다.</p>
-         <p class="intro-text2_m">다음 무지의 페이지에서도 계속해서 문단의 내용을 정리해서 필기를 합니다.</p>
+        <p class="intro-text2_m">다음 무지의 페이지에서도 계속해서 문단의 내용을 정리해서 필기를 합니다.</p>
     </div>
 
     <div class="white-section">
@@ -785,13 +726,12 @@
     </div>
 
     <div class="white-section">
-               <p class="intro-text2">다음은 정리하는 그리드페이지입니다. 40칸의 그리드에 앞서 필기한 문단 번호들을 각 칸에 넣어줍니다. <br> 문단이 더 많다면 1칸에 여러 개 들어가야 하지만, 
-이 챕터에서는 오히려 남았어요.</p>
-                       <p class="intro-text2_m">다음은 정리하는 그리드페이지입니다. 40칸의 그리드에 앞서 필기한 문단 번호들을 각 칸에 넣어줍니다. 문단이 더 많다면 1칸에 여러 개 들어가야 하지만, 
-이 챕터에서는 오히려 남았어요.</p>
+        <p class="intro-text2">다음은 정리하는 그리드페이지입니다. 40칸의 그리드에 앞서 필기한 문단 번호들을 각 칸에 넣어줍니다. <br> 문단이 더 많다면 1칸에 여러 개 들어가야 하지만, 이 챕터에서는 오히려 남았어요.</p>
+        <p class="intro-text2_m">다음은 정리하는 그리드페이지입니다. 40칸의 그리드에 앞서 필기한 문단 번호들을 각 칸에 넣어줍니다. 문단이 더 많다면 1칸에 여러 개 들어가야 하지만, 이 챕터에서는 오히려 남았어요.</p>
+        
         <img id="bottomImage" src="images/in_5.png" alt="Ground & Grid Note 내부" class="image-1">
  
-        <!-- 특별 텍스트 섹션으로 변경 - 특별한 텍스트만 왼쪽 정렬 -->
+        <!-- 특별 텍스트 섹션 - 왼쪽 정렬 -->
         <div class="normalt" style="text-align: left;">
             <p>🟩 먼저 도입부에서 토요일에 겪은 일을 스카우트가 소개했네요.</p>
             <p>🟨 그리고 아빠에게 스카우트가 들은 단어를 묻자 고모가 대화에 끼어듭니다.<br> 두 어른의 대화에 스카우트는 두려움을 갖습니다.</p>
@@ -799,37 +739,40 @@
             <p>🟥 아빠인 아티커스는 스카우트를 달래고 재우지만,</p>
             <p>🟦 집에서 도망나온 친구 딜이 스카우트의 침대 아래 있었습니다. 딜은 학대를 당해서 가출했다고 했지만, 사실은 어린아이가 가진 불안함이 가족들에게 위로받지 못했기 때문입니다.</p>
             <p>🟩 집안의 어른들이 알게 되고, 딜은 우선 그 집에 하룻밤 머물기로 일단락됩니다.<br> 스카우트는 딜에게 마을의 수수께끼 같은 존재, 부 래들리에 대해 왜 그가 도망가지 않았을라<br> 생각하냐고 묻습니다. 그러자 딜은 잠결에, 부 래들리는 도망갈 곳 조차 없을거라고 답합니다.</p>
-      </div>         
-                <div class="normalt_m" style="text-align: left;">
+        </div>         
+        <div class="normalt_m" style="text-align: left;">
             <p>🟩 먼저 도입부에서 토요일에 겪은 일을 스카우트가 소개했네요.</p>
             <p>🟨 그리고 아빠에게 스카우트가 들은 단어를 묻자 고모가 대화에 끼어듭니다.<br> 두 어른의 대화에 스카우트는 두려움을 갖습니다.</p>
             <p>🟧 오빠인 젬이 와서 스카우트를 나무라고, 둘은 싸우게 됩니다.</p>
             <p>🟥 아빠인 아티커스는 스카우트를 달래고 재우지만,</p>
             <p>🟦 집에서 도망나온 친구 딜이 스카우트의 침대 아래 있었습니다. 딜은 학대를 당해서 가출했다고 했지만, 사실은 어린아이가 가진 불안함이 가족들에게 위로받지 못했기 때문입니다.</p>
             <p>🟩 집안의 어른들이 알게 되고, 딜은 우선 그 집에 하룻밤 머물기로 일단락됩니다.<br> 스카우트는 딜에게 마을의 수수께끼 같은 존재, 부 래들리에 대해 왜 그가 도망가지 않았을라<br> 생각하냐고 묻습니다. 그러자 딜은 잠결에, 부 래들리는 도망갈 곳 조차 없을거라고 답합니다.</p>
-      </div>    
-     <p class="intro-text2"> 이렇게 하고보니, 이 챕터의 구조가 어떻게 되었는지 더 잘 이해가 되었어요. <br>도입부는 배경이 작게 소개되고, 아빠와 고모의 대화를 불안하게 듣는 스카우트의 모습이 나와있어요.<br>
-         사랑을 충분히 전해받지 않으면, 불안에 쌓이는 아이의 모습이 뒤이어 가출한 친구 딜과도 연결됩니다.<br><br></p>
-     <p class="intro-text2_m"> 이렇게 하고보니, 이 챕터의 구조가 어떻게 되었는지 더 잘 이해가 되었어요. <br>도입부는 배경이 작게 소개되고, 아빠와 고모의 대화를 불안하게 듣는 스카우트의 모습이 나와있어요.<br>
-         사랑을 충분히 전해받지 않으면, 불안에 쌓이는 아이의 모습이 뒤이어 가출한 친구 딜과도 연결됩니다.<br><br></p>
-         <div class="divider"></div>
-              <p class="intro-text2"> 여러 소동이 일어나지만 일단락되고, 마지막 두 아이의 대화에서, 다시 책의 전체 이야기로 향합니다. </p>
- <p class="intro-text2_m”> 여러 소동이 일어나지만 일단락되고, 마지막 두 아이의 대화에서, 다시 책의 전체 이야기로 향합니다. </p>
-                           <div class="divider"></div>
-            <p class="intro-text2">  부 래들리에 대한 언급으로요. 부 래들리는 이 책의 주요한 인물 중 하나입니다. <br>부 래들리는 도망갈 곳조차 없기 때문에, 그 집에 숨어있을 것이라고 딜이 답합니다. <br>어린아이의 통찰력이 돋보여 놀랍지만, 또한 서글픈 느낌이 들며 챕터가 마무리됩니다.</p>
-  <p class="intro-text2_m”>  부 래들리에 대한 언급으로요. 부 래들리는 이 책의 주요한 인물 중 하나입니다. <br>부 래들리는 도망갈 곳조차 없기 때문에, 그 집에 숨어있을 것이라고 딜이 답합니다. <br>어린아이의 통찰력이 돋보여 놀랍지만, 또한 서글픈 느낌이 들며 챕터가 마무리됩니다.</p>
-        </div>
+        </div>    
+        
+        <p class="intro-text2"> 이렇게 하고보니, 이 챕터의 구조가 어떻게 되었는지 더 잘 이해가 되었어요. <br>도입부는 배경이 작게 소개되고, 아빠와 고모의 대화를 불안하게 듣는 스카우트의 모습이 나와있어요.<br> 사랑을 충분히 전해받지 않으면, 불안에 쌓이는 아이의 모습이 뒤이어 가출한 친구 딜과도 연결됩니다.<br><br></p>
+        <p class="intro-text2_m"> 이렇게 하고보니, 이 챕터의 구조가 어떻게 되었는지 더 잘 이해가 되었어요. <br>도입부는 배경이 작게 소개되고, 아빠와 고모의 대화를 불안하게 듣는 스카우트의 모습이 나와있어요.<br> 사랑을 충분히 전해받지 않으면, 불안에 쌓이는 아이의 모습이 뒤이어 가출한 친구 딜과도 연결됩니다.<br><br></p>
+        
+        <div class="divider"></div>
+        
+        <p class="intro-text2"> 여러 소동이 일어나지만 일단락되고, 마지막 두 아이의 대화에서, 다시 책의 전체 이야기로 향합니다. </p>
+        <p class="intro-text2_m"> 여러 소동이 일어나지만 일단락되고, 마지막 두 아이의 대화에서, 다시 책의 전체 이야기로 향합니다. </p>
+        
+        <div class="divider"></div>
+        
+        <p class="intro-text2">  부 래들리에 대한 언급으로요. 부 래들리는 이 책의 주요한 인물 중 하나입니다. <br>부 래들리는 도망갈 곳조차 없기 때문에, 그 집에 숨어있을 것이라고 딜이 답합니다. <br>어린아이의 통찰력이 돋보여 놀랍지만, 또한 서글픈 느낌이 들며 챕터가 마무리됩니다.</p>
+        <p class="intro-text2_m">  부 래들리에 대한 언급으로요. 부 래들리는 이 책의 주요한 인물 중 하나입니다. <br>부 래들리는 도망갈 곳조차 없기 때문에, 그 집에 숨어있을 것이라고 딜이 답합니다. <br>어린아이의 통찰력이 돋보여 놀랍지만, 또한 서글픈 느낌이 들며 챕터가 마무리됩니다.</p>
+    </div>
     
     <div class="white-section">
         <img id="bottomImage" src="images/note3.gif" alt="Ground & Grid Note 내부" class="image-1">
         <div class="normalt"> <br><b>Ground & Grid Note<br></b>
             128*180mm(B6사이즈), 64p, 내지 미색 모조지 100g<br><br>
         </div>
-        <div class="normalt_m”> <br><b>Ground & Grid Note<br></b>
+        <div class="normalt_m"> <br><b>Ground & Grid Note<br></b>
             128*180mm(B6사이즈), 64p, 내지 미색 모조지 100g<br><br>
         </div>
 
- <!-- 스와이퍼 영역 추가 -->
+        <!-- 스와이퍼 영역 (마지막 섹션에만 적용) -->
         <div class="swiper-container">
             <div class="swiper-content">
                 <div class="swiper-slide active">
@@ -863,7 +806,6 @@
             </div>
         </div>
         
-
         <div class="button-container">
             <button class="custom-button">
                 <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">
@@ -961,122 +903,112 @@
         // 초기에 Top 버튼 숨기기
         topButton.style.display = 'none';
     });
-         document.addEventListener('DOMContentLoaded', function() {
-            const slides = document.querySelectorAll('.swiper-slide');
-            const dots = document.querySelectorAll('.swiper-dot');
-            const prevButton = document.getElementById('swiperPrev');
-            const nextButton = document.getElementById('swiperNext');
-            let currentIndex = 0;
-            let isTransitioning = false;
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.swiper-slide');
+        const dots = document.querySelectorAll('.swiper-dot');
+        const prevButton = document.getElementById('swiperPrev');
+        const nextButton = document.getElementById('swiperNext');
+        let currentIndex = 0;
+        let isTransitioning = false;
+        
+        // 초기화
+        updateSlides();
+        
+        // 슬라이드 업데이트 함수
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentIndex) {
+                    slide.classList.add('active');
+                }
+            });
             
-            // 초기화
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active');
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+        
+        // 이전 슬라이드
+        function goToPrevSlide() {
+            if (isTransitioning) return;
+            isTransitioning = true;
+            
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1;
             updateSlides();
             
-            // 슬라이드 업데이트 함수
-            function updateSlides() {
-                slides.forEach((slide, index) => {
-                    slide.classList.remove('active');
-                    if (index === currentIndex) {
-                        slide.classList.add('active');
-                    }
-                });
-                
-                dots.forEach((dot, index) => {
-                    dot.classList.remove('active');
-                    if (index === currentIndex) {
-                        dot.classList.add('active');
-                    }
-                });
-            }
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 300);
+        }
+        
+        // 다음 슬라이드
+        function goToNextSlide() {
+            if (isTransitioning) return;
+            isTransitioning = true;
             
-            // 이전 슬라이드
-            function goToPrevSlide() {
-                if (isTransitioning) return;
-                isTransitioning = true;
-                
-                currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1;
-                updateSlides();
-                
-                setTimeout(() => {
-                    isTransitioning = false;
-                }, 300);
-            }
+            currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
+            updateSlides();
             
-            // 다음 슬라이드
-            function goToNextSlide() {
-                if (isTransitioning) return;
-                isTransitioning = true;
-                
-                currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
-                updateSlides();
-                
-                setTimeout(() => {
-                    isTransitioning = false;
-                }, 300);
-            }
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 300);
+        }
+        
+        // 특정 슬라이드로 이동
+        function goToSlide(index) {
+            if (isTransitioning || index === currentIndex) return;
+            isTransitioning = true;
             
-            // 특정 슬라이드로 이동
-            function goToSlide(index) {
-                if (isTransitioning || index === currentIndex) return;
-                isTransitioning = true;
-                
-                currentIndex = index;
-                updateSlides();
-                
-                setTimeout(() => {
-                    isTransitioning = false;
-                }, 300);
-            }
+            currentIndex = index;
+            updateSlides();
             
-            // 이벤트 리스너 등록
-            prevButton.addEventListener('click', goToPrevSlide);
-            nextButton.addEventListener('click', goToNextSlide);
-            
-            dots.forEach((dot) => {
-                dot.addEventListener('click', () => {
-                    const index = parseInt(dot.getAttribute('data-index'));
-                    goToSlide(index);
-                });
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 300);
+        }
+        
+        // 이벤트 리스너 등록
+        prevButton.addEventListener('click', goToPrevSlide);
+        nextButton.addEventListener('click', goToNextSlide);
+        
+        dots.forEach((dot) => {
+            dot.addEventListener('click', () => {
+                const index = parseInt(dot.getAttribute('data-index'));
+                goToSlide(index);
             });
-            
-            // 터치 스와이프 지원
-            let touchStartX = 0;
-            let touchEndX = 0;
-            const swiperContent = document.querySelector('.swiper-content');
-            
-            swiperContent.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            });
-            
-            swiperContent.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            });
-            
-            function handleSwipe() {
-                const diff = touchStartX - touchEndX;
-                if (Math.abs(diff) < 30) return; // 작은 움직임은 무시
-                
-                if (diff > 0) {
-                    // 왼쪽으로 스와이프 - 다음 슬라이드
-                    goToNextSlide();
-                } else {
-                    // 오른쪽으로 스와이프 - 이전 슬라이드
-                    goToPrevSlide();
-                }
-            }
-            
-            // 자동 슬라이드 (옵션)
-            // let autoSlideInterval = setInterval(goToNextSlide, 5000);
-            
-            // swiperContent.addEventListener('mouseenter', () => {
-            //     clearInterval(autoSlideInterval);
-            // });
-            
-            // swiperContent.addEventListener('mouseleave', () => {
-            //     autoSlideInterval = setInterval(goToNextSlide, 5000);
-            // });
         });
+        
+        // 터치 스와이프 지원
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const swiperContent = document.querySelector('.swiper-content');
+        
+        swiperContent.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        swiperContent.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) < 30) return; // 작은 움직임은 무시
+            
+            if (diff > 0) {
+                // 왼쪽으로 스와이프 - 다음 슬라이드
+                goToNextSlide();
+            } else {
+                // 오른쪽으로 스와이프 - 이전 슬라이드
+                goToPrevSlide();
+            }
+        }
+    });
     </script>
 </body>
 </html>
