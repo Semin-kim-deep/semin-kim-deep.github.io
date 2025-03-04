@@ -126,6 +126,7 @@
             word-wrap: break-word; /* 긴 단어 줄바꿈 */
         }
         .intro-text {
+                        display:block;
             font-family: 'Pretendard', sans-serif;
             font-weight: bold;
             font-size: 18pt;
@@ -138,9 +139,10 @@
             box-sizing: border-box;
         }
        .intro-text_m {
-        Display:none
+        Display:none;
         }
         .intro-text2 {
+            display:block;
             font-family: 'Pretendard', sans-serif;
             font-weight: bold;
             font-size: 14pt;
@@ -154,7 +156,7 @@
             word-wrap: break-word; /* 긴 단어 줄바꿈 */
         }
         .intro-text2_m {
-      Display:none
+      Display:none;
         }
         
         /* 새로 추가된 클래스 - 특별 텍스트 영역 */
@@ -299,9 +301,10 @@
                 margin-bottom: 30px;
             }
             .intro-text {
-             Display:none
+             Display:none;
             }
            .intro-text_m {
+            display:block;
             font-family: 'Pretendard', sans-serif;
             font-weight: bold;
             font-size: 14pt;
@@ -316,9 +319,10 @@
 
             }
             .intro-text2 {
-         Display:none
+         Display:none;
             }
             .intro-text2_m {
+            display:block;
         font-family: 'Pretendard', sans-serif;
             font-weight: bold;
             font-size: 12pt;
@@ -540,15 +544,7 @@
             .swiper-button.next {
                 right: 10px;
             }
-        }
-        @media (min-width: 1920px) {
-            .header {
-                padding-left: 56px;
-                padding-right: 56px;
-            }
-        }
-
-        @media (max-width: 768px) {
+        
             .header {
                 padding: 20px 20px 0 20px;
                 position: relative;
@@ -664,6 +660,13 @@
                 transform: translateY(-50%);
                 margin-top: 0;
             }
+        }
+                   @media (min-width: 1920px) {
+            .header {
+                padding-left: 56px;
+                padding-right: 56px;
+            }
+        }
         }
     </style>
 </head>
