@@ -99,6 +99,43 @@
             height: auto;
             max-width: 100%; /* 화면보다 커지지 않도록 */
         }
+        .text-section {
+    width: 100%;
+    padding: 50px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.intro-title {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: bold;
+    font-size: 38pt;
+    color: #1b1b1c;
+    margin-bottom: 40px;
+    text-align: center;
+}
+.intro-text {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: bold;
+    font-size: 22pt;
+    line-height: 34pt;
+    color: #6e6e73;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .intro-title {
+        font-size: 28pt;
+        margin-bottom: 30px;
+    }
+    .intro-text {
+        font-size: 16pt;
+        line-height: 24pt;
+    }
+}
         .white-section {
             width: 100%;
             background-color: white;
@@ -439,10 +476,18 @@
             <span class="subm"></span>
         </div>
 
-        <div class="main-image-container">
+<div class="main-image-container">
             <img src="images/like_note2.jpg" alt="Ground & Grid Note" class="main-image">
         </div>
+        
+        <!-- 새로 추가되는 텍스트 섹션 -->
+        <div class="text-section">
+            <h2 class="intro-title">저는 좋아합니다. 필기.</h2>
+            <p class="intro-text">필기를 하면, 놓치지 않고 내 것으로 남길 수 있는 것 같아요.<br> 하지만 그냥 쓰다보면 단순히 쓰는 행위가 되어 버리기도 해요. 그래서 필기를 시작할지, 말아야할지 고민하다가 어느때에는 하고, 어느 때에는 하지 않죠. <br><br>이것을 개선하고 싶어서 그라운드 앤 그리드 노트를 만들었어요. 무지 페이지에서 필기한 내용을 표 형태의 그리드페이지에서 다시 정리하는 콘셉트입니다.</p>
+        </div>
     </div>
+    
+    <div class="white-section">
     
     <div class="white-section">
         <img id="bottomImage" src="images/in_1.png" alt="Ground & Grid Note 내부" class="image-1">
