@@ -820,194 +820,272 @@
     <div class="top-button" id="topButton"></div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const hamburger = document.getElementById('hamburger-menu');
-        const menuItems = document.getElementById('menu-items');
-        const closeBtn = document.getElementById('close-menu');
-        const dimmedBg = document.getElementById('dimmed-bg');
-        const languageToggle = document.getElementById('language-toggle');
-        const topButton = document.getElementById('topButton');
-        
-        let currentLanguage = 'ko';
-
-        const translations = {
-            ko: {
-                title: 'Ground & Grid Note',
-                subtitle: '',
-                bottomText: 'Ground & Grid Note<br>생각을 그라운드에서 펼치고 그리드에서 정리하는<br>딥다운 스튜디오의 노트',
-                buttonText: '신나게 사러 달려나가기',
-                menuHome: 'Home',
-                menuAbout: 'About',
-                menuShop: 'Shop',
-                menuCard: 'Anti-Tarot Card',
-                menuCalendar: 'Calendar 2025'
-            },
-            en: {
-                title: 'Ground & Grid Note',
-                subtitle: '',
-                bottomText: 'Ground & Grid Note<br>A note from Deepdown Studio<br>to expand your ideas on the ground and organize them on the grid',
-                buttonText: 'Run excitedly to buy',
-                menuHome: 'Home',
-                menuAbout: 'About',
-                menuShop: 'Shop',
-                menuCard: 'Anti-Tarot Card',
-                menuCalendar: 'Calendar 2025'
-            }
-        };
-
-        function openMenu() {
-            menuItems.classList.add('menu-open');
-            dimmedBg.style.display = 'block';
-        }
-
-        function closeMenu() {
-            menuItems.classList.remove('menu-open');
-            dimmedBg.style.display = 'none';
-        }
-
-        function changeLanguage() {
-            currentLanguage = currentLanguage === 'ko' ? 'en' : 'ko';
-            languageToggle.textContent = currentLanguage === 'ko' ? 'EN' : 'KO';
-            
-            // 페이지 요소 업데이트
-            document.querySelector('.pc-title').textContent = translations[currentLanguage].title;
-            document.querySelector('.title-year').textContent = translations[currentLanguage].title;
-            
-            document.querySelector('.normalt').innerHTML = translations[currentLanguage].bottomText;
-            document.querySelector('.custom-button .custom-button-content').firstChild.textContent = translations[currentLanguage].buttonText;
-        }
-
-        hamburger.addEventListener('click', openMenu);
-        closeBtn.addEventListener('click', closeMenu);
-        dimmedBg.addEventListener('click', closeMenu);
-        languageToggle.addEventListener('click', changeLanguage);
-
-        // Top 버튼 기능
-        topButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Top 버튼 표시/숨김 처리
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 100) {
-                topButton.style.display = 'flex';
-            } else {
-                topButton.style.display = 'none';
-            }
-        });
-
-        // 초기에 Top 버튼 숨기기
-        topButton.style.display = 'none';
-    });
+ document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const menuItems = document.getElementById('menu-items');
+    const closeBtn = document.getElementById('close-menu');
+    const dimmedBg = document.getElementById('dimmed-bg');
+    const languageToggle = document.getElementById('language-toggle');
+    const topButton = document.getElementById('topButton');
     
-    document.addEventListener('DOMContentLoaded', function() {
-        const slides = document.querySelectorAll('.swiper-slide');
-        const dots = document.querySelectorAll('.swiper-dot');
-        const prevButton = document.getElementById('swiperPrev');
-        const nextButton = document.getElementById('swiperNext');
-        let currentIndex = 0;
-        let isTransitioning = false;
+    let currentLanguage = 'ko';
+
+    const translations = {
+        ko: {
+            title: 'Ground & Grid Note',
+            subtitle: '',
+            introTitle: '저는 좋아합니다, 필기.',
+            introText: '필기를 하면, 내용을 놓치지 않고, 내 것으로 남길 수 있죠.<br> <strong style="color: #000000;">하지만 그냥 쓰다보면 단순히 쓰는 행위가 되어 버리기도 해요.</strong><br>지면에는 남지만 머리에 남지 않고, 손만 아플 때요.<br> 그래서 필기를 시작할지, 말아야할지 고민하다가 어느 때에는 하고, 어느 때에는 하지 않죠. <br><strong style="color: #000000;"><br>이것을 개선하고 싶어서 그라운드 앤 그리드 노트를 만들었어요. <br>무지 페이지에서 필기한 내용을 표 형태의 그리드페이지에서 다시 정리하는 콘셉트입니다. </strong><br> <br>',
+            introTextMobile: '필기를 하면, 내용을 놓치지 않고, 내 것으로 남길 수 있죠. 하지만 그냥 쓰다보면 단순히 쓰는 행위가 되어 버리기도 해요.<br>지면에는 남지만 머리에 남지 않고, 손만 아플 때요.<br> 그래서 필기를 시작할지, 말아야할지 고민하다가 어느 때에는 하고, 어느 때에는 하지 않죠. <br><br>이것을 개선하고 싶어서 그라운드 앤 그리드 노트를 만들었어요. 무지 페이지에서 필기한 내용을 표 형태의 그리드페이지에서 다시 정리하는 콘셉트입니다.<br> <br>',
+            introTextAfterImage: '<br> 필기만 하지 않고 정리까지 하라니, 다소 번거롭죠? <br>그런데 제법 괜찮아요. 공부와 필기의 효용감이 생겨요.',
+            introTextAfterImageMobile: '<br> 필기만 하지 않고 정리까지 하라니,<br> 다소 번거롭죠?<br> 그런데 제법 괜찮아요. <br>공부와 필기의 효용감이 생겨요.',
+            exampleText: '이 예시는 제가 좋아하는 책, 앵무새 죽이기를 원서로 읽으며 필기한 거에요. <br> 그냥 읽으면 이해가 정말 안되어서 필기를 했습니다.<br> <br>',
+            exampleTextMobile: '이 예시는 제가 좋아하는 책, 앵무새 죽이기를 원서로 읽으며 필기한 거에요. 그냥 읽으면 이해가 정말 안되어서 필기를 했습니다.<br> <br>',
+            chapterText: '우선 하나의 챕터를 공부해볼께요.<br> 문단 순서에 번호를 달고, 각 문단에서 모르는 단어와 표현, 주요 내용을 필기합니다.',
+            chapterTextMobile: '우선 하나의 챕터를 공부해볼께요.<br> 문단 순서에 번호를 달고, 각 문단에서 모르는 단어와 표현, 주요 내용을 필기합니다.',
+            continueText: '다음 무지의 페이지에서도 계속해서 문단의 내용을 정리해서 필기를 합니다.',
+            continueTextMobile: '다음 무지의 페이지에서도 계속해서 문단의 내용을 정리해서 필기를 합니다.',
+            nextPageText: '역시 다음 3번째 펼침페이지에도 챕터 내 문단을 번호를 매겨 정리합니다.',
+            nextPageTextMobile: '역시 다음 3번째 펼침페이지에도 챕터 내 문단을 번호를 매겨 정리합니다.',
+            gridText: '다음은 정리하는 그리드페이지입니다. <br>40칸의 그리드에 앞서 필기한 문단 번호들을 각 칸에 넣어줍니다. <br> 문단이 더 많다면 1칸에 여러 개 들어가야 하지만, 이 챕터에서는 오히려 남았어요.',
+            gridTextMobile: '다음은 정리하는 그리드페이지입니다. 40칸의 그리드에 앞서 필기한 문단 번호들을 각 칸에 넣어줍니다. 문단이 더 많다면 1칸에 여러 개 들어가야 하지만, 이 챕터에서는 오히려 남았어요.',
+            normalText1: '🟩 먼저 도입부에서 토요일에 겪은 일을 스카우트가 소개했네요.',
+            normalText2: '🟨 그리고 아빠에게 스카우트가 들은 단어를 묻자 고모가 대화에 끼어듭니다.<br> 두 어른의 대화에 스카우트는 두려움을 갖습니다.',
+            normalText3: '🟧 오빠인 젬이 와서 스카우트를 나무라고, 둘은 싸우게 됩니다.',
+            normalText4: '🟥 아빠인 아티커스는 스카우트를 달래고 재우지만,',
+            normalText4Mobile: '🟥 아빠는 스카우트를 달래고 재우지만,',
+            normalText5: '🟦 집에서 도망나온 친구 딜이 스카우트의 침대 아래 있었습니다. 딜은 학대를 당해서 가출했다고 했지만, 사실은 어린아이가 가진 불안함이 가족들에게 위로받지 못했기 때문입니다.',
+            normalText6: '🟩 집안의 어른들이 알게 되고, 딜은 우선 그 집에 하룻밤 머물기로 일단락됩니다.<br> 스카우트는 딜에게 마을의 수수께끼 같은 존재, 부 래들리가 도망가지 않았을거라 생각하냐고 묻습니다. 그러자 딜은 잠결에, 부 래들리는 도망갈 곳 조차 없을거라고 답합니다.',
+            summaryText: '이렇게 하고보니, 이 챕터의 구조가 어떻게 되었는지 더 잘 이해가 되었어요. <br>도입부에 배경이 살짝 소개되고, 아빠와 고모의 대화를 불안하게 듣는 스카우트가 등장해요. <br>어른들의 사랑을 충분히 느끼지 못해 불안해하는 어린 스카우트의 모습이<br> 뒤이어 등장한 친구 딜과도 연결됩니다.<br><br>',
+            summaryTextMobile: '이렇게 하고보니, 이 챕터의 구조가 어떻게 되었는지 더 잘 이해가 되었어요. <br>도입부는 배경이 작게 소개되고, 아빠와 고모의 대화를 불안하게 듣는 스카우트가 등장해요.<br> 어른들의 사랑을 충분히 전해받지 못해 불안해하는 어린 스카우트의 모습이 뒤이어 등장한 친구 딜과도 연결됩니다.<br><br>',
+            conclusionText1: '여러 소동이 일단락되고, 마지막 두 아이의 대화는 다시 책의 전체 이야기로 향합니다.',
+            conclusionText1Mobile: '여러 소동이 일단락되고, 마지막 두 아이의 대화는 다시 책의 전체 이야기로 향합니다.',
+            conclusionText2: '부 래들리에 대한 언급으로요. 부 래들리는 이 책의 주요한 인물 중 하나입니다. <br>부 래들리는 도망갈 곳조차 없기 때문에, 그 집에 숨어있을 것이라고 딜이 답합니다. <br>어린아이의 통찰력이 돋보여 놀랍지만, 또한 서글픈 느낌이 들며 챕터가 마무리됩니다.',
+            conclusionText2Mobile: '부 래들리에 대한 언급으로요. 부 래들리는 이 책의 주요한 인물 중 하나입니다. <br>부 래들리는 도망갈 곳조차 없기 때문에, 그 집에 숨어있을 것이라고 딜이 답합니다. <br>어린아이의 통찰력이 돋보여 놀랍지만, 또한 서글픈 느낌이 들며 챕터가 마무리됩니다.',
+            noteSpec: '<br><b>Ground & Grid Note<br></b>128*180mm(B6사이즈), 64p, 내지 미색 모조지 100g<br><br>',
+            noteSpecMobile: '<br><b>Ground & Grid Note<br></b>128*180mm(B6사이즈), 64p <br>내지 미색 모조지 100g<br><br>',
+            buttonText: '신나게 사러 달려나가기',
+            menuHome: 'Home',
+            menuAbout: 'About',
+            menuShop: 'Shop',
+            menuCard: 'Anti-Tarot Card',
+            menuCalendar: 'Calendar 2025'
+        },
+        en: {
+            title: 'Ground & Grid Note',
+            subtitle: '',
+            introTitle: 'I love taking notes.',
+            introText: 'When I take notes, I can retain the content and make it my own.<br> <strong style="color: #000000;">But sometimes, just writing becomes a mechanical act.</strong><br>It remains on paper but not in my head, and my hand just hurts.<br> So I sometimes hesitate whether to take notes or not, and do it sometimes, but not always. <br><strong style="color: #000000;"><br>To improve this, I created the Ground & Grid Note. <br>The concept is to organize the content noted on blank pages into a grid format on the following pages.</strong><br> <br>',
+            introTextMobile: 'When I take notes, I can retain the content and make it my own. But sometimes, just writing becomes a mechanical act.<br>It remains on paper but not in my head, and my hand just hurts.<br> So I sometimes hesitate whether to take notes or not, and do it sometimes, but not always. <br><br>To improve this, I created the Ground & Grid Note. The concept is to organize the content noted on blank pages into a grid format on the following pages.<br> <br>',
+            introTextAfterImage: '<br> Taking notes and then organizing them might seem cumbersome, <br>but it actually works quite well. It gives a sense of utility to studying and note-taking.',
+            introTextAfterImageMobile: '<br> Taking notes and then organizing them<br> might seem cumbersome,<br> but it actually works quite well. <br>It gives a sense of utility to studying and note-taking.',
+            exampleText: 'This example is from my notes while reading "To Kill a Mockingbird" in English. <br> I took notes because it was hard to understand just by reading.<br> <br>',
+            exampleTextMobile: 'This example is from my notes while reading "To Kill a Mockingbird" in English. I took notes because it was hard to understand just by reading.<br> <br>',
+            chapterText: 'First, let\'s study one chapter.<br> I number each paragraph and note unfamiliar words, expressions, and key points.',
+            chapterTextMobile: 'First, let\'s study one chapter.<br> I number each paragraph and note unfamiliar words, expressions, and key points.',
+            continueText: 'On the next blank page, I continue summarizing the content of each paragraph.',
+            continueTextMobile: 'On the next blank page, I continue summarizing the content of each paragraph.',
+            nextPageText: 'Similarly, on the third spread, I continue organizing the paragraphs with numbers.',
+            nextPageTextMobile: 'Similarly, on the third spread, I continue organizing the paragraphs with numbers.',
+            gridText: 'Next is the grid page for organizing.<br>I place the paragraph numbers in each of the 40 grid cells. <br> If there are more paragraphs, multiple numbers would go in one cell, but for this chapter, there are actually cells left over.',
+            gridTextMobile: 'Next is the grid page for organizing. I place the paragraph numbers in each of the 40 grid cells. If there are more paragraphs, multiple numbers would go in one cell, but for this chapter, there are actually cells left over.',
+            normalText1: '🟩 First, Scout introduces what happened on Saturday in the introduction.',
+            normalText2: '🟨 When Scout asks her father about a word she heard, her aunt intervenes in the conversation.<br> Scout feels fear during this adult conversation.',
+            normalText3: '🟧 Her brother Jem comes and scolds Scout, leading to a fight between them.',
+            normalText4: '🟥 Her father Atticus comforts Scout and puts her to bed, but',
+            normalText4Mobile: '🟥 Her father comforts Scout and puts her to bed, but',
+            normalText5: '🟦 Her friend Dill, who ran away from home, is hiding under Scout\'s bed. Dill claims he was abused, but in reality, his family just failed to comfort his childish anxieties.',
+            normalText6: '🟩 The adults in the house find out, and it\'s decided that Dill will stay for the night.<br> Scout asks Dill if he thinks Boo Radley, the mysterious figure in town, never ran away. Dill answers sleepily that Boo Radley probably has nowhere to run to.',
+            summaryText: 'After organizing like this, I understand the structure of this chapter better. <br>The introduction briefly presents the background, and Scout appears listening anxiously to her father and aunt\'s conversation. <br>The image of young Scout anxious about not feeling enough love from adults<br> connects with her friend Dill who appears later.<br><br>',
+            summaryTextMobile: 'After organizing like this, I understand the structure of this chapter better. <br>The introduction briefly presents the background, and Scout appears listening anxiously to her father and aunt\'s conversation.<br> The image of young Scout anxious about not receiving enough love from adults connects with her friend Dill who appears later.<br><br>',
+            conclusionText1: 'After various incidents are settled, the final conversation between the two children returns to the overall story of the book.',
+            conclusionText1Mobile: 'After various incidents are settled, the final conversation between the two children returns to the overall story of the book.',
+            conclusionText2: 'With the mention of Boo Radley, who is one of the key characters in this book. <br>Dill answers that Boo Radley is probably hiding in that house because he has nowhere to run. <br>The chapter concludes with a child\'s surprising insight that is both impressive and sad.',
+            conclusionText2Mobile: 'With the mention of Boo Radley, who is one of the key characters in this book. <br>Dill answers that Boo Radley is probably hiding in that house because he has nowhere to run. <br>The chapter concludes with a child\'s surprising insight that is both impressive and sad.',
+            noteSpec: '<br><b>Ground & Grid Note<br></b>128*180mm(B6 size), 64p, Off-white paper 100g<br><br>',
+            noteSpecMobile: '<br><b>Ground & Grid Note<br></b>128*180mm(B6 size), 64p <br>Off-white paper 100g<br><br>',
+            buttonText: 'Run excitedly to buy',
+            menuHome: 'Home',
+            menuAbout: 'About',
+            menuShop: 'Shop',
+            menuCard: 'Anti-Tarot Card',
+            menuCalendar: 'Calendar 2025'
+        }
+    };
+
+    function openMenu() {
+        menuItems.classList.add('menu-open');
+        dimmedBg.style.display = 'block';
+    }
+
+    function closeMenu() {
+        menuItems.classList.remove('menu-open');
+        dimmedBg.style.display = 'none';
+    }
+
+    function changeLanguage() {
+        currentLanguage = currentLanguage === 'ko' ? 'en' : 'ko';
+        languageToggle.textContent = currentLanguage === 'ko' ? 'EN' : 'KO';
         
-        // 초기화
-        updateSlides();
+        // 페이지 요소 업데이트
+        document.querySelector('.pc-title').textContent = translations[currentLanguage].title;
+        document.querySelector('.title-year').textContent = translations[currentLanguage].title;
         
-        // 슬라이드 업데이트 함수
-        function updateSlides() {
-            slides.forEach((slide, index) => {
-                slide.classList.remove('active');
-                if (index === currentIndex) {
-                    slide.classList.add('active');
-                }
-            });
-            
-            dots.forEach((dot, index) => {
-                dot.classList.remove('active');
-                if (index === currentIndex) {
-                    dot.classList.add('active');
-                }
-            });
+        // 인트로 섹션 업데이트
+        document.querySelector('.intro-title').textContent = translations[currentLanguage].introTitle;
+        document.querySelector('.intro-text').innerHTML = translations[currentLanguage].introText;
+        document.querySelector('.intro-text_m').innerHTML = translations[currentLanguage].introTextMobile;
+        document.querySelector('.intro-text:nth-of-type(2)').innerHTML = translations[currentLanguage].introTextAfterImage;
+        document.querySelector('.intro-text_m:nth-of-type(2)').innerHTML = translations[currentLanguage].introTextAfterImageMobile;
+        
+        // 예시 섹션 업데이트
+        const introText2Elements = document.querySelectorAll('.intro-text2');
+        const introText2MobileElements = document.querySelectorAll('.intro-text2_m');
+        
+        if (introText2Elements.length >= 1) {
+            introText2Elements[0].innerHTML = translations[currentLanguage].exampleText;
+        }
+        if (introText2MobileElements.length >= 1) {
+            introText2MobileElements[0].innerHTML = translations[currentLanguage].exampleTextMobile;
         }
         
-        // 이전 슬라이드
-        function goToPrevSlide() {
-            if (isTransitioning) return;
-            isTransitioning = true;
-            
-            currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1;
-            updateSlides();
-            
-            setTimeout(() => {
-                isTransitioning = false;
-            }, 300);
+        if (introText2Elements.length >= 2) {
+            introText2Elements[1].innerHTML = translations[currentLanguage].chapterText;
+        }
+        if (introText2MobileElements.length >= 2) {
+            introText2MobileElements[1].innerHTML = translations[currentLanguage].chapterTextMobile;
         }
         
-        // 다음 슬라이드
-        function goToNextSlide() {
-            if (isTransitioning) return;
-            isTransitioning = true;
-            
-            currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
-            updateSlides();
-            
-            setTimeout(() => {
-                isTransitioning = false;
-            }, 300);
+        if (introText2Elements.length >= 3) {
+            introText2Elements[2].innerHTML = translations[currentLanguage].continueText;
+        }
+        if (introText2MobileElements.length >= 3) {
+            introText2MobileElements[2].innerHTML = translations[currentLanguage].continueTextMobile;
         }
         
-        // 특정 슬라이드로 이동
-        function goToSlide(index) {
-            if (isTransitioning || index === currentIndex) return;
-            isTransitioning = true;
-            
-            currentIndex = index;
-            updateSlides();
-            
-            setTimeout(() => {
-                isTransitioning = false;
-            }, 300);
+        if (introText2Elements.length >= 4) {
+            introText2Elements[3].innerHTML = translations[currentLanguage].nextPageText;
+        }
+        if (introText2MobileElements.length >= 4) {
+            introText2MobileElements[3].innerHTML = translations[currentLanguage].nextPageTextMobile;
         }
         
-        // 이벤트 리스너 등록
-        prevButton.addEventListener('click', goToPrevSlide);
-        nextButton.addEventListener('click', goToNextSlide);
+        if (introText2Elements.length >= 5) {
+            introText2Elements[4].innerHTML = translations[currentLanguage].gridText;
+        }
+        if (introText2MobileElements.length >= 5) {
+            introText2MobileElements[4].innerHTML = translations[currentLanguage].gridTextMobile;
+        }
         
-        dots.forEach((dot) => {
-            dot.addEventListener('click', () => {
-                const index = parseInt(dot.getAttribute('data-index'));
-                goToSlide(index);
-            });
+        // 노멀 텍스트 업데이트 (그리드 설명 부분)
+        const normalTextPs = document.querySelectorAll('.normalt p');
+        const normalTextMobilePs = document.querySelectorAll('.normalt_m p');
+        
+        if (normalTextPs.length >= 1) {
+            normalTextPs[0].innerHTML = translations[currentLanguage].normalText1;
+        }
+        if (normalTextMobilePs.length >= 1) {
+            normalTextMobilePs[0].innerHTML = translations[currentLanguage].normalText1;
+        }
+        
+        if (normalTextPs.length >= 2) {
+            normalTextPs[1].innerHTML = translations[currentLanguage].normalText2;
+        }
+        if (normalTextMobilePs.length >= 2) {
+            normalTextMobilePs[1].innerHTML = translations[currentLanguage].normalText2;
+        }
+        
+        if (normalTextPs.length >= 3) {
+            normalTextPs[2].innerHTML = translations[currentLanguage].normalText3;
+        }
+        if (normalTextMobilePs.length >= 3) {
+            normalTextMobilePs[2].innerHTML = translations[currentLanguage].normalText3;
+        }
+        
+        if (normalTextPs.length >= 4) {
+            normalTextPs[3].innerHTML = translations[currentLanguage].normalText4;
+        }
+        if (normalTextMobilePs.length >= 4) {
+            normalTextMobilePs[3].innerHTML = translations[currentLanguage].normalText4Mobile;
+        }
+        
+        if (normalTextPs.length >= 5) {
+            normalTextPs[4].innerHTML = translations[currentLanguage].normalText5;
+        }
+        if (normalTextMobilePs.length >= 5) {
+            normalTextMobilePs[4].innerHTML = translations[currentLanguage].normalText5;
+        }
+        
+        if (normalTextPs.length >= 6) {
+            normalTextPs[5].innerHTML = translations[currentLanguage].normalText6;
+        }
+        if (normalTextMobilePs.length >= 6) {
+            normalTextMobilePs[5].innerHTML = translations[currentLanguage].normalText6;
+        }
+        
+        // 요약 및 결론 부분 업데이트
+        if (introText2Elements.length >= 6) {
+            introText2Elements[5].innerHTML = translations[currentLanguage].summaryText;
+        }
+        if (introText2MobileElements.length >= 6) {
+            introText2MobileElements[5].innerHTML = translations[currentLanguage].summaryTextMobile;
+        }
+        
+        if (introText2Elements.length >= 7) {
+            introText2Elements[6].innerHTML = translations[currentLanguage].conclusionText1;
+        }
+        if (introText2MobileElements.length >= 7) {
+            introText2MobileElements[6].innerHTML = translations[currentLanguage].conclusionText1Mobile;
+        }
+        
+        if (introText2Elements.length >= 8) {
+            introText2Elements[7].innerHTML = translations[currentLanguage].conclusionText2;
+        }
+        if (introText2MobileElements.length >= 8) {
+            introText2MobileElements[7].innerHTML = translations[currentLanguage].conclusionText2Mobile;
+        }
+        
+        // 노트 스펙 및 버튼 텍스트 업데이트
+        document.querySelectorAll('.white-section .normalt')[1].innerHTML = translations[currentLanguage].noteSpec;
+        document.querySelector('.white-section .normalt_m').innerHTML = translations[currentLanguage].noteSpecMobile;
+        document.querySelector('.custom-button .custom-button-content').firstChild.textContent = translations[currentLanguage].buttonText;
+        
+        // 메뉴 항목 업데이트
+        const menuLinks = document.querySelectorAll('.menu-items a');
+        if (menuLinks.length >= 5) {
+            menuLinks[0].textContent = translations[currentLanguage].menuHome;
+            menuLinks[1].textContent = translations[currentLanguage].menuAbout;
+            menuLinks[2].textContent = translations[currentLanguage].menuShop;
+            menuLinks[3].textContent = translations[currentLanguage].menuCard;
+            menuLinks[4].textContent = translations[currentLanguage].menuCalendar;
+        }
+    }
+
+    hamburger.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+    dimmedBg.addEventListener('click', closeMenu);
+    languageToggle.addEventListener('click', changeLanguage);
+
+    // Top 버튼 기능
+    topButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
-        
-        // 터치 스와이프 지원
-        let touchStartX = 0;
-        let touchEndX = 0;
-        const swiperContent = document.querySelector('.swiper-content');
-        
-        swiperContent.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        
-        swiperContent.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-        
-        function handleSwipe() {
-            const diff = touchStartX - touchEndX;
-            if (Math.abs(diff) < 30) return; // 작은 움직임은 무시
-            
-            if (diff > 0) {
-                // 왼쪽으로 스와이프 - 다음 슬라이드
-                goToNextSlide();
-            } else {
-                // 오른쪽으로 스와이프 - 이전 슬라이드
-                goToPrevSlide();
-            }
+    });
+
+    // Top 버튼 표시/숨김 처리
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 100) {
+            topButton.style.display = 'flex';
+        } else {
+            topButton.style.display = 'none';
         }
     });
+
+    // 초기에 Top 버튼 숨기기
+    topButton.style.display = 'none';
+});
     </script>
 </body>
 </html>
