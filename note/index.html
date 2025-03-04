@@ -820,7 +820,7 @@
     <div class="top-button" id="topButton"></div>
 
     <script>
- document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.getElementById('hamburger-menu');
     const menuItems = document.getElementById('menu-items');
     const closeBtn = document.getElementById('close-menu');
@@ -921,146 +921,89 @@
     function closeMenu() {
         menuItems.classList.remove('menu-open');
         dimmedBg.style.display = 'none';
+    }    
+
+function changeLanguage() {
+    currentLanguage = currentLanguage === 'ko' ? 'en' : 'ko';
+    languageToggle.textContent = currentLanguage === 'ko' ? 'EN' : 'KO';
+    
+    // 모든 텍스트 요소를 번역
+    const elements = [
+        // 제목과 타이틀
+        {selector: '.pc-title', key: 'title'},
+        {selector: '.title-year', key: 'title'},
+        
+        // 인트로 섹션
+        {selector: '.intro-title', key: 'introTitle'},
+        {selector: '.intro-text', key: 'introText'},
+        {selector: '.intro-text_m', key: 'introTextMobile'},
+        
+        // 첫 이미지 후 텍스트
+        {selector: '.intro-text:nth-of-type(2)', key: 'introTextAfterImage'},
+        {selector: '.intro-text_m:nth-of-type(2)', key: 'introTextAfterImageMobile'},
+        
+        // 예시와 챕터 설명 텍스트들
+        {selector: '.intro-text2:nth-of-type(1)', key: 'exampleText'},
+        {selector: '.intro-text2_m:nth-of-type(1)', key: 'exampleTextMobile'},
+        {selector: '.intro-text2:nth-of-type(2)', key: 'chapterText'},
+        {selector: '.intro-text2_m:nth-of-type(2)', key: 'chapterTextMobile'},
+        {selector: '.intro-text2:nth-of-type(3)', key: 'continueText'},
+        {selector: '.intro-text2_m:nth-of-type(3)', key: 'continueTextMobile'},
+        {selector: '.intro-text2:nth-of-type(4)', key: 'nextPageText'},
+        {selector: '.intro-text2_m:nth-of-type(4)', key: 'nextPageTextMobile'},
+        {selector: '.intro-text2:nth-of-type(5)', key: 'gridText'},
+        {selector: '.intro-text2_m:nth-of-type(5)', key: 'gridTextMobile'},
+        
+        // 그리드 설명 텍스트들
+        {selector: '.normalt p:nth-of-type(1)', key: 'normalText1'},
+        {selector: '.normalt_m p:nth-of-type(1)', key: 'normalText1'},
+        {selector: '.normalt p:nth-of-type(2)', key: 'normalText2'},
+        {selector: '.normalt_m p:nth-of-type(2)', key: 'normalText2'},
+        {selector: '.normalt p:nth-of-type(3)', key: 'normalText3'},
+        {selector: '.normalt_m p:nth-of-type(3)', key: 'normalText3'},
+        {selector: '.normalt p:nth-of-type(4)', key: 'normalText4'},
+        {selector: '.normalt_m p:nth-of-type(4)', key: 'normalText4Mobile'},
+        {selector: '.normalt p:nth-of-type(5)', key: 'normalText5'},
+        {selector: '.normalt_m p:nth-of-type(5)', key: 'normalText5'},
+        {selector: '.normalt p:nth-of-type(6)', key: 'normalText6'},
+        {selector: '.normalt_m p:nth-of-type(6)', key: 'normalText6'},
+        
+        // 요약 및 결론 텍스트들
+        {selector: '.intro-text2:nth-of-type(6)', key: 'summaryText'},
+        {selector: '.intro-text2_m:nth-of-type(6)', key: 'summaryTextMobile'},
+        {selector: '.intro-text2:nth-of-type(7)', key: 'conclusionText1'},
+        {selector: '.intro-text2_m:nth-of-type(7)', key: 'conclusionText1Mobile'},
+        {selector: '.intro-text2:nth-of-type(8)', key: 'conclusionText2'},
+        {selector: '.intro-text2_m:nth-of-type(8)', key: 'conclusionText2Mobile'},
+        
+        // 노트 스펙
+        {selector: '.white-section .normalt:nth-of-type(2)', key: 'noteSpec'},
+        {selector: '.white-section .normalt_m', key: 'noteSpecMobile'}
+    ];
+
+    elements.forEach(elem => {
+        const element = document.querySelector(elem.selector);
+        if (element) {
+            element.innerHTML = translations[currentLanguage][elem.key];
+        }
+    });
+
+    // 구매 버튼 텍스트
+    const buyButton = document.querySelector('.custom-button .custom-button-content');
+    if (buyButton) {
+        buyButton.firstChild.textContent = translations[currentLanguage].buttonText;
     }
 
-    function changeLanguage() {
-        currentLanguage = currentLanguage === 'ko' ? 'en' : 'ko';
-        languageToggle.textContent = currentLanguage === 'ko' ? 'EN' : 'KO';
-        
-        // 페이지 요소 업데이트
-        document.querySelector('.pc-title').textContent = translations[currentLanguage].title;
-        document.querySelector('.title-year').textContent = translations[currentLanguage].title;
-        
-        // 인트로 섹션 업데이트
-        document.querySelector('.intro-title').textContent = translations[currentLanguage].introTitle;
-        document.querySelector('.intro-text').innerHTML = translations[currentLanguage].introText;
-        document.querySelector('.intro-text_m').innerHTML = translations[currentLanguage].introTextMobile;
-        document.querySelector('.intro-text:nth-of-type(2)').innerHTML = translations[currentLanguage].introTextAfterImage;
-        document.querySelector('.intro-text_m:nth-of-type(2)').innerHTML = translations[currentLanguage].introTextAfterImageMobile;
-        
-        // 예시 섹션 업데이트
-        const introText2Elements = document.querySelectorAll('.intro-text2');
-        const introText2MobileElements = document.querySelectorAll('.intro-text2_m');
-        
-        if (introText2Elements.length >= 1) {
-            introText2Elements[0].innerHTML = translations[currentLanguage].exampleText;
+    // 메뉴 항목 업데이트
+    const menuLinks = document.querySelectorAll('.menu-items a');
+    const menuKeys = ['menuHome', 'menuAbout', 'menuShop', 'menuCard', 'menuCalendar'];
+    
+    menuLinks.forEach((link, index) => {
+        if (index < menuKeys.length) {
+            link.textContent = translations[currentLanguage][menuKeys[index]];
         }
-        if (introText2MobileElements.length >= 1) {
-            introText2MobileElements[0].innerHTML = translations[currentLanguage].exampleTextMobile;
-        }
-        
-        if (introText2Elements.length >= 2) {
-            introText2Elements[1].innerHTML = translations[currentLanguage].chapterText;
-        }
-        if (introText2MobileElements.length >= 2) {
-            introText2MobileElements[1].innerHTML = translations[currentLanguage].chapterTextMobile;
-        }
-        
-        if (introText2Elements.length >= 3) {
-            introText2Elements[2].innerHTML = translations[currentLanguage].continueText;
-        }
-        if (introText2MobileElements.length >= 3) {
-            introText2MobileElements[2].innerHTML = translations[currentLanguage].continueTextMobile;
-        }
-        
-        if (introText2Elements.length >= 4) {
-            introText2Elements[3].innerHTML = translations[currentLanguage].nextPageText;
-        }
-        if (introText2MobileElements.length >= 4) {
-            introText2MobileElements[3].innerHTML = translations[currentLanguage].nextPageTextMobile;
-        }
-        
-        if (introText2Elements.length >= 5) {
-            introText2Elements[4].innerHTML = translations[currentLanguage].gridText;
-        }
-        if (introText2MobileElements.length >= 5) {
-            introText2MobileElements[4].innerHTML = translations[currentLanguage].gridTextMobile;
-        }
-        
-        // 노멀 텍스트 업데이트 (그리드 설명 부분)
-        const normalTextPs = document.querySelectorAll('.normalt p');
-        const normalTextMobilePs = document.querySelectorAll('.normalt_m p');
-        
-        if (normalTextPs.length >= 1) {
-            normalTextPs[0].innerHTML = translations[currentLanguage].normalText1;
-        }
-        if (normalTextMobilePs.length >= 1) {
-            normalTextMobilePs[0].innerHTML = translations[currentLanguage].normalText1;
-        }
-        
-        if (normalTextPs.length >= 2) {
-            normalTextPs[1].innerHTML = translations[currentLanguage].normalText2;
-        }
-        if (normalTextMobilePs.length >= 2) {
-            normalTextMobilePs[1].innerHTML = translations[currentLanguage].normalText2;
-        }
-        
-        if (normalTextPs.length >= 3) {
-            normalTextPs[2].innerHTML = translations[currentLanguage].normalText3;
-        }
-        if (normalTextMobilePs.length >= 3) {
-            normalTextMobilePs[2].innerHTML = translations[currentLanguage].normalText3;
-        }
-        
-        if (normalTextPs.length >= 4) {
-            normalTextPs[3].innerHTML = translations[currentLanguage].normalText4;
-        }
-        if (normalTextMobilePs.length >= 4) {
-            normalTextMobilePs[3].innerHTML = translations[currentLanguage].normalText4Mobile;
-        }
-        
-        if (normalTextPs.length >= 5) {
-            normalTextPs[4].innerHTML = translations[currentLanguage].normalText5;
-        }
-        if (normalTextMobilePs.length >= 5) {
-            normalTextMobilePs[4].innerHTML = translations[currentLanguage].normalText5;
-        }
-        
-        if (normalTextPs.length >= 6) {
-            normalTextPs[5].innerHTML = translations[currentLanguage].normalText6;
-        }
-        if (normalTextMobilePs.length >= 6) {
-            normalTextMobilePs[5].innerHTML = translations[currentLanguage].normalText6;
-        }
-        
-        // 요약 및 결론 부분 업데이트
-        if (introText2Elements.length >= 6) {
-            introText2Elements[5].innerHTML = translations[currentLanguage].summaryText;
-        }
-        if (introText2MobileElements.length >= 6) {
-            introText2MobileElements[5].innerHTML = translations[currentLanguage].summaryTextMobile;
-        }
-        
-        if (introText2Elements.length >= 7) {
-            introText2Elements[6].innerHTML = translations[currentLanguage].conclusionText1;
-        }
-        if (introText2MobileElements.length >= 7) {
-            introText2MobileElements[6].innerHTML = translations[currentLanguage].conclusionText1Mobile;
-        }
-        
-        if (introText2Elements.length >= 8) {
-            introText2Elements[7].innerHTML = translations[currentLanguage].conclusionText2;
-        }
-        if (introText2MobileElements.length >= 8) {
-            introText2MobileElements[7].innerHTML = translations[currentLanguage].conclusionText2Mobile;
-        }
-        
-        // 노트 스펙 및 버튼 텍스트 업데이트
-        document.querySelectorAll('.white-section .normalt')[1].innerHTML = translations[currentLanguage].noteSpec;
-        document.querySelector('.white-section .normalt_m').innerHTML = translations[currentLanguage].noteSpecMobile;
-        document.querySelector('.custom-button .custom-button-content').firstChild.textContent = translations[currentLanguage].buttonText;
-        
-        // 메뉴 항목 업데이트
-        const menuLinks = document.querySelectorAll('.menu-items a');
-        if (menuLinks.length >= 5) {
-            menuLinks[0].textContent = translations[currentLanguage].menuHome;
-            menuLinks[1].textContent = translations[currentLanguage].menuAbout;
-            menuLinks[2].textContent = translations[currentLanguage].menuShop;
-            menuLinks[3].textContent = translations[currentLanguage].menuCard;
-            menuLinks[4].textContent = translations[currentLanguage].menuCalendar;
-        }
-    }
-
+    });
+ 
     hamburger.addEventListener('click', openMenu);
     closeBtn.addEventListener('click', closeMenu);
     dimmedBg.addEventListener('click', closeMenu);
@@ -1079,13 +1022,13 @@
         if (window.pageYOffset > 100) {
             topButton.style.display = 'flex';
         } else {
-            topButton.style.display = 'none';
+            topButton.style.display = 'none';f
         }
     });
 
     // 초기에 Top 버튼 숨기기
     topButton.style.display = 'none';
 });
-    </script>
+</script>
 </body>
 </html>
