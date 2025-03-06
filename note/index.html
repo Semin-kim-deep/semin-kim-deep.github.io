@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
-/* 기본 스타일 - 중첩 스크롤 완전 제거 */
+/* 기본 스타일 - 이중 스크롤 방지 */
 html, body {
     margin: 0;
     padding: 0;
@@ -16,28 +16,22 @@ html, body {
     color: #404040;
     background-color: white;
     width: 100%;
-    height: auto;
     overflow-x: hidden;
 }
 
 body {
-  display: block !important; /* flex 제거 */
-    position: static !important; /* relative에서 static으로 변경 */
     min-height: 100vh;
-    overflow-y: auto !important; /* 강제로 body에만 스크롤 적용 */
+    overflow-y: auto;
+    display: block;
 }
 
-/* 핵심 문제 해결: content 클래스는 스크롤을 생성하지 않도록 */
-.content {
-    display: block !important; /* flex에서 block으로 변경 */
-    width: 100%;
-    box-sizing: border-box;
-    height: auto !important; /* height 제거 */
-    overflow: visible !important; /* overflow 관련 속성 제거 */
-    position: static !important; /* fixed/absolute 방지 */
+/* 애니메이션 완전 비활성화 - 이중 스크롤 문제의 주요 원인 */
+.animate-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    position: static !important;
 }
-
-
 
 /* 헤더 스타일 */
 .header {
@@ -129,9 +123,6 @@ body {
     width: 100%;
     padding: 50px 20px;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     box-sizing: border-box;
 }
 
@@ -207,18 +198,9 @@ body {
     max-width: 920px;
     margin: 0 auto;
     background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 50px 0;
     box-sizing: border-box;
-}
-
-/* 모든 섹션이 스크롤을 생성하지 않도록 설정 */
-.white-section, .text-section {
-    overflow: visible !important;
-    position: static !important;
-    display: block !important;
+    text-align: center;
 }
 
 .white-section .normalt {
@@ -231,6 +213,7 @@ body {
     color: #404040;
     box-sizing: border-box;
     word-wrap: break-word;
+    margin: 0 auto;
 }
 
 .white-section .normalt_m {
@@ -240,6 +223,8 @@ body {
 .image-1 {
     max-width: 100%;
     height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .divider {
@@ -253,6 +238,9 @@ body {
 /* 버튼 스타일 */
 .button-container {
     margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .custom-button {
@@ -543,22 +531,6 @@ body {
     background-color: #404040;
 }
 
-
-/* 이 부분이 애니메이션 스크롤 문제를 해결합니다 */
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s, transform 0.8s;
-    will-change: opacity, transform;
-    position: static !important; /* absolute 방지 */
-}
-
-.animate-on-scroll.animate {
-    opacity: 1;
-    transform: translateY(0);
-    position: static !important;
-}
-
 /* 모바일 미디어 쿼리 */
 @media (max-width: 768px) {
     .header {
@@ -754,114 +726,121 @@ body {
         padding-right: 56px;
     }
 }
-        
     </style>
 </head>
 <body>
+    <!-- 고정 요소들 -->
     <div class="dimmed-background" id="dimmed-bg"></div>
-    <div class="content">
-        <header class="header">
-            <div class="header-left">
-                <div class="hamburger" id="hamburger-menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+    <div class="top-button" id="topButton"></div>
+    
+    <!-- 메뉴 아이템 -->
+    <div class="menu-items" id="menu-items">
+        <div class="close-btn" id="close-menu"></div>
+        <div class="menu-title">Deepdown Studio</div>
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/shop.html">Shop</a>
+        <a href="/card/index.html">Anti-Tarot Card</a>
+        <a href="/calendar/">Calendar 2025</a>
+        <a href="https://www.instagram.com/deepdown_studio" target="_blank">Instagram</a>
+    </div>
+    
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header-left">
+            <div class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <h1 class="header-title">
-                <span class="pc-title">Ground & Grid Note</span>
-                <span class="mobile-title">
-                    <span class="title-year">Ground & Grid Note</span>
-                </span>
-            </h1>
-            <div class="header-right">
-<!--
-                <button class="language-toggle" id="language-toggle">EN</button> 
--->
-            </div>
-        </header>
-            
-        <div class="menu-items" id="menu-items">
-            <div class="close-btn" id="close-menu"></div>
-            <div class="menu-title">Deepdown Studio</div>
-            <a href="/">Home</a>
-            <a href="/about.html">About</a>
-            <a href="/shop.html">Shop</a>
-            <a href="/card/index.html">Anti-Tarot Card</a>
-            <a href="/calendar/">Calendar 2025</a>
-                    <a href="https://www.instagram.com/deepdown_studio" target="_blank">Instagram</a>
         </div>
-        
-        <!-- 빈 요소 부분 숨김 처리 -->
-        <div class="subtitle" style="display:none;">
-            <span class="subpc"></span>
-            <span class="subm"></span>
+        <h1 class="header-title">
+            <span class="pc-title">Ground & Grid Note</span>
+            <span class="mobile-title">
+                <span class="title-year">Ground & Grid Note</span>
+            </span>
+        </h1>
+        <div class="header-right">
+            <!-- <button class="language-toggle" id="language-toggle">EN</button> -->
         </div>
+    </header>
 
-        <div class="main-image-container  animate-on-scroll">
-            <img src="images/like_note2.jpg" alt="Ground & Grid Note" class="main-image">
-        </div>
-        
-        <!-- 텍스트 섹션 -->
-        <div class="text-section">
-            <h2 class="intro-title animate-on-scroll">저는 좋아합니다, 필기.</h2>
-            <p class="intro-text animate-on-scroll">필기를 하면, 내용을 놓치지 않고, 내 것으로 남길 수 있죠.<br> <strong style="color: #000000;">
+    <!-- 빈 요소 부분 숨김 처리 -->
+    <div class="subtitle" style="display:none;">
+        <span class="subpc"></span>
+        <span class="subm"></span>
+    </div>
+    
+    <!-- 메인 이미지 섹션 -->
+    <div class="main-image-container">
+        <img src="images/like_note2.jpg" alt="Ground & Grid Note" class="main-image">
+    </div>
+    
+    <!-- 텍스트 섹션 -->
+    <div class="text-section">
+        <h2 class="intro-title">저는 좋아합니다, 필기.</h2>
+        <p class="intro-text">필기를 하면, 내용을 놓치지 않고, 내 것으로 남길 수 있죠.<br> <strong style="color: #000000;">
 하지만 그냥 쓰다보면 단순히 쓰는 행위가 되어 버리기도 해요.</strong><br>지면에는 남지만 머리에 남지 않고, 손만 아플 때요.<br> 그래서 필기를 시작할지, 말아야할지 고민하다가 어느 때에는 하고, 어느 때에는 하지 않죠. <br>
-                <strong style="color: #000000;">
+            <strong style="color: #000000;">
 <br>이것을 개선하고 싶어서 그라운드 앤 그리드 노트를 만들었어요. <br>무지 페이지에서 필기한 내용을 표 형태의 그리드페이지에서 다시 정리하는 콘셉트입니다. </strong>
-                          <br> <br>
-            </p>       
-            <p class="intro-text_m animate-on-scroll">필기를 하면, 내용을 놓치지 않고, 내 것으로 남길 수 있죠. 하지만 그냥 쓰다보면 단순히 쓰는 행위가 되어 버리기도 해요.<br>지면에는 남지만 머리에 남지 않고, 손만 아플 때요.<br> 그래서 필기를 시작할지, 말아야할지 고민하다가 어느 때에는 하고, 어느 때에는 하지 않죠. <br>
+                      <br> <br>
+        </p>       
+        <p class="intro-text_m">필기를 하면, 내용을 놓치지 않고, 내 것으로 남길 수 있죠. 하지만 그냥 쓰다보면 단순히 쓰는 행위가 되어 버리기도 해요.<br>지면에는 남지만 머리에 남지 않고, 손만 아플 때요.<br> 그래서 필기를 시작할지, 말아야할지 고민하다가 어느 때에는 하고, 어느 때에는 하지 않죠. <br>
 <br>이것을 개선하고 싶어서 그라운드 앤 그리드 노트를 만들었어요. 무지 페이지에서 필기한 내용을 표 형태의 그리드페이지에서 다시 정리하는 콘셉트입니다. 
-                          <br> <br>
-            </p>
-            
-            <img id="bottomImage" src="images/table2.png" alt="Ground & Grid Note 내부" class="image-1  animate-on-scroll"><br> 
-            
-            <p class="intro-text animate-on-scroll"> <br> 필기만 하지 않고 정리까지 하라니, 다소 번거롭죠? <br>그런데 제법 괜찮아요. 공부와 필기의 효용감이 생겨요. </p>
-            <p class="intro-text_m animate-on-scroll"> <br> 필기만 하지 않고 정리까지 하라니,<br> 다소 번거롭죠?<br> 그런데 제법 괜찮아요. <br>공부와 필기의 효용감이 생겨요. </p>
+                      <br> <br>
+        </p>
+        
+        <img id="bottomImage" src="images/table2.png" alt="Ground & Grid Note 내부" class="image-1"><br> 
+        
+        <p class="intro-text"> <br> 필기만 하지 않고 정리까지 하라니, 다소 번거롭죠? <br>그런데 제법 괜찮아요. 공부와 필기의 효용감이 생겨요. </p>
+        <p class="intro-text_m"> <br> 필기만 하지 않고 정리까지 하라니,<br> 다소 번거롭죠?<br> 그런데 제법 괜찮아요. <br>공부와 필기의 효용감이 생겨요. </p>
+    </div>
+    
+    <!-- 화이트 섹션들 -->
+    <div class="white-section">
+        <div>
+            <p class="intro-text2">이 예시는 제가 좋아하는 책, 앵무새 죽이기를 원서로 읽으며 필기한 거에요. <br> 그냥 읽으면 이해가 정말 안되어서 필기를 했습니다.<br> <br></p>
+            <p class="intro-text2_m">이 예시는 제가 좋아하는 책, 앵무새 죽이기를 원서로 읽으며 필기한 거에요. 그냥 읽으면 이해가 정말 안되어서 필기를 했습니다.<br> <br></p>
+       
+            <img id="bottomImage" src="images/in_2.png" alt="Ground & Grid Note 내부" class="image-1">
+            <p class="intro-text2">우선 하나의 챕터를 공부해볼께요.<br> 문단 순서에 번호를 달고, 각 문단에서 모르는 단어와 표현, 주요 내용을 필기합니다.</p>
+            <p class="intro-text2_m">우선 하나의 챕터를 공부해볼께요.<br> 문단 순서에 번호를 달고, 각 문단에서 모르는 단어와 표현, 주요 내용을 필기합니다.</p>
         </div>
     </div>
     
     <div class="white-section">
-        <div>
-            <p class="intro-text2 animate-on-scroll">이 예시는 제가 좋아하는 책, 앵무새 죽이기를 원서로 읽으며 필기한 거에요. <br> 그냥 읽으면 이해가 정말 안되어서 필기를 했습니다.<br> <br></p>
-            <p class="intro-text2_m animate-on-scroll">이 예시는 제가 좋아하는 책, 앵무새 죽이기를 원서로 읽으며 필기한 거에요. 그냥 읽으면 이해가 정말 안되어서 필기를 했습니다.<br> <br></p>
-       
-            <img id="bottomImage" src="images/in_2.png" alt="Ground & Grid Note 내부" class="image-1  animate-on-scroll">
-            <p class="intro-text2 animate-on-scroll">우선 하나의 챕터를 공부해볼께요.<br> 문단 순서에 번호를 달고, 각 문단에서 모르는 단어와 표현, 주요 내용을 필기합니다.</p>
-            <p class="intro-text2_m animate-on-scroll">우선 하나의 챕터를 공부해볼께요.<br> 문단 순서에 번호를 달고, 각 문단에서 모르는 단어와 표현, 주요 내용을 필기합니다.</p>
-        </div>
-    </div>
-    
-    <div class="white-section animate-on-scroll">
-        <img id="bottomImage" src="images/in_3.png" alt="Ground & Grid Note 내부" class="image-1  animate-on-scroll">
-        <p class="intro-text2 animate-on-scroll">다음 무지의 페이지에서도 계속해서 문단의 내용을 정리해서 필기를 합니다.</p>
-        <p class="intro-text2_m animate-on-scroll">다음 무지의 페이지에서도 계속해서 문단의 내용을 정리해서 필기를 합니다.</p>
+        <img id="bottomImage" src="images/in_3.png" alt="Ground & Grid Note 내부" class="image-1">
+        <p class="intro-text2">다음 무지의 페이지에서도 계속해서 문단의 내용을 정리해서 필기를 합니다.</p>
+        <p class="intro-text2_m">다음 무지의 페이지에서도 계속해서 문단의 내용을 정리해서 필기를 합니다.</p>
     </div>
 
-    <div class="white-section  animate-on-scroll">
-        <img id="bottomImage" src="images/in_4.png" alt="Ground & Grid Note 내부" class="image-1  animate-on-scroll">
-        <p class="intro-text2  animate-on-scroll">역시 다음 3번째 펼침페이지에도 챕터 내 문단을 번호를 매겨 정리합니다.</p>
-        <p class="intro-text2_m  animate-on-scroll">역시 다음 3번째 펼침페이지에도 챕터 내 문단을 번호를 매겨 정리합니다.</p>
+    <div class="white-section">
+        <img id="bottomImage" src="images/in_4.png" alt="Ground & Grid Note 내부" class="image-1">
+        <p class="intro-text2">역시 다음 3번째 펼침페이지에도 챕터 내 문단을 번호를 매겨 정리합니다.</p>
+        <p class="intro-text2_m">역시 다음 3번째 펼침페이지에도 챕터 내 문단을 번호를 매겨 정리합니다.</p>
     </div>
 
-    <div class="white-section  animate-on-scroll">
-        <p class="intro-text2  animate-on-scroll">다음은 정리하는 그리드페이지입니다. <br>40칸의 그리드에 앞서 필기한 문단 번호들을 각 칸에 넣어줍니다. <br> 문단이 더 많다면 1칸에 여러 개 들어가야 하지만, 이 챕터에서는 오히려 남았어요.</p>
-        <p class="intro-text2_m  animate-on-scroll">다음은 정리하는 그리드페이지입니다. 40칸의 그리드에 앞서 필기한 문단 번호들을 각 칸에 넣어줍니다. 문단이 더 많다면 1칸에 여러 개 들어가야 하지만, 이 챕터에서는 오히려 남았어요.</p>
+    <div class="white-section">
+        <p class="intro-text2">다음은 정리하는 그리드페이지입니다. <br>40칸의 그리드에 앞서 필기한 문단 번호들을 각 칸에 넣어줍니다. <br> 문단이 더 많다면 1칸에 여러 개 들어가야 하지만, 이 챕터에서는 오히려 남았어요.</p>
+        <p class="intro-text2_m">다음은 정리하는 그리드페이지입니다. 40칸의 그리드에 앞서 필기한 문단 번호들을 각 칸에 넣어줍니다. 문단이 더 많다면 1칸에 여러 개 들어가야 하지만, 이 챕터에서는 오히려 남았어요.</p>
         
         <img id="bottomImage" src="images/in_5.png" alt="Ground & Grid Note 내부" class="image-1">
  
         <!-- 특별 텍스트 섹션 - 왼쪽 정렬 -->
-        <div class="normalt  animate-on-scroll" style="text-align: left;">
+        <div class="normalt" style="text-align: left;">
             <p>🟩 먼저 도입부에서 토요일에 겪은 일을 스카우트가 소개했네요.</p>
             <p>🟨 그리고 아빠에게 스카우트가 들은 단어를 묻자 고모가 대화에 끼어듭니다.<br> 두 어른의 대화에 스카우트는 두려움을 갖습니다.</p>
             <p>🟧 오빠인 젬이 와서 스카우트를 나무라고, 둘은 싸우게 됩니다.</p>
             <p>🟥 아빠인 아티커스는 스카우트를 달래고 재우지만,</p>
             <p>🟦 집에서 도망나온 친구 딜이 스카우트의 침대 아래 있었습니다. 딜은 학대를 당해서 가출했다고 했지만, 사실은 어린아이가 가진 불안함이 가족들에게 위로받지 못했기 때문입니다.</p>
-            <p>🟩 집안의 어른들이 알게 되고, 딜은 우선 그 집에 하룻밤 머물기로 일단락됩니다.<br> 스카우트는 딜에게 마을의 수수께끼 같은 존재, 부 래들리가 도망가지 않았을거라 생각하냐고 묻습니다. 그러자 딜은 잠결에, 부 래들리는 도망갈 곳 조차 없을거라고 답합니다.</p>
+            <p>🟩 집안의 어른들이 알게 되고, 딜은
+
+
+
+
+집안의 어른들이 알게 되고, 딜은 우선 그 집에 하룻밤 머물기로 일단락됩니다.<br> 스카우트는 딜에게 마을의 수수께끼 같은 존재, 부 래들리가 도망가지 않았을거라 생각하냐고 묻습니다. 그러자 딜은 잠결에, 부 래들리는 도망갈 곳 조차 없을거라고 답합니다.</p>
         </div>         
-        <div class="normalt_m  animate-on-scroll" style="text-align: left;">
+        <div class="normalt_m" style="text-align: left;">
             <p>🟩 먼저 도입부에서 토요일에 겪은 일을 스카우트가 소개했네요.</p>
             <p>🟨 그리고 아빠에게 스카우트가 들은 단어를 묻자 고모가 대화에 끼어듭니다.<br> 두 어른의 대화에 스카우트는 두려움을 갖습니다.</p>
             <p>🟧 오빠인 젬이 와서 스카우트를 나무라고, 둘은 싸우게 됩니다.</p>
@@ -870,26 +849,26 @@ body {
             <p>🟩 집안의 어른들이 알게 되고, 딜은 우선 그 집에 하룻밤 머물기로 일단락됩니다.<br> 스카우트는 딜에게 마을의 수수께끼 같은 존재, 부 래들리가 도망가지 않았을거라 생각하냐고 묻습니다. 그러자 딜은 잠결에, 부 래들리는 도망갈 곳 조차 없을거라고 답합니다.</p>
         </div>    
         
-        <p class="intro-text2  animate-on-scroll"> 이렇게 하고보니, 이 챕터의 구조가 어떻게 되었는지 더 잘 이해가 되었어요. <br>도입부에 배경이 살짝 소개되고, 아빠와 고모의 대화를 불안하게 듣는 스카우트가 등장해요. <br>어른들의 사랑을 충분히 느끼지 못해 불안해하는 어린 스카우트의 모습이<br> 뒤이어 등장한 친구 딜과도 연결됩니다.<br><br></p>
-        <p class="intro-text2_m  animate-on-scroll"> 이렇게 하고보니, 이 챕터의 구조가 어떻게 되었는지 더 잘 이해가 되었어요. <br>도입부는 배경이 작게 소개되고, 아빠와 고모의 대화를 불안하게 듣는 스카우트가 등장해요.<br> 어른들의 사랑을 충분히 전해받지 못해 불안해하는 어린 스카우트의 모습이 뒤이어 등장한 친구 딜과도 연결됩니다.<br><br></p>
+        <p class="intro-text2">이렇게 하고보니, 이 챕터의 구조가 어떻게 되었는지 더 잘 이해가 되었어요. <br>도입부에 배경이 살짝 소개되고, 아빠와 고모의 대화를 불안하게 듣는 스카우트가 등장해요. <br>어른들의 사랑을 충분히 느끼지 못해 불안해하는 어린 스카우트의 모습이<br> 뒤이어 등장한 친구 딜과도 연결됩니다.<br><br></p>
+        <p class="intro-text2_m">이렇게 하고보니, 이 챕터의 구조가 어떻게 되었는지 더 잘 이해가 되었어요. <br>도입부는 배경이 작게 소개되고, 아빠와 고모의 대화를 불안하게 듣는 스카우트가 등장해요.<br> 어른들의 사랑을 충분히 전해받지 못해 불안해하는 어린 스카우트의 모습이 뒤이어 등장한 친구 딜과도 연결됩니다.<br><br></p>
         
         <div class="divider"></div>
         
-        <p class="intro-text2  animate-on-scroll"> 여러 소동이 일단락되고, 마지막 두 아이의 대화는 다시 책의 전체 이야기로 향합니다. </p>
-        <p class="intro-text2_m  animate-on-scroll"> 여러 소동이 일단락되고, 마지막 두 아이의 대화는 다시 책의 전체 이야기로 향합니다. </p>
+        <p class="intro-text2">여러 소동이 일단락되고, 마지막 두 아이의 대화는 다시 책의 전체 이야기로 향합니다.</p>
+        <p class="intro-text2_m">여러 소동이 일단락되고, 마지막 두 아이의 대화는 다시 책의 전체 이야기로 향합니다.</p>
         
         <div class="divider"></div>
         
-        <p class="intro-text2  animate-on-scroll">  부 래들리에 대한 언급으로요. 부 래들리는 이 책의 주요한 인물 중 하나입니다. <br>부 래들리는 도망갈 곳조차 없기 때문에, 그 집에 숨어있을 것이라고 딜이 답합니다. <br>어린아이의 통찰력이 돋보여 놀랍지만, 또한 서글픈 느낌이 들며 챕터가 마무리됩니다.</p>
-        <p class="intro-text2_m  animate-on-scroll">  부 래들리에 대한 언급으로요. 부 래들리는 이 책의 주요한 인물 중 하나입니다. <br>부 래들리는 도망갈 곳조차 없기 때문에, 그 집에 숨어있을 것이라고 딜이 답합니다. <br>어린아이의 통찰력이 돋보여 놀랍지만, 또한 서글픈 느낌이 들며 챕터가 마무리됩니다.</p>
+        <p class="intro-text2">부 래들리에 대한 언급으로요. 부 래들리는 이 책의 주요한 인물 중 하나입니다. <br>부 래들리는 도망갈 곳조차 없기 때문에, 그 집에 숨어있을 것이라고 딜이 답합니다. <br>어린아이의 통찰력이 돋보여 놀랍지만, 또한 서글픈 느낌이 들며 챕터가 마무리됩니다.</p>
+        <p class="intro-text2_m">부 래들리에 대한 언급으로요. 부 래들리는 이 책의 주요한 인물 중 하나입니다. <br>부 래들리는 도망갈 곳조차 없기 때문에, 그 집에 숨어있을 것이라고 딜이 답합니다. <br>어린아이의 통찰력이 돋보여 놀랍지만, 또한 서글픈 느낌이 들며 챕터가 마무리됩니다.</p>
     </div>
     
-    <div class="white-section  animate-on-scroll">
-        <img id="bottomImage" src="images/note3.gif" alt="Ground & Grid Note 내부" class="image-1  animate-on-scroll">
-        <div class="normalt  animate-on-scroll"> <br><b>Ground & Grid Note<br></b>
+    <div class="white-section">
+        <img id="bottomImage" src="images/note3.gif" alt="Ground & Grid Note 내부" class="image-1">
+        <div class="normalt"><br><b>Ground & Grid Note<br></b>
             128*180mm(B6사이즈), 64p, 내지 미색 모조지 100g<br><br>
         </div>
-        <div class="normalt_m  animate-on-scroll"> <br><b>Ground & Grid Note<br></b>
+        <div class="normalt_m"><br><b>Ground & Grid Note<br></b>
             128*180mm(B6사이즈), 64p <br>내지 미색 모조지 100g<br><br>
         </div>
 
@@ -947,36 +926,9 @@ body {
         const menuItems = document.getElementById('menu-items');
         const closeBtn = document.getElementById('close-menu');
         const dimmedBg = document.getElementById('dimmed-bg');
-        const languageToggle = document.getElementById('language-toggle');
         const topButton = document.getElementById('topButton');
         
-        let currentLanguage = 'ko';
-
-        const translations = {
-            ko: {
-                title: 'Ground & Grid Note',
-                subtitle: '',
-                bottomText: 'Ground & Grid Note<br>생각을 그라운드에서 펼치고 그리드에서 정리하는<br>딥다운 스튜디오의 노트',
-                buttonText: '신나게 사러 달려나가기',
-                menuHome: 'Home',
-                menuAbout: 'About',
-                menuShop: 'Shop',
-                menuCard: 'Anti-Tarot Card',
-                menuCalendar: 'Calendar 2025'
-            },
-            en: {
-                title: 'Ground & Grid Note',
-                subtitle: '',
-                bottomText: 'Ground & Grid Note<br>A note from Deepdown Studio<br>to expand your ideas on the ground and organize them on the grid',
-                buttonText: 'Run excitedly to buy',
-                menuHome: 'Home',
-                menuAbout: 'About',
-                menuShop: 'Shop',
-                menuCard: 'Anti-Tarot Card',
-                menuCalendar: 'Calendar 2025'
-            }
-        };
-
+        // 메뉴 기능
         function openMenu() {
             menuItems.classList.add('menu-open');
             dimmedBg.style.display = 'block';
@@ -987,22 +939,9 @@ body {
             dimmedBg.style.display = 'none';
         }
 
-        function changeLanguage() {
-            currentLanguage = currentLanguage === 'ko' ? 'en' : 'ko';
-            languageToggle.textContent = currentLanguage === 'ko' ? 'EN' : 'KO';
-            
-            // 페이지 요소 업데이트
-            document.querySelector('.pc-title').textContent = translations[currentLanguage].title;
-            document.querySelector('.title-year').textContent = translations[currentLanguage].title;
-            
-            document.querySelector('.normalt').innerHTML = translations[currentLanguage].bottomText;
-            document.querySelector('.custom-button .custom-button-content').firstChild.textContent = translations[currentLanguage].buttonText;
-        }
-
         hamburger.addEventListener('click', openMenu);
         closeBtn.addEventListener('click', closeMenu);
         dimmedBg.addEventListener('click', closeMenu);
-        languageToggle.addEventListener('click', changeLanguage);
 
         // Top 버튼 기능
         topButton.addEventListener('click', () => {
@@ -1014,70 +953,19 @@ body {
 
         // Top 버튼 표시/숨김 처리
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 100) {
-                topButton.style.display = 'flex';
-            } else {
-                topButton.style.display = 'none';
-            }
+            topButton.style.display = window.pageYOffset > 100 ? 'flex' : 'none';
         });
 
         // 초기에 Top 버튼 숨기기
         topButton.style.display = 'none';
-    });
-    
-    document.addEventListener('DOMContentLoaded', function() {
+        
+        // 스와이퍼 기능
         const slides = document.querySelectorAll('.swiper-slide');
         const dots = document.querySelectorAll('.swiper-dot');
         const prevButton = document.getElementById('swiperPrev');
         const nextButton = document.getElementById('swiperNext');
         let currentIndex = 0;
         let isTransitioning = false;
-
-       // 스크롤 애니메이션 적용 함수 - 수정버전
-function animateOnScroll() {
-    const animationElements = document.querySelectorAll('.animate-on-scroll');
-
-    animationElements.forEach((element) => {
-        const elementTop = element.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-
-        // 요소가 화면에 보이는지 확인
-        if (elementTop < windowHeight * 0.9) {
-            // 클래스만 추가하고 스타일은 CSS로 처리
-            element.classList.add('animate');
-        }
-    });
-}
-
-// 초기화 함수 추가
-function initPage() {
-    // 초기 애니메이션 적용
-    animateOnScroll();
-    
-    // 모든 요소에서 불필요한 overflow: hidden 제거
-    document.querySelectorAll('*').forEach(el => {
-        if (getComputedStyle(el).overflow === 'hidden' && 
-            el.tagName !== 'HTML' && 
-            el.tagName !== 'SCRIPT' &&
-            !el.classList.contains('swiper-container') && 
-            !el.classList.contains('swiper-content')) {
-            el.style.overflow = 'visible';
-        }
-    });
-}
-
-    // 스크롤 이벤트 리스너 등록
-    window.addEventListener('scroll', animateOnScroll);
-
-// 페이지 로드 및 리사이즈 시 초기화
-window.addEventListener('load', initPage);
-window.addEventListener('resize', initPage);
-
-    // 초기 애니메이션 적용
-    animateOnScroll();
-
-        // 초기화
-        updateSlides();
         
         // 슬라이드 업데이트 함수
         function updateSlides() {
@@ -1172,6 +1060,9 @@ window.addEventListener('resize', initPage);
                 goToPrevSlide();
             }
         }
+        
+        // 초기화
+        updateSlides();
     });
     </script>
 </body>
