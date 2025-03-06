@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ground & Grid Note</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+/* 기본 스타일 - 이중 스크롤 방지 */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Pretendard', sans-serif;
+    color: #404040;
+    background-color: white;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100vh;
+    overflow-y: auto;
+    display: block;
+}
+
+/* 애니메이션 스타일 - 이중 스크롤 없이 작동하도록 수정 */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    will-change: opacity, transform;
+}
+
+.animate-on-scroll.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 헤더 스타일 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 28px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.header-title {
+    font-family: 'Jost', sans-serif;
+    font-weight: 700;
+    color: black;
+    margin: 0;
+    text-align: center;
+    flex-grow: 1;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.header-left, .header-right {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.subpc {
+    display: block;
+    font-size: 14pt;
+}
+
+.subm {
+    display: none;
+}
+
+.mobile-title {
+    display: none;
+}
+
+.pc-title {
+    display: block;
+    font-size: 36pt;
+}
+
+.hamburger {
+    width: 18px;
+    height: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.hamburger span {
+    width: 100%;
+    height: 2px;
+    background-color: #7f7f7f;
+}
+
+.subtitle {
+    font-size: 13pt;
+    text-align: center;
+    max-width: 1000px;
+    line-height: 1.4;
+    padding-bottom: 0px;
+    color: black;
+}
+
+/* 메인 이미지 스타일 */
+.main-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.main-image {
+    width: 600px;
+    height: auto;
+    max-width: 100%;
+}
+
+/* 텍스트 섹션 스타일 */
+.text-section {
+    width: 100%;
+    padding: 50px 20px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.intro-title {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: bold;
+    font-size: 38pt;
+    color: #1b1b1c;
+    margin-bottom: 40px;
+    text-align: center;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.intro-text {
+    display: block;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: bold;
+    font-size: 18pt;
+    line-height: 30pt;
+    color: #6e6e73;
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+    word-wrap: break-word;
+    box-sizing: border-box;
+}
+
+.intro-text_m {
+    display: none;
+}
+
+.intro-text2 {
+    display: block;
+    font-family: 'Pretendard', sans-serif;
+    font-weight: bold;
+    font-size: 18pt;
+    line-height: 32pt;
+    color: #444445;
+    text-align: center;
+    max-width: 920px;
+    margin: 20px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+.intro-text2_m {
+    display: none;
+}
+
+.special-text {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: normal;
+    font-size: 14pt;
+    line-height: 26pt;
+    color: #404040;
+    text-align: left;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+.special-text p {
+    margin-bottom: 15px;
+}
+
+/* 화이트 섹션 스타일 */
+.white-section {
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 50px 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.white-section .normalt {
+    display: block;
+    font-size: 16pt;
+    text-align: center;
+    max-width: 800px;
+    line-height: 1.9;
+    padding: 10px 20px;
+    color: #404040;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    margin: 0 auto;
+}
+
+.white-section .normalt_m {
+    display: none;
+}
+
+.image-1 {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.divider {
+    width: 50px;
+    height: 1px;
+    background-color: #404040;
+    margin: 20px auto;
+    display: block;
+}
+
+/* 버튼 스타일 */
+.button-container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.custom-button {
+    width: 600px;
+    height: 60px;
+    background-color: transparent;
+    border: 1px solid #000;
+    font-family: 'Jost', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.custom-button-content {
+    display: flex;
+    align-items: center;
+}
+
+.custom-button-arrow {
+    width: 8px;
+    height: 8px;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+    transform: rotate(45deg);
+    margin-left: 10px;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.custom-button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.custom-button:hover .custom-button-arrow {
+    border-color: #fff;
+}
+
+.custom-button a {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.custom-button:hover a {
+    color: #fff;
+}
+
+/* 메뉴 아이템 스타일 */
+.menu-items {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
+    background-color: #f5f3f2;
+    transition: left 0.3s ease-in-out;
+    padding: 40px;
+    box-sizing: border-box;
+    z-index: 1001;
+    text-align: center;
+    overflow-y: auto;
+}
+
+.menu-items a {
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+    color: #414141;
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.menu-open {
+    left: 0;
+}
+
+.dimmed-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1000;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    color: #414141;
+}
+
+.close-btn::before,
+.close-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #414141;
+}
+
+.close-btn::before {
+    transform: rotate(45deg);
+}
+
+.close-btn::after {
+    transform: rotate(-45deg);
+}
+
+.menu-title {
+    font-family: 'Jost', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: black;
+}
+
+/* 탑 버튼 스타일 */
+.top-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    border: 1px solid #8a8a8a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.top-button::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-top: 1px solid #404040;
+    border-right: 1px solid #404040;
+    transform: rotate(-45deg);
+    margin-top: 4px;
+}
+
+.language-toggle {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 400;
+    font-size: 12pt;
+    color: #404040;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 10px;
+}
+
+/* 스와이퍼 스타일 - 오직 마지막 섹션에만 적용 */
+.swiper-container {
+    position: relative;
+    width: 100%;
+    max-width: 920px;
+    margin: 30px auto;
+    overflow: hidden;
+}
+
+.swiper-content {
+    display: flex;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.swiper-slide {
+    width: 100%;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.swiper-slide.active {
+    opacity: 1;
+    position: relative;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.swiper-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.swiper-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #404040;
+    font-size: 40px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.swiper-button::before {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-top: 2px solid #404040;
+    border-right: 2px solid #404040;
+    position: absolute;
+}
+
+.swiper-button.prev {
+    left: 20px;
+}
+
+.swiper-button.next {
+    right: 20px;
+}
+
+.swiper-button.prev::before {
+    transform: rotate(-135deg);
+}
+
+.swiper-button.next::before {
+    transform: rotate(45deg);
+}
+
+.swiper-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 8px;
+}
+
+.swiper-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.swiper-dot.active {
+    background-color: #404040;
+}
+
+/* 모바일 미디어 쿼리 */
+@media (max-width: 768px) {
+    .header {
+        padding: 20px 20px 0 20px;
+        position: relative;
+    }
+    
+    .pc-title {
+        display: none;
+    }
+    
+    .mobile-title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 26.4px;
+        line-height: 1.2;
+        margin-bottom: 0;
+    }
+    
+    .subtitle {
+        font-size: 19.6px;
+        font-weight: bold;
+        padding-top: 10px;
+    }
+    
+    .subpc {
+        display: none;
+    }
+    
+    .subm {
+        display: inline-block;
+        padding: 4px; 
+        flex-direction: column;
+        font-size: 14pt;
+        line-height: 1.4;
+    }
+    
+    .title-year {
+        margin-bottom: 5px;
+    }
+    
+    .hamburger {
+        position: absolute;
+        left: 20px;
+        top: 40px;
+        transform: translateY(-50%);
+        margin-top: 0;
+    }
+    
+    .header-title {
+        font-size: 26.4px;
+    }
+    
+    .text-section {
+        padding-top: 20px;
+    }
+    
+    .intro-title {
+        font-size: 28pt;
+        margin-bottom: 30px;
+    }
+    
+    .intro-text {
+        display: none;
+    }
+    
+    .intro-text_m {
+        display: block;
+        font-family: 'Pretendard', sans-serif;
+        font-weight: bold;
+        font-size: 16pt;
+        line-height: 26pt;
+        color: #333333;
+        text-align: left;
+        max-width: 100%;
+        margin: 0 auto;
+        word-wrap: break-word;
+        box-sizing: border-box;
+        padding: 20px;
+    }
+    
+    .intro-text2 {
+        display: none;
+    }
+    
+    .intro-text2_m {
+        display: block;
+        font-family: 'Pretendard', sans-serif;
+        font-weight: regular;
+        font-size: 16pt;
+        line-height: 28pt;
+        color: #000000;
+        text-align: left;
+        margin: 20px auto;
+        padding: 0 20px;
+        box-sizing: border-box;
+        word-wrap: break-word;
+    }
+    
+    .special-text {
+        font-size: 12pt;
+        line-height: 20pt;
+        max-width: 100%;
+    }
+    
+    .white-section {
+        width: 100%;
+        padding: 30px 0;
+    }
+    
+    .white-section .normalt {
+        display: none;
+    }
+    
+    .white-section .normalt_m {
+        display: block;
+        font-weight: regular;
+        font-size: 15pt;
+        text-align: center;
+        color: #000000;
+        max-width: 100%;
+        line-height: 1.8;
+        padding: 20px;
+    }
+    
+    .image-1 {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+    }
+    
+    .main-image {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .main-image-container {
+        margin: 0;
+    }
+    
+    .button-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 40px;
+    }
+    
+    .custom-button {
+        width: 80%;
+        height: 50px;
+        font-size: 16px;
+        margin: 0 auto;
+    }
+    
+    .language-toggle {
+        position: absolute;
+        right: 20px;
+        top: 40px;
+        transform: translateY(-50%);
+        margin-top: 0;
+    }
+    
+    .swiper-button {
+        font-size: 30px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .swiper-button::before {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .swiper-button.prev {
+        left: 10px;
+    }
+    
+    .swiper-button.next {
+        right: 10px;
+    }
+    
+    .swiper-container {
+        margin: 20px auto;
+    }
+}
+
+/* 대형 화면 미디어 쿼리 */
+@media (min-width: 1920px) {
+    .header {
+        padding-left: 56px;
+        padding-right: 56px;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- 고정 요소들 -->
+    <div class="dimmed-background" id="dimmed-bg"></div>
+    <div class="top-button" id="topButton"></div>
+    
+    <!-- 메뉴 아이템 -->
+    <div class="menu-items" id="menu-items">
+        <div class="close-btn" id="close-menu"></div>
+        <div class="menu-title">Deepdown Studio</div>
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/shop.html">Shop</a>
+        <a href="/card/index.html">Anti-Tarot Card</a>
+        <a href="/calendar/">Calendar 2025</a>
+        <a href="https://www.instagram.com/deepdown_studio" target="_blank">Instagram</a>
+    </div>
+    
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header-left">
+            <div class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <h1 class="header-title">
+            <span class="pc-title">Ground & Grid Note</span>
+            <span class="mobile-title">
+                <span class="title-year">Ground & Grid Note</span>
+            </span>
+        </h1>
+        <div class="header-right">
+            <!-- <button class="language-toggle" id="language-toggle">EN</button> -->
+        </div>
+    </header>
+
+    <!-- 빈 요소 부분 숨김 처리 -->
+    <div class="subtitle" style="display:none;">
+        <span class="subpc"></span>
+        <span class="subm"></span>
+    </div>
+    
+    <!-- 메인 이미지 섹션 -->
+    <div class="main-image-container animate-on-scroll">
+        <img src="images/like_note2.jpg" alt="Ground & Grid Note" class="main-image">
+    </div>
+    
+    <!-- 텍스트 섹션 -->
+    <div class="text-section">
+        <h2 class="intro-title animate-on-scroll">저는 좋아합니다, 필기.</h2>
+        <p class="intro-text animate-on-scroll">필기를 하면, 내용을 놓치지 않고, 내 것으로 남길 수 있죠.<br> <strong style="color: #000000;">
+하지만 그냥 쓰다보면 단순히 쓰는 행위가 되어 버리기도 해요.</strong><br>지면에는 남지만 머리에 남지 않고, 손만 아플 때요.<br> 그래서 필기를 시작할지, 말아야할지 고민하다가 어느 때에는 하고, 어느 때에는 하지 않죠. <br>
+            <strong style="color: #000000;">
+<br>이것을 개선하고 싶어서 그라운드 앤 그리드 노트를 만들었어요. <br>무지 페이지에서 필기한 내용을 표 형태의 그리드페이지에서 다시 정리하는 콘셉트입니다. </strong>
+                      <br> <br>
+        </p>       
+        <p class="intro-text_m animate-on-scroll">필기를 하면, 내용을 놓치지 않고, 내 것으로 남길 수 있죠. 하지만 그냥 쓰다보면 단순히 쓰는 행위가 되어 버리기도 해요.<br>지면에는 남지만 머리에 남지 않고, 손만 아플 때요.<br> 그래서 필기를 시작할지, 말아야할지 고민하다가 어느 때에는 하고, 어느 때에는 하지 않죠. <br>
+<br>이것을 개선하고 싶어서 그라운드 앤 그리드 노트를 만들었어요. 무지 페이지에서 필기한 내용을 표 형태의 그리드페이지에서 다시 정리하는 콘셉트입니다. 
+                      <br> <br>
+        </p>
+        
+        <img id="bottomImage" src="images/table2.png" alt="Ground & Grid Note 내부" class="image-1 animate-on-scroll"><br> 
+        
+        <p class="intro-text animate-on-scroll"> <br> 필기만 하지 않고 정리까지 하라니, 다소 번거롭죠? <br>그런데 제법 괜찮아요. 공부와 필기의 효용감이 생겨요. </p>
+        <p class="intro-text_m animate-on-scroll"> <br> 필기만 하지 않고 정리까지 하라니,<br> 다소 번거롭죠?<br> 그런데 제법 괜찮아요. <br>공부와 필기의 효용감이 생겨요. </p>
+    </div>
+    
+    <!-- 화이트 섹션들 -->
+    <div class="white-section">
+        <div>
+            <p class="intro-text2 animate-on-scroll">이 예시는 제가 좋아하는 책, 앵무새 죽이기를 원서로 읽으며 필기한 거에요. <br> 그냥 읽으면 이해가 정말 안되어서 필기를 했습니다.<br> <br></p>
+            <p class="intro-text2_m animate-on-scroll">이 예시는 제가 좋아하는 책, 앵무새 죽이기를 원서로 읽으며 필기한 거에요. 그냥 읽으면 이해가 정말 안되어서 필기를 했습니다.<br> <br></p>
+       
+            <img id="bottomImage" src="images/in_2.png" alt="Ground & Grid Note 내부" class="image-1 animate-on-scroll">
+            <p class="intro-text2 animate-on-scroll">우선 하나의 챕터를 공부해볼께요.<br> 문단 순서에 번호를 달고, 각 문단에서 모르는 단어와 표현, 주요 내용을 필기합니다.</p>
+            <p class="intro-text2_m animate-on-scroll">우선 하나의 챕터를 공부해볼께요.<br> 문단 순서에 번호를 달고, 각 문단에서 모르는 단어와 표현, 주요 내용을 필기합니다.</p>
+        </div>
+    </div>
+    
+    <div class="white-section animate-on-scroll">
+        <img id="bottomImage" src="images/in_3.png" alt="Ground & Grid Note 내부" class="image-1 animate-on-scroll">
+        <p class="intro-text2 animate-on-scroll">다음 무지의 페이지에서도 계속해서 문단의 내용을 정리해서 필기를 합니다.</p>
+        <p class="intro-text2_m animate-on-scroll">다음 무지의 페이지에서도 계속해서 문단의 내용을 정리해서 필기를 합니다.</p>
+    </div>
+
+    <div class="white-section animate-on-scroll">
+        <img id="bottomImage" src="images/in_4.png" alt="Ground & Grid Note 내부" class="image-1 animate-on-scroll">
+        <p class="intro-text2 animate-on-scroll">역시 다음 3번째 펼침페이지에도 챕터 내 문단을 번호를 매겨 정리합니다.</p>
+        <p class="intro-text2_m animate-on-scroll">역시 다음 3번째 펼침페이지에도 챕터 내 문단을 번호를 매겨 정리합니다.</p>
+    </div>
+
+    <div class="white-section animate-on-scroll">
+        <p class="intro-text2 animate-on-scroll">다음은 정리하는 그리드페이지입니다. <br>40칸의 그리드에 앞서 필기한 문단 번호들을 각 칸에 넣어줍니다. <br> 문단이 더 많다면 1칸에 여러 개 들어가야 하지만, 이 챕터에서는 오히려 남았어요.</p>
+        <p class="intro-text2_m animate-on-scroll">다음은 정리하는 그리드페이지입니다. 40칸의 그리드에 앞서 필기한 문단 번호들을 각 칸에 넣어줍니다. 문단이 더 많다면 1칸에 여러 개 들어가야 하지만, 이 챕터에서는 오히려 남았어요.</p>
+        
+        <img id="bottomImage" src="images/in_5.png" alt="Ground & Grid Note 내부" class="image-1">
+ 
+        <!-- 특별 텍스트 섹션 - 왼쪽 정렬 -->
+        <div class="normalt animate-on-scroll" style="text-align: left;">
+            <p>🟩 먼저 도입부에서 토요일에 겪은 일을 스카우트가 소개했네요.</p>
+            <p>🟨 그리고 아빠에게 스카우트가 들은 단어를 묻자 고모가 대화에 끼어듭니다.<br> 두 어른의 대화에 스카우트는 두려움을 갖습니다.</p>
+            <p>🟧 오빠인 젬이 와서 스카우트를 나무라고, 둘은 싸우게 됩니다.</p>
+      <p>🟥 아빠인 아티커스는 스카우트를 달래고 재우지만,</p>
+            <p>🟦 집에서 도망나온 친구 딜이 스카우트의 침대 아래 있었습니다. 딜은 학대를 당해서 가출했다고 했지만, 사실은 어린아이가 가진 불안함이 가족들에게 위로받지 못했기 때문입니다.</p>
+            <p>🟩 집안의 어른들이 알게 되고, 딜은 우선 그 집에 하룻밤 머물기로 일단락됩니다.<br> 스카우트는 딜에게 마을의 수수께끼 같은 존재, 부 래들리가 도망가지 않았을거라 생각하냐고 묻습니다. 그러자 딜은 잠결에, 부 래들리는 도망갈 곳 조차 없을거라고 답합니다.</p>
+        </div>         
+        <div class="normalt_m animate-on-scroll" style="text-align: left;">
+            <p>🟩 먼저 도입부에서 토요일에 겪은 일을 스카우트가 소개했네요.</p>
+            <p>🟨 그리고 아빠에게 스카우트가 들은 단어를 묻자 고모가 대화에 끼어듭니다.<br> 두 어른의 대화에 스카우트는 두려움을 갖습니다.</p>
+            <p>🟧 오빠인 젬이 와서 스카우트를 나무라고, 둘은 싸우게 됩니다.</p>
+            <p>🟥 아빠는 스카우트를 달래고 재우지만,</p>
+            <p>🟦 집에서 도망나온 친구 딜이 스카우트의 침대 아래 있었습니다. 딜은 학대를 당해서 가출했다고 했지만, 사실은 어린아이가 가진 불안함이 가족들에게 위로받지 못했기 때문입니다.</p>
+            <p>🟩 집안의 어른들이 알게 되고, 딜은 우선 그 집에 하룻밤 머물기로 일단락됩니다.<br> 스카우트는 딜에게 마을의 수수께끼 같은 존재, 부 래들리가 도망가지 않았을거라 생각하냐고 묻습니다. 그러자 딜은 잠결에, 부 래들리는 도망갈 곳 조차 없을거라고 답합니다.</p>
+        </div>    
+        
+        <p class="intro-text2 animate-on-scroll">이렇게 하고보니, 이 챕터의 구조가 어떻게 되었는지 더 잘 이해가 되었어요. <br>도입부에 배경이 살짝 소개되고, 아빠와 고모의 대화를 불안하게 듣는 스카우트가 등장해요. <br>어른들의 사랑을 충분히 느끼지 못해 불안해하는 어린 스카우트의 모습이<br> 뒤이어 등장한 친구 딜과도 연결됩니다.<br><br></p>
+        <p class="intro-text2_m animate-on-scroll">이렇게 하고보니, 이 챕터의 구조가 어떻게 되었는지 더 잘 이해가 되었어요. <br>도입부는 배경이 작게 소개되고, 아빠와 고모의 대화를 불안하게 듣는 스카우트가 등장해요.<br> 어른들의 사랑을 충분히 전해받지 못해 불안해하는 어린 스카우트의 모습이 뒤이어 등장한 친구 딜과도 연결됩니다.<br><br></p>
+        
+        <div class="divider"></div>
+        
+        <p class="intro-text2 animate-on-scroll">여러 소동이 일단락되고, 마지막 두 아이의 대화는 다시 책의 전체 이야기로 향합니다.</p>
+        <p class="intro-text2_m animate-on-scroll">여러 소동이 일단락되고, 마지막 두 아이의 대화는 다시 책의 전체 이야기로 향합니다.</p>
+        
+        <div class="divider"></div>
+        
+        <p class="intro-text2 animate-on-scroll">부 래들리에 대한 언급으로요. 부 래들리는 이 책의 주요한 인물 중 하나입니다. <br>부 래들리는 도망갈 곳조차 없기 때문에, 그 집에 숨어있을 것이라고 딜이 답합니다. <br>어린아이의 통찰력이 돋보여 놀랍지만, 또한 서글픈 느낌이 들며 챕터가 마무리됩니다.</p>
+        <p class="intro-text2_m animate-on-scroll">부 래들리에 대한 언급으로요. 부 래들리는 이 책의 주요한 인물 중 하나입니다. <br>부 래들리는 도망갈 곳조차 없기 때문에, 그 집에 숨어있을 것이라고 딜이 답합니다. <br>어린아이의 통찰력이 돋보여 놀랍지만, 또한 서글픈 느낌이 들며 챕터가 마무리됩니다.</p>
+    </div>
+    
+    <div class="white-section animate-on-scroll">
+        <img id="bottomImage" src="images/note3.gif" alt="Ground & Grid Note 내부" class="image-1 animate-on-scroll">
+        <div class="normalt animate-on-scroll"><br><b>Ground & Grid Note<br></b>
+            128*180mm(B6사이즈), 64p, 내지 미색 모조지 100g<br><br>
+        </div>
+        <div class="normalt_m animate-on-scroll"><br><b>Ground & Grid Note<br></b>
+            128*180mm(B6사이즈), 64p <br>내지 미색 모조지 100g<br><br>
+        </div>
+
+        <!-- 스와이퍼 영역 (마지막 섹션에만 적용) -->
+        <div class="swiper-container">
+            <div class="swiper-content">
+                <div class="swiper-slide active">
+                    <img src="images/nc_01.png" alt="Ground & Grid Note 이미지 1">
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/nc_01_2.png" alt="Ground & Grid Note 이미지 2">
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/nc_02.png" alt="Ground & Grid Note 이미지 3">
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/nc_03.png" alt="Ground & Grid Note 이미지 4">
+                </div>
+                <div class="swiper-slide">
+                    <img src="images/nc_04.png" alt="Ground & Grid Note 이미지 5">
+                </div>
+            </div>
+            
+            <div class="swiper-nav">
+                <button class="swiper-button prev" id="swiperPrev"></button>
+                <button class="swiper-button next" id="swiperNext"></button>
+            </div>
+            
+            <div class="swiper-dots">
+                <div class="swiper-dot active" data-index="0"></div>
+                <div class="swiper-dot" data-index="1"></div>
+                <div class="swiper-dot" data-index="2"></div>
+                <div class="swiper-dot" data-index="3"></div>
+                <div class="swiper-dot" data-index="4"></div>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <button class="custom-button">
+                <a href="https://smartstore.naver.com/deepdown-studio/" target="blank">
+                    <span class="custom-button-content">
+                        신나게 사러 달려나가기
+                        <span class="custom-button-arrow"></span>
+                    </span>
+                </a>
+            </button>
+        </div>
+    </div>
+    
+    <div class="top-button" id="topButton"></div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger-menu');
+        const menuItems = document.getElementById('menu-items');
+        const closeBtn = document.getElementById('close-menu');
+        const dimmedBg = document.getElementById('dimmed-bg');
+        const topButton = document.getElementById('topButton');
+        
+        // 메뉴 기능
+        function openMenu() {
+            menuItems.classList.add('menu-open');
+            dimmedBg.style.display = 'block';
+        }
+
+        function closeMenu() {
+            menuItems.classList.remove('menu-open');
+            dimmedBg.style.display = 'none';
+        }
+
+        hamburger.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        dimmedBg.addEventListener('click', closeMenu);
+
+        // Top 버튼 기능
+        topButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Top 버튼 표시/숨김 처리
+        window.addEventListener('scroll', () => {
+            topButton.style.display = window.pageYOffset > 100 ? 'flex' : 'none';
+        });
+
+        // 초기에 Top 버튼 숨기기
+        topButton.style.display = 'none';
+        
+        // 스크롤 애니메이션 함수
+        function animateOnScroll() {
+            const animationElements = document.querySelectorAll('.animate-on-scroll');
+            
+            animationElements.forEach((element) => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                // 요소가 화면 아래쪽에서 올라와 보이는 지점에 도달하면 애니메이션 적용
+                if (elementTop < windowHeight * 0.85) {
+                    element.classList.add('animate');
+                }
+            });
+        }
+        
+        // 스크롤 이벤트에 애니메이션 함수 등록
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // 페이지 로드 시 초기 애니메이션 적용
+        setTimeout(animateOnScroll, 100);
+        
+        // 스와이퍼 기능
+        const slides = document.querySelectorAll('.swiper-slide');
+        const dots = document.querySelectorAll('.swiper-dot');
+        const prevButton = document.getElementById('swiperPrev');
+        const nextButton = document.getElementById('swiperNext');
+        let currentIndex = 0;
+        let isTransitioning = false;
+        
+        // 슬라이드 업데이트 함수
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentIndex) {
+                    slide.classList.add('active');
+                }
+            });
+            
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active');
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+        
+        // 이전 슬라이드
+        function goToPrevSlide() {
+            if (isTransitioning) return;
+            isTransitioning = true;
+            
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1;
+            updateSlides();
+            
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 300);
+        }
+        
+        // 다음 슬라이드
+        function goToNextSlide() {
+            if (isTransitioning) return;
+            isTransitioning = true;
+            
+            currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
+            updateSlides();
+            
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 300);
+        }
+        
+        // 특정 슬라이드로 이동
+        function goToSlide(index) {
+            if (isTransitioning || index === currentIndex) return;
+            isTransitioning = true;
+            
+            currentIndex = index;
+            updateSlides();
+            
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 300);
+        }
+        
+        // 이벤트 리스너 등록
+        prevButton.addEventListener('click', goToPrevSlide);
+        nextButton.addEventListener('click', goToNextSlide);
+        
+        dots.forEach((dot) => {
+            dot.addEventListener('click', () => {
+                const index = parseInt(dot.getAttribute('data-index'));
+                goToSlide(index);
+            });
+        });
+        
+        // 터치 스와이프 지원
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const swiperContent = document.querySelector('.swiper-content');
+        
+        swiperContent.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        swiperContent.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) < 30) return; // 작은 움직임은 무시
+            
+            if (diff > 0) {
+                // 왼쪽으로 스와이프 - 다음 슬라이드
+                goToNextSlide();
+            } else {
+                // 오른쪽으로 스와이프 - 이전 슬라이드
+                goToPrevSlide();
+            }
+        }
+        
+        // 초기화
+        updateSlides();
+    });
+    </script>
+</body>
+</html>
