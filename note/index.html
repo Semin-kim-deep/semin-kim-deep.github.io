@@ -21,20 +21,23 @@ html, body {
 }
 
 body {
-    display: block; /* flex에서 block으로 변경 */
-    position: relative;
+  display: block !important; /* flex 제거 */
+    position: static !important; /* relative에서 static으로 변경 */
     min-height: 100vh;
-    /* 스크롤은 브라우저 기본값 사용 */
+    overflow-y: auto !important; /* 강제로 body에만 스크롤 적용 */
 }
 
 /* 핵심 문제 해결: content 클래스는 스크롤을 생성하지 않도록 */
 .content {
-    display: block; /* flex에서 block으로 변경 */
+    display: block !important; /* flex에서 block으로 변경 */
     width: 100%;
     box-sizing: border-box;
-    /* content의 height 제거 */
-    /* overflow 관련 속성 제거 */
+    height: auto !important; /* height 제거 */
+    overflow: visible !important; /* overflow 관련 속성 제거 */
+    position: static !important; /* fixed/absolute 방지 */
 }
+
+
 
 /* 헤더 스타일 */
 .header {
@@ -209,6 +212,13 @@ body {
     align-items: center;
     padding: 50px 0;
     box-sizing: border-box;
+}
+
+/* 모든 섹션이 스크롤을 생성하지 않도록 설정 */
+.white-section, .text-section {
+    overflow: visible !important;
+    position: static !important;
+    display: block !important;
 }
 
 .white-section .normalt {
@@ -533,17 +543,20 @@ body {
     background-color: #404040;
 }
 
-/* 스크롤 애니메이션 관련 스타일 - 핵심 이중 스크롤 문제 해결 */
+
+/* 이 부분이 애니메이션 스크롤 문제를 해결합니다 */
 .animate-on-scroll {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s, transform 0.8s;
     will-change: opacity, transform;
+    position: static !important; /* absolute 방지 */
 }
 
 .animate-on-scroll.animate {
     opacity: 1;
     transform: translateY(0);
+    position: static !important;
 }
 
 /* 모바일 미디어 쿼리 */
@@ -1020,22 +1033,45 @@ body {
         let currentIndex = 0;
         let isTransitioning = false;
 
-          // 스크롤 애니메이션 적용 함수
-    function animateOnScroll() {
-        const animationElements = document.querySelectorAll('.animate-on-scroll');
+       // 스크롤 애니메이션 적용 함수 - 수정버전
+function animateOnScroll() {
+    const animationElements = document.querySelectorAll('.animate-on-scroll');
 
-        animationElements.forEach((element) => {
-            const elementTop = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
+    animationElements.forEach((element) => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
 
-            if (elementTop < windowHeight * 0.8) {
-                element.classList.add('animate');
-            }
-        });
-    }
+        // 요소가 화면에 보이는지 확인
+        if (elementTop < windowHeight * 0.9) {
+            // 클래스만 추가하고 스타일은 CSS로 처리
+            element.classList.add('animate');
+        }
+    });
+}
+
+// 초기화 함수 추가
+function initPage() {
+    // 초기 애니메이션 적용
+    animateOnScroll();
+    
+    // 모든 요소에서 불필요한 overflow: hidden 제거
+    document.querySelectorAll('*').forEach(el => {
+        if (getComputedStyle(el).overflow === 'hidden' && 
+            el.tagName !== 'HTML' && 
+            el.tagName !== 'SCRIPT' &&
+            !el.classList.contains('swiper-container') && 
+            !el.classList.contains('swiper-content')) {
+            el.style.overflow = 'visible';
+        }
+    });
+}
 
     // 스크롤 이벤트 리스너 등록
     window.addEventListener('scroll', animateOnScroll);
+
+// 페이지 로드 및 리사이즈 시 초기화
+window.addEventListener('load', initPage);
+window.addEventListener('resize', initPage);
 
     // 초기 애니메이션 적용
     animateOnScroll();
