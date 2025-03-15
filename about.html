@@ -74,7 +74,8 @@
             overflow: hidden;
             margin: 0 auto 30px;
             width: 100%;
-            height: 300px; /* 예상 이미지 높이에 맞게 조정 */
+            /* 실제 이미지와 정확히 동일한 비율로 고정 (624*520) */
+            aspect-ratio: 624/520; /* 1.2/1 비율 */
         }
         
         .skeleton-loader::after {
@@ -154,7 +155,7 @@
                 width: calc(100% + 40px);
                 margin-left: -20px;
                 margin-right: -20px;
-                height: 200px; /* 모바일에서는 높이 조정 */
+                aspect-ratio: 16/9; /* 모바일에서도 비율 유지 */
             }
         }
         .menu-items {
@@ -267,15 +268,18 @@
 
     <div class="container">
         <!-- 스켈레톤 로더 추가 -->
-        <div id="imageSkeletonLoader" class="skeleton-loader"></div>
-        <img 
-            id="mainImage" 
-            src="images/Thank-you3_2_web.png" 
-            alt="Deepdown Studio" 
-            class="center-image" 
-            style="opacity: 0;" 
-            onload="imageLoaded()"
-        >
+        <!-- 이미지 컨테이너로 래핑하여 레이아웃 유지 -->
+        <div style="position: relative;">
+            <div id="imageSkeletonLoader" class="skeleton-loader"></div>
+            <img 
+                id="mainImage" 
+                src="images/Thank-you3_2_web.png" 
+                alt="Deepdown Studio" 
+                class="center-image" 
+                style="opacity: 0;" 
+                onload="imageLoaded()"
+            >
+        </div>
         
         <div class="text-group">
             <p>일러스트레이션/디자인 상품을 제작하는 딥다운 스튜디오에 오신 것을 환영합니다.</p>
@@ -331,6 +335,8 @@
             const skeletonLoader = document.getElementById('imageSkeletonLoader');
             skeletonLoader.innerHTML = '<div style="text-align: center; padding-top: 100px;">이미지를 불러올 수 없습니다.</div>';
         });
+        
+        // 이미지 크기 미리 결정하여 스켈레톤에 적용 - 동적 변경 없음
         
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.getElementById('hamburger-menu');
