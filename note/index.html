@@ -731,7 +731,6 @@ body {
 <body>
     <!-- 고정 요소들 -->
     <div class="dimmed-background" id="dimmed-bg"></div>
-    <div class="top-button" id="topButton"></div>
     
     <!-- 메뉴 아이템 -->
     <div class="menu-items" id="menu-items">
@@ -821,8 +820,10 @@ body {
     </div>
 
     <div class="white-section">
-        <p class="intro-text2">다음은 정리하는 그리드페이지입니다. <br>40칸의 그리드에 앞서 필기한 문단 번호들을 각 칸에 넣어줍니다. <br> 문단이 더 많다면 1칸에 여러 개 들어가야 하지만, 이 챕터에서는 오히려 남았어요.</p>
-        <p class="intro-text2_m">다음은 정리하는 그리드페이지입니다. 40칸의 그리드에 앞서 필기한 문단 번호들을 각 칸에 넣어줍니다. 문단이 더 많다면 1칸에 여러 개 들어가야 하지만, 이 챕터에서는 오히려 남았어요.</p>
+        <p class="intro-text2">다음은 정리하는 그리드페이지입니다. <br>40칸의 그리드에 앞서 필기한 문단 순서와 내용을 각 칸에 넣어줍니다. <br> 문단이 40개가 넘으면 1칸에 여러 들어가야 하지만, 이 챕터에서는 오히려 남았어요.
+        그리고 내용이 유사한 것들을 형광펜으로 그룹핑해줍니다. 준비물이 필요하네요.  <br> </p>
+        <p class="intro-text2_m">다음은 정리하는 그리드페이지입니다. 40칸의 그리드에 앞서 필기한 문단 순서와 내용을 각 칸에 넣어줍니다. 문단이 40개가 넘으면 1칸에 여러 들어가야 하지만, 이 챕터에서는 오히려 남았어요. 
+그리고 내용이 유사한 것들을 형광펜으로 그룹핑해줍니다. 준비물이 필요하네요.</p>
         
         <img id="bottomImage" src="images/in_5.png" alt="Ground & Grid Note 내부" class="image-1">
  
@@ -944,22 +945,25 @@ body {
         closeBtn.addEventListener('click', closeMenu);
         dimmedBg.addEventListener('click', closeMenu);
 
-        // Top 버튼 기능
-        topButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+   // Top 버튼 기능
+    topButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
+    });
 
-        // Top 버튼 표시/숨김 처리
-        window.addEventListener('scroll', () => {
-            topButton.style.display = window.pageYOffset > 100 ? 'flex' : 'none';
-        });
+    // Top 버튼 표시/숨김 처리
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 100) {
+            topButton.style.display = 'flex';
+        } else {
+            topButton.style.display = 'none';
+        }
+    });
 
-        // 초기에 Top 버튼 숨기기
-        topButton.style.display = 'none';
-        
+    // 초기에 Top 버튼 숨기기
+    topButton.style.display = 'none';
         // 스와이퍼 기능
         const slides = document.querySelectorAll('.swiper-slide');
         const dots = document.querySelectorAll('.swiper-dot');
