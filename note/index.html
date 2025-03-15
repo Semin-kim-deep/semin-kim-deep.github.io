@@ -820,12 +820,11 @@ body {
     
 <!-- 메인 이미지 섹션 -->
 <div class="main-image-container">
-    <!-- 스켈레톤 로더 (이미지와 동일한 비율과 크기) -->
+    <!-- 스켈레톤 로더 -->
     <div id="mainImageSkeleton" style="width: 600px; max-width: 100%; height: 562px; background-color: #e6e6e6; animation: skeleton-loading 1.5s infinite ease-in-out;"></div>
     <!-- 실제 이미지 (처음에는 숨김) -->
-    <img src="images/like_note2.jpg" alt="Ground & Grid Note" class="main-image" id="mainImage" style="display: none;">
+    <img src="images/like_note2.jpg" alt="Ground & Grid Note" class="main-image" id="mainImage" style="display: none; position: static; width: 600px; max-width: 100%;">
 </div>
-    
     <!-- 텍스트 섹션 -->
     <div class="text-section">
         <h2 class="intro-title">저는 좋아합니다, 필기.</h2>
@@ -1122,10 +1121,11 @@ window.addEventListener('DOMContentLoaded', function() {
     const mainImage = document.getElementById('mainImage');
     const mainImageSkeleton = document.getElementById('mainImageSkeleton');
     
-    function showImage() {
-        mainImageSkeleton.style.display = 'none';
-        mainImage.style.display = 'block';
-    }
+function showImage() {
+    mainImageSkeleton.style.display = 'none';
+    mainImage.style.display = 'block';
+    mainImage.style.position = 'static'; // 명시적으로 위치 설정
+}
     
     // 이미지 로드 이벤트
     mainImage.addEventListener('load', showImage);
