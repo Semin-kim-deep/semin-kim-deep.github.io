@@ -138,10 +138,11 @@ body {
     50% { opacity: 0.5; }
     100% { opacity: 0.7; }
 }   
-        /* 모바일에서 스켈레톤 반응형 처리 */
+/* 모바일에서 스켈레톤 반응형 처리 */
 @media (max-width: 768px) {
     #mainImageSkeleton {
-        height: 400px; /* 모바일에서 이미지 높이에 맞게 조정 */
+     width: 100%; /* 모바일에서는 화면 너비에 맞춤 */
+    aspect-ratio: 1000/562; /* 비율 유지 */
     }
 }
 
