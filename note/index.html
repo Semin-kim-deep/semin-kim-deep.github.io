@@ -110,12 +110,29 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
+    position: relative;
+    height: 400px; /* 이미지 높이에 맞게 조정 */
+}
+
+.skeleton-loader {
+    width: 600px;
+    height: 400px; /* 실제 이미지 비율에 맞게 조정 */
+    max-width: 100%;
+    background-color: #e6e6e6;
+    border-radius: 4px;
+    animation: skeleton-loading 1.5s infinite ease-in-out;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .main-image {
     width: 600px;
     height: auto;
     max-width: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* 텍스트 섹션 스타일 */
@@ -791,10 +808,10 @@ body {
         <span class="subm"></span>
     </div>
     
- <!-- 메인 이미지 섹션 -->
+<!-- 메인 이미지 섹션 -->
 <div class="main-image-container">
     <div class="skeleton-loader" id="mainImageSkeleton"></div>
-    <img src="images/like_note2.jpg" alt="Ground & Grid Note" class="main-image" id="mainImage" style="display: none;">
+    <img src="images/like_note2.jpg" alt="Ground & Grid Note" class="main-image" id="mainImage" style="display: none; position: absolute; top: 0; left: 50%; transform: translateX(-50%);">
 </div>
     
     <!-- 텍스트 섹션 -->
@@ -1092,11 +1109,11 @@ body {
     const mainImage = document.getElementById('mainImage');
     const mainImageSkeleton = document.getElementById('mainImageSkeleton');
     
-    mainImage.onload = function() {
-        mainImageSkeleton.style.display = 'none';
-        mainImage.style.display = 'block';
-    }
-    
+mainImage.onload = function() {
+    mainImageSkeleton.style.display = 'none';
+    mainImage.style.display = 'block';
+    mainImage.style.position = 'relative'; // 로딩 후 포지션 변경
+}
     // 이미지가 이미 캐시되어 있는 경우를 처리
     if (mainImage.complete) {
         mainImageSkeleton.style.display = 'none';
