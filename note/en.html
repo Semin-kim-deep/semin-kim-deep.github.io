@@ -112,11 +112,38 @@ body {
     margin: 0;
 }
 
+.image-wrapper {
+    width: 600px;
+    max-width: 100%;
+    position: relative;
+}
+
+.skeleton-loader {
+    width: 100%;
+    padding-top: 66.67%; /* 이미지 비율에 맞게 조정 (예: 2:3 비율이면 150%) */
+    background-color: #e6e6e6;
+    border-radius: 4px;
+    animation: skeleton-loading 1.5s infinite ease-in-out;
+}
+
 .main-image {
     width: 600px;
     height: auto;
-    max-width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
+     @keyframes skeleton-loading {
+    0% { opacity: 0.7; }
+    50% { opacity: 0.5; }
+    100% { opacity: 0.7; }
+}   
+        /* 모바일에서 스켈레톤 반응형 처리 */
+@media (max-width: 768px) {
+    #mainImageSkeleton {
+        height: 300px; /* 모바일에서 이미지 높이에 맞게 조정 */
+    }
+
 
 /* 텍스트 섹션 스타일 */
 .text-section {
@@ -791,12 +818,13 @@ body {
         <span class="subm"></span>
     </div>
     
- <!-- Main image section -->
+<!-- Main image 섹션 -->
 <div class="main-image-container">
-    <div class="skeleton-loader" id="mainImageSkeleton"></div>
-    <img src="images/like_note2.jpg" alt="Ground & Grid Note" class="main-image" id="mainImage" style="display: none;">
+    <!-- 스켈레톤 로더 -->
+    <div id="mainImageSkeleton" style="width: 600px; max-width: 100%; height: 562px; background-color: #e6e6e6; animation: skeleton-loading 1.5s infinite ease-in-out;"></div>
+    <!-- 실제 이미지 (처음에는 숨김) -->
+    <img src="images/like_note2.jpg" alt="Ground & Grid Note" class="main-image" id="mainImage" style="display: none; position: static; width: 600px; max-width: 100%;">
 </div>
-    
     <!-- Text section -->
     <div class="text-section">
         <h2 class="intro-title">I love taking notes.</h2>
@@ -1083,21 +1111,26 @@ Then I group similar content together with a highlighter.</p>
             }
         }
       
-    // 메인 이미지 스켈레톤 처리
+    // 이미지 로딩 처리
+window.addEventListener('DOMContentLoaded', function() {
     const mainImage = document.getElementById('mainImage');
     const mainImageSkeleton = document.getElementById('mainImageSkeleton');
     
-    mainImage.onload = function() {
-        mainImageSkeleton.style.display = 'none';
-        mainImage.style.display = 'block';
-    }
+function showImage() {
+    mainImageSkeleton.style.display = 'none';
+    mainImage.style.display = 'block';
+    mainImage.style.position = 'static'; // 명시적으로 위치 설정
+}
     
-    // 이미지가 이미 캐시되어 있는 경우를 처리
+    // 이미지 로드 이벤트
+    mainImage.addEventListener('load', showImage);
+    
+    // 이미지가 이미 캐시되어 있는 경우
     if (mainImage.complete) {
-        mainImageSkeleton.style.display = 'none';
-        mainImage.style.display = 'block';
+        showImage();
     }
-    
+});
+       
         // 초기화
         updateSlides();
     });
