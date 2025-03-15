@@ -110,29 +110,28 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
+}
+
+.image-wrapper {
+    width: 600px;
+    max-width: 100%;
     position: relative;
-    height: 400px; /* 이미지 높이에 맞게 조정 */
 }
 
 .skeleton-loader {
-    width: 600px;
-    height: 400px; /* 실제 이미지 비율에 맞게 조정 */
-    max-width: 100%;
+    width: 100%;
+    padding-top: 66.67%; /* 이미지 비율에 맞게 조정 (예: 2:3 비율이면 150%) */
     background-color: #e6e6e6;
     border-radius: 4px;
     animation: skeleton-loading 1.5s infinite ease-in-out;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 .main-image {
-    width: 600px;
+    width: 100%;
     height: auto;
-    max-width: 100%;
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 0;
+    left: 0;
 }
 
 /* 텍스트 섹션 스타일 */
@@ -810,10 +809,11 @@ body {
     
 <!-- 메인 이미지 섹션 -->
 <div class="main-image-container">
-    <div class="skeleton-loader" id="mainImageSkeleton"></div>
-    <img src="images/like_note2.jpg" alt="Ground & Grid Note" class="main-image" id="mainImage" style="display: none; position: absolute; top: 0; left: 50%; transform: translateX(-50%);">
+    <div class="image-wrapper">
+        <div class="skeleton-loader" id="mainImageSkeleton"></div>
+        <img src="images/like_note2.jpg" alt="Ground & Grid Note" class="main-image" id="mainImage" style="display: none;">
+    </div>
 </div>
-    
     <!-- 텍스트 섹션 -->
     <div class="text-section">
         <h2 class="intro-title">저는 좋아합니다, 필기.</h2>
@@ -1112,13 +1112,13 @@ body {
 mainImage.onload = function() {
     mainImageSkeleton.style.display = 'none';
     mainImage.style.display = 'block';
-    mainImage.style.position = 'relative'; // 로딩 후 포지션 변경
 }
-    // 이미지가 이미 캐시되어 있는 경우를 처리
-    if (mainImage.complete) {
-        mainImageSkeleton.style.display = 'none';
-        mainImage.style.display = 'block';
-    }
+
+// 이미지가 이미 캐시되어 있는 경우를 처리
+if (mainImage.complete) {
+    mainImageSkeleton.style.display = 'none';
+    mainImage.style.display = 'block';
+}
     
         // 초기화
         updateSlides();
