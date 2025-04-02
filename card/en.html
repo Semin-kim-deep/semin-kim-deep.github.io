@@ -172,6 +172,22 @@
         .nav-button.right {
             right: 0px;
         }
+	.header-right {
+    	flex: 0 0 auto;
+    	display: flex;
+    	align-items: center;
+	}
+	.language-toggle {
+   	 font-family: 'Pretendard', sans-serif;
+    	font-weight: 400;
+    	font-size: 12pt;
+    	color: #404040;
+   	 background: none;
+   	 border: none;
+   	 cursor: pointer;
+   	 padding: 0;
+  	  margin-top: 10px;
+	}    
         .container {
             overflow-x: auto;
             white-space: nowrap;
@@ -285,6 +301,13 @@
         left: 20px;
         top: 27px;  /* 모바일에서는 27px */
             display: none;
+    }
+.language-toggle {
+position: absolute;
+right: 20px;
+top: 40px;
+transform: translateY(-50%);
+margin-top: 0;
     }
 }
 
@@ -552,6 +575,9 @@
         </p>
             <p class="subtitle_s">Click on each card. </p>.
     </div>
+	  <div class="header-right">
+             <button class="language-toggle"><a href="/card/" style="text-decoration: none; color: inherit;">KO</a></button> 
+        </div>
     <div class="container" id="container">
         <!-- Cards will be dynamically added here -->
     </div>
