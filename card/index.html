@@ -257,6 +257,52 @@
     opacity: 1;
 }
 
+.site-header {
+  position: absolute;
+  top: 25px;
+  left: 10px;
+  width: 100%;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  position: relative;
+}
+
+.header-left {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.header-center {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.header-right {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.language-toggle {
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+	    
 .hamburger {
     width: 18px;
     height: 16px;
@@ -275,6 +321,12 @@
     background-color: white;
     transition: all 0.3s ease; /* 트랜지션 추가 */
         }
+.header-left .hamburger {
+  position: static;
+  transform: none;
+  top: auto;
+  left: auto;
+}
 
 .mobile-title {
             display: none;
@@ -285,6 +337,17 @@
         left: 20px;
         top: 27px;  /* 모바일에서는 27px */
             display: none;
+    }
+	.header-container {
+    padding: 15px 0;
+  }
+
+.language-toggle {
+position: absolute;
+right: 20px;
+top: 40px;
+transform: translateY(-50%);
+margin-top: 0;
     }
 }
 
@@ -538,11 +601,20 @@
 <body>
      <div class="dimmed-background" id="dimmed-bg"></div>
     
-    <div class="hamburger" id="hamburger-menu">
+     <header class="site-header">
+  <div class="header-container">
+    <div class="header-left">
+      <div class="hamburger" id="hamburger-menu">
         <span></span>
         <span></span>
         <span></span>
+      </div>
     </div>
+    <div class="header-right">
+      <button class="language-toggle" id="languageToggle"><a href="/card/en.html">EN</a></button>
+    </div>
+  </div>
+</header>
  <div class="title-container">
         <h1>   <span class="pc-title">Anti-Tarot Card</span></h1>
      <span class="mobile-title">
