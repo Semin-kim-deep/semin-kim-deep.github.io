@@ -273,6 +273,52 @@
     opacity: 1;
 }
 
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  position: relative;
+}
+
+.header-left {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.header-center {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.header-right {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.language-toggle {
+  font-family: 'Jost', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+	    
 .hamburger {
     width: 18px;
     height: 16px;
@@ -291,7 +337,12 @@
     background-color: white;
     transition: all 0.3s ease; /* 트랜지션 추가 */
         }
-
+.header-left .hamburger {
+  position: static;
+  transform: none;
+  top: auto;
+  left: auto;
+}
 .mobile-title {
             display: none;
         }
@@ -302,6 +353,10 @@
         top: 27px;  /* 모바일에서는 27px */
             display: none;
     }
+	.header-container {
+    padding: 15px 0;
+  }
+
 .language-toggle {
 position: absolute;
 right: 20px;
@@ -560,12 +615,20 @@ margin-top: 0;
 </head>
 <body>
      <div class="dimmed-background" id="dimmed-bg"></div>
-    
-    <div class="hamburger" id="hamburger-menu">
+    <header class="site-header">
+  <div class="header-container">
+    <div class="header-left">
+      <div class="hamburger" id="hamburger-menu">
         <span></span>
         <span></span>
         <span></span>
+      </div>
     </div>
+    <div class="header-right">
+      <button class="language-toggle" id="languageToggle">KO</button>
+    </div>
+  </div>
+</header>
  <div class="title-container">
         <h1>   <span class="pc-title">Anti-Tarot Card</span></h1>
      <span class="mobile-title">
@@ -575,9 +638,6 @@ margin-top: 0;
         </p>
             <p class="subtitle_s">Click on each card. </p>.
     </div>
-	  <div class="header-right">
-             <button class="language-toggle"><a href="/card/" style="text-decoration: none; color: inherit;">KO</a></button> 
-        </div>
     <div class="container" id="container">
         <!-- Cards will be dynamically added here -->
     </div>
@@ -953,7 +1013,7 @@ function enlargeCard(card) {
             infoDescription.innerHTML = "In the midst of boring everyday life, imagine that you are an agent sent to Earth with a mission to discover new things. Gather your own elements, even small ones, to change the atmosphere.";
     } else if (cardIndex === 18) {
             infoTitle.innerHTML = "19. Debut and It can create new waves";
-            infoDescription.innerHTML = "Even if it's not grand, when I try something for the first time, I consider it a debut. There are times when you don't have the luxury to challenge something new, of course. But if you proceed with a new venture that calls from your heart, like swimming, you might encounter new waves.";
+            infoDescription.innerHTML = "Even if it's not grand, when I try something for the first time, I consider it a debut. If you proceed with a new venture that calls from your heart, like swimming, you might encounter new waves.";
         } else { 
             infoTitle.innerHTML = '기타 카드';
             infoDescription.innerHTML = '다른 카드에 대한 내용입니다.';
