@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JV7DBEFL97"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JV7DBEFL97');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Tarot Cards</title>
+   <link rel="preload" href="../../woff/Jost-700-Bold.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="../../woff/Jost-400-Book.woff" as="font" type="font/woff" crossorigin>
+    <style>
+@font-face {	
+	font-family: "Jost";
+	src: url("/woff/Jost-400-Book.woff") format("woff");
+	font-weight: 400;
+	font-style: normal;
+	font-display: block;
+	}
+	
+	@font-face {
+	font-family: "Jost";
+	src: url("/woff/Jost-700-Bold.woff") format("woff");
+	font-weight: 700;
+	font-style: normal;
+	font-display: block;
+	}
+	/* Pretendard 폰트는 기존 woff 참조 유지 */
+	
+	@font-face {
+	font-family: "Pretendard-Light";
+	src: url("woff/Pretendard-Light.woff") format("woff");
+	font-weight: 300;
+	font-style: normal;
+	}
+	
+	@font-face {
+	font-family: "Pretendard-Regular";
+	src: url("woff/Pretendard-Regular.woff") format("woff");
+	font-weight: 400;
+	font-style: normal;
+	}
+	
+	@font-face {
+	font-family: "Pretendard-Bold";
+	src: url("woff/Pretendard-Bold.woff") format("woff");
+	font-weight: 700;
+	font-style: normal;
+	}
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            font-family: 'Jost', sans-serif;
+            background-image: url('../images/bg_hp.jpg');
+            background-size: cover;
+            background-position: top center;
+            background-repeat: no-repeat;
+            perspective: 1000px;
+        }
+        .title-container {
+            text-align: center;
+            padding-top: 20px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        h1 {
+            font-weight: 700;
+            font-size: 48px;
+            margin: 0;
+        }
+        .subtitle {
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        .subtitle br {
+            display: none;  /* PC에서는 br 태그 숨김 */
+        }
+        .subtitle-en {
+            font-weight: 500;
+            font-size: 18px;
+            margin: 0;
+        }
+        .subtitle_s {
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 300;
+            font-size: 14px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        
+        .container {
+            display: flex;
+            align-items: center;
+            height: calc(100vh - 150px);
+            padding-left: 120px;
+            position: relative;
+            transition: transform 0.4s ease;
+        }
+     .card {
+    width: 213.6px;
+    height: 356.4px;
+    background-color: transparent;
+    margin-right: 30px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    border-radius: 14px;
+
+    /* 새로 추가되는 속성들 */
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+        .card.active {
+            width: 284px;
+            height: 474.4px;
+            position: fixed;
+            z-index: 1000;
+            border-radius: 18px;
+        }
+        .card__front, .card__back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            transition: transform 0.4s ease;
+            box-shadow: 0 8.4px 16.8px rgba(0,0,0,0.25), 0 6px 6px rgba(0,0,0,0.22);
+            border-radius: inherit;
+            overflow: hidden;
+        }
+        .card__back {
+            transform: rotateY(180deg);
+        }
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .placeholder {
+            width: 213.6px;
+            height: 356.4px;
+            margin-right: 30px;
+            flex-shrink: 0;
+            visibility: hidden;
+        }
+        .nav-button {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 46px;
+            height: 68px;
+            cursor: pointer;
+            z-index: 100;
+        }
+        .nav-button.left {
+            left: 0px;
+        }
+        .nav-button.right {
+            right: 0px;
+        }
+        .container {
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+        .info-box {
+            width: 284px;
+            height: 474.4px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 18px;
+            position: fixed;
+            z-index: 999;
+            display: none;
+            transform: translateX(-100%);
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            opacity: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        .info-box h2 {
+            font-size: 20pt;
+            color: black;
+            margin-bottom: 20px;
+        }
+        .info-box p {
+            font-size: 16pt;
+            color: black;
+            line-height: 1.7;
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 600;
+        }
+
+/* 모바일 버전에서 카드 뒷면 위에 글자만 겹쳐서 보이도록 수정 */
+.card-info-mobile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;    /* 부모 카드의 너비(70vw)를 기준으로 100% */
+    height: 100%;
+    padding: 60px 20px 40px;
+    box-sizing: border-box;
+    color: black;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+    font-family: 'Pretendard', sans-serif;
+    pointer-events: none;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+
+.card-info-mobile h2 {
+    font-size: 22px;
+      line-height: 1.4;
+        margin-bottom: 10px; 
+}
+
+.card-info-mobile p {
+    font-size: 20px;
+    line-height: 1.7;
+    margin-top: 0px; /* 아래 여백 줄임 */
+     font-family: 'Pretendard', sans-serif;
+    font-weight: 600;  
+}
+.card.show-back .card__back {
+    opacity: 1; 
+    transition: opacity 0.4s ease 0s; 
+}
+.card.show-back .card-info-mobile {
+    opacity: 0; 
+    transition: opacity 0.4s ease 0.2s; 
+}
+.card.show-back .card-info-mobile {
+    opacity: 1;
+}
+
+.hamburger {
+    width: 18px;
+    height: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    position: absolute;
+    left: 20px;
+    top: 32px;  /* PC에서는 32px */
+    z-index: 1100;
+}
+.hamburger span {
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transition: all 0.3s ease; /* 트랜지션 추가 */
+        }
+
+.mobile-title {
+            display: none;
+        }
+
+@media (max-width: 768px) {
+    .hamburger {
+        left: 20px;
+        top: 27px;  /* 모바일에서는 27px */
+            display: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hamburger {
+        left: 28px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .hamburger {
+        left: 56px;
+    }
+}
+
+.menu-items {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
+    background-color: #f5f3f2;
+    transition: left 0.3s ease-in-out;
+    padding: 40px;
+    box-sizing: border-box;
+    z-index: 1200;
+    text-align: center;
+}
+
+.menu-items.menu-open {
+    left: 0;
+}
+
+.menu-items a {
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+    color: #414141;
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.dimmed-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1050;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    color: #414141;
+}
+
+.close-btn::before,
+.close-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #414141;
+}
+
+.close-btn::before {
+    transform: rotate(45deg);
+}
+
+.close-btn::after {
+    transform: rotate(-45deg);
+}
+
+.menu-title {
+    font-family: 'Jost', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: black;
+}
+
+.card img {  /* 기존 img 스타일에 추가 */
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+   /* 전체 스크롤 제거 */
+   html, body {
+       overflow-x: hidden;
+       overflow-y: hidden;  /* 세로 스크롤 제거 */
+       width: 100%;
+       position: relative;
+   }
+    .subtitle {
+            font-family: 'Pretendard', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+  .pc-title {
+            display: none;
+            }
+  .mobile-title {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-family: 'Jost', sans-serif;
+                font-size: 30px;
+                font-weight: 700;
+                line-height: 1.2;
+        	 margin-bottom: 0;  /* 하단 여백 제거 */
+            }
+     .title-year {
+                margin-bottom: 5px;
+            }
+    body {
+        background-image: url('../images/m_bg3_2.jpg') !important;
+        background-size: 100% auto !important;
+        background-position: top center !important;
+        background-repeat: no-repeat !important;
+        width: 100vw;
+    }
+    /* 타이틀 크기 60% */
+    h1 {
+        font-size: 32px; /* 48px의 60% */
+    }
+
+    /* 영문 설명 보임 */
+    .subtitle-en {
+        display: block;
+    }
+
+    /* 부제목 줄바꿈 */
+    .subtitle br {
+        display: block;
+    }
+   .container {
+       padding: 0;
+       display: flex;
+       justify-content: center;
+       position: absolute;
+       top: 80px;  /* 글자 아래 50px 간격 */
+       left: 0;
+       width: 100%;
+       overflow: hidden;
+   }
+  /* info-box 숨김 처리 */
+    .info-box {
+        display: none;
+    }
+   /* 카드 스타일 수정 */
+   .card {
+    width: 70%;
+    max-width: 300px;
+    height: auto;
+    aspect-ratio: 213.6/356.4;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);  /* !important 제거 */
+    opacity: 0;
+    margin: 0;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    backface-visibility: hidden;
+    transform-origin: center center;
+    will-change: transform, opacity; /* 한 번만 선언 */
+    transition: opacity 0.4s cubic-bezier(.4,0,.2,1); /* 한 번만 선언 */
+}
+
+.card img {  /* 기존 img 스타일에 추가 */
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+    pointer-events: none;
+}
+    .card.active {
+        position: relative;
+        width: 70%;
+        height: auto;
+        transform: translateX(-50%) !important;
+    }
+
+    .card__front, .card__back {
+        backface-visibility: visible;
+        transition: opacity 0.4s ease;
+        transform: none !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .card__back {
+        display: block;
+        opacity: 0;
+    }
+
+    .card__front {
+        opacity: 1;
+    }
+
+    /* info-box는 모바일에서 완전히 숨김 */
+    .info-box {
+        display: none;
+    }
+
+    /* 모바일용 텍스트는 배경 없이 페이드인만 */
+    .card.show-back .card__back,
+    .card.show-back .card-info-mobile {
+        opacity: 1;
+    }
+}
+
+   /* 나머지 카드 관련 스타일 유지 */
+   .card:first-child {
+       opacity: 1;
+   }
+
+
+   .card img {
+       width: 100%;
+       height: 100%;
+       object-fit: cover;
+   }
+
+    </style>
+</head>
+<body>
+     <div class="dimmed-background" id="dimmed-bg"></div>
+    
+    <div class="hamburger" id="hamburger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+ <div class="title-container">
+        <h1>   <span class="pc-title">Anti-Tarot Card</span></h1>
+     <span class="mobile-title">
+            <span class="title-year">Anti-Tarot Card</span>
+        </span>
+        <p class="subtitle-en">We don't know the future, so we just do what we can do now.</p>
+        </p>
+            <p class="subtitle_s">각 카드를 눌러보세요. Click on each card. </p>.
+    </div>
+    <div class="container" id="container">
+        <!-- Cards will be dynamically added here -->
+    </div>
+    <div class="info-box" id="infoBox">
+        <h2 id="infoTitle"></h2>
+        <p id="infoDescription"></p>
+    </div>
+    <img src="images/left_indi3.png" alt="Left Navigation" class="nav-button left">
+    <img src="images/right_indi3.png" alt="Right Navigation" class="nav-button right">
+
+    <div class="menu-items" id="menu-items">
+        <div class="close-btn" id="close-menu"></div>
+        <div class="menu-title">Deepdown Studio</div>
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+     <!--      <a href="/shop.html">Shop</a> -->
+        <a href="/card/index.html">Anti-Tarot Card</a>
+        <a href="/calendar/">Calendar 2025</a>
+            <a href="/note/">Note</a>
+        <a href="https://www.instagram.com/deepdown_studio" target="_blank">Instagram</a>
+    </div>
+<script>  
+
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const menuItems = document.getElementById('menu-items');
+    const closeBtn = document.getElementById('close-menu');
+    const dimmedBg = document.getElementById('dimmed-bg');
+
+    hamburger.addEventListener('click', function() {
+        menuItems.classList.add('menu-open');
+        dimmedBg.style.display = 'block';
+    });
+
+    closeBtn.addEventListener('click', function() {
+        menuItems.classList.remove('menu-open');
+        dimmedBg.style.display = 'none';
+    });
+
+    dimmedBg.addEventListener('click', function() {
+        menuItems.classList.remove('menu-open');
+        dimmedBg.style.display = 'none';
+    });
+});
+
+// 모바일 체크 함수
+function isMobile() {
+    return window.innerWidth <= 768;
+} 
+const container = document.getElementById('container'); 
+const leftNav = document.querySelector('.nav-button.left'); 
+const rightNav = document.querySelector('.nav-button.right'); 
+const infoBox = document.getElementById('infoBox'); 
+const infoTitle = document.getElementById('infoTitle'); 
+const infoDescription = document.getElementById('infoDescription'); 
+let activeCard = null; let containerWidth = 0; const scrollDistance = 800;
+
+// 여기에 모바일 체크 함수 추가 
+const checkMobile = () => { 
+    const isMobile = window.innerWidth <= 768; document.body.classList.toggle('mobile', isMobile); 
+}; 
+
+const cardData = [
+    {image: "atc01.png"}, {image: "atc02.png"}, {image: "atc03.png"},
+    {image: "atc04_2.png"}, {image: "atc05.png"}, {image: "atc06.png"},
+    {image: "atc07.png"}, {image: "atc08.png"}, {image: "atc09.png"},
+    {image: "atc10.png"}, {image: "atc11.png"}, {image: "atc12.png"},
+    {image: "atc13.png"}, {image: "atc14.png"}, {image: "atc15.png"},
+    {image: "atc16.png"}, {image: "atc17.png"}, {image: "atc18.png"},
+	{image: "atc19.png"}
+];
+
+let currentCardIndex = 0;
+
+function showNextCard() {
+    if (currentCardIndex < cardData.length - 1) {
+        const currentCard = container.querySelector('.card');
+        // 원래 동작 유지: 현재 카드를 오른쪽으로 사라지게 함
+        currentCard.style.transition = 'transform 0.2s cubic-bezier(.4,0,.2,1)';
+        currentCard.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            currentCardIndex++;
+            updateMobileCard('next');
+        }, 100);
+    }
+}
+
+function showPrevCard() {
+    if (currentCardIndex > 0) {
+        const currentCard = container.querySelector('.card');
+        // 현재 카드는 페이드아웃
+        currentCard.style.transition = 'opacity 0.2s cubic-bezier(.4,0,.2,1)';
+        currentCard.style.opacity = '0';
+        
+        setTimeout(() => {
+            currentCardIndex--;
+            // 이전 카드는 오른쪽에서 왼쪽으로 이동하며 나타남 (되감기 효과)
+            reverseMobileCard();
+        }, 200);
+    }
+}
+// 이전 카드를 오른쪽에서 왼쪽으로 이동하며 표시하는 함수
+function reverseMobileCard() {
+    const container = document.getElementById('container');
+    container.innerHTML = '';
+    
+    const card = createCard(cardData[currentCardIndex], currentCardIndex);
+    container.appendChild(card);
+    
+    // 초기 상태 설정 - 오른쪽에서 시작
+    card.style.transition = 'none';
+    card.style.opacity = '1';
+    card.style.transform = 'translateX(100%)';
+    
+    // 애니메이션 적용 - 왼쪽으로 이동
+    requestAnimationFrame(() => {
+        card.style.transition = 'transform 0.4s cubic-bezier(.4,0,.2,1)';
+        card.style.transform = 'translateX(-50%)';
+        
+        // 마우스 이벤트 추가
+        card.addEventListener('mousemove', handleMouseMove);
+        card.addEventListener('mouseleave', handleMouseLeave);
+    });
+    
+    // 카드 정보 초기화
+    updateCardInfo(card, currentCardIndex);
+}
+
+function updateMobileCard(direction = 'next') {
+    const container = document.getElementById('container');
+    
+    container.innerHTML = '';
+    const card = createCard(cardData[currentCardIndex], currentCardIndex);
+    
+    card.style.transition = 'none';
+    card.style.opacity = '0';
+    card.style.transform = 'translateX(-50%) scale(0.3)';
+    
+    container.appendChild(card);
+    requestAnimationFrame(() => {
+        card.style.transition = 'all 0.4s cubic-bezier(.4,0,.2,1)';
+        card.style.opacity = '1';
+        card.style.transform = 'translateX(-50%) scale(1)';
+    });
+}
+function createCard(data, index) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+        <div class="card__front">
+            <img src="images/${data.image}" alt="Anti-Tarot Card Front">
+        </div>
+        <div class="card__back">
+            <img src="images/atc01_back.png" alt="Anti-Tarot Card Back">
+        </div>
+        <div class="card-info-mobile">
+            <h2 id="mobileInfoTitle${index}"></h2>
+            <p id="mobileInfoDescription${index}"></p>
+        </div>
+    `;
+    card.style.transform = getInitialTransform(index);
+
+ if (!isMobile()) {
+        card.style.transform = getInitialTransform(index);
+    }
+    
+    return card;
+}
+
+function getInitialTransform(index) {
+    switch(index % 4) {
+        case 0: return 'rotateX(5deg) rotateY(-5deg)';
+        case 1: return 'rotateX(-5deg) rotateY(5deg)';
+        case 2: return 'rotateX(10deg) rotateY(0deg)';
+        case 3: return 'rotateX(0deg) rotateY(-10deg)';
+    }
+}
+
+function createPlaceholder() {
+    const placeholder = document.createElement('div');
+    placeholder.className = 'placeholder';
+    return placeholder;
+}
+
+function getCardPosition(card) {
+    const cardRect = card.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    return {
+        left: cardRect.left - containerRect.left,
+        top: cardRect.top - containerRect.top
+    };
+}
+
+// Add this function above the enlargeCard function
+function updateCardInfo(card, index) {
+    if (isMobile()) {  // Only execute on mobile
+        const title = card.querySelector('.card-info-mobile h2');
+        const description = card.querySelector('.card-info-mobile p');
+        
+        if (card.classList.contains('show-back')) {
+            if (currentCardIndex === 0) {
+                title.textContent = "1. Do it Lightly and Let things Happen";
+                description.textContent = "Even things you don't want to do or find difficult, you need to start with an empty mind. I started the Deepdown Studio, card series, and other great... things I had imagined. It's not easy, but I'm doing it anyway.";
+            } else if (currentCardIndex === 1) {
+                title.textContent = "2. Read and Compile your thoughts";
+                description.textContent = "The first scene of my favorite movie Good Will Hunting was the motif for this card. I'm not a genius like Will, but I also love reading books. Books provide knowledge and wisdom, and bring fresh air to your mind.";
+            } else if (currentCardIndex === 2) {
+                title.textContent = "3. Buy flowers and Make the new scene";
+                description.textContent = "Flowers naturally catch your eye. You can easily create scenes in new ways. If it's difficult for you to buy flowers, buy this card.";
+            } 
+            // Add descriptions for the rest of the cards (same structure as before)
+            else if (currentCardIndex === 3) {
+                title.textContent = "4. Be Consistent so Extend your trajectory";
+                description.textContent = "Don't be accustomed to the sweetness of rudeness, hatred, competition, division, comparison, laziness, and nihilism; overcome all the violence of meaning and meaninglessness, and fully experience each day (from Professor Heo Jun-yi's graduation speech).";
+            } else if (currentCardIndex === 4) {
+                title.textContent = "5. Exercise and Imagine that you're a backup national athelete";
+                description.textContent = "When you see players making creative plays, you can't help but admire them. The concept is a player who makes fresh plays but is slightly lacking. Known in the industry, but still has things to overcome. So we cheer for them.";
+            } else if (currentCardIndex === 5) {
+                title.textContent = "6. Forget and Move on.";
+                description.textContent = "I know it's not easy, but let's not let unnecessary things trouble us anymore.";
+            } else if (currentCardIndex === 6) {
+                title.textContent = "7. Review and Reflect so Cahch the runaway memory.";
+                description.textContent = "I like the word 'recollection.' It feels like finding lost energy again. Let's embody a detective and catch what we've studied hard. The theme song is Secret Forest OST.";
+            } else if (currentCardIndex === 7) {
+                title.textContent = "8. Do a Spirited Debate and It comes from a logic, not an attitude";
+                description.textContent = "Of course, attitude is important, but you can tell whether someone is just putting on a show or how much they've prepared with logic. It's interesting that 'spirited' comes from 'spirit'... that's cool.";
+            } else if (currentCardIndex === 8) {
+                title.textContent = "9.Do Flirt, well, Somebody should, it will be fun";
+                description.textContent = "Giggling, joking, feeling excited, it'll be fun. Some are too good at it, some are awkward... and I just end up complaining.";
+            } else if (currentCardIndex === 9) {
+                title.textContent = "10. Do shadowboxing and it will come to the light";
+                description.textContent = "Even without a sparring partner, investing time and honing your skills alone is essential. The theme song is Eminem's Lose Yourself or (Boom) the sunrise.";
+            } else if (currentCardIndex === 10) {
+                title.textContent = "11. Join a team so You can be spurred on more";
+                description.textContent = "The good thing about belonging to a group or team is that you can see good people, hardworking people up close, and get more inspiration. You can use them as coordinates for which direction to go.";
+            } else if (currentCardIndex === 11) {
+                title.textContent = "12. Speak what you like and It will be a seed that makes others and yourself feel better";
+                description.textContent = "What do you like? Introduce and summon the things you like. They will make us feel even better.";
+            } else if (currentCardIndex === 12) {
+                title.textContent = "13. Set the milestonesand I will make you work as announced schedule";
+                description.textContent = "A milestone means special content that must be performed at a specific time. Public promises or contracts make you move to keep them. Pull yourself toward your targeted schedule.";
+            } else if (currentCardIndex === 13) {
+                title.textContent = "14. Make your Own Dish and Give your name to it";
+                description.textContent = "Even if it's not grand or excellent, make your own dish and name it. It enriches your daily life (if it's not too bad-tasting).";
+            } else if (currentCardIndex === 14) {
+                title.textContent = "15. Be Sylish In & Out or Just do good, even in small ways.";
+                description.textContent = "Dressing up is fun and can switch you to a different mode. But what can change not only yourself but also others into a different mode is doing good deeds, even if they're small.";
+            } else if (currentCardIndex === 15) {
+                title.textContent = "16. Write Your Story and Make people cry";
+                description.textContent = "Creation begins with stories and writing. I think it would be a lie if there wasn't even a bit of personal story in a great work. The real events and people we face have great power as stories. Don't just cry yourself with it, make people cry.";
+            } else if (currentCardIndex === 16) {
+                title.textContent = "17. Take Notes so Let the power of simple notes win over cleverness";
+                description.textContent = "It's a saying by Jeong Yak-yong that a dull brush overcomes a sharp mind. Establish content that's difficult to know only with the mind by writing it by hand. Listen to Jeong Yak-yong's words, not mine~.";
+            } else if (currentCardIndex === 17) {
+                title.textContent = "18. Discover moments and Turn a light on your heart";
+                description.textContent = "In the midst of boring everyday life, imagine that you are an agent sent to Earth with a mission to discover new things. Gather your own elements, even small ones, to change the atmosphere.";
+            } else if (currentCardIndex === 18) {
+                title.textContent = "19. Debut and It can create new waves";
+                description.textContent = "Even if it's not grand, when I try something for the first time, I consider it a debut. There are times when you don't have the luxury to challenge something new, of course. But if you proceed with a new venture that calls from your heart, like swimming, you might encounter new waves.";
+            } else {
+                title.textContent = 'Other cards';
+                description.textContent = 'Content for other cards.';
+            }
+        } else {
+            // This block executes when card.classList.contains('show-back') is false, i.e., when showing the front of the card
+            title.textContent = '';
+            description.textContent = '';
+        }
+    }
+}
+    
+function enlargeCard(card) {
+    const viewportWidth = document.documentElement.clientWidth;
+    const viewportHeight = document.documentElement.clientHeight;
+    const cardPosition = getCardPosition(card);
+
+    card.style.transition = 'all 0.4s ease';
+    card.classList.add('active');
+    
+    const enlargedWidth = 284;
+    const enlargedHeight = 474.4;
+
+    const newLeft = (viewportWidth - enlargedWidth * 2 - 15) / 2;
+    const newTop = (viewportHeight - enlargedHeight) / 2;
+
+    card.style.position = 'fixed';
+    card.style.left = `${newLeft}px`;
+    card.style.top = `${newTop}px`;
+    card.style.width = `${enlargedWidth}px`;
+    card.style.height = `${enlargedHeight}px`;
+    card.style.zIndex = '1000';
+    
+    const placeholder = createPlaceholder();
+    card.parentNode.insertBefore(placeholder, card.nextSibling);
+
+    // (이하 기존 enlargeCard 함수의 모든 로직 동일하게 유지)
+    setTimeout(() => {
+        card.style.transform = 'rotateY(180deg)';
+    }, 400);
+
+    setTimeout(() => {
+        card.style.transform = 'rotateY(360deg)';
+    }, 800);
+
+  setTimeout(() => {
+    infoBox.style.display = 'block';
+    infoBox.style.left = `${newLeft + enlargedWidth + 15}px`;
+    infoBox.style.top = `${newTop}px`;
+
+    setTimeout(() => {
+        infoBox.style.transform = 'translateX(0)';
+        infoBox.style.opacity = '1';
+
+        const cardIndex = Array.from(container.children).indexOf(card);
+
+        infoTitle.style.fontSize = '20pt';
+        infoDescription.style.fontSize = '17pt';
+
+    // 카드의 인덱스에 따라 다른 내용 표시
+        if (cardIndex === 0) {
+            infoTitle.innerHTML = "1. 마음을 비우고 해야 할 일을 합니다. 일이 벌어지도록";
+            infoDescription.innerHTML = "하기 싫은 것도, 힘든 것도 마음을 비우고 우선 시작해야죠. 저는 상상하던 딥다운 스튜디오와 카드시리즈, 그리고 다른 훌륭한...것들을 시작했어요. 쉽지 않지만 일단은 합니다.";
+        } else if (cardIndex === 1) {
+            infoTitle.innerHTML = "2. 책을 읽고 생각을 엮으세요";
+            infoDescription.innerHTML = "저의 최애 영화 굿윌헌팅의 첫 장면이 이 카드의 모티브가 되었습니다. 윌처럼 천재는 아니지만 저도 책 읽는 것을 좋아해요. 책은 지식과 지혜를 주고, 머리 속에 신선한 바람을 불어넣어 줍니다.";
+        } else if (cardIndex === 2) {
+            infoTitle.innerHTML = "3. 꽃을 사고 새로운 장면을 만드세요";
+            infoDescription.innerHTML = "꽃을 보면 눈길이 절로 가죠. 쉽게 새로운 방법으로 장면을 연출할 수 있어요. 만약 꽃을 사기 어렵다면 이 카드를 사세요.";
+        } else if (cardIndex === 3) {
+            infoTitle.innerHTML = "4. 꾸준하게 해서 당신의 궤도를 넓히세요";
+            infoDescription.innerHTML = "무례와 혐오와 경쟁과 분열과 비교와 나태와 허무의 달콤함에 길들지 말길, 의미와 무의미의 온갖 폭력을 이겨내고 하루하루를 온전히 경험하길(허준이 교수님의 졸업식 축사에서)  .";
+        } else if (cardIndex === 4) {
+            infoTitle.innerHTML = "5. 운동하세요. 국가대표 후보 선수가 되었다고 상상하며";
+            infoDescription.innerHTML = "창의적인 플레이를 하는 선수들을 보면 감탄이 절로 나죠. 신선한 플레이를 하는데 약간 부족한 선수가 콘셉트. 기자들이나 업계에서는 아는데, 아직 극복할 것이 남아있는. 그래서 응원하는.";
+         } else if (cardIndex === 5) {
+            infoTitle.innerHTML = "6. 잊어버려요.";
+            infoDescription.innerHTML = "오히려 쉽지 않다는 것을 알지만, 필요없는 것에는 더이상 우리를 괴롭히지 않도록.";
+         } else if (cardIndex === 6) {
+            infoTitle.innerHTML = "7. 복습하고 복기하여 도망치는 기억을 잡으세요.";
+            infoDescription.innerHTML = "복기라는 단어 좋아합니다. 무언가 놓쳤던 기운을 다시 찾아가는 느낌. 형사에 빙의하여 애써 공부한 것들을 다시 잡으러 갑시다. 주제곡은 비밀의 숲 OST입니다.";
+         } else if (cardIndex === 7) {
+            infoTitle.innerHTML = "8. 기백있는 토론을 하세요, 그것은 논리에서 나옵니다. 태도가 아니라.";
+            infoDescription.innerHTML = "물론 태도도 중요하지만 폼만 잡고 이야기하는지, 얼마나 논리로 무장하고 준비를 했는지 들어보면 다 압니다. 영혼 spirit에서 온 spirited가 기백있는 이라는 뜻이라니.. 멋지네요.";
+         } else if (cardIndex === 8) {
+            infoTitle.innerHTML = "9. 플러팅하세요. 누군가는 해야죠, 재밌을 거에요.";
+            infoDescription.innerHTML = "시시덕거리며 농담하고, 설레고, 재밌겠네요. 누구는 너무 잘하고 누구는 뚝딱거리는... 나는 하소연을 해버리는.";
+         } else if (cardIndex === 9) {
+            infoTitle.innerHTML = "10. 쉐도우복싱 하세요. 언젠가 빛을 볼거에요.";
+            infoDescription.innerHTML = "스파링 상대 없이 혼자서라도 시간을 투자하여 갈고 닦는 연습은 꼭 필요합니다. 주제곡은 Eminem의 Lose yourself 또는 (쨍하고) 해뜰날.";
+         } else if (cardIndex === 10) {
+            infoTitle.innerHTML = "11. 팀에 합류하세요. 더 자극을 받을 수 있도록";
+            infoDescription.innerHTML = "그룹이나 팀에 속했을 때 좋은 점은 잘하는 사람, 열심히 하는 사람을 가까이에서 보고 더 자극을 받을 수 있죠. 내가 어떤 방향으로 나아갈지 좌표를 삼을 수 있어요.";
+       } else if (cardIndex === 11) {
+            infoTitle.innerHTML = "12. 좋아하는 것을 말하세요. 다른 사람이나 자신을 기분좋게 만드는 씨앗이 됩니다";
+            infoDescription.innerHTML = "어떤 것을 좋아하세요? 좋아하는 것을 소개하고 소환해보세요. 그것들은 우리를 더욱 기분좋게 만들어 줄 거에요.";
+       } else if (cardIndex === 12) {
+            infoTitle.innerHTML = "13. 마일스톤을 설정하세요. 발표한 일정대로 움직이게 될거에요";
+            infoDescription.innerHTML = "마일스톤은 특정 시점에 수행되어야 하는 특별한 내용을 뜻합니다. 공개적 약속이나 계약은 그것을 지키기 위해 움직이게 되죠. 자신을 목표한 일정대로 끌어 당기세요.";
+       } else if (cardIndex === 13) {
+            infoTitle.innerHTML = "14. 당신만의 특별한 요리를 만드세요. 그리고 그 요리에 당신의 이름을 붙여보세요";
+            infoDescription.innerHTML = "거창하거나 훌륭하지 않아도 나만의 요리를 만들고 이름을 붙여보세요. 일상이 조금 더 풍부해집니다(너무 맛없지 않다면).";
+       } else if (cardIndex === 14) {
+            infoTitle.innerHTML = "15. 멋지게 꾸미고 착한 일을 하세요. 또는 작지만 좋은 일을 해봐요.";
+            infoDescription.innerHTML = "꾸미는 것은 재미있고 자신을 다른 모드로 바꿔줄 수 있어요. 그렇지만 나만 아니라 다른사람까지 다른 모드로 바꾸어 줄 수 있는 것은 작더라도 좋은 일을 하는 것이죠.";
+   } else if (cardIndex === 15) {
+            infoTitle.innerHTML = "16. 당신의 이야기를 쓰고 사람들을 울리세요.";
+            infoDescription.innerHTML = "창작은 이야기와 글에서 시작합니다. 위대한 작품에 개인적인 이야기가 조금도 없었다면 거짓이라고 생각해요. 우리가 마주한 실제 사건과 사람들은 이야기로서 위대한 힘을 가집니다. 그것으로 나만 울지 말고, 사람들을 울리세요.";
+   } else if (cardIndex === 16) {
+            infoTitle.innerHTML = "17. 둔필승총, 둔한 필기로 총명함을 이기게 하세요.";
+            infoDescription.innerHTML = "둔한 붓이 총명한 머리를 이긴다는 정약용의 말입니다. 머리로만 알기 어려운 내용을 손으로 써서 정립합니다. 저의 말이 아닌 정약용의 말을 들으세요~.";
+   } else if (cardIndex === 17) {
+            infoTitle.innerHTML = "18. 순간을 발견하여 마음에 불을 켜세요";
+            infoDescription.innerHTML = "지겨운 일상 속, 지구에 파견되어 새로움을 발견하려는 미션을 가진 요원이 되었다는 상상을 해요. 작은 것이라도 분위기를 전환할 나만의 요소를 모아보세요.";
+    } else if (cardIndex === 18) {
+            infoTitle.innerHTML = "19. 새로운 일에 데뷔하세요. 새로운 파도를 일으킬 수도 있어요.";
+            infoDescription.innerHTML = "거창하지 않아도 처음 해보는 일을 시도하면, 저는 그 일에 데뷔했다고 여깁니다. 그렇지만 마음에서 부르는 새로운 일을 일단 헤엄치듯 진행해보면 새로운 파도를 만날 수 있어요.";
+        } else { 
+            infoTitle.innerHTML = '기타 카드';
+            infoDescription.innerHTML = '다른 카드에 대한 내용입니다.';
+        }    }, 50);
+  }, 1200);
+}
+
+function returnToOriginalPosition(card) {
+    const placeholder = card.nextElementSibling;
+    const index = Array.from(container.children).indexOf(placeholder);
+
+    // (기존 returnToOriginalPosition 함수의 모든 로직 동일하게 유지)
+    infoBox.style.opacity = '0';
+    setTimeout(() => {
+        infoBox.style.display = 'none';
+        infoBox.style.transform = 'translateX(-100%)';
+    }, 400);
+
+    card.style.transform = 'rotateY(180deg)';
+
+    setTimeout(() => {
+        card.classList.remove('active');
+        card.style.transition = 'all 0.4s ease';
+        card.style.position = '';
+        card.style.left = '';
+        card.style.top = '';
+        card.style.width = '';
+        card.style.height = '';
+        card.style.zIndex = '';
+        card.style.transform = getInitialTransform(index);
+
+        if (placeholder && placeholder.classList.contains('placeholder')) {
+            placeholder.parentNode.removeChild(placeholder);
+        }
+    }, 400);
+}
+
+// (기존의 handleMouseMove, handleMouseLeave 등 모든 함수 동일하게 유지)
+function handleMouseMove(e) {
+   if (isMobile() || this.classList.contains('active')) return;
+    if (this.classList.contains('active')) return;
+    const rect = this.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const dx = (mx - rect.width / 2) / 10;
+    const dy = (my - rect.height / 2) / 10;
+    
+    this.style.transform = `rotateY(${-dx}deg) rotateX(${dy}deg)`;
+}
+
+function handleMouseLeave() {
+    if (this.classList.contains('active')) return;
+    const index = Array.from(container.children).indexOf(this);
+    this.style.transform = getInitialTransform(index);
+    // 모바일에서는 기울기 효과 제거
+    if (isMobile() || this.classList.contains('active')) return;
+
+}
+
+// 이벤트 리스너
+container.addEventListener('click', function(e) {
+    const clickedCard = e.target.closest('.card');
+    if (clickedCard) {
+        if (isMobile()) {  // 모바일일 때
+            if (clickedCard.classList.contains('show-back')) {
+                // 이미 뒷면이 보이는 상태면 앞면으로 돌아가기
+                clickedCard.classList.remove('show-back');
+                
+                const mobileInfoTitle = clickedCard.querySelector('.card-info-mobile h2');
+                const mobileInfoDescription = clickedCard.querySelector('.card-info-mobile p');
+                
+                if (mobileInfoTitle) mobileInfoTitle.textContent = '';
+                if (mobileInfoDescription) mobileInfoDescription.textContent = '';
+            } else {
+                // 앞면일 때 뒷면과 설명 나타내기
+                clickedCard.classList.add('show-back');
+                const index = Array.from(container.children).indexOf(clickedCard);
+                updateCardInfo(clickedCard, index);
+            }
+        } else {  // PC일 때 기존 로직 유지
+            if (activeCard === clickedCard) {
+                returnToOriginalPosition(clickedCard);
+                activeCard = null;
+            } else {
+                if (activeCard) {
+                    returnToOriginalPosition(activeCard);
+                }
+                enlargeCard(clickedCard);
+                activeCard = clickedCard;
+            }
+        }
+    }
+});
+
+// 좌우 네비게이션 버튼 리스너
+leftNav.addEventListener('click', () => {
+    if (isMobile()) {
+        showPrevCard();
+    } else {
+        container.scrollBy({left: -scrollDistance, behavior: 'smooth'});
+        if (activeCard) {
+            returnToOriginalPosition(activeCard);
+            activeCard = null;
+        }
+    }
+});
+
+rightNav.addEventListener('click', () => {
+    if (isMobile()) {
+        showNextCard();
+    } else {
+        container.scrollBy({left: scrollDistance, behavior: 'smooth'});
+        if (activeCard) {
+            returnToOriginalPosition(activeCard);
+            activeCard = null;
+        }
+    }
+}); 
+
+// load 이벤트의 카드 생성 부분 수정
+window.addEventListener('load', () => {
+    checkMobile();
+    if (isMobile()) {
+        const card = createCard(cardData[0], 0);
+        card.addEventListener('mousemove', handleMouseMove);
+        card.addEventListener('mouseleave', handleMouseLeave);
+        
+        // 모바일일 때 카드 스타일 직접 설정
+        card.style.position = 'absolute';
+        card.style.left = '50%';
+        card.style.transform = 'translateX(-50%)';
+        card.style.opacity = '1';
+        
+        container.appendChild(card);
+    } else {
+        cardData.forEach((data, index) => {
+            const card = createCard(data, index);
+            card.addEventListener('mousemove', handleMouseMove);
+            card.addEventListener('mouseleave', handleMouseLeave);
+            container.appendChild(card);
+        });
+    }
+    updateContainerWidth();
+});
+
+// resize 이벤트에서도 카드 재생성 처리
+window.addEventListener('resize', () => {
+    checkMobile();
+    const isMobileView = isMobile();
+    
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+    
+    if (isMobileView) {
+        const card = createCard(cardData[0], 0);
+        card.addEventListener('mousemove', handleMouseMove);
+        card.addEventListener('mouseleave', handleMouseLeave);
+        
+        // 모바일일 때 카드 스타일 직접 설정
+        card.style.position = 'absolute';
+        card.style.left = '50%';
+        card.style.transform = 'translateX(-50%)';
+        card.style.opacity = '1';
+        
+        container.appendChild(card);
+    } else {
+        cardData.forEach((data, index) => {
+            const card = createCard(data, index);
+            card.addEventListener('mousemove', handleMouseMove);
+            card.addEventListener('mouseleave', handleMouseLeave);
+            container.appendChild(card);
+        });
+    }
+    handleResize();
+});
+
+// 우클릭 방지만 남기고 나머지 터치 이벤트는 제거
+document.addEventListener('contextmenu', function(e) {
+    if (e.target.tagName === 'IMG') {  // 이미지에 대해서만 우클릭 방지
+        e.preventDefault();
+    }
+});
+
+// 이미지에 대해서만 키보드 단축키 방지
+document.addEventListener('keydown', function(e) {
+    if (
+        e.target.tagName === 'IMG' && 
+        (e.ctrlKey && (e.keyCode === 83 || e.keyCode === 85))
+    ) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// 초기 업데이트
+updateContainerWidth();
+
+
+</script>
+</body>
+</html>  
+ 
