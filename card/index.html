@@ -621,7 +621,8 @@ const cardData = [
     {image: "atc07.png"}, {image: "atc08.png"}, {image: "atc09.png"},
     {image: "atc10.png"}, {image: "atc11.png"}, {image: "atc12.png"},
     {image: "atc13.png"}, {image: "atc14.png"}, {image: "atc15.png"},
-    {image: "atc16.png"}, {image: "atc17.png"}, {image: "atc18.png"}
+    {image: "atc16.png"}, {image: "atc17.png"}, {image: "atc18.png"},
+{image: "atc19.png"}
 ];
 
 let currentCardIndex = 0;
@@ -808,6 +809,9 @@ function updateCardInfo(card, index) {
    } else if (currentCardIndex === 17) {
             title.textContent = "18. 순간을 발견하여 마음에 불을 켜세요";
             description.textContent = "지겨운 일상 속, 지구에 파견되어 새로움을 발견하려는 미션을 가진 요원이 되었다는 상상을 해요. 작은 것이라도 분위기를 전환할 나만의 요소를 모아보세요.";
+} else if (currentCardIndex === 18) {
+            title.textContent = "19. 새로운 일에 데뷔하세요. 새로운 파도를 일으킬 수도 있어요.";
+            description.textContent = "거창하지 않아도 처음 해보는 일을 시도하면, 저는 그 일에 데뷔했다고 여깁니다. 새로운 것에 도전할 여유가 없을 때도 물론 있죠. 그렇지만 마음에서 부르는 새로운 일을 일단 헤엄치듯 진행해보면 새로운 파도를 만날 수 있어요.";
         } else {
             title.textContent = '기타 카드';
             description.textContent = '다른 카드에 대한 내용입니다.';
@@ -923,7 +927,11 @@ function enlargeCard(card) {
    } else if (cardIndex === 17) {
             infoTitle.innerHTML = "18. 순간을 발견하여 마음에 불을 켜세요";
             infoDescription.innerHTML = "지겨운 일상 속, 지구에 파견되어 새로움을 발견하려는 미션을 가진 요원이 되었다는 상상을 해요. 작은 것이라도 분위기를 전환할 나만의 요소를 모아보세요.";
-        } else {
+        }   
+    } else if (cardIndex === 18) {
+            infoTitle.innerHTML = "19. 새로운 일에 데뷔하세요. 새로운 파도를 일으킬 수도 있어요.";
+            infoDescription.innerHTML = "거창하지 않아도 처음 해보는 일을 시도하면, 저는 그 일에 데뷔했다고 여깁니다. 새로운 것에 도전할 여유가 없을 때도 물론 있죠. 그렇지만 마음에서 부르는 새로운 일을 일단 헤엄치듯 진행해보면 새로운 파도를 만날 수 있어요.";
+        } else { 
             infoTitle.innerHTML = '기타 카드';
             infoDescription.innerHTML = '다른 카드에 대한 내용입니다.';
         }    }, 50);
