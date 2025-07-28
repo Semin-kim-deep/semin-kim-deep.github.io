@@ -344,8 +344,8 @@
 
 .language-toggle {
 position: absolute;
-right: 0px;
-top: 0px;
+right: 5px;
+top: 5px;
 transform: translateY(-50%);
 margin-top: 0;
     }
@@ -694,7 +694,7 @@ const cardData = [
     {image: "atc10.png"}, {image: "atc11.png"}, {image: "atc12.png"},
     {image: "atc13.png"}, {image: "atc14.png"}, {image: "atc15.png"},
     {image: "atc16.png"}, {image: "atc17.png"}, {image: "atc18.png"},
-	{image: "atc19.png"}, {image: "atc20.png"}, {image: "atc21.png"}
+	{image: "atc19.png"}, {image: "atc20.png"}, {image: "atc21.png"},
 ];
 
 let currentCardIndex = 0;
@@ -884,14 +884,7 @@ function updateCardInfo(card, index) {
 } else if (currentCardIndex === 18) {
             title.textContent = "19. 새로운 일에 데뷔하세요. 새로운 파도를 일으킬 수도 있어요.";
             description.textContent = "거창하지 않아도 처음 해보는 일을 시도하면, 저는 그 일에 데뷔했다고 여깁니다. 마음에서 부르는 새로운 일을 일단 헤엄치듯 진행해보면 새로운 파도를 만날 수 있어요.";
- } else if (currentCardIndex === 19) {
-            title.textContent = “20. 달려요. 가슴이 뛸 수 있도록.”;
-            description.textContent = “마음이 “안 좋을 수록 그 생각을 고치려는 노력이 정말 힘들다고 생각해요. 오히려 몸을 움직이면 도움이 된다고 해요. 애써서 뛰면 몸에 힘이 생기는 것이 느껴집니다.”;
- } else if (currentCardIndex === 20) {
-            title.textContent = “21. 나만의 플레이리스트를 만들어요. 주인공은 BGM이 필요하니까!”;
-            description.textContent = “어떤 일을 할 때 어울리는 플레이리스트를 가지고 있나요? 달릴 때, 집중할 때, 우울한 기분을 떨쳐버리고 싶을 때 등. 우리 각자의 BGM을 선곡해봐요. 순간의 농도가 짙어집니다. “;
-        } 
-else {
+        } else {
             title.textContent = '기타 카드';
             description.textContent = '다른 카드에 대한 내용입니다.';
         }
@@ -1009,14 +1002,7 @@ function enlargeCard(card) {
     } else if (cardIndex === 18) {
             infoTitle.innerHTML = "19. 새로운 일에 데뷔하세요. 새로운 파도를 일으킬 수도 있어요.";
             infoDescription.innerHTML = "거창하지 않아도 처음 해보는 일을 시도하면, 저는 그 일에 데뷔했다고 여깁니다. 마음에서 부르는 새로운 일을 일단 헤엄치듯 진행해보면 새로운 파도를 만날 수 있어요.";
-    } else if (cardIndex === 19) {
-            infoTitle.innerHTML = “20. 달려요. 가슴이 뛸 수 있도록.";
-            infoDescription.innerHTML = "마음이 안 좋을 수록 그 생각을 고치려는 노력이 정말 힘들다고 생각해요. 오히려 몸을 움직이면 도움이 된다고 해요. 애써서 뛰면 몸에 힘이 생기는 것이 느껴집니다.";
-        } else if (cardIndex === 20) {
-            infoTitle.innerHTML = “21. 나만의 플레이리스트를 만들어요. 주인공은 BGM이 필요하니까!.";
-            infoDescription.innerHTML = “어떤 일을 할 때 어울리는 플레이리스트를 가지고 있나요? 달릴 때, 집중할 때, 우울한 기분을 떨쳐버리고 싶을 때 등. 우리 각자의 BGM을 선곡해봐요. 순간의 농도가 짙어집니다.” ;
-        }        
- else { 
+        } else { 
             infoTitle.innerHTML = '기타 카드';
             infoDescription.innerHTML = '다른 카드에 대한 내용입니다.';
         }    }, 50);
@@ -1218,3 +1204,4 @@ updateContainerWidth();
 </script>
 </body>
 </html>  
+ 
