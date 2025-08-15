@@ -892,15 +892,17 @@ function updateCardInfo(card, index) {
             title.textContent = "21. 나만의 플레이리스트를 만들어요. 주인공은 BGM이 필요하니까!";
             description.textContent = "어떤 일을 할 때 어울리는 플레이리스트를 가지고 있나요? 달릴 때, 집중할 때, 우울한 기분을 떨쳐버리고 싶을 때 등. 우리 각자의 BGM을 선곡해봐요. 순간의 농도가 짙어집니다.";
    } else if (currentCardIndex === 21) {
-            title.textContent = "22. 밖으로 나와요. 누군가는 “응원하고 있어요”;
+            title.textContent = "22. 밖으로 나와요. 누군가는 응원하고 있어요";
             description.textContent = "무엇을 하더라도, 하지 않더라도 집에만 있지말고, 바깥 공기를 쐬어요. 살아있으니까. 차가움과 두려움을 깨고 나가는 우리를 서로 응원해줘요.";
 }  else {
             title.textContent = '기타 카드';
             description.textContent = '다른 카드에 대한 내용입니다.';
+        }
         } else {
             // card.classList.contains('show-back')이 false인 경우, 즉 카드 앞면을 보여줄 때 실행되는 블록
             title.textContent = '';
             description.textContent = '';
+
         }
     }
 }  
@@ -1017,10 +1019,10 @@ function enlargeCard(card) {
             infoTitle.innerHTML = "21. 나만의 플레이리스트를 만들어요. 주인공은 BGM이 필요하니까!";
             infoDescription.innerHTML = "어떤 일을 할 때 어울리는 플레이리스트를 가지고 있나요? 달릴 때, 집중할 때, 우울한 기분을 떨쳐버리고 싶을 때 등. 우리 각자의 BGM을 선곡해봐요. 순간의 농도가 짙어집니다.";
     } else if (cardIndex === 21) {
-            infoTitle.innerHTML = "22. 밖으로 나와요. 누군가는 응원하고 있어요.”;
-            infoDescription.innerHTML = "무엇을 하더라도, 하지 않더라도 집에만 있지말고, 바깥 공기를 쐬어요. 살아있으니까. 차가움과 두려움을 깨고 나가는 우리를 서로 응원해줘요.";
-        } else {
-			infoTitle.innerHTML = '기타 카드';
+            infoTitle.innerHTML = "22. 밖으로 나와요. 누군가는 응원하고 있어요";
+            infoDescription.innerHTML = "무엇을 하더라도, 하지 않더라도 집에만 있지말고, 바깥 공기를 쐬어요. 살아있으니까. 차가움과 두려움을 깨고 나가는 우리를 서로 응원해줘요. ";
+        } else { 
+            infoTitle.innerHTML = '기타 카드';
             infoDescription.innerHTML = '다른 카드에 대한 내용입니다.';
         }    }, 50);
   }, 1200);
