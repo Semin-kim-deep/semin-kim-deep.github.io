@@ -692,7 +692,7 @@ const cardData = [
     {image: "atc13.png"}, {image: "atc14.png"}, {image: "atc15.png"},
     {image: "atc16.png"}, {image: "atc17.png"}, {image: "atc18.png"},
     {image: "atc19.png"}, {image: "atc20.png"}, {image: "atc21.png"}, 
-	{image: "atc22.png"}
+	{image: "atc22.png"}, {image: "atc23.png"}
 ];
 
 let currentCardIndex = 0;
@@ -904,6 +904,9 @@ function updateCardInfo(card, index) {
              } else if (currentCardIndex === 21) {
                 title.textContent = "22. Step out. Somewhere in the universe cheers you on";
                 description.textContent = "Whether you do something or not, don’t just stay at home—feel the air outside. You’re alive. Let’s break through the cold and fear, and cheer each other on.";
+             } else if (currentCardIndex === 22) {
+                title.textContent = "23. Draw. Build your small big world";
+                description.textContent = "Works that carry the artist’s own perspective and style. It’s fascinating to see a world unfold within them. Rather than AI’s repetitive images, it is human thought and tireless effort that deserve to be cherished more.";
             } else {
                 title.textContent = 'Other cards';
                 description.textContent = 'Content for other cards.';
@@ -1030,6 +1033,9 @@ function enlargeCard(card) {
     } else if (cardIndex === 21) {
             infoTitle.innerHTML = "22. Step out. Somewhere in the universe cheers you on";
             infoDescription.innerHTML = "Whether you do something or not, don’t just stay at home—feel the air outside. You’re alive. Let’s break through the cold and fear, and cheer each other on.";
+    } else if (cardIndex === 22) {
+            infoTitle.innerHTML = "23. Draw. Build your small big world";
+            infoDescription.innerHTML = "Works that carry the artist’s own perspective and style. It’s fascinating to see a world unfold within them. Rather than AI’s repetitive images, it is human thought and tireless effort that deserve to be cherished more.";
         } else { 
             infoTitle.innerHTML = '기타 카드';
             infoDescription.innerHTML = '다른 카드에 대한 내용입니다.';
