@@ -694,7 +694,7 @@ const cardData = [
     {image: "atc13.png"}, {image: "atc14.png"}, {image: "atc15.png"},
     {image: "atc16.png"}, {image: "atc17.png"}, {image: "atc18.png"},
 	{image: "atc19.png"}, {image: "atc20.png"}, {image: "atc21.png"},
-	{image: "atc22.png"}
+	{image: "atc22.png"}, {image: "atc23.png"}
 ];
 
 let currentCardIndex = 0;
@@ -907,6 +907,9 @@ function updateCardInfo(card, index) {
    } else if (currentCardIndex === 21) {
             title.textContent = "22. 밖으로 나와요. 누군가는 응원하고 있어요";
             description.textContent = "무엇을 하더라도, 하지 않더라도 집에만 있지말고, 바깥 공기를 쐬어요. 살아있으니까. 차가움과 두려움을 깨고 나가는 우리를 서로 응원해줘요.";
+   } else if (currentCardIndex === 22) {
+            title.textContent = "23. 그려요. 그림으로 당신의 작고 큰 세계를 만들어요.";
+            description.textContent = "작업자 고유의 시선과 스타일을 갖는 그림들. 그 안에 세계가 펼쳐지는 것이 흥미로워요. AI의 반복적인 그림보다 인간의 생각과 부단한 노력이 더욱 사랑받기를…";
 }  else {
             title.textContent = '기타 카드';
             description.textContent = '다른 카드에 대한 내용입니다.';
@@ -1034,6 +1037,9 @@ function enlargeCard(card) {
     } else if (cardIndex === 21) {
             infoTitle.innerHTML = "22. 밖으로 나와요. 누군가는 응원하고 있어요";
             infoDescription.innerHTML = "무엇을 하더라도, 하지 않더라도 집에만 있지말고, 바깥 공기를 쐬어요. 살아있으니까. 차가움과 두려움을 깨고 나가는 우리를 서로 응원해줘요. ";
+    } else if (cardIndex === 22) {
+            infoTitle.innerHTML = "23. 그려요. 그림으로 당신의 작고 큰 세계를 만들어요.";
+            infoDescription.innerHTML = "작업자 고유의 시선과 스타일을 갖는 그림들. 그 안에 세계가 펼쳐지는 것이 흥미로워요. AI의 반복적인 그림보다 인간의 생각과 부단한 노력이 더욱 사랑받기를…";
         } else { 
             infoTitle.innerHTML = '기타 카드';
             infoDescription.innerHTML = '다른 카드에 대한 내용입니다.';
