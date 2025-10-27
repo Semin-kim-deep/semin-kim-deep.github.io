@@ -13,7 +13,7 @@
 	
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025 Calendar - Songs & Scenes</title>
+    <title>2026 Calendar - Songs & Scenes</title>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
@@ -732,9 +732,9 @@
         </div>
     </div>
     <h1 class="header-title">
-        <span class="pc-title">2025 Calendar - Songs & Scenes</span>
+        <span class="pc-title">2026 Calendar - Songs & Scenes</span>
         <span class="mobile-title">
-            <span class="title-year">2025 Calendar</span>
+            <span class="title-year">2026 Calendar</span>
         </span>
     </h1>
     <div class="header-right">
@@ -750,15 +750,15 @@
             <a href="/about.html">About</a>
          <!--   <a href="/shop.html">Shop</a> -->
             <a href="/card/">Anti-Tarot Card</a>
-            <a href="/calendar/">Calendar 2025</a>
+            <a href="/calendar/">Calendar 2026</a>
 	 <a href="/note/">Note</a>
 	<a href="https://www.instagram.com/deepdown_studio" target="_blank">Instagram</a>
         </div>
         <div class="subtitle">
-            <span class="subpc">2025년의 시간을 팝니다.</span>
+            <span class="subpc">2026년의 시간을 팝니다.</span>
             <span class="subm">
             Songs & Scenes<br>
-            2025년의 시간을 팝니다.</span>
+            2026년의 시간을 팝니다.</span>
         </div>
 
         <div class="subsub">
@@ -777,8 +777,8 @@
             <button class="nav-button prev" id="prevButton"></button>
             <div class="calendar-content">
                 <div class="image-container">
-                    <img id="calendarImage1" class="swipe-image active" src="images/2025_square1.jpg" alt="2025 Calendar Image">
-                    <img id="calendarImage2" class="swipe-image" src="" alt="2025 Calendar Image">
+                    <img id="calendarImage1" class="swipe-image active" src="images/2026_square1.jpg" alt="2026 Calendar Image">
+                    <img id="calendarImage2" class="swipe-image" src="" alt="2026 Calendar Image">
                 </div>
 		    <div class="dot-indicators">
 		    <div class="dot active" data-month="1"></div>
@@ -871,8 +871,8 @@ dots.forEach(dot => {
 
     const translations = {
         ko: {
-            title: '2025 Calendar - Songs & Scenes',
-            subtitle: '2025년의 시간을 팝니다.',
+            title: '2026 Calendar - Songs & Scenes',
+            subtitle: '2026년의 시간을 팝니다.',
             subsubtitle: '월별 어울리는 음악을 선정하고 장면을 그렸어요. 여러분의 월별 플레이리스트는 어떤가요?',
             autoplayText: '음악 영상(유튜브)를 자동재생하려면 버튼을 선택하세요',
 	    playThisSong: 'Play This Song',
@@ -882,11 +882,11 @@ dots.forEach(dot => {
             menuAbout: 'About',
             menuShop: 'Shop',
             menuCard: 'Anti-Tarot Card',
-            menuCalendar: 'Calendar 2025'
+            menuCalendar: 'Calendar 2026'
         },
         en: {
-            title: '2025 Calendar - Songs & Scenes',
-            subtitle: "Selling the time of 2025.",
+            title: '2026 Calendar - Songs & Scenes',
+            subtitle: "Selling the time of 2026.",
             subsubtitle: "We've selected music that fits each month and drawn scenes. What's your monthly playlist like?",
             autoplayText: 'Select the button to autoplay music videos (YouTube)',
             playThisSong: 'Play This Song',
@@ -896,7 +896,7 @@ dots.forEach(dot => {
             menuAbout: 'About',
             menuShop: 'Shop',
             menuCard: 'Anti-Tarot Card',
-            menuCalendar: 'Calendar 2025'
+            menuCalendar: 'Calendar 2026'
         }
     };
 
@@ -1126,7 +1126,7 @@ async function updateContent(month, direction) {
     const nextImage = activeImage === 1 ? calendarImage2 : calendarImage1;
     const currentImage = activeImage === 1 ? calendarImage1 : calendarImage2;
     
-    const nextImageSrc = `images/2025_square${month}.jpg`;
+    const nextImageSrc = `images/2026_square${month}.jpg`;
     
     try {
         await preloadImage(nextImageSrc);
