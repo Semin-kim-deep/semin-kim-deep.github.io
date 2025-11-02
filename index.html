@@ -229,6 +229,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             align-items: center;
             gap: 10px;
         }
+        .cal-2026-section {
+    position: fixed;
+    right: calc(50% - 560px);
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 700;
+}
         .cal-section {
             position: fixed;
             right: calc(50% - 560px);
@@ -472,7 +481,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 font-size: 16.2px;
                 margin-bottom: 5px;
             }
-            .cal-section {
+    .cal-2026-section {
+        right: 20px;
+        text-align: center;
+    }
+    .cal-2026-section .cal-title {
+        font-size: 16.2px;
+        justify-content: center;
+    }
+           .cal-section {
                 text-align: center;
             }
             .cal-title {
@@ -594,7 +611,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="custom-button-arrow"></span>
         </a>
     </div>
-
+<!-- 2026 CAL 섹션 (About과 함께 나타남) -->
+<div class="cal-2026-section" id="cal-2026-section">
+    <div class="cal-title">
+        <a href="/calendar2026/">2026 CAL<span class="mobile-arrow"></span></a>
+    </div>
+</div>
     <!-- 2025 CAL 섹션 -->
     <div class="cal-section">
         <div class="cal-title">
@@ -627,6 +649,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         document.addEventListener('DOMContentLoaded', function() {
             const changingImage = document.querySelector('.changing-image');
             const aboutSection = document.querySelector('#about-section');
+            const cal2026Section = document.querySelector('#cal-2026-section'); 
             const itlineGroup = document.querySelector('.it-line-group');
             const shopLink = document.querySelector('.shop-link');
             const calSection = document.querySelector('.cal-section');
@@ -682,14 +705,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     const opacity = Math.min(scrollTop / 100, 1);
                     aboutSection.style.opacity = opacity;
                     aboutSection.style.transform = `translateY(calc(-50% + ${Math.max(50 - scrollTop / 2, 0)}px))`;
+
+                       // 여기에 2026 CAL 코드 추가
+    cal2026Section.style.opacity = opacity;
+    cal2026Section.style.transform = `translateY(calc(-50% + ${Math.max(50 - scrollTop / 2, 0)}px))`;
+   
                 } else if (scrollTop > (isMobile ? 200 : 430) && scrollTop <= (isMobile ? 300 : 530)) {
                     const opacity = Math.max(1 - (scrollTop - (isMobile ? 200 : 430)) / 100, 0);
                     aboutSection.style.opacity = opacity;
                     aboutSection.style.transform = 'translateY(-50%)';
+
+                        // 여기에도 2026 CAL 코드 추가
+    cal2026Section.style.opacity = opacity;
+    cal2026Section.style.transform = 'translateY(-50%)';
+    
                 } else {
                     aboutSection.style.opacity = '0';
                     aboutSection.style.transform = 'translateY(calc(-50% + 50px))';
-                }
+
+                    // 여기에도 2026 CAL 코드 추가
+    cal2026Section.style.opacity = '0';
+    cal2026Section.style.transform = 'translateY(calc(-50% + 50px))';
+   }
 
                 // IT Line 섹션 애니메이션
                 if (scrollTop > (isMobile ? 300 : 530) && scrollTop <= (isMobile ? 500 : 730)) {
