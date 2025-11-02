@@ -1250,8 +1250,7 @@ function showNextMonth() {
         document.querySelector('.autoplay-text').textContent = translations[currentLanguage].autoplayText;
         document.querySelector('.play-this-song').textContent = translations[currentLanguage].playThisSong;
         document.querySelector('.normalt').innerHTML = translations[currentLanguage].bottomText;
-        document.querySelector('.custom-button .custom-button-content').firstChild.textContent = translations[currentLanguage].buttonText;
-
+       
 
         // 현재 월 내용 업데이트
         calendarText.innerHTML = monthlyContent[currentLanguage][currentMonth - 1];
